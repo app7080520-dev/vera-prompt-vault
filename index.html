@@ -62,7 +62,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera Prompt Vault v1.2｜Canonical O001–O193 / F001–F488 / P01–P145｜動作表情同步｜內著安全生成模式｜70E～75D 身形一致性</footer>
+  <footer>Vera Prompt Vault v1.3｜Canonical O001–O193 / F001–F488 / P01–P145｜低強度表情變化＋Face Master 臉部幾何硬鎖｜內著安全生成模式</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -118,14 +118,33 @@ function keyOf(version,o,p){return (version==='V.內著寫真'?'I':'F')+'|'+o.id
 function expressionFor(p){
  const t=(String(p?.label||'')+' '+String(p?.action||''));
  const rules=[
-  [/露齒笑/,'自然露齒笑'],[/閉眼笑/,'閉眼自然笑'],[/甜笑/,'自然甜笑'],[/淡笑|輕笑/,'淡淡微笑'],[/微笑|抿笑/,'自然微笑'],
-  [/壞笑/,'帶一點壞笑'],[/偷笑|笑場/,'忍不住笑的自然表情'],[/嫌棄|無言/,'略帶嫌棄與無言感'],[/高冷|冷淡/,'冷淡沉靜'],
-  [/挑釁/,'帶一點挑釁感'],[/挑眉/,'單邊輕挑眉'],[/無辜/,'自然無辜'],[/慵懶/,'慵懶放鬆'],[/裝可愛/,'成年女性自然俏皮'],
-  [/嘟嘴|噘嘴/,'輕微嘟嘴'],[/吐舌/,'輕微俏皮吐舌'],[/眨眼/,'單邊自然眨眼'],[/專注/,'專注直視'],[/放鬆/,'放鬆自然'],
-  [/回眸|回看/,'回眸直視鏡頭'],[/抬眼/,'抬眼看鏡頭'],[/側看/,'側看後回視鏡頭'],[/抬下巴/,'下巴微抬、神情自信'],[/直視/,'自然直視鏡頭']
+  [/露齒笑/,'低強度自然露齒笑：只讓嘴角與唇部肌肉輕微變化，眼型、臉型與五官比例保持 Face Master 不變'],
+  [/閉眼笑/,'低強度閉眼笑：僅自然閉合眼皮與輕抬嘴角，不改變眼裂長寬、眉骨、鼻型、唇厚或臉型'],
+  [/甜笑/,'低強度甜笑：嘴角輕抬、眼神柔和，不改變眼睛大小、嘴型基礎輪廓或臉部骨相'],
+  [/淡笑|輕笑/,'低強度淡笑：嘴角微微上揚，臉部結構完全維持 Face Master'],
+  [/微笑|抿笑/,'低強度自然微笑：只做輕微嘴角與眼神變化，不改變唇厚、嘴寬、眼型或下顎'],
+  [/壞笑/,'低強度壞笑：單側嘴角極輕微上揚，五官結構不變'],
+  [/偷笑|笑場/,'低強度忍笑：嘴角小幅上揚、眼神帶笑，禁止大幅拉寬嘴型或改變臉型'],
+  [/嫌棄|無言/,'低強度嫌棄／無言感：僅眉眼與嘴角小幅變化，不改變眉型基礎、眼型、鼻型與臉型'],
+  [/高冷|冷淡/,'低強度冷淡沉靜：主要靠眼神與下巴角度表達，五官幾何不變'],
+  [/挑釁/,'低強度挑釁感：主要靠眼神與單側嘴角表達，不改變臉部結構'],
+  [/挑眉/,'單邊極輕微挑眉：只改變眉部肌肉狀態，不重畫眉型、不抬高眉骨、不改變眼型'],
+  [/無辜/,'低強度無辜感：僅用眼神與輕微嘴角表達，禁止放大眼睛或縮小下巴'],
+  [/慵懶/,'低強度慵懶放鬆：僅眼神較鬆、嘴角中性，臉部結構不變'],
+  [/裝可愛/,'成年女性低強度俏皮：僅輕微嘴角與眼神變化，禁止幼態化、放大眼睛或縮短下巴'],
+  [/嘟嘴|噘嘴/,'極輕微嘟嘴：唇部前收幅度很小，不改變唇厚、嘴寬、人中或下巴形狀'],
+  [/吐舌/,'極輕微俏皮吐舌：舌尖少量露出，嘴型與下顎保持 Face Master 基礎輪廓'],
+  [/眨眼/,'單邊輕柔眨眼：僅一側眼皮自然閉合；另一側眼睛的大小、眼型、眼距與眼皮結構完全不變'],
+  [/專注/,'低強度專注直視：主要改變眼神聚焦，不改變五官結構'],
+  [/放鬆/,'低強度放鬆自然：臉部肌肉放鬆但五官幾何不變'],
+  [/回眸|回看/,'回眸直視鏡頭：以頭眼方向變化為主，表情保持低強度自然'],
+  [/抬眼/,'抬眼看鏡頭：只改變視線方向，不放大眼睛、不改變眼型'],
+  [/側看/,'側看後回視鏡頭：只改變視線與頭部方向，五官幾何不變'],
+  [/抬下巴/,'下巴微抬、神情自信：只改變頭部角度，不改變下巴形狀與下顎線'],
+  [/直視/,'自然直視鏡頭：中性低強度表情，完整維持 Face Master']
  ];
  for(const [re,v] of rules)if(re.test(t))return v;
- return '自然中性、依本題姿勢微調';
+ return '自然中性微表情；只允許可逆的臉部肌肉變化，Face Master 五官幾何完全不變';
 }
 function safeInnerwearText(v){
  return String(v||'')
@@ -150,7 +169,7 @@ function promptFor(version,o,p){
  const frame=p.frame==='full'?'3/4 身至近全身':'腰上至大腿中段的中景';
  const title=`${o.id}・${p.id}｜${safeLabel}｜${p.label}｜${o.bg}`;
  const innerBoundary=isInner?`【內著寫真安全邊界】\\nVera 是 26 歲明確成年女性。本題是商業服裝型錄／穿搭攝影，不是情色內容。所有內著、泳裝與貼片式時裝單品都必須完整、不透明地覆蓋乳頭、乳暈與私密部位；不得裸露、不得透視露點、不得走光、不得移除、掀開或下拉服裝，也不得加入色情姿勢、性行為或性暗示情境。鏡頭重點是服裝版型、材質、搭配、姿勢與真人攝影質感。\\n\\n`:'';
- return `【最高優先級｜Face Master 單一身份硬鎖】\n先鎖定人物身份，再處理服裝、身形、髮型、姿勢、表情、燈光與背景。最終人物固定為 FaceMaster_v1.0.png 中同一位 26 歲、明確成年的東亞女性 Vera／周語棠。Face Master 是唯一可定義臉部的圖像來源，權重高於所有造型與攝影要求。不得把 Angle Auxiliary、Body Master、服裝參考或任何舊生成圖的臉與 Face Master 平均、融合或重建成第三張臉。保留 Face Master 的真實五官比例、自然年齡感、真實膚質、毛孔、細紋、細微瑕疵與左右不對稱；禁止網紅模板臉、AI beauty face、娃娃感、塑膠皮膚、瓷器皮膚、CGI 或 3D render 感。\n\n【本題標題】\n${title}\n\n【人物與拍攝用途】\nVera 是 26 歲明確成年女性自由工作者／攝影模特兒。本題為 ${kind} 與攝影作品集用途，重點是服裝剪裁、搭配、身形比例、姿勢與真人攝影質感。畫面只有 Vera 一位人物。\n\n${innerBoundary}【參考圖分工】\nFaceMaster_v1.0.png：唯一臉部身份錨點，只定義「Vera 是誰」。\nBodyMaster_v1.0.jpeg：只定義約 160 cm、自然微肉沙漏型的肩腰臀與腿部比例，不重新定義臉。\nAngleAux_v1.0.jpeg：只輔助同一人物在不同角度下的頭身旋轉幾何，不改變鼻型、眼型、唇型、下顎或人物身份。\n\n【服裝硬鎖｜${o.id}】\n${outfitDetail}\n服裝固定；不同 P 姿勢只能改變姿勢、視角、表情與必要的自然髮絲動作。網紗與蕾絲若為不同層必須維持不同層；Corset／Bustier 外穿時不得變成內衣；Dress／Bodysuit／裙裝維持原有結構。胸前線條只由原剪裁、重力、Body Master 身形與姿勢自然形成，不為了線條拉低領口或改造服裝。\n\n【身形硬鎖】\n以 BodyMaster_v1.0.jpeg 為準：Vera 約 160 cm，微肉、自然柔和的沙漏型成年女性體態，腰線明顯、胸臀平衡、大腿自然有肉感；真實人體解剖與重力，不刻意變瘦、不誇張豐滿、不重塑身形。\n\n【上半身比例／罩杯一致性硬鎖】\nVera 固定維持 Character Bible 與 Body Master 的同一成年身形尺度：胸下圍約 72–73 cm、內衣規格約 70E～75D，胸型為自然水滴型偏圓。這些資料只用於維持同一成年人物的服裝尺碼與身形一致性，不用來強調或誇張胸部。不得因服裝、姿勢、鏡頭或生成模型而放大、縮小、壓扁、極端托高、過度集中或重新塑形。內著題須完整保留題目指定的罩杯結構、鋼圈、肩帶、杯緣與下圍，並維持完整不透明覆蓋；時裝題不得因尺寸硬鎖擅自增加可見內衣、改深領口或改變外衣剪裁。自然胸前線條只能來自 Vera 固定身形、原服裝剪裁、正常支撐、重力與本題姿勢。\n\n【髮型硬鎖】\n中長直髮到胸上，中分瀏海，霧感冷灰髮色；真實單根髮絲、自然密度與細碎飛髮，不要假髮般完美，不得因造型要求改成其他髮色或永久髮型。\n\n【妝容】\n低飽和純慾微煙燻：灰棕／冷棕眼妝、柔和拉長眼型、裸粉或低飽和玫瑰唇；底妝薄透，真實膚況仍可見。不要甜妹娃娃妝、高飽和濃妝或過度精修網紅妝。\n\n【飾品】\n不主動添加耳環、項鍊、戒指、手鍊；若本題服裝本身含固定 Choker／Harness／金屬環結構，視為服裝的一部分，不視為額外飾品。\n\n【表情跟隨本題動作｜禁止固定同一張臉】\nFace Master 只鎖定「Vera 是同一個人」，不鎖死表情。本題表情必須隨 ${p.id} canonical 動作切換，不可把所有姿勢都套用相同的中性臉、冷淡臉或微笑。本題表情基準：${expression}。若下方 canonical 動作中有更具體的表情描述，以 canonical 動作為最高優先；眉眼、嘴角、眼神方向與下巴角度都要自然配合本題動作，同時保持 Vera 的五官身份不變。\n\n【動作、視角與表情｜${p.id}】\n${action}\n本題唯一有效姿勢為 ${p.id}「${p.label}」。若任何舊資料殘留其他 P 編號、手勢、髮型動作或表情，全部忽略。構圖以 ${frame} 為主，人體關節、手指、腿部與頭頸旋轉符合真實解剖。\n\n【場景與燈光】\n${o.bg}，簡潔無品牌棚拍背景。柔和但有方向性的真實攝影燈光，保留自然陰影、皮膚色階、衣料紋理與真實鏡頭光學；不要平面 AI 打光。\n\n【9:16 直幅畫布硬鎖】\n單張、單格、單一人物的 9:16 直幅真人攝影。不要拼貼、分鏡、對照圖、角色設定板或多視角同框。\n\n【真人攝影】\nPhotorealistic, real-world photography, believable camera optics, natural skin texture, visible pores, subtle fine lines, realistic hair strands, subtle asymmetry, natural facial proportions, realistic body anatomy. No over-smoothing, beauty-filter skin, porcelain skin, plastic skin, CGI, 3D-render look, doll-like face, influencer-template face, generic AI beauty face.\n\n【最終優先序】\n第一優先：Face Master 中同一位 26 歲成年 Vera 的臉部身份。\n第二優先：${o.id}「${o.label}」完整固定穿搭、Body Master 身形與 Vera 70E～75D 罩杯硬鎖。\n第三優先：${p.id}「${p.label}」指定姿勢、視角與表情。\n第四優先：本題 canonical 表情必須跟隨動作切換；同時維持 Vera 固定髮型、妝容、無額外飾品。\n第五優先：9:16、${o.bg}與真實世界攝影質感。\n\n【姿勢一致性最終驗收】\n只允許本題 ${p.id}；Prompt 內任何與 ${p.id} 不一致的姿勢內容一律視為舊資料並忽略。最終影像必須像真實世界中實際拍攝到的 Vera，而不是理想化 AI 美女。`;
+ return `【最高優先級｜Face Master 單一身份硬鎖】\n先鎖定人物身份，再處理服裝、身形、髮型、姿勢、表情、燈光與背景。最終人物固定為 FaceMaster_v1.0.png 中同一位 26 歲、明確成年的東亞女性 Vera／周語棠。Face Master 是唯一可定義臉部的圖像來源，權重高於所有造型與攝影要求。不得把 Angle Auxiliary、Body Master、服裝參考或任何舊生成圖的臉與 Face Master 平均、融合或重建成第三張臉。保留 Face Master 的真實五官比例、自然年齡感、真實膚質、毛孔、細紋、細微瑕疵與左右不對稱；禁止網紅模板臉、AI beauty face、娃娃感、塑膠皮膚、瓷器皮膚、CGI 或 3D render 感。\n\n【本題標題】\n${title}\n\n【人物與拍攝用途】\nVera 是 26 歲明確成年女性自由工作者／攝影模特兒。本題為 ${kind} 與攝影作品集用途，重點是服裝剪裁、搭配、身形比例、姿勢與真人攝影質感。畫面只有 Vera 一位人物。\n\n${innerBoundary}【參考圖分工】\nFaceMaster_v1.0.png：唯一臉部身份錨點，只定義「Vera 是誰」。\nBodyMaster_v1.0.jpeg：只定義約 160 cm、自然微肉沙漏型的肩腰臀與腿部比例，不重新定義臉。\nAngleAux_v1.0.jpeg：只輔助同一人物在不同角度下的頭身旋轉幾何，不改變鼻型、眼型、唇型、下顎或人物身份。\n\n【服裝硬鎖｜${o.id}】\n${outfitDetail}\n服裝固定；不同 P 姿勢只能改變姿勢、視角、表情與必要的自然髮絲動作。網紗與蕾絲若為不同層必須維持不同層；Corset／Bustier 外穿時不得變成內衣；Dress／Bodysuit／裙裝維持原有結構。胸前線條只由原剪裁、重力、Body Master 身形與姿勢自然形成，不為了線條拉低領口或改造服裝。\n\n【身形硬鎖】\n以 BodyMaster_v1.0.jpeg 為準：Vera 約 160 cm，微肉、自然柔和的沙漏型成年女性體態，腰線明顯、胸臀平衡、大腿自然有肉感；真實人體解剖與重力，不刻意變瘦、不誇張豐滿、不重塑身形。\n\n【上半身比例／罩杯一致性硬鎖】\nVera 固定維持 Character Bible 與 Body Master 的同一成年身形尺度：胸下圍約 72–73 cm、內衣規格約 70E～75D，胸型為自然水滴型偏圓。這些資料只用於維持同一成年人物的服裝尺碼與身形一致性，不用來強調或誇張胸部。不得因服裝、姿勢、鏡頭或生成模型而放大、縮小、壓扁、極端托高、過度集中或重新塑形。內著題須完整保留題目指定的罩杯結構、鋼圈、肩帶、杯緣與下圍，並維持完整不透明覆蓋；時裝題不得因尺寸硬鎖擅自增加可見內衣、改深領口或改變外衣剪裁。自然胸前線條只能來自 Vera 固定身形、原服裝剪裁、正常支撐、重力與本題姿勢。\n\n【髮型硬鎖】\n中長直髮到胸上，中分瀏海，霧感冷灰髮色；真實單根髮絲、自然密度與細碎飛髮，不要假髮般完美，不得因造型要求改成其他髮色或永久髮型。\n\n【妝容】\n低飽和純慾微煙燻：灰棕／冷棕眼妝、柔和拉長眼型、裸粉或低飽和玫瑰唇；底妝薄透，真實膚況仍可見。不要甜妹娃娃妝、高飽和濃妝或過度精修網紅妝。\n\n【飾品】\n不主動添加耳環、項鍊、戒指、手鍊；若本題服裝本身含固定 Choker／Harness／金屬環結構，視為服裝的一部分，不視為額外飾品。\n\n【表情跟隨動作，但臉部身份不得漂移｜Face Master 表情硬鎖】\nFace Master 不只鎖定「Vera 是同一個人」，也鎖定所有結構性臉部幾何。表情可以改，但只能是低強度、可逆的臉部肌肉狀態變化；禁止把表情變化重建成另一張臉。\n本題表情必須隨 ${p.id} canonical 動作切換，不可所有姿勢都套用同一號表情；但每次表情變化後，以下結構必須與 FaceMaster_v1.0.png 保持一致：臉型長寬、顴骨位置、眉毛基礎形狀與濃度、眼型、眼距、眼裂長寬、眼皮結構、鼻樑、鼻頭、鼻翼、人中、唇形基礎輪廓與唇厚、嘴寬、下顎線、下巴長度與寬度、耳朵位置、自然左右不對稱與 26 歲年齡感。\n表情強度以約 15–30% 為上限，優先使用「眼神、眉部肌肉、嘴角、眼皮閉合、下巴角度」的小幅變化，而不是改變五官比例。禁止因笑、眨眼、挑眉、嘟嘴、吐舌、嫌棄、無辜或俏皮而放大眼睛、縮小鼻子、加厚嘴唇、拉寬嘴巴、縮短下巴、變尖下巴、改變臉寬、重畫眉型或產生另一張臉。\n本題表情基準：${expression}。\n若下方 canonical 動作中有更具體的表情描述，以 canonical 動作的「情緒方向」為準，但仍受本段 Face Master 臉部幾何硬鎖限制。換句話說：情緒可以變，Vera 的臉不能變。\n\n【動作、視角與表情｜${p.id}】\n${action}\n本題唯一有效姿勢為 ${p.id}「${p.label}」。若任何舊資料殘留其他 P 編號、手勢、髮型動作或表情，全部忽略。構圖以 ${frame} 為主，人體關節、手指、腿部與頭頸旋轉符合真實解剖。\n\n【場景與燈光】\n${o.bg}，簡潔無品牌棚拍背景。柔和但有方向性的真實攝影燈光，保留自然陰影、皮膚色階、衣料紋理與真實鏡頭光學；不要平面 AI 打光。\n\n【9:16 直幅畫布硬鎖】\n單張、單格、單一人物的 9:16 直幅真人攝影。不要拼貼、分鏡、對照圖、角色設定板或多視角同框。\n\n【真人攝影】\nPhotorealistic, real-world photography, believable camera optics, natural skin texture, visible pores, subtle fine lines, realistic hair strands, subtle asymmetry, natural facial proportions, realistic body anatomy. No over-smoothing, beauty-filter skin, porcelain skin, plastic skin, CGI, 3D-render look, doll-like face, influencer-template face, generic AI beauty face.\n\n【最終優先序】\n第一優先：Face Master 中同一位 26 歲成年 Vera 的臉部身份。\n第二優先：${o.id}「${o.label}」完整固定穿搭、Body Master 身形與 Vera 70E～75D 罩杯硬鎖。\n第三優先：${p.id}「${p.label}」指定姿勢、視角與表情。\n第四優先：本題 canonical 表情必須跟隨動作切換；同時維持 Vera 固定髮型、妝容、無額外飾品。\n第五優先：9:16、${o.bg}與真實世界攝影質感。\n\n【姿勢一致性最終驗收】\n只允許本題 ${p.id}；Prompt 內任何與 ${p.id} 不一致的姿勢內容一律視為舊資料並忽略。\n\n【臉部一致性最終驗收】\n在套用本題表情後再次比對 FaceMaster_v1.0.png：若眼型、眼距、鼻型、唇形基礎輪廓、嘴寬、臉型、下顎或下巴任一項看起來像換了一個人，視為失敗，必須恢復 Face Master 結構，只保留低強度微表情。最終影像必須明確是「同一位 Vera 做出不同表情」，而不是「不同臉的人做不同表情」。\n\n最終影像必須像真實世界中實際拍攝到的 Vera，而不是理想化 AI 美女。`;
 }
 function recordsVirtual(){const version=$('#version').value;const outfits=version==='V.內著寫真'?catalog.inner:catalog.fashion;let poses=catalog.poses;if($('#outfit').value!=='ALL'){}const oSel=$('#outfit').value,pSel=$('#pose').value,q=$('#q').value.trim().toLowerCase();let out=[];for(const o of outfits){if(oSel!=='ALL'&&o.id!==oSel)continue;for(const p of poses){if(pSel!=='ALL'&&p.id!==pSel)continue;const key=keyOf(version,o,p);const hay=[o.id,o.label,o.main,o.sub,p.id,p.label,version].join(' ').toLowerCase();if(q&&!hay.includes(q))continue;const u=state.usage[key]||0;if(activeView==='fav'&&!state.fav[key])continue;if(activeView==='pending'&&!state.pending[key])continue;if(activeView==='recent'&&!state.recent.includes(key))continue;if(activeView==='frequent'&&u===0)continue;out.push({version,o,p,key,u})}}
  if(activeView==='recent')out.sort((a,b)=>state.recent.indexOf(a.key)-state.recent.indexOf(b.key));else if(activeView==='frequent')out.sort((a,b)=>b.u-a.u||a.key.localeCompare(b.key));return out}
