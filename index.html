@@ -64,7 +64,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera Prompt Vault v1.9.4｜生成文字視覺化精簡・高風險鏡位中性化｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
+  <footer>Vera Prompt Vault v1.9.5｜BodyMaster 身形硬鎖保留・內著生成穩定化｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -234,7 +234,10 @@ Vera 單人服飾品牌 lookbook 真人攝影。自然、平靜、專業的模�
 姿勢：
 ${poseVisual}
 
-FaceMaster_v1.0.png 只定義 Vera 的臉。身形明顯時參考 BodyMaster_v1.0.jpeg 維持原本比例；明顯 3/4、側臉、回頭、低頭或仰頭時才使用 AngleAux_v1.0.jpeg 協助同一張臉的旋轉。
+FaceMaster_v1.0.png 只定義 Vera 的臉。身形明顯時，原始 BodyMaster_v1.0.jpeg 必須作為本次第二順位 body image reference，只定義 Vera 原有的身體比例，不重新定義臉；明顯 3/4、側臉、回頭、低頭或仰頭時才使用 AngleAux_v1.0.jpeg 協助同一張臉的旋轉。
+
+身形：
+維持 Vera 固定成年身形。身高感約 160 cm；肩部、軀幹、腰、臀與腿部的相對比例以 BodyMaster 圖像本身為準。整體維持自然柔和的沙漏型輪廓，肩寬中等、臀部視覺略寬於肩、腰部自然內收、大腿自然有肉感。不得因服裝、姿勢、鏡頭或生成穩定性需求把 Vera 變瘦、拉高、縮腰、誇張曲線或重塑身材；真實軟組織、人體解剖與重力必須成立。
 
 中長直髮、中分、霧感冷灰／灰棕髮色；低飽和自然微煙燻妝。真實毛孔、細紋、輕微膚色差、自然髮絲與細微左右不對稱。
 
