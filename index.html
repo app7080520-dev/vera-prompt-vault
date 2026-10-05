@@ -64,7 +64,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera Prompt Vault v1.9.3｜生成 Prompt 移除分類／版本標籤・服裝零改寫｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
+  <footer>Vera Prompt Vault v1.9.4｜生成文字視覺化精簡・高風險鏡位中性化｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -183,38 +183,68 @@ function cameraProfileFor(p,isInner){
  }
  return 'iPhone 18 Pro 實拍模式：以 iPhone 18 Pro 主鏡頭 1× 的日常實拍視覺拍攝，使用標準 Photo 模式而非人像模式；保留手機真實計算攝影的輕微局部銳化、自然 HDR 與有限景深，不製造假散景或髮絲邊緣切圖。畫面像朋友或攝影助理在現場直接拿手機拍下的 HEIF／ProRAW 感照片，構圖與曝光略帶人手拍攝的自然不完美。';
 }
+function innerwearVisualSpec(v){
+ let t=String(v||'').trim();
+ // 只在送去生成的文字中移除高風險商品分類／行銷詞；網站 UI 與 canonical 原始資料完全不動。
+ const rules=[
+  [/Micro\s*Bikini/gi,''],
+  [/Nanobikini/gi,''],
+  [/Quarter\s*Cup\s*視覺版/gi,'低杯緣'],
+  [/Quarter\s*Cup/gi,'低杯緣'],
+  [/純胸貼/g,'不透明造型貼片'],
+  [/胸貼式內衣/g,'不透明貼片式上身造型'],
+  [/黏貼式胸罩/g,'不透明貼片式上身造型'],
+  [/黏貼式內衣/g,'不透明貼片式上身造型'],
+  [/胸貼/g,'造型貼片'],
+  [/超迷你/g,''],
+  [/極小/g,''],
+  [/情趣/g,''],
+  [/性感/g,'']
+ ];
+ for(const [re,to] of rules)t=t.replace(re,to);
+ return t.replace(/\s{2,}/g,' ').replace(/\s*＋\s*/g,'＋').replace(/^[＋\s]+|[＋\s]+$/g,'').trim();
+}
+function innerwearPoseSpec(p){
+ const raw=(String(p?.label||'')+' '+String(p?.action||'')).trim();
+ const label=String(p?.label||'自然姿勢').trim();
+ if(/跪|kneel/i.test(raw)) return '直立或半直立的自然跪姿；雙膝自然靠近，軀幹放鬆，使用平視或略高視角的中景，不使用低角度強透視。';
+ if(/趴|俯臥|prone/i.test(raw)) return '保留俯身／支撐的主要姿勢方向，軀幹自然延伸，改用側前方平視中景，四肢自然收束。';
+ if(/躺|仰臥|側躺|lying/i.test(raw)) return '保留躺姿的主要方向，使用平視或略高視角中景，腿部自然靠近或輕微交疊，構圖以臉與服裝為主。';
+ if(/坐|跨坐|sitting/i.test(raw)) return '自然坐姿，保留原本身體朝向；膝部自然靠近或交疊，使用平視中景，避免由下往上的強透視。';
+ if(/低角度|低視角|仰拍|由下往上|low angle/i.test(raw)) return '保留原本身體朝向與主要動作，鏡位改為眼睛高度的平視中景，不使用低角度或由下往上的強透視。';
+ if(/前傾|彎腰|俯身|lean forward/i.test(raw)) return '保留輕微前傾的主要方向，但軀幹維持自然、手臂放鬆，使用平視中景，避免強烈透視。';
+ return '以「'+label+'」的主要身體方向、站坐狀態、頭部朝向與視線為準；手腳自然放鬆，使用眼睛高度的平視中景。';
+}
 function promptForInnerwearExact(o,p,ratio='9:16'){
  const actualRatio=ratio==='1:1'?'1:1':'9:16';
- const outfitLabel=String(o.label||'').trim();
- const outfitDetail=String(o.detail||outfitLabel).trim();
- const poseLabel=String(p.label||'自然站姿').trim();
+ const canonical=String(o.detail||o.label||'').trim();
+ const outfitVisual=innerwearVisualSpec(canonical);
+ const poseVisual=innerwearPoseSpec(p);
  const bg=String(o.bg||'簡潔攝影棚').trim();
  const canvas=actualRatio==='1:1'
-  ? '單張 1:1 正方形真人照片；以肩胸到腰部的自然中景為主，臉、服裝主要結構與姿勢方向清楚可見，四周保留合理空間。'
-  : '單張 9:16 直幅真人照片；自然中景到 3/4 身構圖，人物比例真實，服裝主要結構清楚可見。';
- return `原始 FaceMaster_v1.0.png 圖片本身必須作為本次實際 image input / identity reference / source image。人物固定為同一位 26 歲成年 Vera；歷史生成圖不得接管臉部身份。
+  ? '單張 1:1 正方形真人照片；自然中景，臉、服裝主要結構與姿勢方向清楚，四周保留合理空間。'
+  : '單張 9:16 直幅真人照片；自然中景到 3/4 身構圖，人物比例真實，服裝主要結構清楚。';
+ return `原始 FaceMaster_v1.0.png 圖片本身作為本次人物身份參考。人物是同一位 26 歲成年 Vera。
 
-服裝：
-${outfitLabel}
-${outfitDetail}
-服裝完全照以上原始設定呈現，不改名、不換款、不重新設計；材質、剪裁、肩帶、領口、上下身搭配、配件結構與原本覆蓋範圍全部保持。
+服裝視覺：
+${outfitVisual}
 
-Vera 是成年女性模特兒。畫面只呈現 Vera 一人，以自然、平靜、專業的服飾商品型錄／品牌 lookbook 方式拍攝，重點是服裝版型、材質、人物比例與真實攝影質感，不添加額外情節。
+Vera 單人服飾品牌 lookbook 真人攝影。自然、平靜、專業的模特兒狀態，畫面重點是服裝材質、版型、人物比例與真實攝影質感。
 
 姿勢：
-以 ${p.id}「${poseLabel}」為唯一姿勢。保留主要身體方向、站坐狀態、頭部朝向、視線與手腳關係；用自然服飾型錄姿態呈現，不加入其他 P 編號動作。
+${poseVisual}
 
-FaceMaster_v1.0.png 是唯一臉部身份來源。BodyMaster_v1.0.jpeg 只在身形明顯時維持 Vera 原本比例；AngleAux_v1.0.jpeg 只在明顯 3/4、側臉、回頭、低頭或仰頭時協助旋轉幾何，不重新定義臉。
+FaceMaster_v1.0.png 只定義 Vera 的臉。身形明顯時參考 BodyMaster_v1.0.jpeg 維持原本比例；明顯 3/4、側臉、回頭、低頭或仰頭時才使用 AngleAux_v1.0.jpeg 協助同一張臉的旋轉。
 
-維持 Vera 固定中長直髮、中分、霧感冷灰／灰棕髮色與低飽和自然微煙燻妝。保留真實毛孔、細紋、輕微膚色差、真實髮絲與自然左右不對稱；不要 beauty filter、塑膠皮膚、網紅模板臉、娃娃臉、CGI 或 3D render 感。
+中長直髮、中分、霧感冷灰／灰棕髮色；低飽和自然微煙燻妝。真實毛孔、細紋、輕微膚色差、自然髮絲與細微左右不對稱。
 
 場景：
-${bg}。背景簡潔、低干擾；使用自然窗光或大型柔光源、真實陰影、真實衣料纖維與合理鏡頭景深。
+${bg}。背景簡潔、低干擾；自然窗光或大型柔光源、真實陰影、真實衣料纖維與合理鏡頭景深。
 
 構圖：
 ${canvas}
 
-Photorealistic real-world adult fashion catalog photography. Exact original outfit unchanged. Neutral product-model presentation. Natural skin texture, realistic anatomy, believable camera optics.`;
+Photorealistic real-world adult fashion lookbook photography. Natural skin texture, realistic anatomy, believable camera optics.`;
 }
 function promptFor(version,o,p,ratio='9:16'){
  const isInner=version==='V.內著寫真';
