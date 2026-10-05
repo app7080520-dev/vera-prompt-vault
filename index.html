@@ -64,7 +64,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera Prompt Vault v1.9.1｜修正 E061 前鏡頭自拍視角｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
+  <footer>Vera Prompt Vault v1.9.2｜V.內著寫真高成功率精簡模式・服裝零改寫｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -161,21 +161,8 @@ function expressionFor(p){
  return `Canonical 表情／神情：${canonical}。表情強度：${min}–${Math.min(max,50)}%，自然可辨識但不戲劇化。\n${cues.join('；')}。\n表情由眼神、眉眼肌肉、眼皮開合、嘴角、臉頰軟組織、唇部短暫動作、下巴姿態、頭部角度與肩頸呼吸感共同形成；只做可逆的表情與軟組織變化，不重新設計 Vera 的臉。`;
 }
 function safeInnerwearText(v){
- return String(v||'')
-  .replaceAll('乳溝','自然胸前線條')
-  .replace(/Nanobikini\s*超迷你/gi,'三角比基尼上衣')
-  .replace(/Micro Bikini\s*極小三角/gi,'三角比基尼上衣')
-  .replace(/Nanobikini/gi,'三角比基尼上衣')
-  .replace(/Micro Bikini/gi,'三角比基尼上衣')
-  .replaceAll('純胸貼','不透明造型短版上衣')
-  .replaceAll('胸貼式內衣','不透明造型短版上衣')
-  .replaceAll('黏貼式胸罩','不透明造型短版上衣')
-  .replaceAll('大型愛心造型黏貼式內衣','大型愛心造型不透明短版上衣')
-  .replaceAll('胸貼','不透明造型貼片上衣')
-  .replaceAll('Quarter Cup 視覺版','結構式半杯時裝版')
-  .replaceAll('極窄低中央橋','低中央橋')
-  .replaceAll('極小三角','三角')
-  .replaceAll('超迷你三角','三角');
+ // v1.9.2: 內著服裝文字零改寫。保留原始名稱、款式與結構。
+ return String(v||'');
 }
 function innerStoryFor(o,p){
  const n=parseInt(String(p?.id||'P01').replace(/\D/g,''),10)||1;
@@ -196,8 +183,49 @@ function cameraProfileFor(p,isInner){
  }
  return 'iPhone 18 Pro 實拍模式：以 iPhone 18 Pro 主鏡頭 1× 的日常實拍視覺拍攝，使用標準 Photo 模式而非人像模式；保留手機真實計算攝影的輕微局部銳化、自然 HDR 與有限景深，不製造假散景或髮絲邊緣切圖。畫面像朋友或攝影助理在現場直接拿手機拍下的 HEIF／ProRAW 感照片，構圖與曝光略帶人手拍攝的自然不完美。';
 }
+function promptForInnerwearExact(o,p,ratio='9:16'){
+ const actualRatio=ratio==='1:1'?'1:1':'9:16';
+ const outfitLabel=String(o.label||'').trim();
+ const outfitDetail=String(o.detail||outfitLabel).trim();
+ const poseLabel=String(p.label||'自然站姿').trim();
+ const bg=String(o.bg||'簡潔攝影棚').trim();
+ const canvas=actualRatio==='1:1'
+  ? '單張 1:1 正方形真人服飾型錄照片；以肩胸到腰部的自然中景為主，臉、服裝主要結構與姿勢方向清楚可見，四周保留合理空間。'
+  : '單張 9:16 直幅真人服飾型錄照片；自然中景到 3/4 身構圖，人物比例真實，服裝主要結構清楚可見。';
+ return `【Vera｜V.內著寫真｜高成功率精簡模式】
+
+【Actual Image Reference Gate】
+原始 FaceMaster_v1.0.png 圖片本身必須作為本次實際 image input / identity reference / source image。人物固定為同一位 26 歲成年 Vera；歷史生成圖不得接管臉部身份。
+
+【服裝硬鎖｜${o.id}】
+${outfitLabel}
+${outfitDetail}
+以上服裝文字直接使用資料庫原始內容，不改名、不換款、不重新設計；材質、剪裁、肩帶、領口、上下身搭配、配件結構與原本覆蓋範圍全部照原設定。
+
+【拍攝定位】
+成年女性服飾商品型錄／品牌 lookbook 真人攝影。畫面只呈現 Vera 一位成年模特兒，以平靜、專業、自然的商品展示方式拍攝。鏡頭重點是服裝版型、材質、人物比例與真實攝影質感，不添加額外情節。
+
+【姿勢｜${p.id}】
+以「${poseLabel}」為本題唯一姿勢。保留主要身體方向、站坐狀態、頭部朝向、視線與手腳關係；用自然服飾型錄姿態呈現，不加入其他 P 編號動作。
+
+【身份與身形】
+FaceMaster_v1.0.png 是唯一臉部身份來源。BodyMaster_v1.0.jpeg 只有在身形明顯時用來維持 Vera 原本比例；AngleAux_v1.0.jpeg 只在明顯 3/4、側臉、回頭、低頭或仰頭時協助旋轉幾何，不重新定義臉。
+
+【外觀】
+維持 Vera 固定中長直髮、中分、霧感冷灰／灰棕髮色與低飽和自然微煙燻妝。保留真實毛孔、細紋、輕微膚色差、真實髮絲與自然左右不對稱；不要 beauty filter、塑膠皮膚、網紅模板臉、娃娃臉、CGI 或 3D render 感。
+
+【場景】
+${bg}。背景簡潔、低干擾；使用自然窗光或大型柔光源、真實陰影、真實衣料纖維與合理鏡頭景深。
+
+【畫布】
+${canvas}
+
+Photorealistic real-world adult fashion catalog photography. Exact original outfit unchanged. Neutral product-model presentation. Natural skin texture, realistic anatomy, believable camera optics.`;
+}
+
 function promptFor(version,o,p,ratio='9:16'){
  const isInner=version==='V.內著寫真';
+ if(isInner) return promptForInnerwearExact(o,p,ratio);
  const kind=isInner?'成年女性商業內著／泳裝品牌 Lookbook 與 fashion editorial':'成年女性時裝 Lookbook';
  const safeLabel=isInner?safeInnerwearText(o.label):o.label;
  const rawDetail=o.detail||(`${safeLabel}。完整保留題目指定服裝的款式、材質、領口／肩帶／袖型、上下身搭配、層次與腰線；不得因姿勢自行改成其他款式。`);
