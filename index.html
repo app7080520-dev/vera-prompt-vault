@@ -64,7 +64,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera Prompt Vault v1.9.8｜BodyMaster 身形硬鎖保留・內著生成穩定化｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
+  <footer>Vera Prompt Vault v1.9.9｜BodyMaster 身形硬鎖保留・內著生成穩定化｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -475,7 +475,7 @@ function restoreLastPage(){
  for(const [id,value] of [['outfit',x.outfit],['pose',x.pose]]){const el=$('#'+id);if([...el.options].some(o=>o.value===value))el.value=value}
  $('#q').value=String(x.q||'').slice(0,300);
  if(['all','recent','frequent','fav','pending','sync'].includes(x.view))activeView=x.view;
- $('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===activeView));
+ document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('active',t.dataset.view===activeView));
  page=Number.isInteger(x.page)&&x.page>0?x.page:1;
  render();
  if(x.detailKey){const item=byKey(x.detailKey);if(item)openR(item)}
