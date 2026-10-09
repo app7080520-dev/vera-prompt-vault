@@ -64,7 +64,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera Prompt Vault v1.9.7｜BodyMaster 身形硬鎖保留・內著生成穩定化｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
+  <footer>Vera Prompt Vault v1.9.8｜BodyMaster 身形硬鎖保留・內著生成穩定化｜寫真 9:16／1:1｜表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -468,7 +468,7 @@ function rememberLastPage(){
 }
 function restoreLastPage(){
  let x;try{x=JSON.parse(localStorage.getItem(LAST_PAGE_KEY)||'null')}catch(_){}
- if(!x||typeof x!=='object')return;
+ if(!x||typeof x!=='object'){render();return;}
  const v=$('#version');if([...v.options].some(o=>o.value===x.version))v.value=x.version;
  const src=$('#outfitSource');if([...src.options].some(o=>o.value===x.outfitSource))src.value=x.outfitSource;
  refreshSelects();
@@ -489,6 +489,8 @@ function exportState(){const blob=new Blob([JSON.stringify({format:'vera-prompt-
 async function restore(file){const o=JSON.parse(await file.text());if(!o?.state)throw new Error('不是 Vera Prompt Vault 設定檔');Object.assign(state,o.state);saveState();await reloadCatalog()}
 function bind(){['q','outfit','pose'].forEach(id=>$('#'+id).addEventListener(id==='q'?'input':'change',()=>{page=1;render()}));$('#version').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#outfitSource').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;activeView=b.dataset.view;$$('.tab').forEach(x=>x.classList.toggle('active',x===b));page=1;render()});$('#grid').addEventListener('click',e=>{const c=e.target.closest('.card');if(!c)return;const r=byKey(c.dataset.key);if(!r)return;const a=e.target.closest('[data-act]')?.dataset.act;if(a==='copy')copyR(r);if(a==='detail')openR(r);if(a==='fav'){toggleObj(state.fav,r.key);render()}if(a==='pending'){toggleObj(state.pending,r.key);render()}});$('#pager').addEventListener('click',e=>{const a=e.target.dataset.page;if(a==='prev')page--;if(a==='next')page++;render();scrollTo({top:0,behavior:'smooth'})});$('#random').onclick=()=>{const a=recordsVirtual();if(!a.length)return;openR(a[Math.floor(Math.random()*a.length)])};$('#closeSheet').onclick=()=>{$('#sheet').classList.remove('show');rememberLastPage()};$('#sheet').onclick=e=>{if(e.target===$('#sheet')){$('#sheet').classList.remove('show');rememberLastPage()}};$('#copyDetail').onclick=()=>current&&copyR(current);$('#toggleFavDetail').onclick=()=>{if(current){toggleObj(state.fav,current.key);syncDetailBtns();render()}};$('#togglePendingDetail').onclick=()=>{if(current){toggleObj(state.pending,current.key);syncDetailBtns();render()}};$('#importFile').onchange=async e=>{try{if(e.target.files[0])await importKomori(e.target.files[0])}catch(err){$('#importStatus').textContent='匯入失敗：'+err.message}finally{e.target.value=''}};$('#exportState').onclick=exportState;$('#restoreState').onchange=async e=>{try{if(e.target.files[0])await restore(e.target.files[0]);toast('Vera 設定已匯入')}catch(err){alert(err.message)}finally{e.target.value=''}}}
 (async function(){bind();const errs=await bootstrapRemote();restoreLastPage();if(errs.length)$('#importStatus').textContent='部分遠端 metadata 暫時無法載入；可直接用小森 JSON 補齊。';})();
-window.addEventListener('pagehide',rememberLastPage);\n</script>
+window.addEventListener('pagehide',rememberLastPage);
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')rememberLastPage()});
+</script>
 </body>
 </html>
