@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.1｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.2｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -209,7 +209,7 @@ function cosVariantsFor(role){return [{id:'base',label:role.variantLabel||'基�
 const COS_OUTFITS=COS_ROLES.flatMap(role=>cosVariantsFor(role).flatMap(variant=>COS_STYLES.flatMap((style,si)=>variant.palettes.map((name,pi)=>{
  const palette=COS_PALETTES[name],garment=variant[style.id];
  const replace=v=>String(v||'').replaceAll('{主色}',palette.primary).replaceAll('{配色}',palette.secondary);
- const label=[role.label,...(role.id==='fox'?[variant.label]:[]),style.label,garment.cut,palette.label].join('｜');
+ const label=[role.label,...(role.id==='fox'?[variant.label]:[]),style.label,palette.label].join('｜');
  const top=replace(garment.top),bottom=replace(garment.bottom),material=replace(garment.material),coverage=replace(garment.coverage),accessories=replace(garment.accessories);
  const detail=`【選定款式】${garment.cut}\n【上身、領口與袖型】${top}\n【下身與衣裝連接】${bottom}\n【材質與層次】${material}\n【本題遮覆與版型】${coverage}`;
  return {id:'C'+String(variant.start+si*2+pi).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,cut:garment.cut,top,bottom,material,coverage,accessories,label,detail,referenceNote:role.referenceNote||'原創基本造型，不套用其他既有角色。',brand:!!role.brand,fanRole:!!role.fanRole,main:role.brand||role.fanRole?'指定造型 Cosplay':'原創 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚'};
@@ -656,7 +656,7 @@ function recordsVirtual(){
    for(const person of photoPeople(version)){
    for(const ratio of ratios){
     const key=keyOf(version,o,p,sourceVersion,ratio,person);
-    const hay=[o.id,o.label,o.main,o.sub,p.id,p.label,p.category||'',version,sourceVersion,ratio,person].join(' ').toLowerCase();
+    const hay=[o.id,o.label,o.main,o.sub,p.id,p.label,p.category||'',version,sourceVersion,ratio,person,...(version==='V.cos'?[o.cut]:[])].join(' ').toLowerCase();
     if(q&&!hay.includes(q))continue;
     const u=state.usage[key]||0;
     if(activeView==='fav'&&!state.fav[key])continue;
@@ -791,6 +791,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 </script>
 </body>
 </html>
+
 
 
 
