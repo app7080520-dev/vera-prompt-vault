@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.2｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.3｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -241,7 +241,10 @@ function cosHalfBodyPose(p,person){
   if(frame.includes('半身'))return all;
   const posture=frame.match(/坐姿|跪姿|躺姿|趴姿/)?.[0]||'';
   return '構圖為'+posture+'半身，以頭頂至腰頭／上臀線附近為主要畫面範圍，保留主要手勢與原指定鏡位。';
- }).replaceAll('半身或中景正面構圖','半身正面構圖');
+ }).replaceAll('半身或中景正面構圖','半身正面構圖')
+  .replaceAll('頭部至腰頭／上臀線附近','完整頭頂至大腿最上段（大腿根部下方的一小段）')
+  .replaceAll('頭頂至腰頭／上臀線附近','完整頭頂至大腿最上段（大腿根部下方的一小段）')
+  .replaceAll('腰上中景正面構圖','略寬半身正面構圖');
  return {...canonical,frame:'half',action};
 }
 
@@ -260,7 +263,9 @@ ${title}
 人物仍是 ${profile.name} 本人，不是換成角色原本的臉。角色、品牌及任何服裝參考只定義當次衣裝，其臉部身份權重為 0；不得改用角色的臉、髮色、妝容、國籍、年齡或身形。Cosplay 情境不回寫人物永久設定。
 
 【9:16 半身攝影硬鎖】
-單張、單格、單一人物，9:16 直幅；固定頭頂至腰頭／上臀線附近的半身取景，不拉遠成全身或大腿以下構圖。保留完整頭頂、服裝髮箍／帽子／頭紗、主要手勢與上身衣裝；高舉手勢只向上留安全空間。頭部和身體方向、俯仰鏡位、坐跪躺趴及支點依本題 P 動作；橫向躺趴也保留原動作的半身取景，不改成站姿。畫外膝腳、裙長、褲長與腿部動作正常延續，不為展示下身拉遠取景。正常／性感在上身領口、袖型、衣裝層次及腰線就要清楚可辨，不只靠畫外裙長區別。
+單張、單格、單一人物，9:16 直幅；在原半身構圖基礎上只小幅後退，取景固定為完整頭頂至大腿最上段。畫面下緣落在大腿根部下方一小段，最多包含大腿最上方約 1/4；不把裁切下緣延伸至大腿中段、膝蓋、小腿或全身。
+原服裝是褲裝時，保留完整褲頭、上臀褲片與少量大腿上段褲料，不只露出一條褲頭；裙裝、連身裙、連身泳裝與其他造型則保留原衣裝結構及腰臀至大腿最上段的衣料，不為了露出褲子新增褲裝或改變款式。人物仍是畫面主體，臉部、神情與主要手勢清楚，不靠大量空白背景把人物縮小，也不靠縮頭、拉長軀幹、瘦身或改變身形達成取景。
+保留完整頭頂、服裝髮箍／帽子／頭紗、雙肩與上身衣裝；頭頂及高舉手勢只留必要安全空間。頭部和身體方向、俯仰鏡位、坐跪躺趴及支點依本題 P 動作；橫向躺趴依原身體方向保留相同取景範圍，不改成站姿。畫外腿部、裙長、褲長與支點正常延續，不為了展示整雙腿繼續拉遠。正常／性感在原上身領口、袖型、衣裝層次及腰線就要清楚可辨，不只靠畫外裙長區別。
 
 【服裝硬鎖｜${o.id}「${o.label}」】
 ${o.detail}
@@ -275,7 +280,7 @@ ${branding}
 
 【動作、視角與表情｜${pose.id}「${pose.label}」｜半身版本】
 ${pose.action||`依 ${pose.id}「${pose.label}」完成原動作，維持原手勢、頭部方向、視線、表情與身體支點。`}
-與 V.時裝寫真／V.內著寫真用同一 P 編號的 canonical 動作，只修改成上方半身取景。若服裝沒有指定動作要碰的肩帶、鈕扣或外套，用原動作已有的替代手位；沒有替代時維持同方向手勢，不憑空新增結構、不拉扯衣料。下身在畫外仍保留原姿勢與支點，不拼貼或補出另一個動作。
+與 V.時裝寫真／V.內著寫真用同一 P 編號的 canonical 動作，只修改成上方半身取景。若服裝沒有指定動作要碰的肩帶、鈕扣或外套，用原動作已有的替代手位；沒有替代時維持同方向手勢，不憑空新增結構、不拉扯衣料。畫外下肢仍保留原姿勢與支點，不拼貼或補出另一個動作。
 
 【表情跟隨動作｜不因角色換臉】
 ${expression}
@@ -296,7 +301,7 @@ ${o.bg}，簡潔低干擾的真實棚景，沒有額外品牌招牌。${profile.
 
 【最終驗收】
 原始 ${profile.face} 與必要的 ${profile.body}／${profile.angle} 圖片本身實際參與本次生成。畫面須是同一位 ${profile.name} 穿著 ${o.id}「${o.label}」，做 ${pose.id}「${pose.label}」；人物身份、${o.cut} 的上身／下身／材質／配件、${o.styleLabel}、${o.colorLabel}與 9:16 半身同時成立。不把衣裝簡化成另一件泛用洋裝或緊身衣。
-Photorealistic real-world adult cosplay fashion photography. Identity-preserving, natural body proportions, realistic skin and fabric, half-body portrait, 9:16.`;
+Photorealistic real-world adult cosplay fashion photography. Identity-preserving, natural body proportions, realistic skin and fabric, slightly wider half-body portrait, framed from full head to the very upper thighs, a small section of the original lower garment visible, 9:16.`;
 }
 
 const LS='vera_prompt_vault_v1';
@@ -791,6 +796,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 </script>
 </body>
 </html>
+
 
 
 
