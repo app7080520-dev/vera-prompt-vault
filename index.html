@@ -61,7 +61,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
       <div class="sync-card"><strong id="fashionCov">0 / 488</strong><span>時裝穿搭資料</span></div>
       <div class="sync-card"><strong id="poseCov">0 / 145</strong><span>標準姿勢資料</span></div>
       <div class="sync-card"><strong id="emoteCov">63 / 63</strong><span>V.表情包題目</span></div>
-      <div class="sync-card"><strong id="cosCov">84 / 84</strong><span>V.cos｜18 主題・狐仙 4 款・正常／性感</span></div>
+      <div class="sync-card"><strong id="cosCov">96 / 96</strong><span>V.cos｜21 主題・狐仙 4 款・正常／性感</span></div>
     </div>
     <div class="card">
       <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物，再選寫真或 V.cos、穿搭與動作。V.cos 提供角色、款式、正常／性感版與配色篩選，固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera。</p></div></div>
@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.0｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.1｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -181,6 +181,28 @@ const COS_FOX_VARIANTS=[
   normal:{cut:'夜狐高交領天鵝絨長裙',top:'{主色}高交領長袖古風上衣、{配色}窄刺繡滾邊，前襟完整覆合，胸前和腹部不鏤空；長袖有自然垂墜。',bottom:'同色及踝長裙、{配色}窄腰封與精簡側布結，不混成魅魔連身衣。',material:'柔軟天鵝絨、霧光緞腰封與完整內襯，低反光而非膠皮或黑毛皮。',coverage:'高交領、長袖、覆腹衣裝是正常版輪廓，深色主題不把臉化妝變成另一人。',accessories:'{主色}仿毛狐耳髮箍、{配色}布帶結，不加角、翅膀或新的角色元素。'},
   sexy:{cut:'夜狐低V領短版馬甲裙',top:'{主色}低V領細肩帶古風馬甲，胸片完整、{配色}細刺繡滾邊；肩胸與雙臂自然可見，短版下襬到自然腰線上方。',bottom:'同色高腰側開衩長裙、{配色}窄腰封，腰線與短版馬甲間有小段自然腹部；衣裝不重塑腰圍。',material:'天鵝絨胸片、細緞帶、輕紗外裙與不透明內襯，胸片不透明。',coverage:'低V領、細肩帶與短版腹部間隙可辨；不補回高交領、長袖或完整外袍。',accessories:'{主色}狐耳髮箍、{配色}小布帶結，不加假髮、獸瞳、角或翅膀。'}}
 ];
+
+// v2.3.1: Add only the three requested adult clothing themes, C085–C096.
+Object.assign(COS_PALETTES,{
+ jiraiBlackPink:{id:'jirai-black-pink',label:'地雷黑霧粉',primary:'黑色',secondary:'霧粉色'},
+ jiraiIvoryBlack:{id:'jirai-ivory-black',label:'地雷象牙黑',primary:'象牙白',secondary:'黑色'},
+ neighborCreamPink:{id:'neighbor-cream-pink',label:'奶油霧粉',primary:'奶油白',secondary:'霧粉色'},
+ neighborOatBlue:{id:'neighbor-oat-blue',label:'燕麥霧藍',primary:'燕麥米色',secondary:'霧藍色'},
+ guitaristBlackWine:{id:'guitarist-black-wine',label:'樂團黑酒紅',primary:'黑色',secondary:'酒紅色'},
+ guitaristIvoryGray:{id:'guitarist-ivory-gray',label:'樂團象牙炭灰',primary:'象牙白',secondary:'炭灰色'}
+});
+const COS_ADDITIONAL_ROLES=[
+ {id:'jirai',label:'地雷系少女',start:85,palettes:['jiraiBlackPink','jiraiIvoryBlack'],referenceNote:'「地雷系少女」只作日系地雷系服裝風格名稱，穿著者仍是同一位原設定年齡的明確成年女性；不設定未成年少女、不幼態化，也不把穿搭名稱當成人格或疾病標籤。只取荷葉邊、蕾絲、蝴蝶結與黑粉配色等衣裝元素，不改人物永久妝容。',
+  normal:{cut:'高領蕾絲長袖上衣吊帶裙',top:'{配色}完整高領長袖襯衫，領緣和袖口有小荷葉邊及窄花卉蕾絲；胸前一個{主色}布質蝴蝶結，外搭{主色}高腰吊帶裙胸片，寬吊帶與完整前襟清楚。',bottom:'{主色}膝上A字吊帶裙，裙緣兩層小荷葉邊；上衣下襬完整收在裙腰內，腰腹覆蓋，衣料自然留鬆量。',material:'霧面棉混紡襯衫、不透明挺括裙料、細蕾絲滾邊與布質緞帶；胸前有完整不透明襯布，蕾絲不替代胸片。',coverage:'高領、完整長袖、寬吊帶與覆腹裙身是正常版主輪廓；不改成裸肩馬甲或低領短上衣。',accessories:'胸前一個{主色}蝴蝶結、後側小型{配色}髮夾；不新增大型假髮、耳環、項鍊或幼態妝容。'},
+  sexy:{cut:'低心形領露肩蕾絲馬甲短裙',top:'{主色}低心形領合身馬甲上身，胸片完整不透明；{配色}窄蕾絲沿領口和前襟滾邊，雙肩和上胸清楚可見，兩側獨立荷葉短袖口固定在上臂，不連成正常版完整長袖。',bottom:'{主色}大腿上段A字短裙，{配色}雙層小荷葉邊與後腰布結；腰線依原有身形，馬甲與裙身相接，不束出不真實細腰。',material:'霧光厚緞面胸片、花卉蕾絲覆層及不透明裙內襯；領口蕾絲與馬甲拼縫清楚，不做胸片透視。',coverage:'低心形領、裸肩、分離荷葉短袖口與外穿馬甲在半身中可辨；不能補回高領襯衫、寬吊帶或完整長袖。',accessories:'馬甲前襟一個小型{配色}蝴蝶結、後側{配色}髮夾；不加頸圈、假髮或永久五官特徵。'}},
+ {id:'neighbor-sister',label:'鄰居姊姊',start:89,palettes:['neighborCreamPink','neighborOatBlue'],referenceNote:'「鄰居姊姊」是成年日常穿搭主題，不是換成更年長的新人物，不新增鄰居關係、曖昧故事或居家人物。只用柔軟針織、自然疊穿與生活感衣裝，人物年齡、臉、髮型及妝容依原設定。',
+  normal:{cut:'圓領針織開襟衫完整內搭',top:'{主色}細針織圓領長袖開襟衫，前襟自然扣合，肩線端正；內搭{配色}完整圓領棉質上衣，領口較高，雙層衣料清楚，不貼身束胸。',bottom:'{配色}高腰及膝棉質A字裙，裙腰有自然鬆量；完整內搭覆蓋腹部，不刻意露出腰腹或改成迷你裙。',material:'柔軟霧面細針織、棉質內搭及不透明棉裙；針織紋理、小鈕扣與自然衣料摺痕可見，不使用透明罩衫。',coverage:'較高圓領、完整長袖和完整內搭，肩胸與腹部覆蓋；呈自然柔軟日常穿搭，不用馬甲結構。',accessories:'只保留開襟衫的小型同色鈕扣，不加家門鑰匙、杯子、包包、首飾或新的手勢。'},
+  sexy:{cut:'低U領短版針織背心露肩罩衫',top:'{配色}低U領細肩帶短版針織背心，胸片完整不透明，肩頸與上胸自然可見；外搭{主色}短版長袖針織罩衫，前襟完全敞開、寬領自然落在肩外側，不能遮住所選低U領。',bottom:'{配色}高腰棉質短裙，短版背心下襬與裙腰間露出一小段自然腹部；內搭與罩衫分成兩層，衣料柔軟而不束腰。',material:'有真實細羅紋的柔軟針織背心、細針織罩衫及不透明棉裙，胸片有同色完整襯層；不是蕾絲內衣或膠皮馬甲。',coverage:'低U領、細肩帶、自然露肩的敞開短罩衫與短版腰腹間隙在半身可辨；不補回高領完整棉質內搭。',accessories:'罩衫原有的小型同色鈕扣，不加項鍊、耳環、手持物或刻意拉衣動作。'}},
+ {id:'band-guitarist',label:'樂團女吉他手',start:93,palettes:['guitaristBlackWine','guitaristIvoryGray'],referenceNote:'成年樂團女吉他手風服裝Cosplay，電吉他與肩背帶僅作造型辨識，不新增演唱、彈奏手勢、樂團成員、演出場景或特定音樂人身份。仍依本題原 P 動作，不因角色換臉、換髮色或加煙燻妝。吉他只在既有姿勢允許的位置自然呈現，不搶走半身人像取景。',
+  normal:{cut:'完整皮外套圓領樂團上衣',top:'{主色}霧面柔仿皮騎士外套完整穿長袖，翻領、拉鍊與自然肩線清楚；內搭{配色}完整短袖圓領棉質樂團風上衣，胸前只有小型無文字幾何圖案。',bottom:'{主色}高腰直筒牛仔長褲，內搭下襬完整覆腹，腰帶自然貼合；不做低腰或短版上衣。',material:'柔仿皮外套、棉質上衣及有真實織紋的牛仔布；金屬拉鍊低反光，不畫成膠皮亮面。',coverage:'完整長袖皮外套、較高圓領內搭與腹部覆蓋；半身能看清楚外套和棉上衣兩層。',accessories:'一把黑色實體電吉他與{配色}織布肩背帶；背帶不勒住胸腰，吉他自然懸在腰前或側腰，半身只需露出琴身上緣或琴頸局部。站坐時不另加彈奏手勢；跪躺趴時先保留原動作及支點，將吉他移到側邊安全位置，不能壓在人身上或穿過身體，也不為展示整把琴拉遠取景。'},
+  sexy:{cut:'低U領短版背心無袖皮外套',top:'{配色}低U領細肩帶短版棉質背心，胸片完整不透明、上胸自然可見；外搭{主色}無袖短版柔仿皮騎士外套，前襟敞開，翻領及低反光拉鍊清楚，雙臂裸露。',bottom:'{主色}高腰牛仔短褲，短背心下襬與褲腰之間露出一小段自然腹部；腰帶留原有腰圍，不用馬甲縮腰。',material:'細羅紋棉背心、不透明胸片襯層、霧面柔仿皮外套與牛仔短褲，呈俐落樂團造型，不使用亮面膠皮或胸前透視。',coverage:'低U領、短版內搭、無袖敞開皮外套、裸臂與腰腹間隙在半身清楚可見；不加正常版完整長袖外套或高領T恤。',accessories:'一把黑色實體電吉他與{配色}織布肩背帶，保持造型辨識但不新增彈奏動作。半身只見吉他局部也成立，背帶不遮住主要領口；跪躺趴時將琴移到側邊，優先保留原 P 手勢與人體支點，沒有琴身穿插或強迫全身構圖。'}}
+];
+COS_ROLES.push(...COS_ADDITIONAL_ROLES);
 
 const COS_STYLES=[{id:'normal',label:'正常版'},{id:'sexy',label:'性感版'}];
 function cosVariantsFor(role){return [{id:'base',label:role.variantLabel||'基本款',start:role.start,palettes:role.palettes,normal:role.normal,sexy:role.sexy},...(role.id==='fox'?COS_FOX_VARIANTS:[])];}
@@ -769,6 +791,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 </script>
 </body>
 </html>
+
 
 
 
