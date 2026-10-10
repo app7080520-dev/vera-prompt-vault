@@ -61,7 +61,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
       <div class="sync-card"><strong id="fashionCov">0 / 488</strong><span>時裝穿搭資料</span></div>
       <div class="sync-card"><strong id="poseCov">0 / 145</strong><span>標準姿勢資料</span></div>
       <div class="sync-card"><strong id="emoteCov">63 / 63</strong><span>V.表情包題目</span></div>
-      <div class="sync-card"><strong id="cosCov">96 / 96</strong><span>V.cos｜21 主題・狐仙 4 款・正常／性感</span></div>
+      <div class="sync-card"><strong id="cosCov">156 / 156</strong><span>V.cos｜36 主題・狐仙 4 款・正常／性感</span></div>
     </div>
     <div class="card">
       <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物，再選寫真或 V.cos、穿搭與動作。V.cos 提供角色、款式、正常／性感版與配色篩選，固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera。</p></div></div>
@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.3｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.4｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -204,6 +204,88 @@ const COS_ADDITIONAL_ROLES=[
 ];
 COS_ROLES.push(...COS_ADDITIONAL_ROLES);
 
+// v2.3.4: Only the fifteen requested adult costume themes, C097–C156.
+Object.assign(COS_PALETTES,{
+ tacticalBlackGray:{id:'tactical-black-gray',label:'戰術黑炭灰',primary:'黑色',secondary:'炭灰色'},
+ tacticalSandBlack:{id:'tactical-sand-black',label:'沙色黑',primary:'沙米色',secondary:'黑色'},
+ gymBlackPink:{id:'gym-black-pink',label:'運動黑霧粉',primary:'黑色',secondary:'霧粉色'},
+ gymGrayBlue:{id:'gym-gray-blue',label:'運動炭灰霧藍',primary:'炭灰色',secondary:'霧藍色'},
+ yogaPurpleIvory:{id:'yoga-purple-ivory',label:'霧紫象牙',primary:'霧紫色',secondary:'象牙白'},
+ yogaOatRose:{id:'yoga-oat-rose',label:'燕麥玫瑰',primary:'燕麥米色',secondary:'乾燥玫瑰色'},
+ qipaoWineGold:{id:'qipao-wine-gold',label:'酒紅香檳金',primary:'酒紅色',secondary:'香檳金色'},
+ qipaoNavyIvory:{id:'qipao-navy-ivory',label:'深藍象牙',primary:'深藍色',secondary:'象牙白'},
+ nurseWhitePink:{id:'nurse-white-pink',label:'白色霧粉',primary:'白色',secondary:'霧粉色'},
+ nurseIvoryBlue:{id:'nurse-ivory-blue',label:'象牙霧藍',primary:'象牙白',secondary:'霧藍色'},
+ apronIvoryBlack:{id:'apron-ivory-black',label:'圍裙象牙黑',primary:'象牙白',secondary:'黑色'},
+ apronPinkIvory:{id:'apron-pink-ivory',label:'圍裙霧粉象牙',primary:'霧粉色',secondary:'象牙白'},
+ cheerBlueWhite:{id:'cheer-blue-white',label:'啦啦深藍白',primary:'深藍色',secondary:'白色'},
+ cheerWineWhite:{id:'cheer-wine-white',label:'啦啦酒紅白',primary:'酒紅色',secondary:'白色'},
+ bathIvoryOat:{id:'bath-ivory-oat',label:'浴巾象牙燕麥',primary:'象牙白',secondary:'燕麥米色'},
+ bathRoseIvory:{id:'bath-rose-ivory',label:'浴巾霧粉象牙',primary:'霧粉色',secondary:'象牙白'},
+ hoodRedIvory:{id:'hood-red-ivory',label:'朱紅象牙',primary:'朱紅色',secondary:'象牙白'},
+ hoodWineBlack:{id:'hood-wine-black',label:'酒紅黑',primary:'酒紅色',secondary:'黑色'},
+ tomieGrayWhite:{id:'tomie-gray-white',label:'灰白冷調',primary:'冷灰色',secondary:'白色'},
+ tomieBlackIvory:{id:'tomie-black-ivory',label:'黑色象牙',primary:'黑色',secondary:'象牙白'},
+ harleyRedBlack:{id:'harley-red-black',label:'經典紅黑',primary:'紅色',secondary:'黑色'},
+ harleyRedBlue:{id:'harley-red-blue',label:'紅藍改良',primary:'紅色',secondary:'寶藍色'},
+ demonFoxBlackPurple:{id:'demon-fox-black-purple',label:'妖狐黑紫',primary:'黑色',secondary:'深紫色'},
+ demonFoxWineBlack:{id:'demon-fox-wine-black',label:'妖狐酒紅黑',primary:'酒紅色',secondary:'黑色'},
+ egyptIvoryGold:{id:'egypt-ivory-gold',label:'埃及象牙金',primary:'象牙白',secondary:'金色'},
+ egyptBlackGold:{id:'egypt-black-gold',label:'埃及黑金',primary:'黑色',secondary:'金色'},
+ soldierOliveBlack:{id:'soldier-olive-black',label:'軍裝橄欖黑',primary:'橄欖綠色',secondary:'黑色'},
+ soldierNavyGray:{id:'soldier-navy-gray',label:'軍裝深藍灰',primary:'深藍色',secondary:'灰色'},
+ dealerBlackWhite:{id:'dealer-black-white',label:'荷官黑白',primary:'黑色',secondary:'白色'},
+ dealerWineIvory:{id:'dealer-wine-ivory',label:'荷官酒紅象牙',primary:'酒紅色',secondary:'象牙白'}
+});
+const COS_V234_ROLES=[
+ {id:'tactical-girl',label:'戰術娘',start:97,palettes:['tacticalBlackGray','tacticalSandBlack'],referenceNote:'只借取使用者參考圖的戰術上衣、棒球帽、通訊耳機、手套、裝備帶與褲裝；參考人物的臉、髮型、身材與手勢權重為 0。不戴口罩，不遮住鼻、嘴或眼睛；原 P 動作照做，不新增持槍、射擊或雙手比手勢。',
+  normal:{cut:'完整立領短袖戰術上衣',top:'{主色}完整立領短袖機能上衣，領口貼近頸根、肩線自然，短袖完整覆蓋上臂上段；上衣下襬收在褲腰內，胸前保持實體不透明布面。外層兩條{配色}窄裝備肩帶沿肩外側延伸至腰帶，不遮住主要領口。',bottom:'{主色}高腰機能長褲，腰頭與上臀褲片平整；{配色}織布裝備腰帶自然貼合腰圍，側腰有固定小裝備套。完整上衣覆腹，不做短版腰腹間隙。',material:'有細羅紋的霧面高密度彈性上衣、耐磨機能褲布及尼龍織帶；扣具低反光，衣料有真實拼縫，不是光亮膠皮或金屬盔甲。',coverage:'高立領、完整短袖、覆腹上衣與高腰長褲是正常版主輪廓；裝備帶只貼衣服，不擠胸或收成不真實細腰。',accessories:'同色無字棒球帽、黑色罩耳通訊耳機與偏側麥克風、黑色薄戰術手套、{配色}裝備帶及腰側硬殼造型套。麥克風停在嘴角外側，不遮臉；帽子不改原瀏海。腰腿裝備只在原取景內局部入鏡，不為展示整套裝備拉遠；無口罩、無手持武器。'},
+  sexy:{cut:'無袖立領短版戰術背心',top:'{主色}立領無袖短版機能背心，袖窿乾淨、雙肩外側與雙臂裸露，胸前仍是完整不透明布面；下襬停在自然肋骨下方，與褲腰間露出一小段腹部。{配色}窄裝備肩帶沿肩外側和身體兩側連接，不勒胸或遮住上衣剪裁。',bottom:'{主色}高腰合身機能長褲，褲頭、上臀褲片與一小段大腿褲料可見；{配色}裝備腰帶與側腰造型套分層清楚，保留正常腰圍及腿部比例。',material:'霧面細羅紋彈性背心、密織不透明機能褲與柔軟尼龍帶，背心有完整胸片與真實下襬包邊；不使用透視網紗或亮面膠皮。',coverage:'無袖、短版、裸臂和腰腹間隙在半身中清楚，對應參考圖的俐落裝備風；不補回正常版完整短袖或覆腹下襬，不以豐胸或拉腿增加性感差異。',accessories:'同色無字棒球帽、黑色通訊耳機與偏側麥克風、黑色戰術手套、{配色}裝備肩帶和腰帶。腰側造型套固定在原腰帶，不拿在手裡；依原 P 手勢及支點微調裝備，不加口罩或遮臉面具。'}},
+ {id:'fitness-coach',label:'健身教練',start:101,palettes:['gymBlackPink','gymGrayBlue'],referenceNote:'成年健身教練風運動服造型，不新增健身房人物、啞鈴動作或教學故事，不把人物練成另一種肌肉量、體脂或身形；原 P 動作、原人物身體比例及臉部身份不變。',
+  normal:{cut:'高圓領短袖運動上衣',top:'{主色}高圓領短袖運動上衣，前胸完整、自然肩線，{配色}細拼接沿肩線和兩側延伸；下襬覆腹，衣料貼合而留正常呼吸鬆量，胸前沒有開口或縮胸結構。',bottom:'{主色}高腰運動長緊身褲，寬腰頭與上臀拼縫可見；{配色}小側邊色塊和自然縫線清楚，保留原骨盆及腿部比例。',material:'霧面吸濕排汗機能針織、細密四向彈性褲布與平整包縫；胸部及臀部不透明，沒有汗水透視或油亮橡膠感。',coverage:'較高圓領、完整短袖、覆腹上衣與長褲，屬完整教練運動穿搭；不改成運動內衣或露腹短背心。',accessories:'衣裝兩側的小型色塊拼接，不加口哨、啞鈴、運動手錶、手持物或新的訓練動作。'},
+  sexy:{cut:'低U領短版運動背心',top:'{主色}低U領寬肩帶運動背心，{配色}包邊沿領口和肩帶清楚，雙肩與雙臂裸露；前胸是有支撐的完整不透明雙層胸片，下襬停在肋骨下方，露出自然腰腹間隙。',bottom:'{主色}高腰合身運動短褲，{配色}細側條與寬腰頭清楚，短褲前後片完整；不靠拉低腰頭、擠胸或改臀型呈現差異。',material:'雙層霧面機能彈性胸片、柔軟包邊及高密度短褲布；有真實織紋、拼縫與自然受力，不做透視或乳膠材質。',coverage:'低U領、無袖、短版胸片、腰腹間隙與短褲腰線在半身可見；不能套回正常版高圓領T恤，人物仍保留原自然體態。',accessories:'領口與褲側的{配色}機能包邊，不加手錶、啞鈴、汗巾或原 P 以外的舉重動作。'}},
+ {id:'yoga-coach',label:'瑜珈教練',start:105,palettes:['yogaPurpleIvory','yogaOatRose'],referenceNote:'成年瑜珈教練的柔軟運動服主題，不新增瑜珈體式、伸展手勢或瑜珈墊道具；動作只依所選 P 編號，不改筋骨柔軟度、體型、肌肉量或年齡。',
+  normal:{cut:'高領長袖瑜珈上衣',top:'{主色}柔軟高領長袖瑜珈上衣，完整肩線、貼合但不勒身，{配色}小弧形拼接沿袖側延伸；前胸與腹部完整覆蓋，下襬自然接在褲腰外側。',bottom:'{主色}高腰七分瑜珈長褲，寬而平整的腰頭與上臀褲片清楚；{配色}窄側邊拼接，衣料順著原身形自然伸展。',material:'柔和霧面的細密瑜珈針織、親膚彈性長褲與平整縫線，無光亮膠皮感；前胸和腰臀不透明，不做過度壓縮塑形。',coverage:'完整高領、長袖與覆腹輪廓，呈柔軟簡潔的瑜珈教練穿搭；不改成單肩短版胸衣。',accessories:'只保留衣料本身的{配色}拼縫，不加瑜珈墊、手持水杯、首飾或新的伸展姿勢。'},
+  sexy:{cut:'單肩短版瑜珈背心',top:'{主色}單肩斜領短版瑜珈背心，一側寬肩帶、另一側肩頸自然裸露；完整不透明胸片沿斜領平整包邊，{配色}小色塊位於肩帶外側，下襬停在肋骨下方。',bottom:'{主色}高腰合身瑜珈短褲，褲腰與短上衣之間露出一小段自然腹部；{配色}窄腰邊與側面弧形縫線清楚，褲口不向上捲起。',material:'霧面雙層親膚彈性背心、細羅紋包邊及密織短褲布，胸片與臀片保持不透明；柔軟貼合，不以腰封重塑人體。',coverage:'斜領單肩、裸臂、短版及自然腰腹間隙是性感版可見差異；不加正常版高領長袖，胸片固定不隨動作滑落。',accessories:'肩帶外側的小型{配色}拼接，不加頸鍊、瑜珈墊或所選 P 以外的體式。'}},
+ {id:'qipao-girl',label:'旗袍少女',start:109,palettes:['qipaoWineGold','qipaoNavyIvory'],referenceNote:'「旗袍少女」只是旗袍服裝主題名稱，穿著者仍為原年齡的明確成年人物；不幼態化、不改成年臉或身材，不把旗袍剪裁當成縮腰豐胸工具。',
+  normal:{cut:'立領短袖經典旗袍',top:'{主色}完整立領短袖旗袍，{配色}細滾邊沿立領和斜襟延伸，胸前一排小型盤扣閉合；肩部及上胸由完整衣料覆蓋，短袖與自然肩線清楚。',bottom:'{主色}及膝修身直筒旗袍裙身與上身連成一件，側衩停在膝上附近；{配色}小花枝刺繡位於側腰，版型跟隨原身形而不束腰。',material:'低反光厚緞面提花、實體盤扣與不透明內襯；織紋及衣料摺痕可見，不把緞面畫成金屬或透明薄紗。',coverage:'完整立領、封閉斜襟、短袖及連續覆腹裙身是正常版；不加胸前大開口或露側腰剪裁。',accessories:'衣裝自帶{配色}盤扣與小型刺繡，不加髮簪、耳環、扇子或角色假髮。'},
+  sexy:{cut:'削肩立領鏤空旗袍',top:'{主色}削肩無袖立領旗袍，上胸有一個清楚的縱向水滴開口，開口止於原低領上緣，完整不透明胸片仍固定；{配色}滾邊和立領盤扣清楚，雙肩外側與雙臂裸露。',bottom:'{主色}大腿上段旗袍短裙與上身連接，側腰各一個小型月牙剪裁，腰前及臀部衣料完整；{配色}花枝刺繡沿側襟延伸，不藉側衩改變腿長或臀型。',material:'有微光澤的厚緞面、精細盤扣及雙層不透明胸片；開口邊緣有實體包邊，不以透明布模糊剪裁。',coverage:'削肩、無袖、水滴上胸開口與小型側腰剪裁在半身可辨，和正常版封閉短袖不同；必要遮覆固定，動作不拉開盤扣或裙衩。',accessories:'本題立領盤扣和{配色}滾邊，不加髮簪、珠鍊、手持扇或新的旗袍姿勢。'}},
+ {id:'nurse',label:'護士',start:113,palettes:['nurseWhitePink','nurseIvoryBlue'],referenceNote:'成年護士風衣裝 Cosplay，不改人物原職業或新增病人、醫療處置與故事。帽子、制服拼接和衣裝配件只辨識主題，原 P 手勢及人物身份不變。',
+  normal:{cut:'翻領短袖護士制服',top:'{主色}完整翻領短袖制服上身，{配色}細領邊與袖口滾邊、中央完整鈕扣前襟和一只小胸口布袋清楚；領口端正閉合，腰身自然收省而不束胸。',bottom:'{主色}及膝A字制服裙與上身相連，{配色}窄布腰帶平整系在自然腰線；腹部與腰臀完整覆蓋，沒有大腿以上側衩。',material:'霧面厚棉混紡制服布、完整不透明襯層及實體小鈕扣；有真實布紋和自然摺痕，不做透明白衣。',coverage:'端正翻領、完整短袖、閉合前襟和連身覆腹裙身是正常版；不改成低領短版背心或露肩款。',accessories:'{主色}小護士布帽，{配色}細帽邊與簡單十字布飾；帽子固定在原髮型外側，不加針筒、聽診器、手持物或醫療手勢。'},
+  sexy:{cut:'低心形領無袖護士短裙',top:'{主色}低心形領無袖制服上身，{配色}窄翻折領邊和中央小鈕扣保留護士造型；肩頸、上胸和雙臂自然可見，完整不透明胸片固定，領口不是用手拉開。',bottom:'{主色}合身短裙與上身連接，{配色}布腰帶停在原自然腰線，腰腹完整包覆；兩側小裙衩是固定剪裁，不向上掀開衣料。',material:'有柔和微光澤的厚棉彈性制服布、雙層胸片及{配色}包邊，裙片不透明；自然貼合，不使用透視蕾絲或亮面乳膠。',coverage:'低心形領、無袖與短裙的俐落版型在半身中可辨，不補回正常版高翻領或完整短袖；胸部與臀部保持完整衣料遮覆。',accessories:'{主色}小護士布帽、{配色}帽邊與十字布飾；不換髮色、妝容，不加醫療工具或原 P 以外的照護動作。'}},
+ {id:'apron-housekeeper',label:'圍裙家政婦',start:117,palettes:['apronIvoryBlack','apronPinkIvory'],referenceNote:'成年單件圍裙造型攝影：人物只穿本題不透明圍裙式衣裝，不另外疊襯衫、洋裝、胸衣或短褲。圍裙前片、側翼與腰臀覆片保持必要遮覆及合理固定，不掀開、不拉移衣料；仍是服裝造型，沒有家政工作、性行為或新手勢。',
+  normal:{cut:'寬肩帶完整胸兜圍裙',top:'{主色}單件厚棉胸兜圍裙，前胸是完整較高方形胸片，兩條寬肩帶跨過肩部，{配色}細包邊沿胸兜與肩帶延伸；胸兜自然向腰部收合，不另外加襯衫或袖子。',bottom:'{主色}完整及膝圍裙前片與寬側翼包住腰臀，側翼在後腰大幅重疊，以{配色}寬腰帶固定；前片從腰線連續垂落，沒有需要用手遮擋的空隙。',material:'挺括不透明厚棉、雙層完整胸兜及{配色}實體棉帶；細織紋、包邊與自然摺痕可見，不做透視圍裙或薄紗胸片。',coverage:'較高完整胸兜、寬肩帶、寬側翼與完整腰臀前片是正常版；肩臂可以自然裸露，但必要胸片與腰臀覆片不移位。',accessories:'後腰{配色}寬布結與圍裙前片的一只小布袋；不加女僕髮箍、清潔工具、手持物或刻意提起圍裙的動作。'},
+  sexy:{cut:'低弧領細帶短圍裙',top:'{主色}單件低弧形領胸兜圍裙，完整不透明立體胸片固定，{配色}窄肩帶在後背交叉，雙肩、雙臂與上胸自然可見；胸片沿側邊自然收合，不額外疊胸衣、襯衫或袖子。',bottom:'{主色}大腿上段短圍裙前片，兩側較窄但完整的包覆翼片與{配色}布腰帶連接，腰臀前後必要覆片保持不透明；衣料依原 P 重力固定，不用手提起或拉開。',material:'柔軟不透明雙層棉緞、實體細包邊與棉質綁帶，前胸和腰臀覆片有完整襯層；不是透明蕾絲圍裙或只有幾條帶子的造型。',coverage:'低弧領、細交叉肩帶、較短前片與小範圍側腰裸露形成可見差異；胸片及腰臀覆片完整，不以露出乳頭或私密部位呈現版本差異。',accessories:'後腰小型{配色}布結與細包邊；沒有女僕頭飾、清潔工具或新增拉衣手勢，任何角度都維持本題圍裙固定。'}},
+ {id:'cheerleader',label:'啦啦隊員',start:121,palettes:['cheerBlueWhite','cheerWineWhite'],referenceNote:'成年運動啦啦隊服裝主題，不設定中小學生、校隊年齡或新的跳舞、加油、舉彩球手勢；人物仍為原設定的成年人物，表情與動作只依選定 P 編號。',
+  normal:{cut:'高領短袖啦啦隊上衣',top:'{主色}完整高圓領短袖啦啦隊上衣，{配色}V形色塊沿胸前與肩線拼接，前胸只有幾何圖案沒有文字；下襬完整接到高腰裙頭，肩胸和腹部覆蓋。',bottom:'{主色}膝上百褶運動裙，{配色}寬裙緣色帶與高腰裙頭清楚，裙內有同色不透明完整襯片；褶線自然，不把裙子掀起。',material:'霧面厚運動針織、挺括百褶裙料與平整縫線，胸前色塊為實體拼接；不使用透明白布或膠皮反光。',coverage:'高圓領、短袖、覆腹上衣和百褶裙是完整正常版；不改成露腹綁帶胸衣。',accessories:'裙腰與袖口自帶{配色}色帶，不加團隊文字、彩球、手持物或新的啦啦隊動作。'},
+  sexy:{cut:'低U領削肩短版啦啦隊上衣',top:'{主色}低U領削肩短版運動上衣，{配色}V形胸前拼接與寬肩帶清楚；完整不透明胸片有合理支撐，雙臂裸露，下襬停在肋骨下方。',bottom:'{主色}高腰大腿上段百褶短裙，{配色}細裙緣色帶及完整不透明內襯；短上衣與裙腰間露出一小段自然腹部，裙頭保持原腰圍。',material:'雙層霧面彈性胸片、挺括短百褶裙料與{配色}細包邊，拼接有真實厚度及摺痕；不是泳衣或透明薄紗。',coverage:'低U領、削肩無袖、短版及腰腹間隙在半身清楚可見，和正常版完整短袖不同；不藉擠胸、縮腰或掀裙增加差異。',accessories:'衣裝既有{配色}V形色帶與裙緣，不加彩球、隊名、首飾或原 P 以外的加油手勢。'}},
+ {id:'after-bath-student',label:'浴後女大生',start:125,palettes:['bathIvoryOat','bathRoseIvory'],hairState:'wet',referenceNote:'明確成年大學生風的浴後衣裝主題，人物仍為原設定年齡與原身份，不把既定人物改成另一位學生。只用不透明圍浴巾與本題暫時濕髮，沒有浴室第二人、淋浴動作或永久髮型變更；浴巾固定，不拉開。',
+  normal:{cut:'平直高折邊長浴巾',top:'{主色}厚浴巾由腋下自然環繞胸腰，胸前上緣是平直寬折邊，{配色}細織帶位於折邊外緣；肩頸裸露，完整不透明胸片與側面重疊固定，不另外穿襯衫或胸衣。',bottom:'同一條{主色}浴巾連續包住腹部與腰臀，長度至膝上，側面有足夠重疊量及隱藏固定；衣料垂落有真實厚度，不把下襬掀起。',material:'厚實吸水棉質華夫格浴巾、完整雙層折邊與{配色}細織帶；即使人物髮絲濕潤，浴巾仍不透明，不做濕布透視。',coverage:'較高平直寬折邊、完整包腹與長浴巾是正常版；胸前及腰臀始終完整覆蓋，沒有需要用手遮擋的開口。',accessories:'只有浴巾本身的{配色}細織帶與隱藏固定，不加頭巾帽、吹風機、手持物或新動作；原頭髮保持可見濕髮狀態。'},
+  sexy:{cut:'低弧斜折邊短浴巾',top:'{主色}單條短浴巾環繞胸腰，胸前上緣作明確較低的斜折弧線，{配色}窄包邊沿折線延伸；鎖骨及上胸自然可見，但胸片不透明、重疊固定，不靠手拉低浴巾。',bottom:'同一條{主色}浴巾完整包住腹部與臀部，長度停在大腿上段，側面重疊及自然小布摺清楚；腰臀必要覆片固定，不打開側縫或新增其他衣服。',material:'柔軟不透明雙層短毛圈棉浴巾、窄實體包邊與完整重疊襯層，觸感比正常版華夫格更細緻；沒有濕布透視或亮面薄紗。',coverage:'較低斜弧折邊、較窄包邊、短浴巾及裸肩上胸形成可見版本差異；浴巾一直完整覆胸和腰臀，不加乳溝拉扯手勢或走光。',accessories:'只有{配色}窄包邊及浴巾隱藏固定；頭髮呈剛洗好澡的濕潤髮束，不加頭巾帽、吹風機或新的撥髮動作。'}},
+ {id:'red-riding-hood',label:'小紅帽',start:129,palettes:['hoodRedIvory','hoodWineBlack'],referenceNote:'童話小紅帽元素的明確成年服裝 Cosplay，角色名不導入兒童年齡、幼態臉或兒童體型。只取紅色兜帽斗篷、復古衣裝與配色，沒有狼、籃子、森林故事或新的童話人物。',
+  normal:{cut:'兜帽斗篷完整泡袖洋裝',top:'{配色}高圓領完整泡袖洋裝上身，胸前閉合、肩部覆蓋，外搭{主色}完整兜帽短斗篷；斗篷在頸前用同色布帶固定，自然垂到上臂外側，兜帽不遮五官。',bottom:'{主色}及膝A字裙與洋裝上身連成一件，腰線自然、{配色}窄裙緣清楚；腹部完整覆蓋，斗篷與裙身是分開層次。',material:'霧面厚棉洋裝、柔軟絨面斗篷與實體布帶，胸片及裙料不透明；不是透明披紗或厚重盔甲。',coverage:'完整高領泡袖、覆腹裙身和較長短斗篷是正常版；不改成低領馬甲或裸肩露腹款。',accessories:'{主色}衣裝兜帽與頸前布結，不加籃子、手持物、角色假髮或新的牽裙動作。'},
+  sexy:{cut:'短兜帽披肩低領馬甲裙',top:'{配色}低心形領無肩帶馬甲上身，完整不透明胸片和自然拼縫清楚，肩頸與雙臂裸露；外搭{主色}較短兜帽披肩，只覆後肩及上臂外側，不蓋住所選低領。',bottom:'{主色}高腰大腿上段A字短裙與馬甲連接，{配色}細裙緣與自然小褶清楚；腰腹衣裝完整，原身形不被馬甲束窄。',material:'厚棉緞馬甲、柔軟霧面短斗篷與不透明裙內襯，胸片有完整支撐；布帶及拼縫可見，不使用透明胸片。',coverage:'低心形領、裸肩、短披肩及馬甲輪廓在半身中清楚，和正常版完整泡袖不同；兜帽仍不遮眼睛、鼻子或嘴。',accessories:'{主色}兜帽及短披肩頸前布結，不加籃子、假髮、狼或原 P 以外的動作。'}},
+ {id:'tomie',label:'川上富江',start:133,palettes:['tomieGrayWhite','tomieBlackIvory'],fanRole:true,referenceNote:'伊藤潤二「川上富江」服裝風 Cosplay：借取冷調針織背心、襯領、窄領帶與百褶裙等造型語彙，性感版為成年改良剪裁，不宣稱原作固定服裝。人物仍為原年齡的既定人物，不導入學生年齡、富江的臉、黑色角色假髮、眼下痣、恐怖變形或多張臉；表情只依原 P。',
+  normal:{cut:'襯衫針織背心百褶裙',top:'{配色}完整尖領長袖襯衫，前襟扣合、袖口端正，胸前一條黑色窄領帶；外搭{主色}無袖V領針織背心，胸前及腹部完整覆蓋，襯衫與背心是兩層衣裝。',bottom:'{主色}膝上百褶裙，裙頭接在完整背心下襬附近，褶線自然；不拉低裙腰或把襯衫改成短版。',material:'霧面細針織背心、挺括棉質襯衫與不透明百褶裙料，領帶為實體織布；保留真實織紋，不畫成漫畫網點或塑膠模型。',coverage:'完整尖領襯衫、長袖、針織背心與覆腹輪廓是正常版；造型靠衣裝辨識，不靠富江五官或眼下痣。',accessories:'黑色窄領帶與襯領是衣裝配件，不加眼下痣、耳環、假髮、角色道具或新的冷笑表情。'},
+  sexy:{cut:'低V短版背心分離襯領',top:'{主色}低V領無袖短版針織背心，完整不透明胸片自然貼合，前襟小鈕扣固定；頸前是{配色}分離式尖襯領與黑色窄領帶，沒有正常版完整長袖襯衫，雙臂及上胸可見。',bottom:'{主色}高腰大腿上段百褶短裙，短背心與裙腰間露出一小段自然腹部；{配色}細裙緣清楚，腰圍及臀型依原人物。',material:'雙層不透明細針織胸片、實體棉襯領及厚百褶裙料，小鈕扣低反光；不是透明蕾絲內衣或亮面乳膠。',coverage:'低V領、無袖短版、分離襯領和腰腹間隙在半身可辨，屬成年服裝改良；不換富江的臉、角色髮型或眼下痣。',accessories:'{配色}分離式尖襯領與黑色窄領帶，不加角色假髮、眼下痣、恐怖配件或原 P 以外的表情。'}},
+ {id:'harley-quinn',label:'小丑女',start:137,palettes:['harleyRedBlack','harleyRedBlue'],fanRole:true,referenceNote:'Harley Quinn 小丑女的紅色對比拼色、菱形圖案與荷葉襯領造型，第二配色為原創改良；只換衣裝，不導入角色的臉、膚色、金色雙馬尾、染色髮尾、白底臉妝、刺青或眼罩。人物維持原年齡與原 P 手勢，不加武器、故事人物或另一套動作。',
+  normal:{cut:'高領長袖菱形連身衣',top:'{主色}與{配色}左右不對稱拼色的完整高領長袖連身上衣，胸前有少量對比色菱形布飾；頸口一圈小型象牙白荷葉襯領，胸前與腹部完整覆蓋，不以角色臉妝辨識。',bottom:'同一件拼色連身衣延續至長褲，腰臀前片完整，原自然腰線及拼縫清楚；不改成短胸衣或高腿口泳衣。',material:'霧面厚彈性布、實體菱形拼片與柔軟棉質荷葉邊，胸腹及腰臀不透明；不是乳膠亮面或動漫平塗材質。',coverage:'完整高領、長袖和連續覆腹長褲是正常版，小丑女風格由拼色、菱形及荷葉襯領呈現；不改臉或變成角色身材。',accessories:'象牙白小荷葉襯領與同色短荷葉袖口，視為衣裝的一部分；不加眼罩、假髮、臉部彩繪、刺青、球棒或大槌。'},
+  sexy:{cut:'低心形領菱形馬甲短褲',top:'{主色}與{配色}不對稱拼色的無肩帶低心形領短馬甲，完整不透明胸片和對比色菱形布飾清楚；象牙白分離式小荷葉襯領固定在頸根，雙肩及手臂裸露，馬甲不束窄原腰圍。',bottom:'同拼色高腰合身短褲，短馬甲與褲頭間留一小段自然腹部；上臀褲片、實體菱形布飾和不透明前後片清楚，不用高腿口或拉低腰頭。',material:'有柔和微光澤的厚棉緞馬甲、密織不透明短褲與柔軟荷葉襯領，拼片有實體厚度；沒有透視胸片或亮面膠皮。',coverage:'低心形領、無肩帶、裸臂及短版腰腹間隙是可見性感版差異；不補回正常版高領長袖，不靠角色臉妝或豐胸呈現。',accessories:'象牙白分離式荷葉襯領與短袖口，不加眼罩、假髮、染色髮尾、刺青、球棒或原 P 以外的揮槌動作。'}},
+ {id:'demon-fox',label:'妖狐',start:141,palettes:['demonFoxBlackPurple','demonFoxWineBlack'],referenceNote:'妖狐為暗色妖魅東方衣裝，和既有狐仙的清雅仙氣、淺色古風及祭典款分開。只使用可拆卸深色狐耳、仿毛尾及暗色服裝，不改成真實妖獸，不加獸瞳、尖牙、動物鼻、角色髮色或新的魅惑表情。',
+  normal:{cut:'暗色交領長袖妖狐衣',top:'{主色}完整東方交領上衣，{配色}寬滾邊沿衣襟與袖口延伸，前胸覆合固定；完整長袖在上臂有窄仿毛肩片，肩頸及腹部覆蓋，不套用淺色狐仙襯衣。',bottom:'{主色}暗色及踝層疊長裙，{配色}寬布腰封及深色仿毛尾固定在後腰；裙料自然垂落，不靠束腰或改臀型呈現妖狐。',material:'低反光厚緞面、暗色細提花、仿毛肩片與不透明裙內襯，衣料有真實層次；沒有神聖光暈、透明胸片或塑膠獸毛。',coverage:'完整交領、長袖、暗色仿毛肩片和寬腰封是正常版；與既有淺色清雅狐仙造型不同，不新增仙符或祭典頭飾。',accessories:'一對可拆卸深色仿毛狐耳髮箍、後腰三簇深色仿毛尾與{配色}衣裝腰帶。耳尾只是服裝配件，不變真實器官；尾巴可局部或畫外，不拉遠展示完整尾形。'},
+  sexy:{cut:'低交領露肩妖狐短衣',top:'{主色}低交領露肩短版上衣，左右完整不透明胸片交疊固定，{配色}滾邊沿原低領延伸；雙肩和上胸可見，兩側獨立仿毛短袖口停在上臂，不是正常版完整長袖。',bottom:'{主色}高腰層疊短裙，{配色}窄布腰帶與深色仿毛尾固定在後腰；短上衣與裙頭間露出一小段自然腹部，腰臀前片完整。',material:'柔和微光澤厚緞面、深色仿毛袖口及不透明雙層裙片，交領邊緣有實體包邊；不使用胸前透視、乳膠反光或獸化皮膚。',coverage:'低交領、露肩、獨立仿毛短袖口及腰腹間隙形成可見差異；不補回正常版高交領或完整長袖，不靠改瞳孔、尖牙或換臉增加妖魅感。',accessories:'一對深色仿毛狐耳、後腰三簇深色仿毛尾與{配色}窄布腰帶，不加狐仙仙符、假髮、獸瞳或新的勾引動作；耳尾位置服從原 P 支點。'}},
+ {id:'cleopatra',label:'埃及豔后',start:145,palettes:['egyptIvoryGold','egyptBlackGold'],referenceNote:'成年埃及宮廷風衣裝 Cosplay，以幾何寬領片、金色滾邊及垂墜裙料辨識，不宣稱歷史服裝考據，也不改人物國籍、膚色、五官、髮色或妝容；仍為原年齡的既定人物。',
+  normal:{cut:'幾何寬領宮廷長裙',top:'{主色}完整高領無袖宮廷上衣，前胸連續不透明，外層{配色}幾何寬領片由頸根延伸至上胸，分層小布飾清楚；雙臂自然裸露，領片是衣裝縫製部件，不擠胸。',bottom:'{主色}及踝直筒垂墜長裙與上身連成一件，{配色}寬布腰帶和前側垂片固定，腹部完整覆蓋；裙料依原自然身形下垂，不塑造成另一個腰臀比。',material:'不透明亞麻感厚棉、柔和低反光金色織帶及幾何布片，領片有真實厚度與縫線；不是金屬盔甲、透明薄紗或鏡面乳膠。',coverage:'完整高領、寬幾何領片與連續覆腹長裙是正常版；不改成低領短胸衣或裸腹兩件式。',accessories:'{配色}小型幾何額前髮帶與衣裝寬領片、腰帶，髮帶固定在原髮型外側；不加黑色角色假髮、黑眼線改妝、耳環、手杖或手持物。'},
+  sexy:{cut:'低V掛頸宮廷短上衣',top:'{主色}低V領掛頸短上衣，完整不透明立體胸片以{配色}實體織帶固定，胸前只有少量幾何金色布飾；肩頸、上胸及雙臂可見，不加正常版覆滿上胸的寬領片。',bottom:'{主色}高腰垂墜長裙，{配色}窄布腰帶與前側垂片固定，短上衣與裙頭間露出一小段自然腹部；腰臀片保持完整，側衩是衣裝固定剪裁。',material:'有柔和微光澤的厚棉緞胸片、不透明垂墜裙料與低反光金色織帶，胸片有完整襯層；不畫成金屬胸甲或透明珠簾。',coverage:'低V領、掛頸短版與自然腰腹間隙在半身清楚，和正常版完整高領長裙不同；不靠豐胸、縮腰、加古埃及眼妝或改膚色呈現主題。',accessories:'{配色}幾何細髮帶、掛頸衣裝織帶與裙腰布帶，不加黑色假髮、耳環、手杖或原 P 以外的宮廷手勢。'}},
+ {id:'soldier',label:'軍人',start:149,palettes:['soldierOliveBlack','soldierNavyGray'],referenceNote:'成年軍裝制服風 Cosplay，重點是翻領、肩袢、胸袋和制服版型；與戰術娘的貼身短上衣、通訊耳機和裝備帶分開。不導入真實軍階、國家單位或武器手勢，人物身份及原 P 動作不變。',
+  normal:{cut:'翻領長袖軍裝制服',top:'{主色}完整翻領長袖軍裝上衣，兩個平整胸袋、自然肩袢與中央完整鈕扣前襟清楚，{配色}細袖口和領邊固定；領口端正、肩線自然，不使用防彈背心或束胸裝備帶。',bottom:'{主色}高腰直筒制服長褲，上衣下襬完整收在褲腰內，{配色}織布腰帶自然貼合；上臀褲片有真實鬆量，不用緊身戰術褲代替制服。',material:'霧面棉斜紋制服布、低反光小鈕扣與織布腰帶，肩袢及口袋有實體拼縫；不是乳膠、金屬盔甲或緊身塑形衣。',coverage:'完整翻領、長袖、閉合前襟與覆腹長褲是正常版；軍裝輪廓端正，不改成戰術娘短背心。',accessories:'{主色}小型軟布軍帽、{配色}制服腰帶與無文字幾何肩袢，沒有通訊耳機、口罩、武器、真實單位標誌或新手勢。'},
+  sexy:{cut:'低V內搭短版無袖軍裝',top:'{主色}短版無袖軍裝外套，翻領、肩袢和兩個小胸袋保留，前襟敞開；內搭{配色}低V領短版不透明背心，胸片固定，雙臂裸露、上胸自然可見，兩層衣裝清楚。',bottom:'{主色}高腰制服短褲，{配色}織布腰帶與上臀褲片完整；短內搭與褲腰間留一小段自然腹部，腰帶不束窄腰圍、不拉低褲頭。',material:'霧面棉斜紋短外套、雙層棉質背心與不透明制服短褲，鈕扣和肩袢低反光；不做亮面膠皮或胸前透視。',coverage:'低V內搭、無袖短外套、裸臂及腰腹間隙在半身可辨；不補回正常版完整長袖或封閉前襟，也不增加戰術耳機或裝備帶。',accessories:'{主色}小型軟布軍帽、{配色}布腰帶和衣裝肩袢，不加武器、口罩、耳機或原 P 以外的敬禮動作。'}},
+ {id:'female-dealer',label:'女荷官',start:153,palettes:['dealerBlackWhite','dealerWineIvory'],referenceNote:'成年荷官風正式衣裝主題，只借襯領、領結、合身背心與撲克牌花色小刺繡辨識；沒有賭桌、發牌、洗牌動作或額外人物，原 P 手勢照做，人物職業不回寫為荷官。',
+  normal:{cut:'長袖襯衫正式荷官背心',top:'{配色}完整尖領長袖襯衫，胸前扣合、袖口端正，外搭{主色}完整V領西裝背心；背心鈕扣固定、肩帶較寬，頸前一只{主色}小布領結，腹部覆蓋。',bottom:'{主色}高腰西裝直筒長褲，腰頭自然接在完整背心下方，實體前褶和上臀褲片清楚；不改成短裙或低腰短褲。',material:'霧面西裝布、挺括不透明棉襯衫與實體布領結，鈕扣低反光；背心自然收省，不以馬甲改變胸腰比例。',coverage:'完整長袖襯衫、寬肩西裝背心、端正領結和覆腹長褲是正常版；胸前不開口，不改成無肩帶胸衣。',accessories:'{主色}小布領結、背心側邊一枚小型無字撲克牌花色刺繡；不加手持撲克牌、骰子、賭桌或新的發牌手勢。'},
+  sexy:{cut:'無肩帶低心形領荷官短背心',top:'{主色}無肩帶低心形領西裝短背心，完整不透明胸片、短翻折襟邊及中央小鈕扣清楚；頸前為{配色}分離式尖襯領與{主色}小領結，沒有正常版完整長袖襯衫，雙肩及雙臂裸露。',bottom:'{主色}高腰合身西裝短褲，短背心與褲腰間露出一小段自然腹部，實體上臀褲片和前褶清楚；不以拉低腰頭或收束腰帶呈現性感差異。',material:'有柔和微光澤的厚西裝緞布、雙層不透明胸片與實體棉襯領，鈕扣和花色刺繡低反光；不是透明蕾絲或亮面乳膠。',coverage:'低心形領、無肩帶短背心、分離襯領、裸臂與腰腹間隙在半身可辨，和正常版完整長袖不同；必要胸片及褲片固定。',accessories:'{配色}分離式襯領、{主色}布領結與一枚無字撲克牌花色刺繡，不加撲克牌、骰子、賭桌或原 P 以外的洗牌手勢。'}}
+];
+COS_ROLES.push(...COS_V234_ROLES);
+
 const COS_STYLES=[{id:'normal',label:'正常版'},{id:'sexy',label:'性感版'}];
 function cosVariantsFor(role){return [{id:'base',label:role.variantLabel||'基本款',start:role.start,palettes:role.palettes,normal:role.normal,sexy:role.sexy},...(role.id==='fox'?COS_FOX_VARIANTS:[])];}
 const COS_OUTFITS=COS_ROLES.flatMap(role=>cosVariantsFor(role).flatMap(variant=>COS_STYLES.flatMap((style,si)=>variant.palettes.map((name,pi)=>{
@@ -212,7 +294,7 @@ const COS_OUTFITS=COS_ROLES.flatMap(role=>cosVariantsFor(role).flatMap(variant=>
  const label=[role.label,...(role.id==='fox'?[variant.label]:[]),style.label,palette.label].join('｜');
  const top=replace(garment.top),bottom=replace(garment.bottom),material=replace(garment.material),coverage=replace(garment.coverage),accessories=replace(garment.accessories);
  const detail=`【選定款式】${garment.cut}\n【上身、領口與袖型】${top}\n【下身與衣裝連接】${bottom}\n【材質與層次】${material}\n【本題遮覆與版型】${coverage}`;
- return {id:'C'+String(variant.start+si*2+pi).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,cut:garment.cut,top,bottom,material,coverage,accessories,label,detail,referenceNote:role.referenceNote||'原創基本造型，不套用其他既有角色。',brand:!!role.brand,fanRole:!!role.fanRole,main:role.brand||role.fanRole?'指定造型 Cosplay':'原創 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚'};
+ return {id:'C'+String(variant.start+si*2+pi).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,cut:garment.cut,top,bottom,material,coverage,accessories,label,detail,referenceNote:role.referenceNote||'原創基本造型，不套用其他既有角色。',brand:!!role.brand,fanRole:!!role.fanRole,main:role.brand||role.fanRole?'指定造型 Cosplay':'原創 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚',...(role.hairState?{hairState:role.hairState}:{})};
 })))).sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
 function outfitsForVersion(version){return version==='V.cos'?catalog.cos:version==='V.內著寫真'?catalog.inner:catalog.fashion;}
 function cosFilteredOutfits(){
@@ -246,6 +328,11 @@ function cosHalfBodyPose(p,person){
   .replaceAll('頭頂至腰頭／上臀線附近','完整頭頂至大腿最上段（大腿根部下方的一小段）')
   .replaceAll('腰上中景正面構圖','略寬半身正面構圖');
  return {...canonical,frame:'half',action};
+}
+
+function cosHairFor(o,profile){
+ if(o.hairState!=='wet')return profile.hair;
+ return profile.hair+'\n【本題浴後濕髮】同一位 '+profile.name+' 剛洗好澡，原頭髮呈清楚可見的濕潤髮束、較貼合的真實髮絲與少量髮尾水珠；濕髮只改暫時乾濕狀態，不改原髮色、髮長、瀏海分線、髮量或人物身份，不換成角色假髮。原 P 指定綁髮、撥髮或抓髮仍照做，保留相應濕髮狀態，不新增甩髮、擦髮或吹髮動作。此濕髮要求只作用於本題浴後款，不回寫其他造型或永久設定。';
 }
 
 function promptForCos(o,p,person='Vera'){
@@ -292,7 +379,7 @@ ${bodyPosePhysics(pose)}
 衣裝剪裁與服裝馬甲不能重塑人體；正常頭身比、肩寬、頸長、胸廓及軀幹長度保留。坐躺的軟組織受壓、真實衣料摺痕和光影自然，不為消除摺痕而修瘦。
 
 【人物髮型與妝容】
-${profile.hair}
+${cosHairFor(o,profile)}
 ${profile.makeup}
 衣裝色不改髮色、瞳色或膚色；帽子、耳箍與頭紗可以佩戴，但不加角色假髮或把它們變成新瀏海。原 P 動作指定綁髮、撥髮或髮態時照做，保持同一個人物。
 
@@ -796,6 +883,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 </script>
 </body>
 </html>
+
 
 
 
