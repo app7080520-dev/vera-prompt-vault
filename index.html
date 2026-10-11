@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.6｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.7｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -298,7 +298,7 @@ const COS_ROPE_ROLE={
  id:'rope-art',label:'繩結服裝',
  aliases:['繩藝','繩藝造型','繩縛娘','Shibari Girl','繩縛女郎','Rope Bunny','緊縛模特','Kinbaku Model'],
  styles:[{id:'fashion',label:'時裝'},{id:'innerwear',label:'居家服'}],titleByGarment:true,
- referenceNote:'同一位成年人物的 Cosplay 服裝 lookbook。主造型是縫在不透明衣料上的編繩飾片：交叉線、菱格和小結飾構成成衣表面圖案，具有低浮雕的纖維厚度。飾片隨衣服一起穿著，衣服完整覆蓋胸腹與腰臀，雙臂、雙手和雙腿保持正常活動。原人物身份、髮型、妝容及身體比例維持原始 Master。',
+ referenceNote:'同一位成年人物的 Cosplay 服裝 lookbook。主造型是縫在衣料邊緣的細窄編繩飾邊與普通衣裝盤扣。飾片隨衣服一起穿著，衣服完整覆蓋胸腹與腰臀，雙臂、雙手和雙腿保持正常活動。原人物身份、髮型、妝容及身體比例維持原始 Master。',
  variants:[
   {id:'rope-dress',label:'高領洋裝／背心短褲',start:157,palettes:['ropeBlackIvory','ropeIvoryWine'],
    fashion:{title:'高領合身洋裝',cut:'高領無袖合身洋裝＋縫製編繩飾片',
@@ -362,6 +362,50 @@ const COS_ROPE_ROLE={
     ropeDesign:'{配色}縫製棉繩飾片在完整長袖上衣前胸和上腹形成較密但清楚的交叉菱格，腰側保留平行線條與固定小結。圖案始終依附不透明衣面，縫製點、低浮雕厚度及自然接觸陰影可辨，手臂和衣袖各自正常活動。'}}
  ]
 };
+// v2.3.7: Cord is sewn only along garment edges and used as ordinary fabric buttons.
+COS_ROPE_ROLE.referenceNote='同一位成年人物的 Cosplay 成衣目錄攝影。完整衣服的特色是縫在衣襟、領口邊、袖口或下襬的編繩飾邊與盤扣。飾邊貼著衣料邊緣，盤扣只是普通衣裝鈕扣；上衣前身保持大面積連續不透明布面。身體、雙手和四肢維持正常自然姿勢，服裝按原人物尺寸製作。';
+COS_ROPE_ROLE.variants[0].label='高領長袖洋裝／棉質居家套裝';
+Object.assign(COS_ROPE_ROLE.variants[0].fashion,{
+ cut:'高領長袖合身洋裝＋編繩飾邊盤扣',
+ top:'{主色}高領長袖合身洋裝，領口停在自然頸根，完整肩線、長袖及平整袖口清楚；胸前到腹部是連續不透明衣面，自然收省配合原骨架。{配色}編繩只縫在衣襟與袖口邊緣，前身中央保持大片實體衣料。',
+ coverage:'高領、長袖、覆腹和連續裙身構成完整時裝。盤扣是縫在衣襟上的普通服裝鈕扣，編繩是細窄飾邊，成衣按原自然肩寬、胸廓與腰圍製作。'
+});
+Object.assign(COS_ROPE_ROLE.variants[0].innerwear,{
+ title:'棉質短袖上衣＋短褲',cut:'高圓領棉質短袖上衣＋完整短褲＋編繩飾邊',
+ top:'{主色}高圓領短袖棉質居家上衣，完整肩線、短袖與平整袖口清楚，下襬到褲腰下方；胸前及腹部是連續不透明布面，保留正常穿著鬆量。{配色}編繩飾邊只縫在袖口與上衣下襬。',
+ bottom:'{主色}高腰棉質居家短褲，完整前後褲片、寬腰頭、正常側縫及褲管清楚；上衣下襬與褲腰自然重疊，腰腹連續覆蓋，取景內保留少量大腿最上段褲料。',
+ material:'雙層不透明棉質居家上衣與密織棉質短褲，包邊和拼縫真實；{配色}棉繩編成細窄飾邊，縫在衣料邊緣，纖維與固定點清楚。',
+ coverage:'高圓領、短袖、覆腹上衣及完整短褲構成普通棉質居家套裝，衣料完全不透明，正常鬆量與原身體比例保留。'
+});
+const ROPE_TRIM_DESIGNS={
+ 'rope-dress/fashion':'{配色}棉繩編成細窄飾邊，沿洋裝衣襟垂直排列，袖口另有相同包邊；衣襟上數枚小盤扣是普通服裝鈕扣。各段飾邊都有衣面縫製固定點，胸腹中央是連續{主色}布面，衣襟方向、縫線、細纖維及柔和陰影清楚。',
+ 'rope-dress/innerwear':'{配色}編繩飾邊只沿短袖口和上衣下襬縫製，側邊有一枚小布結。胸腹是連續{主色}布面，上衣與短褲保持普通居家套裝結構；衣料邊緣的固定點、棉繩纖維和小結厚度真實可辨。',
+ 'rope-shirt/fashion':'{配色}細窄編繩飾邊沿襯衫鈕扣前襟兩側垂直縫製，袖口有少量同色結飾；原襯衫鈕扣、尖領與前襟結構清楚。胸腹中央是大片{主色}不透明襯衫布面，棉繩纖維與衣料固定點自然。',
+ 'rope-shirt/innerwear':'{配色}細窄編繩飾邊只縫在居家上衣袖口及下襬，衣面側邊有小結飾；完整不透明蕾絲襯層與編繩飾邊是不同材質。胸腹前身保留大片同色衣料，固定點、縫線和小結厚度清楚。',
+ 'rope-satin/fashion':'{配色}棉繩飾邊只沿緞面連身裙方領衣緣和原寬肩帶外緣縫製，裙腰布面一側有一枚小布結。連身裙前身保持完整不透明緞面，飾邊與衣料固定點、微光澤與細纖維真實可辨。',
+ 'rope-satin/innerwear':'{配色}細窄編繩飾邊沿連身家居服短袖口與短褲褲口縫製，衣面一側有小結飾。高圓領與胸腹前身是完整{主色}不透明衣料，圖案限於成衣邊緣，縫製固定點、包邊和棉繩纖維可辨。',
+ 'rope-wrap/fashion':'{配色}窄編繩飾邊只沿改良和服的交領滾邊、七分袖口和布腰帶布面縫製，交領上有數枚小盤扣作普通衣裝鈕扣。上衣前身保持連續不透明布面，飾邊與衣料固定點和布結厚度自然。',
+ 'rope-wrap/innerwear':'{配色}窄編繩飾邊沿長袖居家上衣袖口與下襬縫製，布面側邊有一枚小結。上衣前胸與腹部是大片完整{主色}不透明衣料，短褲結構正常，棉繩纖維與成衣固定點清楚。'
+};
+const ROPE_TRIM_TOPS={
+ 'rope-shirt/fashion':'{主色}完整尖領長袖襯衫，前襟鈕扣扣合、袖口端正，衣料有正常鬆量，下襬收進裙腰；{配色}窄編繩飾邊只縫在鈕扣前襟兩側及袖口，原領片與前襟清楚。',
+ 'rope-shirt/innerwear':'{主色}高圓領短袖居家上衣，胸腹覆蓋，下襬到褲腰下方；小花蕾絲作表面紋理，底下是完整不透明襯布。{配色}細窄編繩飾邊只縫在袖口與下襬，前身保持大片同色布面。',
+ 'rope-satin/fashion':'{主色}寬肩帶緞面連身裙，固定方領、雙層不透明前胸與自然收省清楚，完整衣面延伸至腰腹；{配色}窄編繩飾邊只縫在方領衣緣及原肩帶外緣，前身保持連續緞面。',
+ 'rope-satin/innerwear':'{主色}高圓領短袖緞面連身家居服，完整肩線與雙層不透明前身清楚，上身衣面連續延伸至腰腹，正常穿著鬆量保留；{配色}窄編繩飾邊只縫在袖口和褲口。',
+ 'rope-wrap/fashion':'{主色}改良和服洋裝，閉合交領、自然肩線及七分寬袖清楚，上胸到腹部是完整不透明衣面；{配色}窄編繩飾邊只縫在交領滾邊與袖口，盤扣作普通衣裝鈕扣。',
+ 'rope-wrap/innerwear':'{主色}高圓領長袖居家上衣，完整肩線、平整袖口與連續胸腹布面清楚，下襬到褲腰下方；{配色}窄編繩飾邊只縫在袖口與下襬，正常穿著鬆量保留。'
+};
+for(const variant of COS_ROPE_ROLE.variants)for(const style of COS_ROPE_ROLE.styles){
+ const g=variant[style.id];
+ if(ROPE_TRIM_TOPS[variant.id+'/'+style.id])g.top=ROPE_TRIM_TOPS[variant.id+'/'+style.id];
+ g.cut=g.cut.replace(/＋縫製[^＋]*$/,'＋編繩飾邊');
+ g.ropeDesign=ROPE_TRIM_DESIGNS[variant.id+'/'+style.id];
+ g.accessories='只有縫在衣料邊緣的{配色}細窄編繩飾邊、小布結與本題明列的普通衣裝盤扣。各裝飾都有成衣固定點，胸腹前身保持連續不透明布面，人體保持正常自然姿態。';
+ g.top=g.top.replaceAll('低浮雕','細窄').replaceAll('編繩飾片','編繩飾邊');
+ g.material=g.material.replaceAll('低浮雕飾片','細窄飾邊').replaceAll('低浮雕','細窄').replaceAll('飾片','飾邊').replaceAll('交叉厚度','編繩厚度');
+ g.coverage=g.coverage.replaceAll('菱格圖案','編繩飾邊');
+}
+
 COS_ROLES.push(COS_ROPE_ROLE);
 
 
@@ -377,6 +421,8 @@ const COS_OUTFITS=COS_ROLES.flatMap(role=>cosVariantsFor(role).flatMap(variant=>
  return {id:'C'+String(variant.start+si*2+pi).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,cut:garment.cut,top,bottom,material,coverage,accessories,label,detail,referenceNote:role.referenceNote||'原創基本造型，不套用其他既有角色。',brand:!!role.brand,fanRole:!!role.fanRole,main:role.brand||role.fanRole?'指定造型 Cosplay':'原創 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚',...(role.hairState?{hairState:role.hairState}:{}),...(role.aliases?{aliases:role.aliases}:{}),...(garment.ropeDesign?{ropeDesign:replace(garment.ropeDesign)}:{})};
 })))).sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
 const COS_ROPE_LEGACY_LABELS={"C157":["繩藝｜時裝｜高領合身洋裝｜黑色象牙繩","高領無袖合身洋裝＋交叉繩藝外搭"],"C158":["繩藝｜時裝｜高領合身洋裝｜象牙酒紅繩","高領無袖合身洋裝＋交叉繩藝外搭"],"C159":["繩藝｜內著｜長版胸衣＋高腰內褲｜黑色象牙繩","長版全罩胸衣＋高腰內褲＋交叉繩藝外搭","內著"],"C160":["繩藝｜內著｜長版胸衣＋高腰內褲｜象牙酒紅繩","長版全罩胸衣＋高腰內褲＋交叉繩藝外搭","內著"],"C161":["繩藝｜時裝｜襯衫＋高腰短裙｜黑色象牙繩","完整長袖襯衫＋高腰短裙＋菱格繩藝外搭"],"C162":["繩藝｜時裝｜襯衫＋高腰短裙｜象牙酒紅繩","完整長袖襯衫＋高腰短裙＋菱格繩藝外搭"],"C163":["繩藝｜內著｜有襯蕾絲成套｜黑色象牙繩","有襯全罩蕾絲內衣＋高腰內褲＋菱格繩藝外搭","內著"],"C164":["繩藝｜內著｜有襯蕾絲成套｜象牙酒紅繩","有襯全罩蕾絲內衣＋高腰內褲＋菱格繩藝外搭","內著"],"C165":["繩藝｜時裝｜緞面吊帶裙｜黑色象牙繩","完整緞面吊帶連身裙＋斜向繩藝外搭"],"C166":["繩藝｜時裝｜緞面吊帶裙｜象牙酒紅繩","完整緞面吊帶連身裙＋斜向繩藝外搭"],"C167":["繩藝｜內著｜緞面連身內著｜黑色象牙繩","寬肩帶緞面連身內著＋斜向繩藝外搭","內著"],"C168":["繩藝｜內著｜緞面連身內著｜象牙酒紅繩","寬肩帶緞面連身內著＋斜向繩藝外搭","內著"],"C169":["繩藝｜時裝｜改良和服洋裝｜黑色象牙繩","閉合交領改良和服洋裝＋層疊繩藝外搭"],"C170":["繩藝｜時裝｜改良和服洋裝｜象牙酒紅繩","閉合交領改良和服洋裝＋層疊繩藝外搭"],"C171":["繩藝｜內著｜長版內衣背心＋高腰內褲｜黑色象牙繩","方領長版內衣背心＋高腰內褲＋層疊繩藝外搭","內著"],"C172":["繩藝｜內著｜長版內衣背心＋高腰內褲｜象牙酒紅繩","方領長版內衣背心＋高腰內褲＋層疊繩藝外搭","內著"]};
+const COS_ROPE_PREVIOUS_LABELS={"C157":["繩結服裝｜時裝｜高領合身洋裝｜黑色象牙","高領無袖合身洋裝＋縫製編繩飾片"],"C158":["繩結服裝｜時裝｜高領合身洋裝｜象牙酒紅","高領無袖合身洋裝＋縫製編繩飾片"],"C159":["繩結服裝｜居家服｜長版背心＋棉質短褲｜黑色象牙","高圓領長版背心＋棉質短褲＋縫製編繩飾片"],"C160":["繩結服裝｜居家服｜長版背心＋棉質短褲｜象牙酒紅","高圓領長版背心＋棉質短褲＋縫製編繩飾片"],"C161":["繩結服裝｜時裝｜襯衫＋高腰短裙｜黑色象牙","完整長袖襯衫＋高腰短裙＋縫製菱格飾片"],"C162":["繩結服裝｜時裝｜襯衫＋高腰短裙｜象牙酒紅","完整長袖襯衫＋高腰短裙＋縫製菱格飾片"],"C163":["繩結服裝｜居家服｜有襯蕾絲居家上衣＋短褲｜黑色象牙","有襯蕾絲短袖居家上衣＋完整短褲＋縫製菱格飾片"],"C164":["繩結服裝｜居家服｜有襯蕾絲居家上衣＋短褲｜象牙酒紅","有襯蕾絲短袖居家上衣＋完整短褲＋縫製菱格飾片"],"C165":["繩結服裝｜時裝｜緞面吊帶裙｜黑色象牙","寬肩帶緞面連身裙＋縫製斜向編繩飾片"],"C166":["繩結服裝｜時裝｜緞面吊帶裙｜象牙酒紅","寬肩帶緞面連身裙＋縫製斜向編繩飾片"],"C167":["繩結服裝｜居家服｜緞面連身家居服｜黑色象牙","高圓領短袖緞面連身家居服＋縫製斜向編繩飾片"],"C168":["繩結服裝｜居家服｜緞面連身家居服｜象牙酒紅","高圓領短袖緞面連身家居服＋縫製斜向編繩飾片"],"C169":["繩結服裝｜時裝｜改良和服洋裝｜黑色象牙","閉合交領改良和服洋裝＋縫製層疊編繩飾片"],"C170":["繩結服裝｜時裝｜改良和服洋裝｜象牙酒紅","閉合交領改良和服洋裝＋縫製層疊編繩飾片"],"C171":["繩結服裝｜居家服｜長袖居家上衣＋短褲｜黑色象牙","高圓領長袖居家上衣＋完整短褲＋縫製層疊編繩飾片"],"C172":["繩結服裝｜居家服｜長袖居家上衣＋短褲｜象牙酒紅","高圓領長袖居家上衣＋完整短褲＋縫製層疊編繩飾片"]};
+for(const [id,labels] of Object.entries(COS_ROPE_PREVIOUS_LABELS))COS_ROPE_LEGACY_LABELS[id].push(...labels);
 for(const o of COS_OUTFITS)if(o.role==='rope-art')o.aliases=[...new Set([...o.aliases,...COS_ROPE_LEGACY_LABELS[o.id]])];
 function outfitsForVersion(version){return version==='V.cos'?catalog.cos:version==='V.內著寫真'?catalog.inner:catalog.fashion;}
 function cosFilteredOutfits(){
@@ -472,16 +518,16 @@ function promptForRopeCostume(o,p,person='Vera'){
 ${profile.name}｜${o.id}・${pose.id}｜${o.label}｜${pose.label}｜9:16
 
 【Cosplay 服裝展示攝影】
-同一位 ${profile.age} 歲成年 ${profile.fullName}，穿著「${o.cut}」完成單人服裝 lookbook。畫面重點是完整成衣版型、縫製編繩飾片、纖維材質、自然穿著鬆量與真實攝影。${o.referenceNote}
+同一位 ${profile.age} 歲成年 ${profile.fullName}，穿著「${o.cut}」完成單人服裝 lookbook。畫面重點是完整成衣版型、衣襟與袖口的編繩飾邊、纖維材質與正常穿著鬆量。${o.referenceNote}
 
 【選定服裝】
 ${o.detail}
 【成衣裝飾】${o.accessories}
-【配色】衣料主色 ${o.primaryColor}，編繩飾片 ${o.secondaryColor}。
-所有編繩線條是預先縫在衣料上的成衣表面飾片，低浮雕交叉、菱格與結飾清楚；圖案與服裝一起活動，人體維持正常自然姿態。完整不透明衣料獨立成立，服裝依原身體尺寸製作，胸腹及腰臀完整覆蓋。
+【配色】衣料主色 ${o.primaryColor}，編繩飾邊 ${o.secondaryColor}。
+編繩只作衣襟、領口衣緣、袖口、布腰帶或下襬的細窄縫製飾邊，盤扣只作普通衣裝鈕扣。胸腹中央保持連續不透明衣面，裝飾位置固定在衣料邊緣，人體維持正常自然姿態。完整不透明衣料獨立成立，服裝依原身體尺寸製作，胸腹及腰臀完整覆蓋。
 
 【取景】
-單張、單一人物、9:16 直幅，完整頭頂至大腿最上段，最多包含大腿最上方約 1/4。人物仍是畫面主體，臉、雙肩、主要手勢、胸前至腰間的成衣圖案清楚。褲裝保留完整褲腰、上臀褲片與少量大腿最上段褲料；裙裝保留相同範圍的原裙面。坐、跪、躺、趴時沿原身體方向取景，畫外肢體與支點正常延續。
+單張、單一人物、9:16 直幅，完整頭頂至大腿最上段，最多包含大腿最上方約 1/4。人物仍是畫面主體，臉、雙肩、主要手勢、衣襟、領口衣緣或袖口的裝飾清楚。褲裝保留完整褲腰、上臀褲片與少量大腿最上段褲料；裙裝保留相同範圍的原裙面。坐、跪、躺、趴時沿原身體方向取景，畫外肢體與支點正常延續。
 
 【動作與表情｜${pose.id}「${pose.label}」】
 ${pose.action}
@@ -491,7 +537,7 @@ ${expression}
 【人物與身形】
 原始 ${profile.face} 唯一定義人物身份，服裝和飾片不改五官、膚色、年齡或永久特徵。表情與頭部角度照本題自然變化，顱顏結構和主要五官維持同一人物。
 ${profile.bodyLock}
-保留原肩寬、胸廓、頸長、軀幹與腰臀比例，關節、骨盆、手腳及坐躺支點合理；衣料按重力自然產生摺痕，編繩飾片順著衣面曲率呈現，原身體沒有塑形效果。
+保留原肩寬、胸廓、頸長、軀幹與腰臀比例，關節、骨盆、手腳及坐躺支點合理；衣料按重力自然產生摺痕，編繩飾邊順著成衣邊緣呈現，原身體沒有塑形效果。
 
 【髮型與妝容】
 ${profile.hair}
@@ -499,7 +545,7 @@ ${makeup}
 
 【真人攝影】
 中性灰攝影棚，單人成衣目錄攝影，自然窗光或大型柔光，正常人像鏡頭與景深，原 P 所需簡單椅面或地面支撐。真實毛孔、唇紋、髮絲、衣料纖維、縫線與細微不對稱可見，保持自然未過度修圖的膚況。單一畫面，清楚的正常服裝展示狀態，沒有畫面字幕、品牌文字、水印或拼貼。
-Photorealistic adult cosplay clothing lookbook. Sewn cotton-cord appliques on opaque garments, comfortable natural fit, relaxed fashion presentation, preserved facial identity and body proportions, full head to very upper thighs, 9:16.`;
+Photorealistic adult cosplay clothing lookbook. Sewn cotton-cord edging and ordinary fabric buttons on opaque garments, comfortable natural fit, relaxed fashion presentation, preserved facial identity and body proportions, full head to very upper thighs, 9:16.`;
 }
 
 function promptForCos(o,p,person='Vera'){
@@ -1050,6 +1096,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 </script>
 </body>
 </html>
+
 
 
 
