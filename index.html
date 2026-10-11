@@ -96,7 +96,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.12｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.13｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -1054,6 +1054,32 @@ function bindFilterPresentation(){
  $('#advancedFilters').addEventListener('toggle',rememberLastPage);
 }
 
+// Describe the reference's visible rope geometry as freely worn, clothed body art.
+// Keep all 40 existing IDs, clothing, colors, identity rules and poses.
+const ROPE_ART_V2313_REFERENCE_NOTE='同一位成年人物的 Cosplay 服裝造型藝術攝影。實體圓棉繩在完整上衣與貼身褲裝外，沿穿衣軀幹纏繞並形成立體交叉、連續菱格與腰側繩弧；繩藝是畫面的主要造型細節。衣服與繩線各自清楚，人物仍可自然活動。若另附繩藝造型參考，只取其繩線幾何與衣外層次，人物身份、身形、所選服裝及 P 動作仍依本題。';
+function ropeArtDesignV2313(color){
+ return `【軀幹繩線排列】${color}實體圓棉繩沿左右肩線下方的上衣衣面向前身斜行，在前襟上段形成清楚的 X 形交叉；由該交點往下，軀幹前身中央有兩個上下相接的縱向菱格。左右兩側以三層近水平的繩弧繞過穿衣側腰並延續至背面，正面菱格和側腰繩弧屬同一套連續繩藝。繩線跟隨原衣料曲面，不只懸浮在身體正前方；上衣領口與頸部保持空出。
+【腰臀與大腿繩線】最下層橫向繩線停在實體褲腰外側，兩邊各有沿側褲縫向下的短繩段。每側大腿最上段的褲料外，各有一至兩道獨立的環形繩線；沿該側褲筒前片、外側及後片連續繞行，呈現環繞衣料的弧度，與上身繩藝以同色、同線徑保持整體感。左右繩環各自獨立，保留正常穿著鬆量及自由活動空間；前襠與兩腿之間留空，不跨胯、不連接左右腿。繩環完整位置在衣料上，短褲以實際褲片範圍為準，畫外部分正常延續。
+【實體與接觸感】全部繩線是獨立、可拆卸的真實圓棉繩，線徑一致，捻股、細纖維與少量自然毛邊清楚。交叉處有上下層次、小型繩結、真實厚度及接觸陰影；衣料在接觸處可有輕微自然摺痕。它們保持圓截面與原繩色，不變成衣面印花、平面皮帶、縫製飾邊或單根腰帶。
+【穿著狀態】完整不透明上衣與貼身褲裝先正常穿著，繩線在衣料外自然貼合，不勒陷皮膚、不壓縮身形、不替代衣料。頸部、手臂、手腕及關節保持空出；人物自然完成原 P 的站、坐、跪或躺姿，雙手與雙腿可各自活動。`;
+}
+function ropeArtAccessoriesV2313(color){return `${color}實體圓棉繩沿穿衣軀幹交叉纏繞，腰側繩弧與左右獨立褲面繩環延續同一造型；圓截面、捻股和接觸陰影清楚。繩藝可拆卸，保持正常穿著鬆量，人物自然活動。`;}
+for(const variant of COS_ROPE_ROLE.variants){
+ const g=variant.fashion;if(!g)continue;
+ g.ropeDesign=ropeArtDesignV2313('{配色}');g.accessories=ropeArtAccessoriesV2313('{配色}');
+}
+COS_ROPE_ROLE.referenceNote=ROPE_ART_V2313_REFERENCE_NOTE;
+for(const o of COS_OUTFITS.filter(o=>o.role==='rope-art')){
+ o.ropeDesign=ropeArtDesignV2313(o.secondaryColor);
+ o.accessories=ropeArtAccessoriesV2313(o.secondaryColor);
+ o.referenceNote=ROPE_ART_V2313_REFERENCE_NOTE;
+ o.detail=cosV2311Detail(o);
+}
+function ropeArtVisualV2313(){return `【繩藝造型與攝影呈現】
+依上方「繩藝主體與衣料分層」完成前身 X 形交叉、兩個連續菱格、三層側腰繩弧，以及左右獨立的褲面繩環。繩子沿穿衣軀幹與各側褲料環繞，保持與衣料分開的實體層次；以柔和側光呈現圓繩厚度、交叉前後次序及自然接觸陰影。
+人物只做原 P 的自然服裝展示，不因繩藝改變手位、表情、支點或身形。保持正常穿著鬆量，繩線不限制活動；與手勢或衣裝結構相遇時只微調繩線位置，不改服裝或人體。`;
+}
+
 function outfitsForVersion(version){return version==='V.cos'?catalog.cos:version==='V.內著寫真'?catalog.inner:catalog.fashion;}
 function cosFilteredOutfits(){
  const role=$('#cosRole').value,style=$('#cosStyle').value,color=$('#cosColor').value,variant=$('#cosVariant').value;
@@ -1142,10 +1168,8 @@ function promptForRopeCostume(o,p,person='Vera'){
  const profile=personProfile(person),pose=ropeCostumePose(p,person),fashion=o.style==='fashion',costume=o.role==='bunny'||o.role==='succubus';
  const expression=person==='小森'?expressionFor(pose).replaceAll('Vera','小森'):expressionFor(pose);
  const makeup=profile.makeup.replace('低飽和純慾微煙燻','低飽和微煙燻');
- const kind=costume?'成年 Cosplay 服裝攝影':fashion?'Cosplay 時裝與繩藝外搭攝影':'成年內著商品目錄攝影';
- const visual=costume?'所選 Cosplay 舞台衣裝保持完整穿著，畫面呈現固定領口、袖型、接縫與角色配件；人物只做本題的自然服裝展示，服裝按原身體尺寸製作。':fashion?`【繩藝外搭】
-${o.ropeDesign}
-繩子是環繞已穿衣軀幹的獨立圓棉繩外搭，保留胸腹的立體交錯菱格和腰側連續繩段；與原衣服各自獨立、可以拆卸。線條保持正常佩戴鬆量，順應原衣料曲面；雙臂、雙手、頸部及腿部各自自由活動，人物照所選自然模特兒動作。棉繩與衣料的纖維、圓截面、交叉厚度和接觸陰影清楚。`:'原款內著保持完整穿著，畫面只呈現指定服裝的剪裁、襯層、包邊和織紋，人物做自然服裝展示。';
+ const kind=costume?'成年 Cosplay 服裝攝影':fashion?'Cosplay 時裝與繩藝造型攝影':'成年內著商品目錄攝影';
+ const visual=costume?'所選 Cosplay 舞台衣裝保持完整穿著，畫面呈現固定領口、袖型、接縫與角色配件；人物只做本題的自然服裝展示，服裝按原身體尺寸製作。':fashion?ropeArtVisualV2313():'原款內著保持完整穿著，畫面只呈現指定服裝的剪裁、襯層、包邊和織紋，人物做自然服裝展示。';
  const colors=costume?`衣料主色 ${o.primaryColor}，原衣裝明列的拼片、領結或包邊配色 ${o.secondaryColor}。`:fashion?`衣料主色 ${o.primaryColor}，外搭棉繩 ${o.secondaryColor}。`:`衣料主色 ${o.primaryColor}。${o.variant==='rope-wrap'?`原款細包邊為 ${o.secondaryColor}。`:'其餘衣料細節保留原款同色設計。'}`;
  return `${photoReferenceGate(profile)}
 
@@ -1180,7 +1204,7 @@ ${makeup}
 
 【攝影氛圍】
 中性灰攝影棚、柔和側窗光或大型柔光，背景留出自然明暗層次，像安靜拍攝現場的單人作品集。人物神情依本題，衣料與配件保持真實的細節，畫面自然、克制、有生活呼吸感。正常人像鏡頭與景深，原 P 所需簡單椅面或地面支撐自然。真實毛孔、唇紋、髮絲、衣料纖維、縫線與細微不對稱可見，保持自然未過度修圖的膚況；單一畫面，沒有字幕、品牌文字、水印或拼貼。
-Photorealistic adult ${costume?'cosplay stage-costume clothing lookbook':fashion?'clothed cosplay fashion portrait with a detachable cotton-rope outerwear accessory':'underwear product lookbook with the original opaque garment designs'}. Natural fashion presentation, soft studio light, preserved facial identity and body proportions, full head to very upper thighs, 9:16.`;
+Photorealistic adult ${costume?'cosplay stage-costume clothing lookbook':fashion?'clothed cosplay rope-art fashion portrait with real cotton rope, connected torso diamonds and independent trouser-surface loops, freely worn':'underwear product lookbook with the original opaque garment designs'}. Natural fashion presentation, soft studio light, preserved facial identity and body proportions, full head to very upper thighs, 9:16.`;
 }
 
 function promptForCos(o,p,person='Vera'){
