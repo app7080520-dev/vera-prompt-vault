@@ -61,7 +61,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
       <div class="sync-card"><strong id="fashionCov">0 / 488</strong><span>時裝穿搭資料</span></div>
       <div class="sync-card"><strong id="poseCov">0 / 145</strong><span>標準姿勢資料</span></div>
       <div class="sync-card"><strong id="emoteCov">63 / 63</strong><span>V.表情包題目</span></div>
-      <div class="sync-card"><strong id="cosCov">194 / 194</strong><span>V.cos｜38 主題・狐仙 4 款・獨立內著 18 套・繩藝褲裝 20 套</span></div>
+      <div class="sync-card"><strong id="cosCov">374 / 374</strong><span>V.cos｜47 主題・狐仙 5 款・獨立內著 18 套・繩藝褲裝 20 套</span></div>
     </div>
     <div class="card">
       <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物，再選寫真或 V.cos、穿搭與動作。V.cos 提供角色／分類、款式、服裝版本與配色篩選；內著可獨立篩選，繩藝時裝改為褲裝並保留可拆卸衣外繩線，固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera。</p></div></div>
@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.10｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.11｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -554,6 +554,275 @@ for(const variant of COS_ROPE_PANTS_ADDITIONS)for(const [pi,name]of variant.pale
  const label=['繩藝','時裝',g.title,palette.label].join('｜');
  const detail=`【選定款式】${g.cut}\n【上身、領口與袖型】${top}\n【下身與衣裝連接】${bottom}\n【材質與層次】${material}\n【本題遮覆與版型】${coverage}\n【繩藝主體與衣料分層】${ropeDesign}`;
  COS_OUTFITS.push({id:'C'+String(variant.start+pi).padStart(3,'0'),role:'rope-art',roleLabel:'繩藝造型',variant:variant.id,variantLabel:variant.label,style:'fashion',styleLabel:'時裝繩藝',color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,cut:g.cut,top,bottom,material,coverage,accessories,label,detail,referenceNote:COS_ROPE_ROLE.referenceNote,brand:false,fanRole:false,main:'原創 Cosplay',sub:'繩藝／'+variant.label,bg:'中性灰棚',ropeDesign,aliases:['繩藝','褲裝',variant.label]});
+}
+COS_OUTFITS.sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
+
+
+// One additional clothing variant per existing character; original outfits remain.
+Object.assign(COS_PALETTES,{
+ creamBlack:{id:'cream-black-v2311',label:'奶油黑',primary:'奶油白',secondary:'黑色'},
+ powderNavy:{id:'powder-navy-v2311',label:'霧粉深藍',primary:'霧粉色',secondary:'深藍色'},
+ lavenderSilver:{id:'lavender-silver-v2311',label:'霧紫銀',primary:'霧紫色',secondary:'霧銀色'},
+ charcoalIvory:{id:'charcoal-ivory-v2311',label:'炭灰象牙',primary:'炭灰色',secondary:'象牙白'},
+ tealIvory:{id:'teal-ivory-v2311',label:'深青藍象牙',primary:'深青藍色',secondary:'象牙白'},
+ oliveBlack:{id:'olive-black-v2311',label:'橄欖黑',primary:'橄欖綠色',secondary:'黑色'},
+ denimIvory:{id:'denim-ivory-v2311',label:'丹寧象牙',primary:'牛仔藍',secondary:'象牙白'},
+ coffeeIvory:{id:'coffee-ivory-v2311',label:'可可象牙',primary:'可可棕色',secondary:'象牙白'},
+ pearlBlue:{id:'pearl-blue-v2311',label:'珍珠霧藍',primary:'珍珠白',secondary:'霧藍色'},
+ roseGold:{id:'rose-gold-v2311',label:'玫瑰香檳',primary:'乾燥玫瑰色',secondary:'香檳金'},
+ greenBeige:{id:'green-beige-v2311',label:'綠色燕麥',primary:'星巴克綠',secondary:'燕麥米色'},
+ greenDenim:{id:'green-denim-v2311',label:'綠色丹寧',primary:'星巴克綠',secondary:'牛仔藍'},
+ yellowIvory:{id:'yellow-ivory-v2311',label:'黃象牙改良',primary:'芥末黃色',secondary:'象牙白'},
+ yellowCharcoal:{id:'yellow-charcoal-v2311',label:'黃炭灰改良',primary:'芥末黃色',secondary:'炭灰色'},
+ leatherBlackSilver:{id:'leather-black-silver-v2311',label:'黑色銀線',primary:'黑色',secondary:'霧銀色'},
+ leatherBlackCharcoal:{id:'leather-black-charcoal-v2311',label:'黑色灰線',primary:'黑色',secondary:'炭灰色'},
+ ghostPearlSilver:{id:'ghost-pearl-silver-v2311',label:'珍珠銀',primary:'珍珠白',secondary:'霧銀色'},
+ forestIvory:{id:'forest-ivory-v2311',label:'森林象牙',primary:'森林綠色',secondary:'象牙白'},
+ mintSilver:{id:'mint-silver-v2311',label:'薄荷銀',primary:'薄荷綠色',secondary:'霧銀色'}
+});
+const COS_CHARACTER_EXPANSIONS=[
+ {role:'maid',label:'法式棉麻',palettes:['creamBlack','powderNavy'],fabric:'霧面棉麻、細緞帶及完整不透明襯層',accessories:'{配色}小型布質女僕髮箍與衣裝圍裙結，髮箍不遮五官。',
+  normal:['泡袖方領圍裙洋裝','{主色}方領泡袖洋裝上身，前胸完整，外搭{配色}寬肩帶胸兜圍裙，袖口有小褶邊。','{主色}高腰A字裙與上身相連，{配色}完整圍裙面自然垂落，腰臀衣料連續。'],
+  sexy:['露肩緞帶圍裙洋裝','{主色}露肩心形領洋裝上身，完整有襯胸片與固定領口，{配色}腰側緞帶及獨立短袖口清楚。','{主色}高腰短裙與上身相連，{配色}小圍裙固定在腰頭，完整裙內襯及自然褶線清楚。']},
+ {role:'bunny',label:'天鵝絨舞台',palettes:['ivoryGold','navyBlack'],fabric:'不透明柔霧天鵝絨、完整襯布與厚實霧面褲襪',accessories:'{主色}可拆卸布質兔耳、{配色}小襯領與領結、後腰小仿毛球，配件不改原人物。',
+  normal:['方領天鵝絨兔女郎舞台服','{主色}寬肩帶方領天鵝絨連身上衣，胸腹完整，外搭同色短袖舞台小外套，{配色}窄包邊清楚。','連身衣前後褲片完整、一般腿口，搭配同色不透明褲襪，正常褲襠及腰腹連續衣面保留。'],
+  sexy:['心形領天鵝絨兔女郎舞台服','{主色}無肩帶心形領天鵝絨連身衣，固定領口、完整有襯胸片及自然腰線，雙肩正常可見。','連身衣腰腹連續、完整前後褲片、一般腿口與同色不透明褲襪，保持舞台衣裝固定版型。']},
+ {role:'fox',label:'輕紗披袖',palettes:['mintSilver','lavenderSilver'],fabric:'厚棉緞、完整不透明內襯與衣外輕紗披袖',accessories:'一對可拆卸象牙色狐耳、小型花形髮飾與後腰仿毛尾，原髮色和五官保留。',
+  normal:['交領披袖狐仙衣','{主色}完整交領長袖上衣，{配色}窄滾邊及衣外輕紗披袖，胸腹為不透明實體衣料。','{主色}高腰層疊長裙，實體腰封及完整裙內襯自然延伸，輕紗只在裙外層。'],
+  sexy:['露肩披袖狐仙衣','{主色}固定低交領露肩上衣，完整有襯胸片，{配色}領邊及上臂外側獨立輕紗披袖清楚。','{主色}高腰層疊裙與實體腰封，短上衣至裙腰保留自然小段腰腹，必要裙片完整。']},
+ {role:'sailor',label:'針織學院',palettes:['powderNavy','pearlBlue'],fabric:'細針織上衣、挺括棉質水手領與完整百褶裙內襯',accessories:'{配色}水手領及前胸布領結，不加帽子、書本或新的學生動作。',
+  normal:['針織水手領長袖制服','{主色}完整長袖針織上衣，{配色}日式水手領與布領結，胸腹連續覆蓋，袖口平整。','{主色}高腰百褶裙，腰頭固定、完整內襯與自然褶線，和上衣構成日式制服風分件穿搭。'],
+  sexy:['短袖水手領短版制服','{主色}固定較寬U領短袖針織上衣，{配色}日式水手領及領結，完整有襯前身，短版下襬固定。','{主色}高腰百褶短裙，與短上衣間保留一小段自然腰腹，裙頭、前後裙片及內襯完整。']},
+ {role:'bride',label:'珠緞婚紗',palettes:['pearlBlue','roseGold'],fabric:'低反光珠緞、完整不透明內襯與衣外薄紗頭紗',accessories:'小型{配色}布花髮飾與後側短頭紗，不遮五官、不加捧花或手持物。',
+  normal:['船領珠緞長袖婚紗','{主色}固定船領完整長袖婚紗上身，胸腹實體衣面，{配色}細滾邊沿領口和袖口延伸。','同一件{主色}婚紗自然接續為高腰A字長裙，裙內襯完整，腰臀不被收窄。'],
+  sexy:['露肩珠緞婚紗','{主色}固定露肩心形領婚紗上身，完整有襯胸片與原自然腰線，{配色}細包邊清楚。','同一件{主色}婚紗接續為完整垂墜裙身，腰腹衣料連續，不依靠束腰改變身形。']},
+ {role:'miko',label:'細提花祭典',palettes:['pearlBlue','charcoalIvory'],fabric:'霧面細提花厚棉、完整袴裙內襯及織布領邊',accessories:'{配色}衣裝腰結與簡單布質髮帶，不加符紙、武器或新手勢。',
+  normal:['細提花寬袖巫女衣','{主色}完整閉合交領寬袖上衣，{配色}細領邊，原肩線及胸腹衣面清楚。','{配色}高腰完整袴裙，實體腰頭及袴褶自然延續到畫外，不更改原站坐支點。'],
+  sexy:['露肩細提花巫女衣','{主色}固定較低交領露肩上衣，完整有襯胸片與獨立短披袖，{配色}細滾邊清楚。','{配色}高腰短袴裙，短上衣與裙腰間保留自然腰腹，袴褶與必要衣片完整。']},
+ {role:'succubus',label:'霧絨暗黑',palettes:['charcoalIvory','tealIvory'],fabric:'不透明柔霧天鵝絨、完整襯布與低光澤緞面窄拼片',accessories:'小型{主色}可拆卸彎角髮箍與肩背側迷你舞台翼片，不加頸部配件。',
+  normal:['方領霧絨暗黑洋裝','{主色}方領短袖天鵝絨洋裝上身，完整不透明胸腹與自然收省，{配色}窄緞面拼片清楚。','完整裙身與上衣連成一件，腰臀衣面連續，裙長在畫外自然延續。'],
+  sexy:['心形領霧絨暗黑洋裝','{主色}固定心形領細肩帶天鵝絨洋裝，完整有襯胸片與自然腰線，{配色}窄緞面拼片。','完整裙身和上衣連成一件，腰腹至上臀為連續實體衣料，裙料自然垂落。']},
+ {role:'vampire',label:'哥德緞絨',palettes:['charcoalIvory','wineGold'],fabric:'低光澤厚緞面、霧面天鵝絨與完整裙內襯',accessories:'{配色}小型衣裝領結與後肩短披肩，不加尖牙、血跡或新的表情。',
+  normal:['立領緞絨長袖洋裝','{主色}立領完整長袖洋裝上身，{配色}緞面前襟與小布領結，胸腹連續覆蓋。','{主色}高腰層疊長裙與上衣相連，前後裙片完整，腰線自然。'],
+  sexy:['露肩緞絨洋裝','{主色}露肩固定心形領緞絨洋裝，完整有襯胸片及自然收省，{配色}小前襟拼片。','完整高腰短裙與上衣相連，腰腹衣面連續，後側短披肩停在肩外側。']},
+ {role:'agent',label:'都會機能',palettes:['charcoalIvory','denimIvory'],fabric:'不透明彈性機能針織、霧面短外套與密織褲布',accessories:'原款布腰帶與小型無字服裝扣件，不加武器、耳機或手持物。',
+  normal:['立領機能上衣貼身長褲','{主色}立領完整短袖機能上衣，外搭{配色}短外套，胸腹實體衣料，袖線自然。','{主色}高腰貼身彈性長褲，實體褲腰、正常褲襠與完整前後褲片，按原腿部尺寸延續。'],
+  sexy:['無袖機能短上衣貼身短褲','{主色}固定較寬U領無袖短版機能上衣，完整有襯前身，{配色}窄拼片與原肩線清楚。','{主色}高腰貼身機能短褲，與上衣間保留自然小段腰腹，褲腰及必要褲片完整。']},
+ {role:'magician',label:'珠緞舞台',palettes:['roseGold','charcoalIvory'],fabric:'厚棉緞舞台布、不透明襯衫與完整褲布',accessories:'{配色}小領結與衣裝短燕尾後片，不加高帽、魔術棒或新動作。',
+  normal:['珠緞燕尾上衣貼身短褲','{主色}完整短燕尾外套，內搭{配色}扣合長袖襯衫及同色小領結，胸腹覆蓋。','{主色}高腰貼身棉緞短褲，實體褲腰、完整前後褲片與正常褲襠，燕尾後片獨立。'],
+  sexy:['心形領珠緞舞台短褲裝','{主色}固定心形領無肩帶舞台上衣，完整有襯胸片及自然腰線，{配色}分離小襯領與領結。','{主色}高腰貼身棉緞短褲，前後衣片完整，後腰保留短燕尾布片，不改身形。']},
+ {role:'dark-angel',label:'緞面羽邊',palettes:['charcoalIvory','tealIvory'],fabric:'厚棉緞、完整不透明內襯與柔軟仿羽布邊',accessories:'{主色}肩背側小型可拆卸仿羽翼片，不改成真實翅膀或遮住手勢。',
+  normal:['船領長袖羽邊長裙','{主色}固定船領完整長袖上衣，{配色}窄仿羽布邊停在肩袖外側，胸腹衣面完整。','同色高腰長裙與上衣相連，完整裙片與實體腰封，仿羽只作少量衣外飾邊。'],
+  sexy:['露肩羽邊洋裝','{主色}固定露肩心形領上衣，完整有襯胸片，{配色}仿羽短披袖停在上臂外側。','同色高腰垂墜裙與上衣相連，腰腹連續衣料，前後裙片完整。']},
+ {role:'swimsuit',label:'羅紋競泳',palettes:['tealIvory','lavenderSilver'],fabric:'密織霧面泳裝羅紋、完整不透明襯層與彈性包邊',accessories:'只有泳裝肩帶、窄包邊與接縫，不加名牌、泳帽或新動作。',
+  normal:['高U領羅紋連身泳裝','{主色}高U領寬肩帶羅紋連身泳裝，完整有襯前身，{配色}窄側縫與領邊清楚。','連身泳裝腰腹連續，完整前後褲片、一般腿口與實體包邊，按原人物尺寸製作。'],
+  sexy:['方領細肩帶羅紋連身泳裝','{主色}固定較寬方領細肩帶羅紋泳裝，完整有襯胸片與原自然肩線，{配色}細包邊。','連身腰腹衣料完整，正常前後褲片及一般腿口，肩帶與接縫保持固定。']},
+ {role:'nun',label:'緞邊修女衣',palettes:['charcoalIvory','tealIvory'],fabric:'不透明霧面厚布、低光澤緞邊與完整裙內襯',accessories:'同色短頭巾與{配色}小衣裝領片，頭巾位於原髮型外側，不遮眼鼻嘴。',
+  normal:['立領長袖緞邊修女衣','{主色}完整立領長袖上衣，{配色}小領片與細緞邊，胸腹連續衣面及自然肩線。','同色高腰完整長裙與上衣相連，前後裙片及內襯自然垂落。'],
+  sexy:['方領短袖緞邊修女衣','{主色}固定較寬方領短袖上衣，完整有襯前身，{配色}細緞邊與自然肩頸線。','同色高腰完整短裙和上衣相連，腰腹衣料連續，頭巾保持服裝配件位置。']},
+ {role:'lace-maid',label:'緞帶花蕾絲',palettes:['creamBlack','lavenderSilver'],fabric:'小花蕾絲表面層、完整不透明棉緞襯布與柔軟織帶',accessories:'{配色}小蕾絲女僕髮箍、衣裝腰結及原圍裙，原髮型和五官保留。',
+  normal:['有襯花蕾絲泡袖圍裙洋裝','{主色}完整方領泡袖有襯蕾絲上衣，{配色}胸兜圍裙與小緞帶，胸腹實體衣料。','同色高腰A字裙與上衣相連，{配色}完整圍裙面及自然細褶，裙內襯完整。'],
+  sexy:['露肩花蕾絲小圍裙洋裝','{主色}固定露肩心形領蕾絲洋裝，完整不透明胸腹襯層，{配色}小腰結及獨立袖口。','同色高腰短裙及完整內襯，{配色}小圍裙固定在腰頭，保持自然裙片結構。']},
+ {role:'cat',label:'霧絨貓耳',palettes:['coffeeIvory','charcoalIvory'],fabric:'不透明柔霧天鵝絨、密織褲布及柔軟仿毛配件',accessories:'一對{主色}可拆卸貓耳髮箍及後腰仿毛尾，不加鬍鬚、獸瞳或改變耳位。',
+  normal:['方領霧絨貓耳褲裝','{主色}完整方領短袖天鵝絨上衣，{配色}細包邊，胸腹連續衣料。','同色高腰貼身短褲，實體褲腰、正常褲襠與完整前後褲片，尾巴固定於衣裝後腰。'],
+  sexy:['心形領霧絨貓耳褲裝','{主色}固定心形領細肩帶天鵝絨上衣，完整有襯胸片及自然腰線，{配色}細包邊。','同色高腰貼身短褲，腰腹及必要褲片完整，後腰尾巴作可拆卸衣裝配件。']},
+ {role:'starbucks',label:'襯衫丹寧',palettes:['greenBeige','greenDenim'],fabric:'不透明棉斜紋綠圍裙、完整襯衫布及密織彈性牛仔布',accessories:'綠圍裙胸前只一個白色雙尾人魚圓形Starbucks標誌，不加咖啡杯、工牌或新手勢。',
+  normal:['綠圍裙襯衫貼身牛仔褲','{配色}完整尖領長袖襯衫，外搭{主色}完整胸兜圍裙，領片、前襟與圍裙肩帶各自清楚。','水洗藍高腰貼身牛仔長褲，實體褲腰與前後褲片，圍裙下半部覆在褲面外側。'],
+  sexy:['綠短圍裙無袖上衣短褲','{配色}固定較寬U領無袖上衣，完整有襯前身，外搭{主色}較低弧領短胸兜圍裙，原衣裝層次清楚。','水洗藍高腰貼身牛仔短褲，實體褲腰及完整前後褲片，短圍裙自然固定在腰前。']},
+ {role:'assassin',label:'霧面皮革',palettes:['leatherBlackSilver','leatherBlackCharcoal'],fabric:'霧面仿皮革、完整柔軟內襯與不透明彈性針織',accessories:'原衣裝低反光拉鍊、腰帶與小扣件，不加武器、手持物或新手勢。',
+  normal:['立領皮外套貼身長褲','{主色}完整立領短皮外套，內搭{配色}圓領完整上衣，胸腹衣料連續，袖口自然。','{主色}高腰貼身皮革長褲，實體腰頭、正常褲襠與完整前後褲片，原腿部尺寸保持。'],
+  sexy:['無袖皮革短上衣貼身短褲','{主色}固定方領無袖皮革上衣，完整有襯胸片，{配色}窄接縫及原肩線清楚。','{主色}高腰貼身皮革短褲，短上衣與褲腰間保留小段自然腰腹，前後褲片完整。']},
+ {role:'killjoy',label:'機能拼布改良',palettes:['yellowIvory','yellowCharcoal'],fabric:'蓬鬆機能外套布、不透明針織內搭與密織褲布',accessories:'綠色折邊針織帽、細黑圓框透明眼鏡及外套科技袖章，保留原臉、髮色和眼型，不加武器或機器人。',
+  normal:['Killjoy機能拼布長袖外套','{主色}完整長袖蓬鬆機能外套，{配色}幾何小拼布，內搭完整圓領上衣，外套袖章清楚。','{配色}高腰貼身機能長褲，實體褲腰、完整前後褲片與正常褲襠，長褲在畫外延續。'],
+  sexy:['Killjoy機能短外套無袖內搭','{主色}短版機能外套，內搭{配色}固定較寬U領無袖上衣，完整有襯胸片，袖章及原肩線可辨。','{配色}高腰貼身機能短褲，腰頭與前後褲片完整，與短外套構成兩層上身衣裝。']},
+ {role:'jirai',label:'提花蝴蝶結',palettes:['charcoalIvory','lavenderSilver'],fabric:'不透明細提花、完整襯布與緞面蝴蝶結織帶',accessories:'{配色}小型布蝴蝶結髮夾與原領結，不放大眼睛或換娃娃妝。',
+  normal:['提花蕾絲長袖吊帶裙','{配色}完整高領蕾絲長袖上衣，外搭{主色}提花吊帶裙，胸腹有完整不透明襯層及小領結。','{主色}高腰完整A字裙與吊帶胸片相連，裙內襯和提花紋理各自清楚。'],
+  sexy:['方領提花露肩短裙','{主色}固定較寬方領露肩提花上衣，完整有襯胸片，{配色}小蝴蝶結及獨立短袖口。','{主色}高腰提花短裙，完整內襯與原自然腰線，前後裙片保持固定。']},
+ {role:'neighbor-sister',label:'柔棉開襟',palettes:['coffeeIvory','roseGold'],fabric:'柔軟不透明棉針織、完整內搭與密織彈性褲布',accessories:'只有原上衣鈕扣、包邊及衣裝腰頭，不加手持物或新的居家動作。',
+  normal:['柔棉開襟衫貼身長褲','{主色}完整長袖棉針織開襟衫，內搭{配色}高圓領上衣，鈕扣前襟端正，胸腹覆蓋。','{主色}高腰貼身棉質長褲，完整前後褲片、自然腰頭與正常褲襠，衣料順應原身形。'],
+  sexy:['方領棉背心貼身短褲','{主色}固定較寬方領棉質背心，完整有襯前身，外搭{配色}薄針織短罩衫，肩線自然。','{主色}高腰貼身棉質短褲，必要前後褲片完整，腰頭自然連接上衣下襬。']},
+ {role:'band-guitarist',label:'丹寧舞台',palettes:['denimIvory','charcoalIvory'],fabric:'霧面丹寧、完整不透明棉針織及低反光金屬衣扣',accessories:'只有原丹寧鈕扣與腰頭配件，不加吉他、手持物或原 P 以外的演奏手勢。',
+  normal:['丹寧短外套貼身長褲','{主色}完整長袖丹寧短外套，內搭{配色}高圓領上衣，原肩線與衣裝接縫清楚。','{主色}高腰貼身牛仔長褲，正常褲襠與完整前後褲片，膝下褲腿在畫外自然延續。'],
+  sexy:['丹寧背心貼身短褲','{主色}無袖丹寧短外套，內搭{配色}固定較寬U領上衣，完整有襯胸片與原自然腰線。','{主色}高腰貼身牛仔短褲，腰頭與前後褲片完整，丹寧明線及側縫清楚。']},
+ {role:'tactical-girl',label:'機能針織',palettes:['oliveBlack','charcoalIvory'],fabric:'不透明機能針織、密織斜紋短褲及霧面裝備織帶',accessories:'同色無字棒球帽、黑色罩耳通訊耳機與偏側麥克風、薄手套、{配色}原裝備帶；不戴口罩、不持武器，裝備不限制手腳。',
+  normal:['立領機能短袖貼身短褲','{主色}完整立領短袖機能上衣，胸腹實體衣料，{配色}原裝備肩帶在衣外正常佩戴。','{主色}高腰貼身工裝短褲，腰頭、側袋與正常褲襠，前後褲片完整，原腰側裝備局部入鏡。'],
+  sexy:['無袖機能短上衣貼身短褲','{主色}立領無袖短版機能上衣，完整不透明前身與固定領口，{配色}衣外裝備肩帶保持。','{主色}高腰貼身工裝短褲，與短上衣間保留自然小段腰腹，完整褲片及原裝備腰帶清楚。']},
+ {role:'fitness-coach',label:'細羅紋運動',palettes:['tealIvory','roseGold'],fabric:'密織霧面運動羅紋、完整不透明襯層與彈性包邊',accessories:'只有原運動上衣肩帶、包邊及褲腰，不加器材或新的健身動作。',
+  normal:['長袖羅紋運動上衣緊身褲','{主色}完整圓領長袖運動上衣，胸腹連續衣面，{配色}細側縫與正常袖口。','{主色}高腰緊身運動長褲，完整不透明前後褲片、正常褲襠及實體腰頭，按原腿部尺寸製作。'],
+  sexy:['方領羅紋運動背心短褲','{主色}固定方領寬肩帶短版運動背心，完整有襯前身及{配色}細包邊，肩線自然。','{主色}高腰緊身運動短褲，腰頭與必要褲片完整，短背心至褲腰保留自然腰腹。']},
+ {role:'yoga-coach',label:'霧面交叉背帶',palettes:['mintSilver','coffeeIvory'],fabric:'不透明霧面高密度運動布、完整襯層與柔軟彈性包邊',accessories:'只有衣裝本身交叉背帶、接縫及褲腰，背帶固定衣片，不連接或限制四肢。',
+  normal:['船領長袖瑜珈上衣緊身褲','{主色}固定船領完整長袖瑜珈上衣，胸腹實體衣料，{配色}細側縫，肩線自然。','{主色}高腰緊身瑜珈長褲，完整前後褲片、正常褲襠及平整腰頭，穿著鬆量合理。'],
+  sexy:['交叉背帶瑜珈背心短褲','{主色}固定較寬U領無袖短版瑜珈背心，完整有襯前身，背面{配色}成衣交叉肩帶自然固定。','{主色}高腰緊身瑜珈短褲，前後必要褲片完整，和短背心間保留自然小段腰腹。']},
+ {role:'qipao-girl',label:'霧緞提花',palettes:['tealIvory','roseGold'],fabric:'低光澤厚緞提花、完整不透明內襯與實體包邊',accessories:'{配色}衣裝盤扣與領邊，不加扇子、假髮或新的東方手勢。',
+  normal:['短袖霧緞提花旗袍','{主色}完整立領短袖旗袍上身，前襟閉合、{配色}實體盤扣與領邊，胸腹衣面完整。','同一件{主色}旗袍連續延伸為合身裙身，腰臀尺寸依原人物，固定裙衩在畫外延續。'],
+  sexy:['削肩霧緞提花旗袍','{主色}固定較低立領削肩旗袍上身，完整有襯胸片及{配色}盤扣，肩頸與原雙臂自然可見。','同一件旗袍腰腹連續、完整前後裙片，固定側衩依原版型，不拉高衣料。']},
+ {role:'nurse',label:'滾邊制服',palettes:['pearlBlue','lavenderSilver'],fabric:'不透明霧面棉斜紋、完整內襯與細織帶包邊',accessories:'小型同色無文字護士帽及衣裝口袋，不加針筒、聽診器或醫療手勢。',
+  normal:['翻領滾邊護士褲裝','{主色}完整翻領短袖制服上衣，{配色}窄滾邊、閉合前襟與實體小口袋，胸腹衣面完整。','{主色}高腰貼身制服短褲，正常褲襠、腰頭及完整前後褲片，維持原腰臀尺寸。'],
+  sexy:['方領滾邊護士短裙','{主色}固定較寬方領無袖制服上衣，完整有襯前身，{配色}細滾邊及小口袋。','同色高腰合身短裙與上衣相連，腰腹衣料連續，前後裙片及內襯完整。']},
+ {role:'apron-housekeeper',label:'居家棉麻',palettes:['creamBlack','coffeeIvory'],fabric:'霧面不透明棉麻圍裙、完整棉質內搭與密織褲布',accessories:'只有原圍裙肩帶、腰結與口袋，不加清潔器具或新的家務動作。',
+  normal:['棉麻圍裙短袖短褲裝','{配色}完整圓領短袖上衣，外搭{主色}寬肩帶胸兜棉麻圍裙，前胸衣面及肩帶完整。','{配色}高腰貼身棉質短褲，前後褲片完整，圍裙下半片自然覆在褲面外側。'],
+  sexy:['方領棉麻圍裙短褲裝','{主色}固定較寬方領無袖圍裙式上衣，完整不透明胸腹衣片與自然側縫，肩線正常可見。','{配色}高腰貼身棉質短褲，前後褲片和正常褲襠完整，圍裙前片自然接續腰頭。']},
+ {role:'cheerleader',label:'羅紋隊服',palettes:['tealIvory','powderNavy'],fabric:'不透明高密度運動羅紋、完整襯層與實體隊服拼邊',accessories:'只有{配色}幾何隊服布邊，不加彩球、隊名文字或新的跳躍動作。',
+  normal:['高圓領短袖羅紋隊服','{主色}完整高圓領短袖隊服上衣，{配色}幾何布邊與胸腹連續衣面，肩線自然。','{主色}高腰百褶隊服裙，完整不透明內襯與自然褶線，腰頭及前後裙片固定。'],
+  sexy:['方領削肩羅紋隊服','{主色}固定方領削肩短版隊服上衣，完整有襯前身及{配色}幾何布邊，原肩頸線清楚。','{主色}高腰百褶短裙，完整襯層與實體腰頭，短上衣至裙腰保留自然小段腰腹。']},
+ {role:'after-bath-student',label:'細毛圈浴巾',palettes:['pearlBlue','lavenderSilver'],fabric:'厚實不透明細毛圈棉浴巾、雙層折邊及實體織帶',accessories:'只有浴巾自身{配色}窄織帶及隱藏固定，保留本題暫時濕髮，不加手持物。',
+  normal:['高平直折邊細毛圈長浴巾','{主色}單條厚細毛圈浴巾由腋下完整圍住胸腰，高平直雙層折邊及{配色}織帶，側面重疊固定。','同一條浴巾連續完整包住腹部與腰臀，前後布片厚實，原長度在畫外自然延續。'],
+  sexy:['斜弧折邊細毛圈短浴巾','{主色}單條細毛圈浴巾以固定較低斜弧折邊圍住胸腰，完整不透明布片與{配色}窄邊，肩線自然。','同一條浴巾連續完整包住腹部與臀部，長度至大腿上段，側片重疊固定，不拉開浴巾。']},
+ {role:'red-riding-hood',label:'絨面斗篷',palettes:['wineGold','roseGold'],fabric:'霧面柔絨斗篷、完整厚棉洋裝及不透明裙內襯',accessories:'同色小兜帽與衣裝布結，不加籃子、童話人物或新手勢。',
+  normal:['絨面斗篷完整長袖洋裝','{配色}完整圓領長袖洋裝上身，外搭{主色}絨面兜帽短斗篷，胸腹及原肩線清楚。','{主色}高腰完整A字裙與洋裝相連，斗篷與裙身是獨立衣料層次。'],
+  sexy:['短絨斗篷露肩洋裝','{配色}固定露肩心形領洋裝上身，完整有襯胸片，外搭{主色}後側短兜帽披肩。','{主色}高腰完整短裙與上衣相連，腰腹連續衣面，前後裙片自然延續。']},
+ {role:'tomie',label:'細羅紋學院',palettes:['charcoalIvory','powderNavy'],fabric:'不透明細羅紋、完整棉襯衫與厚百褶裙布',accessories:'{配色}小襯領與窄領帶，不加眼下痣、假髮、恐怖變形或新的冷笑。',
+  normal:['襯領長袖羅紋背心裙裝','{配色}完整尖領長袖襯衫，外搭{主色}V領細羅紋背心，胸腹衣面及原領帶清楚。','{主色}高腰百褶裙，完整內襯、實體腰頭及正常褶線，保持原身形。'],
+  sexy:['方領羅紋短背心裙裝','{主色}固定較寬方領無袖細羅紋上衣，完整有襯前身，{配色}分離襯領與窄領帶。','{主色}高腰百褶短裙，前後衣片完整，短上衣與裙腰間保留自然小段腰腹。']},
+ {role:'harley-quinn',label:'拼色舞台',palettes:['blackRose','charcoalIvory'],fabric:'不透明厚棉緞、完整襯布與實體菱形布片',accessories:'{配色}小荷葉襯領及少量菱形衣飾，不加角色臉妝、假髮、球棒或新動作。',
+  normal:['拼色長袖連身褲裝','{主色}與{配色}固定左右拼色長袖連身衣，胸腹完整不透明，少量菱形布飾及小荷葉領清楚。','同一件連身衣自然延續為貼身長褲，實體褲襠及完整前後褲片，原腰臀尺寸保留。'],
+  sexy:['拼色方領連身短褲裝','{主色}與{配色}固定左右拼色方領無袖連身上衣，完整有襯前身與自然肩線，小荷葉領分開。','連身上衣自然連接為完整貼身短褲，正常褲襠與一般褲口，腰腹衣料連續。']},
+ {role:'demon-fox',label:'暗紋緞絨',palettes:['charcoalIvory','wineGold'],fabric:'暗紋厚緞面、完整不透明襯布與深色仿毛衣片',accessories:'深色可拆卸狐耳與後腰仿毛尾，不加獸瞳、尖牙、角色髮色或新表情。',
+  normal:['暗紋交領長袖妖狐衣','{主色}完整交領長袖上衣，{配色}暗紋領邊與肩外側小仿毛衣片，胸腹衣面完整。','同色高腰層疊長裙，實體腰封及完整裙內襯，原腰臀比例保持。'],
+  sexy:['露肩暗紋妖狐衣','{主色}固定低交領露肩上衣，完整有襯胸片，{配色}窄領邊與獨立短仿毛袖口。','同色高腰層疊短裙，完整裙片與實體腰頭，短上衣至裙腰保留自然腰腹。']},
+ {role:'cleopatra',label:'細緞宮廷',palettes:['tealIvory','roseGold'],fabric:'低光澤厚棉緞、完整不透明裙內襯與幾何織帶',accessories:'{配色}小型幾何髮帶和衣裝領片，不加角色假髮、濃妝、手杖或新動作。',
+  normal:['幾何寬領細緞宮廷長裙','{主色}完整高圓領無袖上衣，{配色}低反光幾何寬領片，胸腹實體衣料與原肩線。','同色高腰垂墜長裙和上衣相連，{配色}衣裝腰帶及完整前後裙片。'],
+  sexy:['方領掛頸細緞宮廷衣','{主色}固定較寬方領掛頸上衣，完整有襯胸片，{配色}細幾何領邊，肩線自然。','同色高腰垂墜裙，完整前後裙片與固定腰帶，短上衣至裙腰保留自然小段腰腹。']},
+ {role:'soldier',label:'棉斜紋短褲',palettes:['charcoalIvory','oliveBlack'],fabric:'不透明棉斜紋、完整背心內搭與低反光衣扣',accessories:'同色小軟布軍帽、{配色}衣裝腰帶與無字肩袢，不加武器、真實軍階或新手勢。',
+  normal:['翻領棉斜紋制服短褲','{主色}完整翻領短袖制服上衣，前襟扣合，{配色}肩袢及完整胸袋，胸腹衣面端正。','{主色}高腰貼身棉斜紋短褲，實體腰頭、正常褲襠及完整前後褲片，保留原身體尺寸。'],
+  sexy:['無袖制服短外套短褲','{主色}無袖短制服外套，內搭{配色}固定較寬U領上衣，完整有襯前身與自然肩線。','{主色}高腰貼身制服短褲，腰頭及前後衣片完整，短上衣至褲腰保留自然小段腰腹。']},
+ {role:'female-dealer',label:'緞面荷官',palettes:['charcoalIvory','roseGold'],fabric:'厚棉緞、不透明棉襯領與完整彈性褲布',accessories:'{配色}小領結及一枚無字花色衣裝刺繡，不加撲克牌、賭桌或新的發牌動作。',
+  normal:['緞面荷官背心貼身短褲','{配色}完整尖領短袖襯衫，外搭{主色}扣合緞面背心，小領結及胸腹衣料端正。','{主色}高腰貼身棉緞短褲，實體腰頭、正常褲襠及完整前後褲片，背心下襬自然相接。'],
+  sexy:['心形領荷官上衣貼身短褲','{主色}固定心形領無肩帶緞面上衣，完整有襯胸片，{配色}分離小襯領與領結。','{主色}高腰貼身棉緞短褲，腰頭與必要前後褲片完整，原自然腰臀保持。']}
+];
+
+
+// Adult clothing themes only; persona identity, age and canonical actions stay fixed.
+const COS_NEW_CHARACTER_DEFINITIONS=[
+ {id:'doll-princess',label:'人偶公主',palettes:['creamBlack','lavenderSilver'],fabric:'霧面棉緞、細提花、完整不透明裙襯與布質荷葉邊',accessories:'{配色}小型布花冠與衣裝緞帶結，不加關節線、玻璃眼、娃娃臉或塑膠皮膚。',referenceNote:'原創人偶公主風的成年舞台服裝，只借用細提花、荷葉邊與小花冠；維持真人皮膚、成年五官與原身體比例，不把人物變成人偶或幼童。',
+  normal:['立領泡袖提花公主洋裝','{主色}完整小立領泡袖洋裝上身，{配色}細荷葉邊與前胸緞帶，胸腹為連續不透明衣料，自然肩線清楚。','{主色}高腰層疊A字裙與上衣相連，完整裙內襯、自然腰頭與少量{配色}裙邊，裙長向畫外延續。'],
+  sexy:['露肩緞帶公主洋裝','{主色}固定露肩心形領上衣，完整有襯胸片與自然收省，{配色}小緞帶及上臂外側獨立泡袖。','同色高腰層疊短裙與上衣相連，腰腹衣料連續、裙內襯完整，荷葉邊只是衣裝細節，不重塑腰臀。']},
+ {id:'student-president',label:'學生會長',palettes:['navyBlack','powderNavy'],fabric:'霧面針織外套、完整棉襯衫、密織百褶裙與不透明內襯',accessories:'{配色}小型布領結與衣裝鈕扣，不加書本、學生證、校徽、手持物或新動作。',referenceNote:'成年大學學生會長風的原創學院服裝；這是成年人物的制服 Cosplay，年齡、五官、身形與妝容仍依原人物設定，不幼態化。',
+  normal:['長袖學院外套襯衫百褶裙','{主色}完整翻領長袖短外套，內搭{配色}扣合尖領襯衫及小布領結，前胸與腰腹完整覆蓋。','{主色}高腰完整百褶裙，實體腰頭、前後裙片與完整裙內襯，褶線在腰臀自然延續。'],
+  sexy:['短學院外套方領上衣百褶裙','{主色}短版翻領外套，內搭{配色}固定較寬方領無袖上衣，完整有襯前身，獨立小襯領與布領結不連接頸部。','{主色}高腰百褶短裙，上衣下襬至裙腰間保留自然小段腰腹，裙頭、前後裙片及內襯完整。']},
+ {id:'ghost-girl',label:'幽靈少女',palettes:['ghostPearlSilver','lavenderSilver'],fabric:'厚棉緞、不透明完整內襯與衣外輕薄雪紡',accessories:'{配色}小布花髮飾與肩外輕紗，原髮色、瞳色及膚色保留，不加漂浮肢體、傷口或恐怖妝。',referenceNote:'原創幽靈風成年 Cosplay，以淡色衣料與衣外輕紗表達安靜朦朧的造型；維持活人的真實皮膚、原瞳色、成年身形與正常支點，不變成透明身體或幽靈器官。',
+  normal:['船領長袖雪紡外層洋裝','{主色}固定船領完整長袖洋裝，胸腹為不透明棉緞與完整襯層，{配色}雪紡只疊在衣料外表與袖外。','同色完整高腰長裙與上衣相連，內層實體裙片連續，外層輕紗自然垂落到畫外。'],
+  sexy:['露肩輕紗披袖洋裝','{主色}固定露肩心形領洋裝上身，完整不透明胸片與自然肩線，{配色}輕紗披袖停在上臂外側。','同色高腰完整垂墜裙與上衣相連，腰腹連續實體衣面，輕紗只作衣外層次。']},
+ {id:'leather-agent',label:'皮革特務',aliases:['黑色皮革修身連身衣特務'],palettes:['leatherBlackSilver','leatherBlackCharcoal'],fabric:'不透明柔軟霧面仿皮革、完整柔軟內襯與低反光服裝拉鍊',accessories:'{配色}細接縫、普通拉鍊與原衣裝小扣件，不加武器、拘束配件、頸圈或手持物。',referenceNote:'原創成年特務風的黑色修身皮革連身舞台衣，衣料按原身體尺寸製作，保留正常活動空間；只有服裝剪裁與縫線，不用服裝束腰或改變原身形。',
+  normal:['黑色立領長袖皮革連身長褲衣','黑色完整低立領長袖仿皮革連身衣，前胸拉鍊扣合至自然領口，{配色}細接縫沿衣片延伸，胸腹連續不透明。','同一件黑色連身衣接續為貼身長褲，實體腰線、正常褲襠與完整前後褲片，左右褲腿各自延續到畫外。'],
+  sexy:['黑色方領無袖皮革連身短褲衣','黑色固定較寬方領無袖仿皮革連身衣，完整有襯胸片、自然肩線與{配色}細接縫，原衣片固定。','同一件黑色連身衣接續為貼身短褲，腰腹連續覆蓋，正常褲襠、一般褲口與完整前後褲片，保留原腰臀比例。']},
+ {id:'leather-catwoman',label:'皮革貓女',aliases:['黑色皮革修身連身衣貓女'],palettes:['leatherBlackSilver','leatherBlackCharcoal'],fabric:'不透明柔軟霧面仿皮革、完整內襯與低反光衣裝包邊',accessories:'一對黑色可拆卸小貓耳髮箍、後腰小仿毛尾與{配色}衣裝細縫線；不戴面罩、不加鞭子或拘束配件，不改獸瞳或五官。',referenceNote:'原創貓女風黑色皮革連身舞台服；貓耳與尾巴是衣裝外側的可拆卸配件，人物仍是同一位成年真人，不套用其他角色的臉或身形。',
+  normal:['黑色圓領長袖貓耳連身長褲衣','黑色完整圓領長袖仿皮革連身衣，前胸與腰腹為連續不透明衣面，{配色}細包邊和自然肩線清楚。','同一件黑色連身衣接續為貼身長褲，正常褲襠、實體腰線與完整前後褲片，尾巴只固定在衣裝後腰。'],
+  sexy:['黑色心形領貓耳連身短褲衣','黑色固定心形領寬肩帶仿皮革連身衣，完整有襯胸片及自然腰線，{配色}細包邊，原肩線可見。','同一件黑色連身衣胸腹衣面連續，接續為貼身短褲，正常褲襠、一般褲口與完整前後褲片，尾巴不妨礙原姿勢。']},
+ {id:'lace-up-dancer',label:'綁帶舞孃',palettes:['tealIvory','roseGold'],fabric:'不透明厚棉緞、完整襯布、柔軟織帶與低反光舞台飾片',accessories:'{配色}少量縫製衣裝飾片與布質腰結；織帶只穿過衣服自身的縫製孔眼並固定在衣面，不環繞或限制裸露身體。',referenceNote:'原創成年舞台舞孃服，綁帶指衣片上的成衣繫帶設計；沒有身體捆綁、頸圈或四肢拘束。保持原 P 的自然攝影動作，不另加舞蹈姿勢。',
+  normal:['短袖繫帶上衣層疊裙','{主色}完整方領短袖上衣，{配色}織帶在前胸實體衣片的孔眼間交叉固定，胸腹與帶下襯布完整不透明。','{主色}高腰層疊舞台裙，實體腰頭與完整裙內襯，{配色}少量縫製飾片沿裙外層自然排列。'],
+  sexy:['無袖繫帶短上衣層疊裙','{主色}固定較寬U領無袖短版上衣，完整有襯前身，{配色}交叉織帶只位於成衣孔眼及衣面，原肩線可見。','{主色}高腰層疊短裙，短上衣與裙腰間保留自然小段腰腹，裙片和內襯完整，布質腰結固定在裙腰。']},
+ {id:'secretary',label:'秘書',palettes:['charcoalIvory','powderNavy'],fabric:'不透明棉襯衫、霧面細針織、密織裙布與完整內襯',accessories:'原衣裝鈕扣、細包邊與普通布腰帶，不加眼鏡、工牌、文件、手持物或新手勢。',referenceNote:'原創成年都會秘書風穿搭，以襯衫、針織與窄裙表達俐落造型；維持原身份、年齡與自然腰臀，不增加職場故事或其他人物。',
+  normal:['長袖襯衫針織窄裙','{配色}完整扣合尖領長袖襯衫，外搭{主色}完整V領針織背心，胸腹由內搭連續覆蓋。','{主色}高腰及膝窄裙，實體腰頭與完整前後裙片，不透明內襯及自然收省，裙長在畫外延續。'],
+  sexy:['方領無袖上衣高腰短窄裙','{配色}固定較寬方領無袖上衣，完整有襯前身及自然收省，{主色}細包邊，原肩頸線清楚。','{主色}高腰短窄裙，完整前後裙片與內襯，衣裝腰頭自然，不靠束腰重塑身形。']},
+ {id:'elf',label:'精靈',palettes:['forestIvory','mintSilver'],fabric:'不透明細提花棉緞、完整襯布與衣外輕紗',accessories:'{配色}小型葉形髮飾、貼在原耳外側的可拆卸尖耳配件與腰側縫製葉形飾片，不加魔杖、武器或改瞳色。',referenceNote:'原創成年森林精靈風舞台衣，只以葉形飾片及可拆卸尖耳配件呈現角色；原耳位、五官、髮色、膚色與成年身形保留，不變成非人身體。',
+  normal:['交領長袖葉形精靈衣','{主色}完整交領長袖上衣，{配色}葉形衣片沿領邊縫製，胸腹有完整不透明內襯，衣外輕紗停在肩袖。','{主色}高腰完整層疊裙，實體腰頭與裙內襯，葉形飾片只在衣面，裙長在畫外自然延續。'],
+  sexy:['露肩葉形披袖精靈衣','{主色}固定露肩心形領上衣，完整有襯胸片與原自然肩線，{配色}葉形領邊及獨立輕紗短披袖。','{主色}高腰層疊短裙，短上衣至裙腰保留自然小段腰腹，完整內襯和必要裙片保持。']},
+ {id:'tennis-girl',label:'網球少女',palettes:['pearlBlue','mintSilver'],fabric:'密織不透明運動珠地布、完整裙襯與霧面彈性包邊',accessories:'原衣裝翻領、細包邊與裙腰，不加球拍、網球、髮帶或原 P 以外的運動手勢。',referenceNote:'成年網球選手風的原創運動服 Cosplay，年齡依原人物成年設定；只更換衣裝，不變成青少年，不加入新的打球姿勢。',
+  normal:['短袖網球Polo上衣百褶裙','{主色}完整翻領短袖Polo上衣，{配色}細領邊及袖邊，前襟自然扣合、胸腹連續覆蓋。','{主色}高腰百褶運動裙，實體腰頭、完整不透明內襯與一體安全短褲，褶線自然。'],
+  sexy:['無袖翻領網球短上衣百褶裙','{主色}固定較寬V形翻領無袖短版上衣，完整有襯前身，{配色}領邊與原肩線清楚。','{主色}高腰百褶運動短裙，短上衣至裙腰間保留自然小段腰腹，裙內襯及一體安全短褲完整。']}
+];
+
+
+// Keep existing IDs and reference/pose rules; update only the selected garments.
+function cosV2311Detail(o){return `【選定款式】${o.cut}\n【上身、領口與袖型】${o.top}\n【下身與衣裝連接】${o.bottom}\n【材質與層次】${o.material}\n【本題遮覆與版型】${o.coverage}`+(o.ropeDesign?`\n【繩藝主體與衣料分層】${o.ropeDesign}`:'');}
+const COS_FITTED_PANTS_CHANGES={
+ 'rope-dress':{title:'高領上衣＋貼身棉質短褲',cut:'高領無袖上衣＋高腰貼身棉質短褲＋交叉繩藝外搭',
+  top:'{主色}高領無袖不透明上衣，領口停在自然頸根，兩側袖窿平整；上胸至腹部完整衣料，下襬自然接至褲腰。{配色}圓棉繩另作獨立外搭，與衣料分層清楚。',
+  bottom:'{主色}高腰貼身彈性棉質短褲，實體褲腰、正常褲襠與完整前後褲片，褲口在大腿上段，左右褲腿各自延續。按原腰臀及腿部尺寸製作，不縮腰或收窄骨盆。',
+  material:'不透明霧面針織上衣、密織彈性棉質短褲與完整柔軟內襯；{配色}圓棉繩有清楚纖維、圓截面、交叉厚度及自然接觸陰影。',
+  coverage:'高領無袖上衣覆腹，高腰貼身棉質短褲保留完整前後褲片與正常褲口；衣裝順應原體態，保持正常活動鬆量。'},
+ 'rope-shirt':{title:'長袖襯衫＋貼身牛仔短褲',cut:'完整長袖襯衫＋高腰貼身牛仔短褲＋菱格繩藝外搭',
+  top:'{主色}完整尖領長袖襯衫，前襟鈕扣扣合、袖口端正，衣料保留正常鬆量，下襬自然收進牛仔褲腰。{配色}棉繩是衣外獨立層次，領片與前襟清楚。',
+  bottom:'水洗藍高腰貼身牛仔短褲，實體褲腰、腰帶環、門襟、正常褲襠及完整前後褲片；左右褲腿各自延續，褲口在大腿上段，牛仔明線清楚，不以褲裝拉腿。',
+  material:'不透明棉府綢襯衫、密織彈性牛仔短褲與真實鈕扣；{配色}圓棉繩有清楚纖維、獨立圓截面及衣料接觸陰影。',
+  coverage:'完整尖領長袖襯衫覆腹，高腰貼身牛仔短褲維持完整褲片與正常褲襠，原骨架、腰臀與正常穿著鬆量保留。'},
+ 'rope-satin':{title:'緞面背心＋貼身緞面短褲',cut:'方領緞面背心＋高腰貼身緞面短褲＋斜向繩藝外搭',
+  top:'{主色}固定方領寬肩帶緞面背心，完整雙層不透明前胸與自然收省，衣面延伸至褲腰；肩帶與{配色}外搭棉繩分開可辨。',
+  bottom:'{主色}高腰貼身彈性緞面短褲，實體褲腰、正常褲襠及完整前後褲片，左右褲腿各自延續，柔和微光澤與側縫清楚。',
+  material:'完整不透明內襯的厚緞面背心與彈性緞面短褲；{配色}霧面圓棉繩有纖維、圓截面與接觸陰影，繩面和緞面光澤分開。',
+  coverage:'固定方領寬肩帶背心覆腹，完整高腰貼身短褲維持分件版型，保留正常活動空間與原自然腰臀。'},
+ 'rope-wrap':{title:'交領上衣＋貼身棉質短褲',cut:'閉合交領上衣＋高腰貼身棉質短褲＋層疊繩藝外搭',
+  top:'{主色}完整閉合交領短袖上衣，{配色}窄領邊與側襟，胸腹不透明，下襬自然接至褲腰；外搭圓棉繩獨立於衣裝交領。',
+  bottom:'{主色}高腰貼身棉質短褲，實體腰頭、正常褲襠、完整前後褲片及左右各自延續的褲腿，褲口在大腿上段，細接縫自然。',
+  material:'不透明棉斜紋交領上衣、密織彈性棉短褲與完整內襯；{配色}圓棉繩有可見纖維、交叉厚度和衣料接觸陰影。',
+  coverage:'完整閉合交領短袖、覆腹上衣與高腰貼身短褲；不改為裙裝，不以衣裝重塑原人物骨架或腰臀。'},
+ 'rope-office-pants':{title:'長袖襯衫＋貼身棉質長褲',cut:'完整長袖襯衫＋高腰貼身棉質長褲＋菱格繩藝外搭',
+  top:'{主色}完整尖領長袖襯衫，鈕扣扣合、袖口正常，下襬自然收進棉質褲腰，胸腹衣面完整；{配色}棉繩獨立於衣料。',
+  bottom:'{主色}高腰貼身彈性棉質長褲，實體褲腰、正常褲襠與完整前後褲片；左右褲腿按原腿部尺寸各自延續到畫外，不做西裝壓褶或寬直筒剪裁。',
+  material:'不透明棉府綢襯衫與密織彈性棉質長褲、完整柔軟內襯；{配色}圓棉繩纖維、圓截面與交叉陰影清楚。',
+  coverage:'完整尖領長袖襯衫覆腹，高腰貼身棉質長褲保留正常褲襠和活動空間，不縮腰、拉腿或改變骨盆。'},
+ 'rope-rib-denim':{title:'羅紋上衣＋貼身牛仔短褲',cut:'方領羅紋上衣＋高腰貼身牛仔短褲＋交叉繩藝外搭',
+  top:'{主色}固定方領完整短袖羅紋上衣，胸腹不透明，羅紋密度與原肩線清楚，下襬自然接至牛仔褲腰；{配色}棉繩獨立佩戴。',
+  bottom:'水洗藍高腰貼身牛仔短褲，實體褲腰、腰帶環、正常褲襠及完整前後褲片，左右褲腿各自延續，明線及原布料摺痕清楚。',
+  material:'不透明細羅紋上衣、密織彈性牛仔短褲及完整內襯；{配色}圓棉繩有纖維與真實交叉厚度，羅紋和牛仔織紋各自可辨。',
+  coverage:'固定方領短袖上衣覆腹，完整高腰貼身牛仔短褲維持正常褲口，衣料按原人物尺寸製作，不重新塑形。'},
+ 'rope-cargo-pants':{title:'立領上衣＋貼身工裝短褲',cut:'立領短袖上衣＋高腰貼身工裝短褲＋菱格繩藝外搭',
+  top:'{主色}完整低立領短袖機能上衣，胸腹連續不透明，袖口平整，{配色}外搭棉繩與衣面分層。',
+  bottom:'{主色}高腰貼身工裝短褲，實體褲腰、普通側袋、正常褲襠與完整前後褲片；左右褲腿各自延續，側袋貼合衣面，不改成寬鬆工裝長褲。',
+  material:'不透明機能針織上衣、密織彈性工裝斜紋短褲及完整內襯；{配色}圓棉繩纖維、圓截面與交叉接觸陰影清楚。',
+  coverage:'完整立領短袖上衣覆腹，完整高腰貼身工裝短褲保留正常褲襠，原肩寬、自然腰臀及活動空間保持。'},
+ 'rope-sport-shorts':{title:'圓領T恤＋貼身運動短褲',cut:'完整圓領T恤＋高腰貼身運動短褲＋交叉繩藝外搭',
+  top:'{主色}完整圓領短袖T恤，胸腹不透明，下襬自然接至運動褲腰，{配色}棉繩作衣外獨立層次。',
+  bottom:'{主色}高腰貼身運動短褲，實體彈性褲腰、正常褲襠與完整前後褲片；左右褲腿各自延續，密織衣料順應原腿部尺寸，沒有透膚褲片。',
+  material:'不透明霧面棉T恤、密織運動彈性短褲及完整內襯；{配色}圓棉繩纖維、圓截面及衣料接觸陰影清楚。',
+  coverage:'完整圓領短袖T恤覆腹，高腰貼身運動短褲保持正常褲口與完整褲片，不縮腰、不拔高或改變原體態。'},
+ 'rope-lace-shorts':{title:'有襯蕾絲上衣＋貼身短褲',cut:'有襯蕾絲短袖上衣＋高腰貼身短褲＋菱格繩藝外搭',
+  top:'{主色}固定船領完整短袖蕾絲上衣，胸腹有完整不透明襯層，蕾絲只是表面小花紋理；{配色}棉繩與衣面分層。',
+  bottom:'{主色}高腰貼身彈性棉緞短褲，實體褲腰、正常褲襠與完整前後褲片，左右褲腿各自延續，必要布片不透明。',
+  material:'小花蕾絲表面層、完整不透明棉緞襯布與密織彈性短褲；{配色}圓棉繩纖維、圓截面與交叉厚度清楚。',
+  coverage:'固定船領短袖有襯上衣覆腹，完整高腰貼身短褲；蕾絲只在衣面，衣料不透膚，不以繩藝或衣裝塑形。'},
+ 'rope-leather-pants':{title:'方領上衣＋貼身皮革長褲',cut:'方領長袖上衣＋高腰貼身霧面皮革長褲＋交叉繩藝外搭',
+  top:'{主色}固定方領完整長袖針織上衣，胸腹連續不透明，下襬自然接至皮革褲腰；{配色}棉繩與上衣層次各自清楚。',
+  bottom:'{主色}高腰貼身霧面仿皮革長褲，實體腰頭、門襟、正常褲襠及完整前後褲片；左右褲腿各自延續到畫外，衣面保留自然接縫和細小摺痕，不收窄原骨盆。',
+  material:'不透明細針織上衣、柔軟霧面彈性仿皮革長褲與完整內襯；{配色}圓棉繩纖維、圓截面和交叉陰影與皮革細微光澤分開。',
+  coverage:'固定方領長袖上衣覆腹，完整高腰貼身皮革長褲維持分件版型，保留正常活動鬆量與原身體尺寸。'}
+};
+for(const variant of COS_ROPE_ROLE.variants){
+ const change=COS_FITTED_PANTS_CHANGES[variant.id];
+ if(!change)continue;
+ Object.assign(variant.fashion,change);variant.label=change.title;
+ for(const o of COS_OUTFITS.filter(o=>o.role==='rope-art'&&o.variant===variant.id)){
+  o.aliases=[...new Set([...(o.aliases||[]),o.label,o.cut,o.variantLabel])];
+  const replace=v=>String(v||'').replaceAll('{主色}',o.primaryColor).replaceAll('{配色}',o.secondaryColor);
+  for(const key of ['cut','top','bottom','material','coverage'])o[key]=replace(change[key]);
+  o.variantLabel=change.title;o.label=['繩藝','時裝',change.title,o.colorLabel].join('｜');o.sub='繩藝／'+change.title;o.detail=cosV2311Detail(o);
+ }
+}
+const COS_OTHER_FITTED_PANTS_CHANGES={
+ agent:{cut:'完整西裝外套＋襯衫＋高腰貼身棉質長褲',bottom:'{主色}高腰貼身彈性棉質長褲，實體褲腰、正常褲襠與完整前後褲片；窄布腰帶與門襟清楚，左右褲腿各自延續到畫外，腹部由襯衫完整覆蓋。',material:'不透明霧面外套、完整棉襯衫、密織彈性棉質褲布與完整內襯，衣裝按原尺寸製作，保留原自然腰臀和正常活動空間。'},
+ magician:{cut:'燕尾外套＋完整襯衫背心＋高腰貼身短褲',bottom:'{主色}高腰貼身棉緞短褲，實體褲腰、正常褲襠與完整前後褲片；左右褲腿各自延續，燕尾後片在衣外自然垂落，腹部由襯衫與背心完整覆蓋。',material:'不透明棉緞燕尾外套、完整襯衫與背心、密織彈性棉緞短褲及完整內襯；接縫及原衣裝包邊清楚。'},
+ 'female-dealer':{cut:'長袖襯衫＋正式荷官背心＋高腰貼身短褲',bottom:'{主色}高腰貼身彈性棉質短褲，實體褲腰、正常褲襠與完整前後褲片；左右褲腿各自延續，襯衫與背心自然接至褲腰，維持原成熟荷官穿搭。',material:'不透明完整棉襯衫、霧面有襯背心與密織彈性棉短褲，必要衣料完整，衣裝縫線與包邊清楚。',coverage:'完整長袖襯衫、寬肩正式背心、端正領結和高腰貼身短褲是正常版；腹部由上衣完整覆蓋，胸前不開口，不改成無肩帶胸衣。'}
+};
+for(const role of COS_ROLES){
+ const change=COS_OTHER_FITTED_PANTS_CHANGES[role.id];if(!change)continue;
+ Object.assign(role.normal,change);
+ for(const o of COS_OUTFITS.filter(o=>o.role===role.id&&o.style==='normal')){
+  o.aliases=[...new Set([...(o.aliases||[]),o.label,o.cut])];
+  const replace=v=>String(v||'').replaceAll('{主色}',o.primaryColor).replaceAll('{配色}',o.secondaryColor);
+  for(const key of ['cut','bottom','material','coverage'])if(change[key])o[key]=replace(change[key]);o.detail=cosV2311Detail(o);
+ }
+}
+
+
+function cosV2311Garment(def,style){
+ const [cut,top,bottom]=def[style];
+ return {cut,top,bottom,material:def.fabric+'；各層織紋、接縫與包邊清楚，必要衣料完整不透明。',coverage:'維持本款明列的領口、袖型、腰線與成衣層次；必要前後衣片與內襯完整不透明，服裝按原人物尺寸製作，保留正常活動空間，不縮腰、拉腿或重塑原身形。',accessories:def.accessories};
+}
+let cosV2311NextId=195;
+function cosV2311Append(role,def,base=false){
+ const variant={id:base?'base':role.id+'-wardrobe-v2311',label:base?'基本款':def.label,start:cosV2311NextId,palettes:def.palettes,normal:cosV2311Garment(def,'normal'),sexy:cosV2311Garment(def,'sexy')};
+ role.variants=base?[variant]:[...cosVariantsFor(role),variant];
+ for(const style of COS_STYLES)for(const name of variant.palettes){
+  const palette=COS_PALETTES[name],g=variant[style.id],replace=v=>String(v||'').replaceAll('{主色}',palette.primary).replaceAll('{配色}',palette.secondary);
+  const o={id:'C'+String(cosV2311NextId++).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,cut:replace(g.cut),top:replace(g.top),bottom:replace(g.bottom),material:replace(g.material),coverage:replace(g.coverage),accessories:replace(g.accessories),label:[role.label,style.label,...(base?[]:[variant.label]),palette.label].join('｜'),referenceNote:role.referenceNote||'原創成年人物的基本服裝造型，不套用其他角色的臉或身形。',brand:!!role.brand,fanRole:!!role.fanRole,main:role.brand||role.fanRole?'指定造型 Cosplay':'原創 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚',...(role.hairState?{hairState:role.hairState}:{}),...(role.aliases?{aliases:[...role.aliases]}:{})};
+  o.detail=cosV2311Detail(o);COS_OUTFITS.push(o);
+ }
+}
+for(const def of COS_CHARACTER_EXPANSIONS){const role=COS_ROLES.find(r=>r.id===def.role);if(!role)throw Error('Missing role '+def.role);cosV2311Append(role,def);}
+for(const def of COS_NEW_CHARACTER_DEFINITIONS){
+ const role={id:def.id,label:def.label,referenceNote:def.referenceNote,brand:false,fanRole:false,...(def.aliases?{aliases:def.aliases}:{})};
+ COS_ROLES.push(role);cosV2311Append(role,def,true);
 }
 COS_OUTFITS.sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
 
