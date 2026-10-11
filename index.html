@@ -61,10 +61,10 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
       <div class="sync-card"><strong id="fashionCov">0 / 488</strong><span>時裝穿搭資料</span></div>
       <div class="sync-card"><strong id="poseCov">0 / 145</strong><span>標準姿勢資料</span></div>
       <div class="sync-card"><strong id="emoteCov">63 / 63</strong><span>V.表情包題目</span></div>
-      <div class="sync-card"><strong id="cosCov">172 / 172</strong><span>V.cos｜37 主題・狐仙 4 款・繩藝時裝／內著</span></div>
+      <div class="sync-card"><strong id="cosCov">172 / 172</strong><span>V.cos｜37 主題・狐仙 4 款・繩結時裝／居家服</span></div>
     </div>
     <div class="card">
-      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物，再選寫真或 V.cos、穿搭與動作。V.cos 提供角色、款式、服裝版本與配色篩選；繩藝分時裝／內著，固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera。</p></div></div>
+      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物，再選寫真或 V.cos、穿搭與動作。V.cos 提供角色、款式、服裝版本與配色篩選；繩結服裝分時裝／居家服，固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera。</p></div></div>
       <div class="importbox">
         <b style="color:#fff">匯入共用穿搭／動作資料</b><br>
         可直接選擇小森 Prompt Vault 匯出的 JSON。網站只抽取 V.內著寫真與 V.時裝寫真的「服裝／姿勢 canonical 資料」，不把小森身份帶進 Vera；匯入後依所選人物套用各自的 Face / Body / Angle Master，重新組裝完整 Prompt。
@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.5｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.6｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -291,75 +291,79 @@ Object.assign(COS_PALETTES,{
  ropeBlackIvory:{id:'rope-black-ivory',label:'黑色象牙繩',primary:'黑色',secondary:'象牙白'},
  ropeIvoryWine:{id:'rope-ivory-wine',label:'象牙酒紅繩',primary:'象牙白',secondary:'酒紅色'}
 });
+// v2.3.6: Sewn cord appliques on opaque fashion and loungewear, C157–C172.
+COS_PALETTES.ropeBlackIvory.label='黑色象牙';
+COS_PALETTES.ropeIvoryWine.label='象牙酒紅';
 const COS_ROPE_ROLE={
- id:'rope-art',label:'繩藝',
- aliases:['繩縛娘','Shibari Girl','繩縛女郎','Rope Bunny','緊縛模特','Kinbaku Model','繩藝造型'],
- styles:[{id:'fashion',label:'時裝'},{id:'innerwear',label:'內著'}],titleByGarment:true,
- referenceNote:'本題是成年人物的非露骨服裝與繩藝造型攝影。繩藝為可拆卸成衣外搭，在衣料表面形成清楚交叉線條、菱格與結飾；衣服是獨立完整的實體成衣，繩紋不能取代必要衣料。只改當次衣裝，不改臉、髮型、妝容、年齡或體型；原 P 動作與支點保留，繩子不連接或限制四肢，不增加其他人物或情節。',
+ id:'rope-art',label:'繩結服裝',
+ aliases:['繩藝','繩藝造型','繩縛娘','Shibari Girl','繩縛女郎','Rope Bunny','緊縛模特','Kinbaku Model'],
+ styles:[{id:'fashion',label:'時裝'},{id:'innerwear',label:'居家服'}],titleByGarment:true,
+ referenceNote:'同一位成年人物的 Cosplay 服裝 lookbook。主造型是縫在不透明衣料上的編繩飾片：交叉線、菱格和小結飾構成成衣表面圖案，具有低浮雕的纖維厚度。飾片隨衣服一起穿著，衣服完整覆蓋胸腹與腰臀，雙臂、雙手和雙腿保持正常活動。原人物身份、髮型、妝容及身體比例維持原始 Master。',
  variants:[
-  {id:'rope-dress',label:'高領洋裝／長版胸衣',start:157,palettes:['ropeBlackIvory','ropeIvoryWine'],
-   fashion:{title:'高領合身洋裝',cut:'高領無袖合身洋裝＋交叉繩藝外搭',
-    top:'{主色}高領無袖合身洋裝，領口停在自然頸根，兩側袖窿平整；上胸到腹部是一整片不透明衣料，自然收省貼合原胸廓，沒有挖空、透視或露背。{配色}外搭繩紋與衣面形成清楚色差。',
-    bottom:'洋裝上下連成一件，{主色}裙身在自然腰線下沿原骨盆垂落；取景內可見腰臀衣料和大腿最上段裙面，畫外裙長延續至膝上，不加內著外穿或新褲裝。',
-    material:'有實體厚度的不透明霧面彈性針織洋裝；外搭為柔軟{配色}圓棉繩，有真實纖維、圓截面、接觸陰影與交叉厚度，沒有乳膠反光或金屬鏈條。',
-    coverage:'高領、無袖、覆腹與連續裙身是時裝輪廓；繩紋只沿衣面自然貼放，洋裝必要胸臀布片始終完整，不壓縮胸廓、不勒出細腰。',
-    accessories:'只有{配色}可拆卸繩藝外搭及側腰一枚小繩結裝飾。沒有頸圈、腕繩、腳踝繩、面具、手持繩尾或新增首飾；雙手與雙臂保持原 P 動作所需自由度。',
-    ropeDesign:'繩藝是上身主要造型：{配色}兩側斜向繩線在衣面形成清楚胸前交叉與上腹菱格，腰側有一段平行繩紋；每條繩線都位於{主色}洋裝外層，上下交叉次序及接觸陰影可信，不是衣服印花、肩帶或單條腰繩。雙臂與頸部沒有繩圈，繩紋與手勢衝突時只微調衣面佩戴位置。'},
-   innerwear:{title:'長版胸衣＋高腰內褲',cut:'長版全罩胸衣＋高腰內褲＋交叉繩藝外搭',
-    top:'{主色}長版寬肩帶全罩胸衣，完整有襯胸片與實體下圍連接至自然肋骨下方；胸片邊緣平整，原胸部得到合理支撐，沒有開洞、透明杯面或額外推高。{配色}繩藝外搭疊在完整胸衣表面。',
-    bottom:'{主色}高腰完整內褲，腰頭停在自然腰線附近，前後褲片與側邊完整；長版胸衣與高腰之間只保留自然小段腰腹，取景顯示腰頭與上臀布片，不加吊襪帶或改低腰。',
-    material:'雙層不透明棉緞胸片、細密彈性長版下圍及完整高腰褲布，柔和微光澤與包縫真實；{配色}柔軟棉繩有纖維和厚度，不使用透明網紗取代必要衣料。',
-    coverage:'這是完整遮覆的內著服裝 lookbook；全罩胸片、長版下圍及高腰褲片清楚，與高領洋裝時裝版不同。繩藝為第二層造型，不用繩線代替衣料或改人物身形。',
-    accessories:'{配色}可拆卸繩藝外搭與側腰小繩結，不添加頸圈、腕繩、腳踝繩、吊襪帶或手持物；雙手、雙臂和坐躺支點維持原 P 的自然狀態。',
-    ropeDesign:'{配色}繩線在完整長版胸衣外層形成對稱交叉、下圍到上腹的菱格與側腰平行層次，繩色與{主色}成衣反差清楚。線條順應原衣料與人體曲面，不勒出凹痕、不推擠胸片、不限制手臂；不可簡化成內衣肩帶或只在腰部添一根繩。'}},
-  {id:'rope-shirt',label:'襯衫短裙／蕾絲成套',start:161,palettes:['ropeBlackIvory','ropeIvoryWine'],
-   fashion:{title:'襯衫＋高腰短裙',cut:'完整長袖襯衫＋高腰短裙＋菱格繩藝外搭',
-    top:'{主色}完整尖領長袖襯衫，前襟鈕扣扣合、袖口端正，衣料自然留鬆量，胸前沒有開口；下襬整齊收進裙腰。{配色}外搭繩紋位於襯衫表面，保留原領片與前襟辨識。',
-    bottom:'{主色}高腰平整A字短裙，實體腰頭、上臀裙片與簡潔側縫可見；腰間連續覆蓋，裙子原長度延續在畫外，不為展示裙擺拉遠鏡頭。',
-    material:'不透明棉府綢襯衫與有實體內襯的霧面裙布，鈕扣與袖口有真實厚度；{配色}柔軟細編棉繩呈獨立外搭層，與襯衫形成細小接觸陰影。',
-    coverage:'完整領口、長袖與覆腹裙腰構成時裝版；菱格繩紋是視覺主體，襯衫前襟保持閉合，袖子與手腕沒有繩圈，不拉開鈕扣或束窄腰圍。',
-    accessories:'{配色}繩藝外搭，前襟旁有小型固定結飾；不加領結、頸圈、腕帶、手持物或新增首飾，不把日系穿搭變成學生身份。',
-    ropeDesign:'{配色}交錯繩線從襯衫衣面兩側向中央形成較大的菱格，主圖案位於胸前與上腹，腰側有整齊平行繩線；不遮掉尖領與鈕扣前襟。交叉線各有實體前後關係，不畫成印刷格紋或西裝背心；袖子與雙手各自保持自由。'},
-   innerwear:{title:'有襯蕾絲成套',cut:'有襯全罩蕾絲內衣＋高腰內褲＋菱格繩藝外搭',
-    top:'{主色}寬肩帶全罩內衣，胸片為完整不透明襯層，外表有同色小花蕾絲與細包邊；下圍寬而平整，原肩帶長度固定，不是透明網紗杯或深開口胸衣。',
-    bottom:'{主色}高腰完整內褲，前後褲片均有不透明內襯，外層同色蕾絲花紋延續；實體腰頭與側片可見，不使用繩線當褲帶或增加腿部配件。',
-    material:'細緻花紋蕾絲只作表面層，胸片及前後褲片有完整不透明棉緞襯布；{配色}圓棉繩的纖維與交叉厚度清楚，內著蕾絲和繩紋是兩個可辨的材質層。',
-    coverage:'有襯全罩內衣與高腰完整內褲是固定成套版型；蕾絲只提供衣料紋理，必要胸臀衣料不透視、不挖空，繩紋不替代肩帶或改變杯型。',
-    accessories:'{配色}菱格繩藝外搭與側腰小結飾；不加頸圈、腕繩、吊襪帶、腿環或額外手持物，原 P 手位和支點保留。',
-    ropeDesign:'繩藝為主圖案：{配色}大菱格疊在完整內衣前胸與下圍外層，上腹和腰側延續少量平行繩線；底下蕾絲花紋仍可辨，兩層不能合成一塊印花。繩線不壓迫杯面或側片、不連接雙臂或雙腿，不形成皮膚勒痕。'}},
-  {id:'rope-satin',label:'緞面吊帶裙／緞面連身內著',start:165,palettes:['ropeBlackIvory','ropeIvoryWine'],
-   fashion:{title:'緞面吊帶裙',cut:'完整緞面吊帶連身裙＋斜向繩藝外搭',
-    top:'{主色}寬肩帶緞面連身裙，平整方領、雙層不透明前胸及自然胸省清楚；肩帶和外搭繩線分開可辨，連身衣面從胸前自然延伸到腰部，不拉低領口。',
-    bottom:'{主色}緞面裙身與上身連成一件，順著原腰臀比例柔和垂落，沒有束腰；取景下緣露出大腿最上段的裙料，畫外裙長自然延續，不改成短褲或透明睡裙。',
-    material:'有完整內襯的厚緞面，微光澤依真實棚光形成柔和摺痕；{配色}霧面棉繩作外搭，繩纖維與緞面光澤反差清楚，不像金屬鏈或服裝印花。',
-    coverage:'寬肩帶、固定方領、覆腹的完整緞面連身裙是時裝版；外搭繩紋不壓平衣料原垂墜、不改胸腰比例，必要衣面保持完整不透明。',
-    accessories:'只有{配色}斜向繩藝外搭與衣面一側的固定小結飾；原肩帶不被換成繩子，不加頸圈、腕帶、手持物、項鍊或新增動作。',
-    ropeDesign:'{配色}斜向交叉繩線在裙子上身形成偏側但平衡的菱格，另一側上腹有短平行段，腰側結飾貼在衣面而不是勒住身體；胸前到腰間須有清楚可見的繩藝層次。繩線與成衣肩帶分開，不伸到頸部或手腕；衣料重力與交叉陰影真實。'},
-   innerwear:{title:'緞面連身內著',cut:'寬肩帶緞面連身內著＋斜向繩藝外搭',
-    top:'{主色}寬肩帶連身內著，平整方領、完整雙層胸片及自然收省清楚，沒有挖洞或透明側胸；上身衣面延續到腰腹，原肩帶與外搭{配色}繩線各自獨立。',
-    bottom:'{主色}連身內著從腹部延伸為完整前後褲片，正常腿口與實體包邊清楚；腰腹連續覆蓋，不加裙擺或另一件內褲，不改成高開衩或低腰結構。',
-    material:'柔和微光澤雙層棉緞與細密彈性襯層，胸腹及前後褲片不透明；{配色}霧面棉繩有細纖維和真實圓截面，與緞面衣料呈獨立外搭層。',
-    coverage:'完整方領、寬肩帶、連續覆腹與正常腿口的連身內著，是和緞面裙不同的成衣結構；繩藝不代替肩帶或褲片，不用收束方式改變腰臀比例。',
-    accessories:'只有{配色}可拆卸斜向繩藝外搭和側腰小繩結；不加頸圈、腕繩、吊襪帶、腿環、手持物或新增首飾，原 P 動作保持。',
-    ropeDesign:'{配色}斜向交叉繩線在完整連身衣胸前與上腹形成清楚菱格，腰側保留小型平行段與固定結飾；繩線始終位於不透明成衣表面，陰影與前後次序可信。不要變成單一腰帶、同色印花或真實勒痕；手臂、雙腿和頸部沒有相連繩圈。'}},
-  {id:'rope-wrap',label:'改良和服／長版內衣背心',start:169,palettes:['ropeBlackIvory','ropeIvoryWine'],
-   fashion:{title:'改良和服洋裝',cut:'閉合交領改良和服洋裝＋層疊繩藝外搭',
-    top:'{主色}改良和服洋裝，完整交領固定閉合、自然肩線與七分寬袖清楚；上胸和腹部是完整不透明衣料，{配色}細領邊與外搭繩紋形成日系層次，不加落肩、低交領或透視。',
-    bottom:'{主色}直筒裙身與上衣連成一件，窄布腰帶自然固定衣襟，不塑形；取景內可見腰臀衣料及大腿最上段裙面，畫外裙長延續至膝附近，不拉遠展示整套衣裝。',
-    material:'不透明細紋厚棉與柔和霧面織布領邊，衣襟和寬袖有真實厚度及重力；外搭{配色}柔軟編棉繩，繩纖維、結飾及衣料是可分辨的三維層次。',
-    coverage:'閉合交領、七分寬袖、覆腹與連身裙面是固定時裝版；原窄布腰帶和外搭繩紋各自獨立，繩子只在衣面造型，不縮腰、不勒胸、不限制寬袖及雙手。',
-    accessories:'原窄布腰帶及{配色}層疊繩藝外搭、側腰小結飾。沒有狐耳、尾巴、仙符、頭飾、頸圈、腕繩或手持物；不套用狐仙或妖狐角色元素。',
-    ropeDesign:'{配色}繩線在閉合交領下方的衣面形成對稱交叉與上腹層疊菱格，腰側留清楚平行繩紋；交領方向和原布腰帶不能被繩結蓋掉。繩子是造型主體而非單一日式腰封，完整胸前至腰間繩紋須入鏡；雙袖、頸部和四肢各自自由。'},
-   innerwear:{title:'長版內衣背心＋高腰內褲',cut:'方領長版內衣背心＋高腰內褲＋層疊繩藝外搭',
-    top:'{主色}寬肩帶方領長版內衣背心，完整雙層前胸、實體下圍與自然包縫清楚；下襬延伸到自然腰線，腹部完整覆蓋，{配色}細包邊與外搭繩紋分開，不加和服袖子或開襟外套。',
-    bottom:'{主色}高腰完整內褲，腰頭與長版背心下襬自然相接，前後褲片、側邊及正常腿口均完整；不改連身裙、吊襪帶或低腰內褲。',
-    material:'高密度不透明棉質內衣布、完整雙層胸片與柔軟包邊，沒有透明網紗或乳膠反光；{配色}編棉繩有可見纖維、圓截面和交叉接觸陰影。',
-    coverage:'方領、寬肩帶、覆腹長版背心與高腰完整內褲是固定內著輪廓；繩藝疊在成衣外面，必要胸臀衣料始終完整，不壓縮胸片、收束腰部或改原身形。',
-    accessories:'只有{配色}層疊繩藝外搭及側腰小結飾，不增加和服腰封、外套、頸圈、腕繩、腿環、手持物或首飾；手勢及支點保留原 P 的自然狀態。',
-    ropeDesign:'{配色}成衣外搭繩紋在長版背心前胸與上腹形成較密但清楚的交叉菱格，腰側保留兩段平行線條與小結飾；繩線不能被簡化成背心包邊或內衣肩帶。線條服從衣料曲面和原 P 支點，不連接雙臂、雙腿或頸部，不產生皮膚勒痕。'}}
+  {id:'rope-dress',label:'高領洋裝／背心短褲',start:157,palettes:['ropeBlackIvory','ropeIvoryWine'],
+   fashion:{title:'高領合身洋裝',cut:'高領無袖合身洋裝＋縫製編繩飾片',
+    top:'{主色}高領無袖合身洋裝，領口停在自然頸根，兩側袖窿平整；上胸至腹部是連續不透明衣面，自然收省配合原胸廓。{配色}編繩飾片縫在洋裝外表面，輪廓與衣面色差清楚。',
+    bottom:'{主色}裙身與上身連成一件，腰線自然、上臀裙片完整，裙長正常延續到膝上；取景內保留腰臀衣料和大腿最上段裙面，成衣依原身體方向及重力垂落。',
+    material:'有實體厚度的不透明霧面針織洋裝與完整內襯；{配色}圓棉繩縫製成低浮雕飾片，表面有細纖維、交叉厚度及沿衣面的柔和接觸陰影。',
+    coverage:'高領、覆腹及連續裙身為時裝輪廓；衣面保持完整，飾片只添加表面層次，衣服按原自然腰圍與胸廓製作，不作人體塑形。',
+    accessories:'只有縫在成衣上的{配色}編繩飾片與側腰一枚小結飾。各飾片固定在衣料表面，手部依所選 P 做自然服裝展示動作。',
+    ropeDesign:'{配色}編繩飾片是主圖案，在洋裝前胸與上腹形成清楚交叉及大菱格，衣服腰側延續少量平行線條。每條線都有縫製固定點、可信的交叉次序及低浮雕陰影，圖案完整依附在不透明成衣表面，保持自然胸廓與腰線。'},
+   innerwear:{title:'長版背心＋棉質短褲',cut:'高圓領長版背心＋棉質短褲＋縫製編繩飾片',
+    top:'{主色}高圓領寬肩帶長版居家背心，胸前到腹部是連續不透明衣面，下襬到自然腰線下方；肩帶較寬，胸前只有正常收省與平整包邊。{配色}編繩飾片縫在背心表面。',
+    bottom:'{主色}高腰棉質居家短褲，完整前後褲片、寬腰頭、正常側縫與褲管清楚；背心下襬與短褲腰頭自然重疊，腰腹連續覆蓋，保留少量大腿最上段褲料。',
+    material:'雙層不透明棉針織背心、密織棉質短褲和柔軟包邊；{配色}棉繩以成衣飾片方式縫製，纖維、固定點及接觸陰影真實。',
+    coverage:'高圓領、寬肩帶、覆腹長版背心及完整短褲構成居家套裝，視覺重點是織紋、包邊和穿著鬆量；全部衣料保持不透明，原身體比例自然。',
+    accessories:'只有背心表面的{配色}縫製編繩飾片及衣面側邊小結飾，圖案隨背心一起活動。手部依所選 P 保持正常服裝展示手位。',
+    ropeDesign:'{配色}棉繩飾片在長版背心前胸到上腹形成對稱交叉與菱格，圖案完全縫在完整衣面上；腰側有少量平行繩紋和可辨固定點。低浮雕厚度與纖維清楚，背心和短褲仍是獨立完整的成衣。'}},
+  {id:'rope-shirt',label:'襯衫短裙／蕾絲居家套裝',start:161,palettes:['ropeBlackIvory','ropeIvoryWine'],
+   fashion:{title:'襯衫＋高腰短裙',cut:'完整長袖襯衫＋高腰短裙＋縫製菱格飾片',
+    top:'{主色}完整尖領長袖襯衫，前襟鈕扣扣合、袖口端正，衣料有自然鬆量，下襬收進裙腰；{配色}編繩飾片縫在前身衣面，尖領及鈕扣前襟保持可辨。',
+    bottom:'{主色}高腰平整A字短裙，實體腰頭、上臀裙片與簡潔側縫清楚，胸腹到裙腰完整覆蓋；裙子原長度自然延續在畫外，身體方向依所選 P。',
+    material:'不透明棉府綢襯衫、完整有襯裙布及真實鈕扣；{配色}細編棉繩縫製成低浮雕飾片，纖維與襯衫表面形成柔和接觸陰影。',
+    coverage:'完整尖領、長袖、扣合前襟及覆腹裙腰構成時裝版；衣料留正常鬆量，菱格圖案只是成衣表面裝飾，原肩寬和自然腰圍保留。',
+    accessories:'襯衫前身的{配色}編繩菱格飾片，以及前襟旁一枚固定小結飾；袖子與手部自然活動，配件限於衣料上的縫製圖案。',
+    ropeDesign:'{配色}棉繩飾片在襯衫前胸與上腹構成較大的交叉菱格，腰側延續少量平行線；繩紋固定在不透明襯衫上，縫製點和交叉陰影清楚，尖領、前襟與袖口仍是主要成衣結構。'},
+   innerwear:{title:'有襯蕾絲居家上衣＋短褲',cut:'有襯蕾絲短袖居家上衣＋完整短褲＋縫製菱格飾片',
+    top:'{主色}高圓領短袖居家上衣，胸腹覆蓋、下襬到褲腰下方；同色小花蕾絲作外表層，底下是完整不透明襯布，正常肩線與袖口清楚。{配色}編繩飾片縫製固定在上衣前身。',
+    bottom:'{主色}高腰完整居家短褲，前後褲片及側片均有不透明內襯，外層同色小花蕾絲延續；實體腰頭與正常褲管清楚，上衣與褲腰自然重疊。',
+    material:'蕾絲提供表面花紋，整件上衣和短褲都有完整不透明棉襯層；{配色}圓棉繩形成縫製飾片，蕾絲、襯布與編繩厚度各自可辨。',
+    coverage:'高圓領、短袖、覆腹上衣與完整短褲是有襯蕾絲居家套裝；全部必要衣面有實體襯層，成衣鬆量自然，保留原體態。',
+    accessories:'上衣表面的{配色}縫製菱格飾片及側邊小結飾，全部固定在衣料上；手位與正常肢體方向依所選 P。',
+    ropeDesign:'{配色}棉繩飾片在有襯上衣前胸到上腹形成大菱格，兩側延續簡潔平行線；底下小花蕾絲仍可辨，表面兩種圖案有清楚材質差異。每段棉繩有固定點和交叉陰影，衣料始終完整不透明。'}},
+  {id:'rope-satin',label:'緞面吊帶裙／連身家居服',start:165,palettes:['ropeBlackIvory','ropeIvoryWine'],
+   fashion:{title:'緞面吊帶裙',cut:'寬肩帶緞面連身裙＋縫製斜向編繩飾片',
+    top:'{主色}寬肩帶緞面連身裙，平整方領、雙層不透明前胸與自然胸省清楚，衣面從胸前連續延伸至腰腹；{配色}斜向編繩飾片縫在前身，原肩帶結構仍清楚。',
+    bottom:'{主色}緞面裙身與上身連成一件，按照原自然腰臀比例柔和垂落，完整裙片及襯層延續在畫外；取景下緣露出大腿最上段的裙料。',
+    material:'有完整不透明內襯的厚緞面，棚光形成柔和微光澤與自然摺痕；{配色}霧面棉繩以低浮雕飾片縫在衣面上，繩纖維與緞面質感反差清楚。',
+    coverage:'寬肩帶、固定方領與覆腹連身裙面構成時裝版；完整襯層不透明，衣料保持自然垂墜，圖案依服裝曲面延伸。',
+    accessories:'裙子前身的{配色}斜向編繩飾片與一側固定小結飾，皆為成衣縫製部分；原肩帶與飾片各自獨立，手部照所選 P。',
+    ropeDesign:'{配色}斜向棉繩飾片在連身裙前胸到上腹構成平衡的菱格，另一側腰面保留少量平行線條和結飾。線條縫在完整緞面上，交叉次序、細固定點和接觸陰影可信，低浮雕層次隨原衣料重力呈現。'},
+   innerwear:{title:'緞面連身家居服',cut:'高圓領短袖緞面連身家居服＋縫製斜向編繩飾片',
+    top:'{主色}高圓領短袖緞面連身家居服，完整肩線、雙層不透明前胸與自然鬆量清楚；上身衣面延續到腰腹，{配色}斜向編繩飾片縫在完整前身。',
+    bottom:'{主色}連身家居服由腰腹延伸成完整短褲結構，前後褲片、側縫和正常褲管清楚；腰腹連續覆蓋，取景內保留少量大腿最上段的褲料。',
+    material:'柔和微光澤雙層棉緞與不透明襯層，上身及短褲有真實鬆量；{配色}霧面棉繩縫製成低浮雕飾片，交叉厚度和纖維清楚。',
+    coverage:'高圓領、短袖、連續覆腹和完整短褲構成連身家居服，服裝外觀以休閒成衣為準，雙臂與雙腿自然活動，原身體比例維持。',
+    accessories:'連身家居服前身的{配色}斜向編繩飾片與側邊固定小結飾，全部為成衣表面部件，手部按所選 P 展示服裝。',
+    ropeDesign:'{配色}斜向交叉棉繩飾片縫在連身家居服前胸與上腹，構成清楚大菱格，腰側保留小型平行線段；完整衣面、縫製固定點與前後交叉陰影同時可辨，圖案低浮雕厚度隨衣料曲面變化。'}},
+  {id:'rope-wrap',label:'改良和服／長袖居家套裝',start:169,palettes:['ropeBlackIvory','ropeIvoryWine'],
+   fashion:{title:'改良和服洋裝',cut:'閉合交領改良和服洋裝＋縫製層疊編繩飾片',
+    top:'{主色}改良和服洋裝，完整交領固定閉合、自然肩線與七分寬袖清楚，上胸到腹部為完整不透明衣面；{配色}編繩飾片縫在完整前身，細領邊和飾片形成衣裝層次。',
+    bottom:'{主色}直筒裙身與上身連成一件，窄布腰帶自然固定衣襟，衣料保留正常穿著鬆量；取景內可見腰臀裙面與大腿最上段衣料，畫外裙長自然延續。',
+    material:'不透明細紋厚棉與霧面織布領邊，衣襟和寬袖有真實厚度及重力；{配色}棉繩以低浮雕飾片縫在完整前身，纖維與縫製點可辨。',
+    coverage:'閉合交領、七分寬袖與覆腹連身裙面構成完整時裝，窄布腰帶正常貼合衣料，原肩寬、胸廓及自然腰圍保留。',
+    accessories:'原窄布腰帶、{配色}縫製層疊編繩飾片及衣面側邊小結飾；雙袖與手部自然活動，配件限於成衣上的裝飾。',
+    ropeDesign:'{配色}棉繩飾片在閉合交領下方至上腹構成對稱交叉和層疊菱格，腰側延續簡潔平行線條。每段圖案都有衣面固定點，原交領和布腰帶清楚可辨，低浮雕繩紋是主要成衣裝飾。'},
+   innerwear:{title:'長袖居家上衣＋短褲',cut:'高圓領長袖居家上衣＋完整短褲＋縫製層疊編繩飾片',
+    top:'{主色}高圓領長袖居家上衣，完整肩線、平整袖口與連續胸腹衣面清楚，下襬延伸至褲腰下方；{配色}細包邊和編繩飾片縫製固定在上衣表面，穿著鬆量自然。',
+    bottom:'{主色}高腰完整居家短褲，前後褲片、側邊與正常褲管清楚，上衣下襬和褲腰自然重疊；取景內可見完整褲腰、上臀褲片和一小段大腿最上段褲料。',
+    material:'高密度不透明棉質居家服布與完整襯層，包邊、袖口和褲片有真實縫線；{配色}編棉繩以低浮雕飾片縫製，纖維和交叉厚度清楚。',
+    coverage:'高圓領、長袖、覆腹長上衣與完整短褲構成居家套裝，衣料完全不透明，成衣配合原自然骨架與身形，沒有人體塑形效果。',
+    accessories:'只有上衣表面的{配色}縫製層疊繩紋與側邊固定小結飾；圖案隨成衣活動，原 P 手位與支點正常保留。',
+    ropeDesign:'{配色}縫製棉繩飾片在完整長袖上衣前胸和上腹形成較密但清楚的交叉菱格，腰側保留平行線條與固定小結。圖案始終依附不透明衣面，縫製點、低浮雕厚度及自然接觸陰影可辨，手臂和衣袖各自正常活動。'}}
  ]
 };
 COS_ROLES.push(COS_ROPE_ROLE);
+
 
 const COS_STYLES=[{id:'normal',label:'正常版'},{id:'sexy',label:'性感版'}];
 function cosStylesFor(role){return role.styles||COS_STYLES;}
@@ -372,6 +376,8 @@ const COS_OUTFITS=COS_ROLES.flatMap(role=>cosVariantsFor(role).flatMap(variant=>
  const detail=`【選定款式】${garment.cut}\n【上身、領口與袖型】${top}\n【下身與衣裝連接】${bottom}\n【材質與層次】${material}\n【本題遮覆與版型】${coverage}`+(garment.ropeDesign?`\n【繩藝主體與衣料分層】${replace(garment.ropeDesign)}`:'');
  return {id:'C'+String(variant.start+si*2+pi).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,cut:garment.cut,top,bottom,material,coverage,accessories,label,detail,referenceNote:role.referenceNote||'原創基本造型，不套用其他既有角色。',brand:!!role.brand,fanRole:!!role.fanRole,main:role.brand||role.fanRole?'指定造型 Cosplay':'原創 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚',...(role.hairState?{hairState:role.hairState}:{}),...(role.aliases?{aliases:role.aliases}:{}),...(garment.ropeDesign?{ropeDesign:replace(garment.ropeDesign)}:{})};
 })))).sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
+const COS_ROPE_LEGACY_LABELS={"C157":["繩藝｜時裝｜高領合身洋裝｜黑色象牙繩","高領無袖合身洋裝＋交叉繩藝外搭"],"C158":["繩藝｜時裝｜高領合身洋裝｜象牙酒紅繩","高領無袖合身洋裝＋交叉繩藝外搭"],"C159":["繩藝｜內著｜長版胸衣＋高腰內褲｜黑色象牙繩","長版全罩胸衣＋高腰內褲＋交叉繩藝外搭","內著"],"C160":["繩藝｜內著｜長版胸衣＋高腰內褲｜象牙酒紅繩","長版全罩胸衣＋高腰內褲＋交叉繩藝外搭","內著"],"C161":["繩藝｜時裝｜襯衫＋高腰短裙｜黑色象牙繩","完整長袖襯衫＋高腰短裙＋菱格繩藝外搭"],"C162":["繩藝｜時裝｜襯衫＋高腰短裙｜象牙酒紅繩","完整長袖襯衫＋高腰短裙＋菱格繩藝外搭"],"C163":["繩藝｜內著｜有襯蕾絲成套｜黑色象牙繩","有襯全罩蕾絲內衣＋高腰內褲＋菱格繩藝外搭","內著"],"C164":["繩藝｜內著｜有襯蕾絲成套｜象牙酒紅繩","有襯全罩蕾絲內衣＋高腰內褲＋菱格繩藝外搭","內著"],"C165":["繩藝｜時裝｜緞面吊帶裙｜黑色象牙繩","完整緞面吊帶連身裙＋斜向繩藝外搭"],"C166":["繩藝｜時裝｜緞面吊帶裙｜象牙酒紅繩","完整緞面吊帶連身裙＋斜向繩藝外搭"],"C167":["繩藝｜內著｜緞面連身內著｜黑色象牙繩","寬肩帶緞面連身內著＋斜向繩藝外搭","內著"],"C168":["繩藝｜內著｜緞面連身內著｜象牙酒紅繩","寬肩帶緞面連身內著＋斜向繩藝外搭","內著"],"C169":["繩藝｜時裝｜改良和服洋裝｜黑色象牙繩","閉合交領改良和服洋裝＋層疊繩藝外搭"],"C170":["繩藝｜時裝｜改良和服洋裝｜象牙酒紅繩","閉合交領改良和服洋裝＋層疊繩藝外搭"],"C171":["繩藝｜內著｜長版內衣背心＋高腰內褲｜黑色象牙繩","方領長版內衣背心＋高腰內褲＋層疊繩藝外搭","內著"],"C172":["繩藝｜內著｜長版內衣背心＋高腰內褲｜象牙酒紅繩","方領長版內衣背心＋高腰內褲＋層疊繩藝外搭","內著"]};
+for(const o of COS_OUTFITS)if(o.role==='rope-art')o.aliases=[...new Set([...o.aliases,...COS_ROPE_LEGACY_LABELS[o.id]])];
 function outfitsForVersion(version){return version==='V.cos'?catalog.cos:version==='V.內著寫真'?catalog.inner:catalog.fashion;}
 function cosFilteredOutfits(){
  const role=$('#cosRole').value,style=$('#cosStyle').value,color=$('#cosColor').value,variant=$('#cosVariant').value;
@@ -423,7 +429,81 @@ function cosStyleRulesFor(o){
 胸部與下身維持必要的不透明遮覆與合理支撐；衣裝原有低領與露肩可以自然呈現肩頸、上胸及胸前線條，腰腹是否入鏡依所選款式，不另加透明胸片、走光、掀衣或性行為。所選領口是原服裝剪裁，不是用動作拉低衣服。衣裝適應原有身體，不能因性感版豐胸、縮腰、變瘦、增加胸墊或拉腿。`;
 }
 
+const ROPE_COSTUME_POSES={
+ P06:'雙臂在胸前自然交叉，手掌停在對側上臂外側，肩線放鬆；輕微嘟嘴直視鏡頭，保留正常成年表情。',
+ P44:'雙臂自然靠近胸前或上臂外側，手掌輕放在對側上臂，保持正常肩頸與手臂輪廓。表情固定為直視。',
+ P60:'人物雙臂交疊於胸前，手掌停在對側上臂，保持自然模特兒姿勢；頭部正面或略偏，視線冷淡看向鏡頭。',
+ P61:'採穩定低蹲或深蹲，膝蓋與腳尖方向自然，上半身略向側前方轉；一手輕扶同側大腿，另一手自然放在身前。頭部從肩線方向回看鏡頭，表情為微挑眉回眸。',
+ P62:'雙腳自然站穩，上半身從髖部輕微向前傾，雙手分別撐在大腿前側或膝上，手肘自然靠近軀幹；背部和頸部保持正常線條。臉部抬起直視，表情為自信直視、嘴唇自然微啟。',
+ P63:'坐在簡潔矮凳或平台邊緣，軀幹自然挺直或微前傾，前臂自然垂向身前，雙肘靠近軀幹兩側；雙手輕放大腿或在腿間自然交握。表情為冷淡直視。',
+ P64:'採雙膝跪坐或穩定單膝跪姿，臀腿與膝關節保持正常支點；雙手自然疊放大腿前側或腿間，上半身輕微前傾。頭先微低再抬眼看鏡頭，表情為柔和無辜的成年自然反應。',
+ P65:'正面或輕微四分之三站立，雙手在上腹自然交握，手肘靠近軀幹，肩頸放鬆。頭部微偏，表情為自然淡笑。',
+ P67:'正面站立，前臂在上腹位置自然交疊，手掌停在對側上臂，肩膀輕微內收；頭略低，再抬眼看鏡頭。表情為冷淡抬眼。',
+ P69:'採穩定蹲坐，雙膝自然靠近或略分，雙手環抱膝前或小腿上方，軀幹略靠近膝蓋且保留正常關節角度；臉部朝向鏡頭，表情為自然輕笑。',
+ P70:'坐在矮凳或平台前緣，雙腿自然放在舒適範圍內，雙手分別撐在大腿內側或膝上，上半身微向前傾，手肘靠近軀幹。表情為自信直視、嘴角微揚。',
+ P74:'坐在矮凳或平台，軀幹微向前，前臂放在大腿或身前，雙肘自然靠近軀幹，肩膀輕微內收且放鬆；頭部輕偏一側，表情為側頭柔和淡笑。',
+ P91:'正面或輕微四分之三站立，前臂在上腹自然交疊，手掌停在對側上臂或肋側；肩膀放鬆，服裝圖案清楚。表情為冷淡直視。',
+ P92:'正面半身，雙手指尖輕放鎖骨外側、肩部或服裝上緣附近，手肘自然向身前靠近；肩頸放鬆。表情為柔和直視、嘴唇自然微啟。',
+ P93:'四分之三半身，一手輕扶頸側或後頸，另一隻前臂自然橫放上腹，手掌停在對側上臂或腰側。表情為側看、微挑眉。',
+ P95:'坐在矮凳或平台，雙肘自然靠近腰部，前臂落在大腿或身前，軀幹非常輕微前傾，肩頸放鬆。表情為自信直視。',
+ P96:'正面站立，雙手在上腹至腰前自然交握，手肘靠近軀幹，肩膀非常輕微向內收但保持正常背部線條。表情為柔和淡笑。',
+ P99:'上半身輕微前傾，一手托腮或雙手在下巴附近輕托，雙肘自然靠近身前，臉部完整清楚，肩膀放鬆。表情為俏皮淡笑。',
+ P100:'正面或輕微四分之三站立，雙臂在上腹自然交叉，手掌停在對側上臂，服裝前身仍清楚可見；下巴微抬，表情為抬下巴冷淡。',
+ P101:'採穩定雙膝或單膝跪姿，上半身從髖部輕微前傾，雙手放在大腿內側或膝上，雙肘自然靠近軀幹；背部、骨盆與膝關節正常。表情為低頭後抬眼。',
+ P103:'正面半身，雙手放在後頸或後腦髮際附近，手肘稍微向前靠近，肩膀放鬆，髮絲只依原手部接觸自然變化。表情為放鬆直視、輕微笑意。',
+ P127:'採自然跪坐，雙肘自然靠近身體兩側，雙手放大腿或身前，頭部輕偏。表情為柔和直視。'
+};
+function ropeCostumePoseLabel(p){
+ if(p.id==='P60')return '雙臂交疊胸前・冷淡';
+ if(p.id==='P62')return '前傾雙手撐膝・自信直視';
+ return p.label;
+}
+function ropeCostumePose(p,person){
+ const pose=cosHalfBodyPose(p,person);
+ return {...pose,label:ropeCostumePoseLabel(pose),...(ROPE_COSTUME_POSES[p.id]?{action:ROPE_COSTUME_POSES[p.id]}:{})};
+}
+function promptForRopeCostume(o,p,person='Vera'){
+ const profile=personProfile(person),pose=ropeCostumePose(p,person);
+ const expression=person==='小森'?expressionFor(pose).replaceAll('Vera','小森'):expressionFor(pose);
+ const makeup=profile.makeup.replace('低飽和純慾微煙燻','低飽和微煙燻');
+ return `${photoReferenceGate(profile)}
+
+【本題標題】
+${profile.name}｜${o.id}・${pose.id}｜${o.label}｜${pose.label}｜9:16
+
+【Cosplay 服裝展示攝影】
+同一位 ${profile.age} 歲成年 ${profile.fullName}，穿著「${o.cut}」完成單人服裝 lookbook。畫面重點是完整成衣版型、縫製編繩飾片、纖維材質、自然穿著鬆量與真實攝影。${o.referenceNote}
+
+【選定服裝】
+${o.detail}
+【成衣裝飾】${o.accessories}
+【配色】衣料主色 ${o.primaryColor}，編繩飾片 ${o.secondaryColor}。
+所有編繩線條是預先縫在衣料上的成衣表面飾片，低浮雕交叉、菱格與結飾清楚；圖案與服裝一起活動，人體維持正常自然姿態。完整不透明衣料獨立成立，服裝依原身體尺寸製作，胸腹及腰臀完整覆蓋。
+
+【取景】
+單張、單一人物、9:16 直幅，完整頭頂至大腿最上段，最多包含大腿最上方約 1/4。人物仍是畫面主體，臉、雙肩、主要手勢、胸前至腰間的成衣圖案清楚。褲裝保留完整褲腰、上臀褲片與少量大腿最上段褲料；裙裝保留相同範圍的原裙面。坐、跪、躺、趴時沿原身體方向取景，畫外肢體與支點正常延續。
+
+【動作與表情｜${pose.id}「${pose.label}」】
+${pose.action}
+保留此 P 的主要身體方向、手位、視線、表情、髮態與正常支點，作自然服裝展示。本題若有整理衣裝的手勢，只輕觸所選成衣實際存在的領口、袖口、肩線或飾片；若指定衣裝結構不存在，手位停在原同方向的肩部附近或衣面上。服裝圖案依自然姿勢可見，衣料保持原固定版型。
+${expression}
+
+【人物與身形】
+原始 ${profile.face} 唯一定義人物身份，服裝和飾片不改五官、膚色、年齡或永久特徵。表情與頭部角度照本題自然變化，顱顏結構和主要五官維持同一人物。
+${profile.bodyLock}
+保留原肩寬、胸廓、頸長、軀幹與腰臀比例，關節、骨盆、手腳及坐躺支點合理；衣料按重力自然產生摺痕，編繩飾片順著衣面曲率呈現，原身體沒有塑形效果。
+
+【髮型與妝容】
+${profile.hair}
+${makeup}
+
+【真人攝影】
+中性灰攝影棚，單人成衣目錄攝影，自然窗光或大型柔光，正常人像鏡頭與景深，原 P 所需簡單椅面或地面支撐。真實毛孔、唇紋、髮絲、衣料纖維、縫線與細微不對稱可見，保持自然未過度修圖的膚況。單一畫面，清楚的正常服裝展示狀態，沒有畫面字幕、品牌文字、水印或拼貼。
+Photorealistic adult cosplay clothing lookbook. Sewn cotton-cord appliques on opaque garments, comfortable natural fit, relaxed fashion presentation, preserved facial identity and body proportions, full head to very upper thighs, 9:16.`;
+}
+
 function promptForCos(o,p,person='Vera'){
+ if(o.role==='rope-art')return promptForRopeCostume(o,p,person);
  const profile=personProfile(person),pose=cosHalfBodyPose(p,person);
  const expression=person==='小森'?expressionFor(pose).replaceAll('Vera','小森'):expressionFor(pose);
  const title=`${profile.name}｜${o.id}・${pose.id}｜${o.label}｜${pose.label}（半身版本）｜9:16`;
@@ -842,7 +922,7 @@ function recordsVirtual(){
     if(activeView==='pending'&&!state.pending[key])continue;
     if(activeView==='recent'&&!state.recent.includes(key))continue;
     if(activeView==='frequent'&&u===0)continue;
-    out.push({version,sourceVersion,o,p,key,u,ratio,person});
+    out.push({version,sourceVersion,o,p:version==='V.cos'&&o.role==='rope-art'?ropeCostumePose(p,person):p,key,u,ratio,person});
    }
    }
   }
@@ -864,9 +944,9 @@ function refreshSelects(){
  const ov=$('#outfit').value,pv=$('#pose').value;
  $('#outfit').innerHTML='<option value="ALL">'+(isCos?'全部造型':'全部服裝')+'（'+os.length+'）</option>'+os.map(x=>`<option value="${x.id}">${x.id}｜${esc(x.label)}</option>`).join('');
  if(os.some(x=>x.id===ov))$('#outfit').value=ov;
- $('#pose').innerHTML='<option value="ALL">'+(isEmote?'全部表情包':isCos?'全部動作・半身':'全部動作')+'（'+items.length+'）</option>'+items.map(x=>`<option value="${x.id}">${x.id}｜${esc(x.label)}${isEmote?'｜'+esc(x.category):''}</option>`).join('');
+ $('#pose').innerHTML='<option value="ALL">'+(isEmote?'全部表情包':isCos?'全部動作・半身':'全部動作')+'（'+items.length+'）</option>'+items.map(x=>`<option value="${x.id}">${x.id}｜${esc(isCos&&$('#cosRole').value==='rope-art'?ropeCostumePoseLabel(x):x.label)}${isEmote?'｜'+esc(x.category):''}</option>`).join('');
  if(items.some(x=>x.id===pv))$('#pose').value=pv;
- $('#q').placeholder=isEmote?'搜尋 E 編號、表情包、服裝、比例…':isCos?'搜尋角色、正常版／性感版、配色、C／P 編號…':'搜尋服裝、動作、比例、編號…';
+ $('#q').placeholder=isEmote?'搜尋 E 編號、表情包、服裝、比例…':isCos?'搜尋角色、服裝版本、配色、C／P 編號…':'搜尋服裝、動作、比例、編號…';
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function render(){rememberLastPage();if(activeView==='sync'){ $('#syncPanel').style.display='block';$('#grid').innerHTML='';$('#pager').innerHTML='';updateStats();return}else $('#syncPanel').style.display='none';filtered=recordsVirtual();const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages);const slice=filtered.slice((page-1)*pageSize,page*pageSize);$('#grid').innerHTML=slice.length?slice.map(cardHTML).join(''):'<div class="empty">目前沒有符合條件的 Prompt</div>';$('#pager').innerHTML=pages>1?`<button class="btn small" data-page="prev" ${page<=1?'disabled':''}>上一頁</button><span>${page} / ${pages}</span><button class="btn small" data-page="next" ${page>=pages?'disabled':''}>下一頁</button>`:'';updateStats()}
@@ -970,6 +1050,7 @@ document.addEventListener('visibilitychange',()=>{if(document.visibilityState===
 </script>
 </body>
 </html>
+
 
 
 
