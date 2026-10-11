@@ -41,7 +41,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
     </div>
     <section id="cosControls" class="cos-controls is-hidden" aria-label="V.cos 造型篩選">
       <div class="cos-toolbar">
-        <select id="cosRole" class="ctrl" aria-label="Cosplay 角色"><option value="ALL">角色：全部</option></select>
+        <select id="cosRole" class="ctrl" aria-label="Cosplay 角色與分類"><option value="ALL">角色／分類：全部</option></select>
         <select id="cosStyle" class="ctrl" aria-label="服裝版本"><option value="ALL">風格：全部</option><option value="normal">正常版</option><option value="sexy">性感版</option></select>
         <select id="cosVariant" class="ctrl" aria-label="Cosplay 款式"><option value="ALL">款式：全部</option></select>
         <select id="cosColor" class="ctrl" aria-label="服裝配色"><option value="ALL">配色：全部</option></select>
@@ -61,10 +61,10 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
       <div class="sync-card"><strong id="fashionCov">0 / 488</strong><span>時裝穿搭資料</span></div>
       <div class="sync-card"><strong id="poseCov">0 / 145</strong><span>標準姿勢資料</span></div>
       <div class="sync-card"><strong id="emoteCov">63 / 63</strong><span>V.表情包題目</span></div>
-      <div class="sync-card"><strong id="cosCov">172 / 172</strong><span>V.cos｜37 主題・狐仙 4 款・繩藝時裝／原款內著</span></div>
+      <div class="sync-card"><strong id="cosCov">182 / 182</strong><span>V.cos｜38 主題・狐仙 4 款・獨立內著 18 套・繩藝時裝</span></div>
     </div>
     <div class="card">
-      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物，再選寫真或 V.cos、穿搭與動作。V.cos 提供角色、款式、服裝版本與配色篩選；繩結服裝分時裝／居家服，固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera。</p></div></div>
+      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物，再選寫真或 V.cos、穿搭與動作。V.cos 提供角色／分類、款式、服裝版本與配色篩選；內著可獨立篩選，繩藝時裝保留衣外繩線，固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera。</p></div></div>
       <div class="importbox">
         <b style="color:#fff">匯入共用穿搭／動作資料</b><br>
         可直接選擇小森 Prompt Vault 匯出的 JSON。網站只抽取 V.內著寫真與 V.時裝寫真的「服裝／姿勢 canonical 資料」，不把小森身份帶進 Vera；匯入後依所選人物套用各自的 Face / Body / Angle Master，重新組裝完整 Prompt。
@@ -76,7 +76,7 @@ footer{margin:28px 0;color:#7f7688;font-size:11px;text-align:center;line-height:
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.8｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.9｜雙人物寫真／V.cos 9:16｜V.表情包 1:1／9:16</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -360,6 +360,91 @@ const COS_ROPE_ROLE={
  ]
 };
 COS_ROLES.push(COS_ROPE_ROLE);
+// Restore the two early clothing silhouettes; keep role, outfit and palette IDs.
+const COS_PRODUCT_ROLE_IDS=['rope-art','cos-underwear','bunny','succubus'];
+COS_ROPE_ROLE.label='繩藝';
+Object.assign(COS_ROLES.find(r=>r.id==='bunny'),{
+ normal:{cut:'方領連身衣＋短燕尾外套',
+  top:'{主色}寬肩帶方領舞台連身衣，完整上身與自然腰線清楚；外搭同色短燕尾外套，兩袖正常穿著，{配色}小襯領與領結端正。',
+  bottom:'連身衣腰腹連續、一般腿口及完整前後布片，搭配{主色}不透明褲襪；後腰一個小仿毛球配件隨原衣裝自然呈現，襪料在畫外正常延續。',
+  material:'不透明彈性舞台布、薄西裝布外套與霧面襪料，接縫、衣料厚度和正常穿著鬆量清楚。',
+  coverage:'維持寬肩帶方領、短燕尾外套與連續腰腹，服裝完整固定，按原人物尺寸製作。',
+  accessories:'{主色}可拆卸布質兔耳髮箍、{配色}小襯領／領結及短布袖口；耳箍固定在頭髮外側，原五官和髮色保持。'},
+ sexy:{cut:'無肩帶心形領緞面連身衣',
+  top:'{主色}緞面舞台連身衣，無肩帶心形領、完整不透明有襯胸片與自然合身腰線；領口為固定剪裁，原肩線與雙臂自然可見。',
+  bottom:'腰腹為連續實體衣料，一般腿口、完整前後布片及{主色}不透明褲襪；後腰一個小仿毛球配件，襪料按原身體方向在畫外自然延續。',
+  material:'柔和微光澤厚緞面、完整不透明襯布與霧面襪料，立體接縫、包邊及正常穿著鬆量清楚。',
+  coverage:'維持無肩帶心形領與完整連身版型，和正常版的方領外套有清楚區別；服裝按原尺寸自然貼合，腰腹衣料連續。',
+  accessories:'{主色}可拆卸布質兔耳髮箍、{配色}分離式小襯領／領結與短布袖口，配件尺寸正常，保持原人物五官。'}
+});
+Object.assign(COS_ROLES.find(r=>r.id==='succubus'),{
+ normal:{cut:'方領短袖暗黑洋裝',
+  top:'{主色}原創暗黑幻想洋裝，端正方領、完整短袖及自然腰身，{配色}緞面窄拼片沿前身自然延伸。',
+  bottom:'完整A字裙身與上身連成一件，胸腹及腰臀衣料連續，裙長在畫外延續至膝附近，依原身體方向自然垂落。',
+  material:'霧面厚舞台布、柔和緞面拼片及完整不透明內襯，衣料有真實厚度、接縫與自然摺痕。',
+  coverage:'方領、短袖與完整腰腹維持原款洋裝輪廓，衣料按原骨架製作，原自然體態保持。',
+  accessories:'{主色}小型可拆卸彎角髮箍與肩背側迷你舞台翼片，均是服裝配件，髮箍不遮五官，翼片不遮主要手勢。'},
+ sexy:{cut:'心形領細肩帶馬甲洋裝',
+  top:'{主色}原創暗黑幻想馬甲洋裝，固定心形領、細肩帶、完整不透明有襯胸片與自然合身腰線；{配色}緞面拼片延續原衣裝輪廓。',
+  bottom:'完整裙身與上身連成一件，胸腹至腰臀為連續衣料，裙長自然延續到畫外；維持原洋裝結構及正常穿著鬆量。',
+  material:'柔和微光澤厚緞面與完整不透明襯層，胸片、拼縫、裙料與接觸陰影清楚。',
+  coverage:'心形領、細肩帶和自然肩線保持，和正常版的方領短袖有清楚區別；原胸腹與腰臀衣料完整。',
+  accessories:'{主色}小型可拆卸彎角髮箍與肩背側迷你舞台翼片，維持真人耳位、原髮色與五官，不增加頸部配件。'}
+});
+
+Object.assign(COS_PALETTES,{
+ underwearBlack:{id:'rope-black-ivory',label:'黑色',primary:'黑色',secondary:'黑色'},
+ underwearIvory:{id:'rope-ivory-wine',label:'象牙白',primary:'象牙白',secondary:'象牙白'}
+});
+const COS_INNERWEAR_ROLE={
+ id:'cos-underwear',label:'內著',aliases:['內著','內衣','成套內著'],
+ styles:[{id:'innerwear',label:'內著'}],titleByGarment:true,
+ referenceNote:'成年內著商品目錄攝影，原款服裝完整穿著，畫面以剪裁、襯層、包邊與織紋為主。',
+ variants:[
+  {id:'cotton-full',label:'棉質全罩成套',start:173,palettes:['underwearBlack','underwearIvory'],
+   innerwear:{title:'棉質全罩成套',cut:'棉質全罩內衣＋高腰內褲',
+    top:'{主色}棉質全罩內衣，寬肩帶、完整雙層有襯胸片及平整下圍，胸片與原肩帶長度固定，自然支撐和包縫清楚。',
+    bottom:'{主色}高腰完整內褲，寬腰頭、完整前後褲片與側片、正常腿口及細包邊，保持原分件成套結構。',
+    material:'霧面密織棉質表層、完整不透明雙層襯布及同色彈性包邊，棉織紋、接縫和柔和摺痕可辨。',
+    coverage:'全罩胸片與高腰完整褲片固定，必要衣料完整不透明，依原人物尺寸製作，原自然體態保留。',
+    accessories:'原款寬肩帶、同色細包邊及接縫，保持單純完整穿著。'}},
+  {id:'rib-long',label:'羅紋長版成套',start:175,palettes:['underwearBlack','underwearIvory'],
+   innerwear:{title:'羅紋長版成套',cut:'羅紋長版內衣＋高腰內褲',
+    top:'{主色}寬肩帶圓領長版內衣，完整雙層胸片、平整下圍與縱向細羅紋，下襬延伸至自然肋骨下方，包邊與正常支撐清楚。',
+    bottom:'{主色}高腰完整內褲，縱向羅紋、完整不透明前後褲片與側片，寬腰頭和正常腿口保持原成套版型。',
+    material:'密織棉混紡細羅紋、完整不透明內襯與柔軟包邊，織紋按衣料曲面自然延伸。',
+    coverage:'圓領長版上身與高腰完整褲片固定，衣料正常留鬆量，不重新塑造原骨架或自然腰線。',
+    accessories:'原款肩帶、同色羅紋與細包邊，保持單純完整穿著。'}},
+  {id:'triangle-lined',label:'有襯三角杯成套',start:177,palettes:['underwearBlack','underwearIvory'],
+   innerwear:{title:'有襯三角杯成套',cut:'有襯三角杯內衣＋高腰內褲',
+    top:'{主色}有襯三角杯無鋼圈內衣，固定中寬肩帶、完整不透明三角胸片與平整彈性下圍，杯片是完整雙層衣料，尺寸與正常支撐清楚。',
+    bottom:'{主色}高腰完整內褲，完整前後褲片及側片、自然腰頭與正常腿口，維持原分件成套結構。',
+    material:'霧面柔軟細針織表層、完整不透明雙層襯布與同色包邊，杯片接縫和細織紋真實可辨。',
+    coverage:'三角杯型固定，胸片與高腰前後褲片完整不透明，肩帶按原人物尺寸調整，正常穿著鬆量保留。',
+    accessories:'原款肩帶、平整下圍與同色包邊，保持單純完整穿著。'}},
+  {id:'satin-full',label:'緞面全罩成套',start:179,palettes:['underwearBlack','underwearIvory'],
+   innerwear:{title:'緞面全罩成套',cut:'緞面全罩內衣＋高腰內褲',
+    top:'{主色}緞面全罩內衣，固定中寬肩帶、完整雙層胸片及平整下圍，胸片自然收省，接縫與正常支撐清楚。',
+    bottom:'{主色}高腰完整緞面內褲，完整前後褲片與側片、平整腰頭及正常腿口，包縫保持成套同色設計。',
+    material:'柔和微光澤棉緞、完整不透明內襯與細密彈性側片，棚光下有真實摺痕與柔和光澤。',
+    coverage:'全罩胸片和高腰完整褲片固定，必要衣料完整不透明，尺寸依原身體比例製作。',
+    accessories:'原款肩帶、胸片接縫與細包邊，保持單純完整穿著。'}},
+  {id:'rib-bodysuit',label:'羅紋連身內著',start:181,palettes:['underwearBlack','underwearIvory'],
+   innerwear:{title:'羅紋連身內著',cut:'方領寬肩帶羅紋連身內著',
+    top:'{主色}方領寬肩帶羅紋連身內著，完整雙層胸片、固定方領與自然收省，上身衣面連續延伸至腰腹。',
+    bottom:'{主色}連身衣料由腹部延伸為完整前後褲片，正常腿口與實體包邊清楚，保持原一件式版型。',
+    material:'高密度棉混紡細羅紋與完整不透明內襯，縱向織紋、接縫和柔和摺痕清楚。',
+    coverage:'方領、寬肩帶、連續覆腹與正常腿口固定，衣料按原肩寬和腰臀比例製作，保持自然穿著鬆量。',
+    accessories:'原款肩帶、細羅紋與腿口包邊，保持單純完整穿著。'}}
+ ]
+};
+COS_ROLES.push(COS_INNERWEAR_ROLE);
+
+// Extend clothed fashion outerwear within the existing upper-thigh crop.
+const COS_ROPE_LOWER_OUTERWEAR='外搭繩線由腰側連續向下延伸至上臀衣面與大腿最上段的裙面，形成可拆卸的腰臀層次及左右獨立弧形繩段；全部仍在完整裙料外層，保留正常佩戴鬆量。左右腿各自自由活動，原站坐跪姿和步態正常，鏡頭下緣仍停在大腿最上方約 1/4。';
+COS_ROPE_ROLE.referenceNote+=' '+COS_ROPE_LOWER_OUTERWEAR;
+for(const v of COS_ROPE_ROLE.variants)v.fashion.ropeDesign+=' '+COS_ROPE_LOWER_OUTERWEAR;
+
 
 
 
@@ -385,6 +470,25 @@ for(const o of COS_OUTFITS)if(o.role==='rope-art'){
  if(o.style==='fashion'){o.roleLabel='繩藝造型';o.label=['繩藝', '時裝', COS_ROPE_ROLE.variants.find(v=>v.id===o.variant).fashion.title,o.colorLabel].join('｜');o.referenceNote=COS_ROPE_ROLE.referenceNote;}
  else{o.roleLabel='原款內著';o.colorLabel=o.primaryColor;o.label=['原款內著（無繩飾）',COS_ROPE_ROLE.variants.find(v=>v.id===o.variant).innerwear.title,o.colorLabel].join('｜');o.referenceNote='成年內著商品目錄攝影，原款服裝完整穿著，畫面以剪裁、襯層、包邊與織紋為主。';}
 }
+// Move the eight legacy underwear entries without changing their copied prompts.
+COS_INNERWEAR_ROLE.variants.unshift(...COS_ROPE_ROLE.variants.map(v=>({
+ id:v.id,label:v.innerwear.title,start:v.start+2,palettes:v.palettes,innerwear:v.innerwear
+})));
+for(const o of COS_OUTFITS){
+ if(o.role==='rope-art'&&o.style==='innerwear'){
+  o.role='cos-underwear';o.roleLabel='內著';o.variantLabel=COS_INNERWEAR_ROLE.variants.find(v=>v.id===o.variant).label;o.styleLabel='內著';o.sub='內著／'+o.variantLabel;
+ }
+ else if(o.role==='cos-underwear'){
+  const g=COS_INNERWEAR_ROLE.variants.find(v=>v.id===o.variant).innerwear;
+  o.colorLabel=o.primaryColor;o.label=['內著',g.title,o.colorLabel].join('｜');o.sub='內著／'+o.variantLabel;
+ }
+}
+for(const v of COS_ROPE_ROLE.variants)v.label=v.fashion.title;
+for(const o of COS_OUTFITS)if(o.role==='rope-art'){
+ o.variantLabel=COS_ROPE_ROLE.variants.find(v=>v.id===o.variant).label;o.sub='繩藝／'+o.variantLabel;
+}
+COS_ROPE_ROLE.styles=COS_ROPE_ROLE.styles.filter(s=>s.id==='fashion');
+
 function outfitsForVersion(version){return version==='V.cos'?catalog.cos:version==='V.內著寫真'?catalog.inner:catalog.fashion;}
 function cosFilteredOutfits(){
  const role=$('#cosRole').value,style=$('#cosStyle').value,color=$('#cosColor').value,variant=$('#cosVariant').value;
@@ -392,7 +496,7 @@ function cosFilteredOutfits(){
 }
 function refreshCosSelects(){
  const role=$('#cosRole'),rv=role.value;
- role.innerHTML='<option value="ALL">角色：全部（'+COS_ROLES.length+'）</option>'+COS_ROLES.map(r=>`<option value="${r.id}">${esc(r.label)}</option>`).join('');
+ role.innerHTML='<option value="ALL">角色／分類：全部（'+COS_ROLES.length+'）</option>'+COS_ROLES.map(r=>`<option value="${r.id}">${esc(r.label)}</option>`).join('');
  if(COS_ROLES.some(r=>r.id===rv))role.value=rv;
  const style=$('#cosStyle'),sv=style.value;
  const styles=uniqBy(COS_ROLES.filter(r=>role.value==='ALL'||r.id===role.value).flatMap(cosStylesFor),s=>s.id);
@@ -403,7 +507,7 @@ function refreshCosSelects(){
  variant.innerHTML='<option value="ALL">款式：全部</option>'+variants.map(o=>`<option value="${o.variant}">${o.variant==='base'&&role.value==='ALL'?'基本款／經典古風':esc(o.variantLabel)}</option>`).join('');
  if(variants.some(o=>o.variant===vv))variant.value=vv;
  const color=$('#cosColor'),cv=color.value;
- const colors=uniqBy(catalog.cos.filter(o=>(role.value==='ALL'||o.role===role.value)&&(variant.value==='ALL'||o.variant===variant.value)&&(role.value!=='rope-art'||style.value==='ALL'||o.style===style.value)),o=>o.color);
+ const colors=uniqBy(catalog.cos.filter(o=>(role.value==='ALL'||o.role===role.value)&&(variant.value==='ALL'||o.variant===variant.value)&&(!['rope-art','cos-underwear'].includes(role.value)||style.value==='ALL'||o.style===style.value)),o=>o.color);
  color.innerHTML='<option value="ALL">配色：全部</option>'+colors.map(o=>`<option value="${o.color}">${esc(o.colorLabel)}</option>`).join('');
  if(colors.some(o=>o.color===cv))color.value=cv;
 }
@@ -470,14 +574,14 @@ function ropeCostumePose(p,person){
  return {...pose,label:ropeCostumePoseLabel(pose),...(ROPE_COSTUME_POSES[p.id]?{action:ROPE_COSTUME_POSES[p.id]}:{})};
 }
 function promptForRopeCostume(o,p,person='Vera'){
- const profile=personProfile(person),pose=ropeCostumePose(p,person),fashion=o.style==='fashion';
+ const profile=personProfile(person),pose=ropeCostumePose(p,person),fashion=o.style==='fashion',costume=o.role==='bunny'||o.role==='succubus';
  const expression=person==='小森'?expressionFor(pose).replaceAll('Vera','小森'):expressionFor(pose);
  const makeup=profile.makeup.replace('低飽和純慾微煙燻','低飽和微煙燻');
- const kind=fashion?'Cosplay 時裝與繩藝外搭攝影':'成年內著商品目錄攝影';
- const visual=fashion?`【繩藝外搭】
+ const kind=costume?'成年 Cosplay 服裝攝影':fashion?'Cosplay 時裝與繩藝外搭攝影':'成年內著商品目錄攝影';
+ const visual=costume?'所選 Cosplay 舞台衣裝保持完整穿著，畫面呈現固定領口、袖型、接縫與角色配件；人物只做本題的自然服裝展示，服裝按原身體尺寸製作。':fashion?`【繩藝外搭】
 ${o.ropeDesign}
 繩子是環繞已穿衣軀幹的獨立圓棉繩外搭，保留胸腹的立體交錯菱格和腰側連續繩段；與原衣服各自獨立、可以拆卸。線條保持正常佩戴鬆量，順應原衣料曲面；雙臂、雙手、頸部及腿部各自自由活動，人物照所選自然模特兒動作。棉繩與衣料的纖維、圓截面、交叉厚度和接觸陰影清楚。`:'原款內著保持完整穿著，畫面只呈現指定服裝的剪裁、襯層、包邊和織紋，人物做自然服裝展示。';
- const colors=fashion?`衣料主色 ${o.primaryColor}，外搭棉繩 ${o.secondaryColor}。`:`衣料主色 ${o.primaryColor}。${o.variant==='rope-wrap'?`原款細包邊為 ${o.secondaryColor}。`:'其餘衣料細節保留原款同色設計。'}`;
+ const colors=costume?`衣料主色 ${o.primaryColor}，原衣裝明列的拼片、領結或包邊配色 ${o.secondaryColor}。`:fashion?`衣料主色 ${o.primaryColor}，外搭棉繩 ${o.secondaryColor}。`:`衣料主色 ${o.primaryColor}。${o.variant==='rope-wrap'?`原款細包邊為 ${o.secondaryColor}。`:'其餘衣料細節保留原款同色設計。'}`;
  return `${photoReferenceGate(profile)}
 
 【本題標題】
@@ -511,11 +615,11 @@ ${makeup}
 
 【攝影氛圍】
 中性灰攝影棚、柔和側窗光或大型柔光，背景留出自然明暗層次，像安靜拍攝現場的單人作品集。人物神情依本題，衣料與配件保持真實的細節，畫面自然、克制、有生活呼吸感。正常人像鏡頭與景深，原 P 所需簡單椅面或地面支撐自然。真實毛孔、唇紋、髮絲、衣料纖維、縫線與細微不對稱可見，保持自然未過度修圖的膚況；單一畫面，沒有字幕、品牌文字、水印或拼貼。
-Photorealistic adult ${fashion?'clothed cosplay fashion portrait with a detachable cotton-rope outerwear accessory':'underwear product lookbook with the original opaque garment designs'}. Natural fashion presentation, soft studio light, preserved facial identity and body proportions, full head to very upper thighs, 9:16.`;
+Photorealistic adult ${costume?'cosplay stage-costume clothing lookbook':fashion?'clothed cosplay fashion portrait with a detachable cotton-rope outerwear accessory':'underwear product lookbook with the original opaque garment designs'}. Natural fashion presentation, soft studio light, preserved facial identity and body proportions, full head to very upper thighs, 9:16.`;
 }
 
 function promptForCos(o,p,person='Vera'){
- if(o.role==='rope-art')return promptForRopeCostume(o,p,person);
+ if(COS_PRODUCT_ROLE_IDS.includes(o.role))return promptForRopeCostume(o,p,person);
  const profile=personProfile(person),pose=cosHalfBodyPose(p,person);
  const expression=person==='小森'?expressionFor(pose).replaceAll('Vera','小森'):expressionFor(pose);
  const title=`${profile.name}｜${o.id}・${pose.id}｜${o.label}｜${pose.label}（半身版本）｜9:16`;
@@ -934,7 +1038,7 @@ function recordsVirtual(){
     if(activeView==='pending'&&!state.pending[key])continue;
     if(activeView==='recent'&&!state.recent.includes(key))continue;
     if(activeView==='frequent'&&u===0)continue;
-    out.push({version,sourceVersion,o,p:version==='V.cos'&&o.role==='rope-art'?ropeCostumePose(p,person):p,key,u,ratio,person});
+    out.push({version,sourceVersion,o,p:version==='V.cos'&&COS_PRODUCT_ROLE_IDS.includes(o.role)?ropeCostumePose(p,person):p,key,u,ratio,person});
    }
    }
   }
@@ -956,7 +1060,7 @@ function refreshSelects(){
  const ov=$('#outfit').value,pv=$('#pose').value;
  $('#outfit').innerHTML='<option value="ALL">'+(isCos?'全部造型':'全部服裝')+'（'+os.length+'）</option>'+os.map(x=>`<option value="${x.id}">${x.id}｜${esc(x.label)}</option>`).join('');
  if(os.some(x=>x.id===ov))$('#outfit').value=ov;
- $('#pose').innerHTML='<option value="ALL">'+(isEmote?'全部表情包':isCos?'全部動作・半身':'全部動作')+'（'+items.length+'）</option>'+items.map(x=>`<option value="${x.id}">${x.id}｜${esc(isCos&&$('#cosRole').value==='rope-art'?ropeCostumePoseLabel(x):x.label)}${isEmote?'｜'+esc(x.category):''}</option>`).join('');
+ $('#pose').innerHTML='<option value="ALL">'+(isEmote?'全部表情包':isCos?'全部動作・半身':'全部動作')+'（'+items.length+'）</option>'+items.map(x=>`<option value="${x.id}">${x.id}｜${esc(isCos&&COS_PRODUCT_ROLE_IDS.includes($('#cosRole').value)?ropeCostumePoseLabel(x):x.label)}${isEmote?'｜'+esc(x.category):''}</option>`).join('');
  if(items.some(x=>x.id===pv))$('#pose').value=pv;
  $('#q').placeholder=isEmote?'搜尋 E 編號、表情包、服裝、比例…':isCos?'搜尋角色、服裝版本、配色、C／P 編號…':'搜尋服裝、動作、比例、編號…';
 }
@@ -1031,6 +1135,8 @@ function rememberLastPage(){
 function restoreLastPage(){
  let x;try{x=JSON.parse(localStorage.getItem(LAST_PAGE_KEY)||'null')}catch(_){}
  if(!x||typeof x!=='object'){render();return;}
+ // Migrate the previous rope-category underwear page to its independent category.
+ if(x.version==='V.cos'&&x.cosRole==='rope-art'){const savedOutfit=catalog.cos.find(o=>o.id===x.outfit);if(x.cosStyle==='innerwear'||savedOutfit?.role==='cos-underwear')x.cosRole='cos-underwear';}
  const person=$('#person');person.value=['ALL','Vera','小森'].includes(x.person)?x.person:'Vera';
  if(['ALL','Vera','小森'].includes(x.photoPerson))state.photoPerson=x.photoPerson;
  const v=$('#version');if([...v.options].some(o=>o.value===x.version))v.value=x.version;
