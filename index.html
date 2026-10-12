@@ -67,7 +67,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       <div class="style-field"><span class="field-caption">字幕</span><div id="replyCaptionChoices" class="style-choices" role="group" aria-label="字幕版本"></div></div>
       <select id="replyCaption" class="is-hidden" aria-label="字幕版本"><option value="caption">有字幕</option><option value="clean">無字幕</option><option value="ALL">全部版本</option></select>
       <select id="replyExact" class="is-hidden" aria-label="指定回覆"><option value="ALL">全部回覆</option></select>
-      <p class="cos-note">小森專用・固定 1:1・制服優先・第三人稱手機攝影感。先選回覆情境，或直接搜尋「收到、等我、抱歉」；圖內字幕僅放所選短句。</p>
+      <p class="cos-note">小森專用・固定 1:1・制服優先・第三人稱手機攝影感。先選回覆情境，或直接搜尋「收到、等我、抱歉」；表情與手勢生動，字幕用大字、描邊與短陰影；縮成脆留言小圖也要清楚，圖內僅放所選短句。</p>
     </section>
     <label id="fashionFamilyField" class="filter-field fashion-family is-hidden"><span>穿搭方向</span><select id="fashionFamily" class="ctrl"><option value="ALL">全部時裝</option><option value="inner-outer">內著＋外搭</option><option value="inner-mesh">內著＋網紗</option><option value="other">其他時裝</option></select></label>
     <details id="advancedFilters" class="advanced-filters">
@@ -96,7 +96,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       <div class="sync-card"><strong id="cosCov">742 / 742</strong><span>V.cos｜47 主題・狐仙 6 款・獨立內著 18 套・繩藝褲裝 40 套</span></div>
     </div>
     <div class="card">
-      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物和大分類。V.cos 再選角色、款式與配色，正常／性感版可直接切換；寫真可快速篩選內著＋外搭、內著＋網紗，需要時再展開指定動作或服裝。繩藝褲裝保留可拆卸、自由活動的衣外繩線；V.cos 固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera；小森回覆包另外提供制服優先、1:1、有／無字幕的基本網友回覆，面部由小森原始 Face Master 唯一鎖定。</p></div></div>
+      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物和大分類。V.cos 再選角色、款式與配色，正常／性感版可直接切換；寫真可快速篩選內著＋外搭、內著＋網紗，需要時再展開指定動作或服裝。繩藝褲裝保留可拆卸、自由活動的衣外繩線；V.cos 固定 9:16 半身。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera；小森回覆包另外提供制服優先、1:1、有／無字幕的脆留言回覆，表情與手勢生動，大字字幕清楚，面部由小森原始 Face Master 唯一鎖定。</p></div></div>
       <div class="importbox">
         <b style="color:#fff">匯入共用穿搭／動作資料</b><br>
         可直接選擇小森 Prompt Vault 匯出的 JSON。網站只抽取 V.內著寫真與 V.時裝寫真的「服裝／姿勢 canonical 資料」，不把小森身份帶進 Vera；匯入後依所選人物套用各自的 Face / Body / Angle Master，重新組裝完整 Prompt。
@@ -108,7 +108,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.14｜雙人物寫真／V.cos 9:16｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.15｜雙人物寫真／V.cos 9:16｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -1148,10 +1148,45 @@ function komoriReplyRecords(){
  if(activeView==='recent')out.sort((a,b)=>state.recent.indexOf(a.key)-state.recent.indexOf(b.key));else if(activeView==='frequent')out.sort((a,b)=>b.u-a.u||a.key.localeCompare(b.key));
  return out;
 }
+// Same 24 reply phrases and saved keys; strengthen the visible reaction for Threads comments.
+const KOMORI_THREADS_REACTIONS={
+ R001:{strength:'65–75%',expression:'明亮而開心的招呼笑容，嘴角明顯上揚、臉頰自然抬起，眼神熱情；原眼型和臉型不變。',action:'面向鏡頭、上身微微前傾，雙手在雙肩兩側張開揮手，抓拍揮手最清楚的一瞬間；手掌不遮臉。'},
+ R002:{strength:'60–70%',expression:'充滿朝氣的笑容，眉毛自然提起、眼神有精神，像很有活力地說早安。',action:'面向鏡頭，雙手在肩旁輕握拳做打起精神的手勢，肩膀自然抬起、頭部略偏，前臂和手指清楚。'},
+ R003:{strength:'55–65%',expression:'明顯帶倦意的溫柔笑容，眼皮自然半垂、嘴角柔和，讓晚安語意一眼可辨。',action:'雙手並攏放在一側臉外方做睡覺手勢，頭部輕靠近手背但不擠壓臉；仍和鏡頭有自然交流。'},
+ R004:{strength:'60–70%',expression:'真誠而開心的感謝笑容，眼周與嘴角一起反應，可自然露出少量牙齒。',action:'直視鏡頭，雙手在胸前比出一個清楚的大愛心，肘部自然彎曲，身體微微向前表示感謝；手勢不遮臉。'},
+ R005:{strength:'55–65%',expression:'明顯關心對方、帶認可的暖心笑容，眉眼柔和，嘴角上揚而有真人反應。',action:'朝鏡頭回應網友，一手在肩下比明顯的讚，另一手輕放上胸衣面，身體稍微前傾，頭部輕偏表示辛苦了。'},
+ R006:{strength:'70–80%',expression:'看到留言後忍不住喜歡的驚喜笑容，嘴唇自然微張、笑意帶動臉頰和眼周；保持成年原五官。',action:'直視鏡頭，雙手輕握拳停在兩側臉外方，肩膀興奮地輕收、上身前傾，像忍不住說好可愛喔；不遮臉，也不另加貓狗、商品或可愛物件。'},
+ R007:{strength:'60–70%',expression:'俐落、有精神的確認笑容，眉眼專注，讓收到的反應明確。',action:'面向鏡頭，一手在額頭外側做俐落的小敬禮，手指不遮眉眼，另一手自然放在胸下，身體微微挺起。'},
+ R008:{strength:'60–70%',expression:'突然想通、恍然大悟的神情，眉毛自然上抬，嘴角打開成會意的笑，不放大眼睛。',action:'直視鏡頭，一手食指停在太陽穴外側表示想通，另一手在胸前比讚；不按壓頭部，抓拍點頭時的清楚瞬間。'},
+ R009:{strength:'65–75%',expression:'爽快而肯定的笑容，可自然眨一隻眼呈現俏皮自信；閉眼是暫時表情，不改眼型。',action:'面向鏡頭，一手在肩旁比出明顯的 OK，身體略側、頭部回向鏡頭，姿態輕鬆有精神。'},
+ R010:{strength:'60–70%',expression:'禮貌而有反應的等待神情，眉毛明顯抬起、嘴角帶笑，沒有不耐煩。',action:'面向鏡頭，一手食指清楚舉起表示一下，另一手掌心朝外示意等一下；兩手停在肩旁，不伸得過近鏡頭。'},
+ R011:{strength:'55–65%',expression:'願意幫忙、認真思考的神情，眉部自然收起，眼神集中，嘴角保有友善反應。',action:'直視鏡頭，一手食指輕停下巴側邊，另一手在胸前指向自己表示我來確認；頭微偏，不壓變形臉部。'},
+ R012:{strength:'60–70%',expression:'忙碌中仍友善的歉意笑容，眉毛略抬、嘴角有反應，像在說先等等我。',action:'身體微側像準備回去忙，頭仍回向鏡頭，一手在肩旁張開掌心示意等待，另一手自然放下；不加工作道具或其他人物。'},
+ R013:{strength:'55–65%',expression:'一眼能看出歉意的真人神情，眉尾輕垂、嘴角帶不好意思的微笑，保留自然不對稱。',action:'面向鏡頭，雙手在胸前合十，肩膀略收、上身輕輕前傾道歉，眼神仍與鏡頭交流；不壓低到看不清臉。'},
+ R014:{strength:'55–65%',expression:'溫和但明確的婉拒神情，眉眼帶歉意、嘴角收成柔和小笑，不冷漠或生氣。',action:'面向鏡頭，雙手在胸前交成清楚的 X，手掌自然、肩頸放鬆，頭部微偏表示這次沒辦法；臉部完整可見。'},
+ R015:{strength:'60–70%',expression:'急著澄清的小驚訝，眉毛自然抬起、嘴唇微張，像正開口解釋；不是指責對方。',action:'直視鏡頭，雙手在肩旁攤開、掌心朝外，上身略往後反應、頭微偏，呈現等等，不是這個意思的清楚瞬間。'},
+ R016:{strength:'55–65%',expression:'溫柔而明顯的安慰笑容，眼神關心、臉頰自然帶笑，讓擁抱邀請有情緒。',action:'朝鏡頭張開雙臂再自然彎曲前臂，呈現大大的邀請擁抱；雙手留在畫面兩側、不遮臉。畫面只有小森，不真的抱另一個人。'},
+ R017:{strength:'65–75%',expression:'充滿支持和力量的鼓勵笑容，可自然露齒，眼神有精神但原五官大小不變。',action:'直視鏡頭，雙手在肩旁握拳做清楚的加油手勢，肩膀自然帶動、上身有朝氣，抓拍打氣的一瞬間；不是攻擊或朝鏡頭揮拳。'},
+ R018:{strength:'50–60%',expression:'安定而有感染力的柔和笑容，眉眼舒展，像真心安撫對方別急，不是空白中性臉。',action:'面向鏡頭，雙手在胸前掌心朝下做清楚的放慢手勢，上身微微向前關心對方，動作幅度明確但平穩。'},
+ R019:{strength:'70–80%',expression:'明顯的驚訝加懷疑，一邊眉毛自然抬起、眼皮開合增加、嘴唇形成小幅 O 形；原眼球尺寸、眼型與唇部基礎結構保留。',action:'直視鏡頭，上身小幅向後反應，雙手在肩旁攤開、頭部略偏，像剛看到不可思議的留言；主要手指完整。'},
+ R020:{strength:'60–70%',expression:'很想聽下去的好奇神情，眉毛自然上抬、眼神集中、嘴角帶一點期待。',action:'面向鏡頭，一手掌心向上邀請對方繼續說，另一手輕托下巴側面，頭微偏、上身前傾；不壓變形臉部。'},
+ R021:{strength:'65–75%',expression:'期待後續、忍不住敲碗的笑容，眉眼有興趣、嘴角明顯上揚，保留成年真人感。',action:'直視鏡頭，雙手合十舉在胸上、下巴以下，上身明顯但自然前傾表示拜託給後續；不加碗、餐具或其他道具。'},
+ R022:{strength:'75–85%',expression:'真的笑到忍不住的真人反應，嘴巴自然張開、眼睛因笑瞇起、臉頰抬高，保留真實笑紋與原五官骨架。',action:'朝鏡頭附近笑開，一手輕扶自己上腹衣面，另一手在胸旁自然張開，上身略前傾、肩膀隨笑容自然帶動；雙手不遮住鼻眼和嘴部。'},
+ R023:{strength:'65–75%',expression:'被看穿後的尷尬偷笑，眉毛略提、嘴角努力收住又忍不住笑，讓心虛與幽默同時可辨。',action:'回望鏡頭，一手輕碰後頸、另一手在胸旁小幅攤開，肩膀略聳、頭部微偏，像被抓包的即時反應；不抓亂頭髮。'},
+ R024:{strength:'60–70%',expression:'帶玩味的吃瓜觀察神情，一邊眉毛稍抬、嘴角勾起，眼神有好奇而不空洞。',action:'面向鏡頭，雙手自然抱胸，上身微微偏向一側再探向鏡頭，頭略偏，像準備看後續發展；不躲到人或道具後面。'}
+};
+for(const e of KOMORI_REPLIES){const reaction=KOMORI_THREADS_REACTIONS[e.id];if(!reaction)throw Error('Missing Threads reaction '+e.id);Object.assign(e,reaction);}
+function komoriThreadsCaption(e){
+ const short=Array.from(e.caption).length<=4,size=short?'畫面高度的 14–18%':'畫面高度的 10–13%';
+ return `【脆留言回覆字幕｜大字美化】
+唯一字幕仍是繁體中文「${e.caption}」，逐字正確，不增減文字。採厚實圓角黑體／圓角無襯線，奶油白實體字、深炭黑粗描邊及右下方向的短柔陰影，可在字緣加一點暖金色高光；字形乾淨，輪廓清楚，和原制服藍色有足夠對比。
+字幕明顯加大，每字字高約${size}，以縮成留言區小圖仍可讀為準。整組文字置於下方約 18–25% 的安全區，左右和底邊保留約 5% 空間；以一行完整顯示。若較長句必須分成兩行，每字字高調為約畫面高度的 9–10%，兩行一起落在原安全區。整句同一組、不重複、不拆成多個對話框。
+臉和主要手勢留在字幕上方，不遮眼、鼻、嘴或關鍵手指；不為字幕縮小人物或把鏡頭拉成全身。字幕是照片上的醒目回覆文字，不加額外貼紙、表情符號、聊天介面、分類、版本、編號、用途或其他文案。保留真實人物攝影與自然膚質，字效不改人物膚色。`;
+}
+
 function promptForKomoriReply(e,mode='caption'){
  const profile=personProfile('小森'),caption=mode==='clean'?`【字幕】
-無字幕版本。畫面不生成字幕、對話框、水印、編號或內部分類文字；僅保留制服本身原有品牌圖案。`:`【字幕】
-畫面僅加入一句繁體中文字幕：「${e.caption}」。字體清楚、簡短易讀，置於下方安全區，不遮臉、不遮主要手勢；不加分類、版本、編號、用途、額外文案或對話框。字幕正確但不凌駕人物身份與表情。`;
+無字幕版本。畫面不生成字幕、對話框、水印、編號或內部分類文字；僅保留制服本身原有品牌圖案。`:komoriThreadsCaption(e);
  return `【本次原始參考圖與面部身份硬鎖】
 原始 ${profile.face} 圖片本身必須實際進入本次 image／reference input；檔名、文字描述、聊天記憶或前一次生成圖不能代替原始影像。若未提供原始 Face Master，先要求補圖，不自行猜臉。每次重新載入原圖建立 fresh facial anchor，歷史生成圖的臉部身份權重為 0。
 人物固定為同一位 23 歲明確成年的小森／藍予晴。Face Master 唯一定義顱顏結構、原臉型長寬、眉眼與眼距、鼻唇、人中、下顎、下巴、膚色、自然不對稱與真實膚質。Body Master、Angle Auxiliary、制服照及其他人物圖的臉部身份權重為 0；不平均、不融合、不重畫第三張臉。美感形容與文字數字不能反過來改造原圖。
@@ -1165,7 +1200,7 @@ ${profile.body} 只維持原上半身骨架、肩寬、胸廓及軀幹比例；�
 東森寵物制服實拍_UniformMaster.jpeg 若已提供，圖像本身唯一定義制服真實色相、領口、門襟、袖口、布料與 Logo；忽略制服實拍人物的臉與黑色內搭。未提供時，以下制服文字只是暫用結構，不能宣稱已用真人制服 Master 精準還原色彩或 Logo，也不用 Body Master、ReferenceBoard 或其他 AI 圖替代。
 
 【回覆用途與拍攝方式】
-回覆情境：「${e.label}」。小森像剛看到網友留言，在真實工作空檔自然回應攝影者；回覆對象在鏡頭外，畫面只有小森。第三人稱、同事手機拍到的真人回覆瞬間，不是自拍、鏡子自拍、貼圖插畫或時裝棚拍。不新增第二人、貓狗、商品故事、聊天介面或手持手機。
+本題專門用於回覆 Threads（脆）的留言，回覆情境是「${e.label}」。小森像剛看到網友留言，朝鏡頭回應留言者，捕捉有情緒、有手勢、帶生活幽默的即時反應；回覆對象在鏡頭外，畫面只有小森。縮成留言小圖時，表情、手勢與指定字幕仍要一眼可辨。第三人稱、同事手機拍到的真人回覆瞬間，不是自拍、鏡子自拍、貼圖插畫或時裝棚拍。不新增第二人、貓狗、商品故事、聊天介面或手持手機。
 
 【制服與人物】
 完整穿著 ET PET 深皇家藍、微帶藍紫底的合身套頭短袖 Polo：鮮明青藍翻領與短門襟、原有兩顆扣子、白色＋青藍雙條紋袖口、標誌在人物自己的左胸且不可鏡像；不改成襯衫、拉鍊或全開襟。領口與門襟維持原結構，不改成深 V、不拉低領口或讓表情改造衣裝。下身沿用破洞牛仔褲、白色 Air Max 97，但在本題中近景畫外正常延續，不為鞋褲擅自拉遠。
@@ -1176,16 +1211,16 @@ ${profile.makeup}
 【本題動作與表情】
 ${e.action}
 表情：${e.expression}
-表情自然、可辨識，約 30–50% 強度，以本題語意和眼神、眼皮、眉部肌肉、嘴角、臉頰反應共同形成。只執行本題，不混入其他回覆手勢；真人骨架、手部關節及正常支點合理。手碰臉時不壓變形，手指清楚且不遮主要五官。
+本題表情強度約 ${e.strength}，是明顯、生動的真人反應，透過眼神、眼皮、眉部肌肉、嘴角、臉頰和肩頸一起表達；強度指表情肌肉反應，不是放大五官。笑、驚訝、道歉、婉拒、安慰要各自符合語意，不把全部題目套成禮貌小微笑或呆板站姿。手勢幅度清楚而活潑，抓拍本題動作最容易讀懂的一瞬間，五官與手指仍清楚，不用殘影、多重手腳或動作拼貼。只執行本題，不混入其他回覆手勢；真人骨架、手部關節及正常支點合理。手碰臉時不壓變形，手指清楚且不遮主要五官。
 
 【1:1 構圖與真實攝影】
-單張、單格、單人物，固定 1:1 正方形。完整頭頂到胸下／腰上中近景，臉部是主要視覺焦點，同時完整保留本題主要手勢；依手勢只作必要的小幅取景調整，不改成全身照。鏡頭大致眼平、正常手機拍攝距離，避免超近廣角變形，不為構圖縮頭或改臉型。
+單張、單格、單人物，固定 1:1 正方形。完整頭頂到胸下／腰上中近景，臉部是主要視覺焦點，同時完整保留本題主要手勢；有字幕版在下方留出大字安全區，無字幕版維持同樣的臉與手勢重點。依手勢只作必要的小幅取景調整，不改成全身照。鏡頭大致眼平、正常手機拍攝距離，避免超近廣角變形，不為構圖縮頭或改臉型。
 背景為真實寵物門市工作區，貨架與工作空間低干擾、自然稍微失焦；白天或一般工作照明，不因「早安／晚安」另外換成臥室。保留略不完美但清楚的手機拍攝感、真實毛孔、眼下結構、唇紋、自然髮絲、制服纖維與衣料摺痕。暖中性原膚色不被濾鏡漂白、灰化或改成另一種膚色；不做完美對稱、塑膠肌、過度精修或網紅模板臉。
 ${caption}
 
 【最後比對】
 先比對原始 Face Master：保持同一位小森的眉眼、鼻唇、下顎、下巴、臉型、膚色與年齡感，再確認「${e.label}」的表情與手勢清楚、制服原結構、${mode==='clean'?'無字幕':`唯一字幕「${e.caption}」`}、1:1 同時成立。若表情使人物身份漂移，恢復原五官幾何，只降低表情強度，不換成另一張臉。
-Photorealistic phone-captured reply portrait of the same adult Komori, original face reference used as actual image input, natural expressive reaction, third-person view, original work uniform, one person, square 1:1.`;
+Photorealistic phone-captured reply portrait of the same adult Komori, original face reference used as actual image input, lively expressive reaction and a playful readable gesture for a Threads comment reply, third-person view, original work uniform, one person, square 1:1.`;
 }
 function promptForRecord(r){return r.version===KOMORI_REPLY_VERSION?promptForKomoriReply(r.reply,r.captionMode):r.version==='V.表情包'?promptForEmote(r.o,r.p,r.sourceVersion,r.ratio):promptFor(r.version,r.o,r.p,r.ratio,r.person);}
 function komoriReplyCard(r){const f=!!state.fav[r.key],p=!!state.pending[r.key];return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">小森｜${esc(r.p.id)} · 1:1</div><div class="title">${esc(r.p.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏">♥</button></div><div class="sub"><span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.captionModeLabel)}</span><span class="tag">工作制服</span></div><div class="reply-use">${esc(r.reply.expression)}</div><div class="actions"><button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="usage">使用 ${r.u} 次</div></article>`;}
