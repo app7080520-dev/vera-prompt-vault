@@ -129,7 +129,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.23｜F000／O000／C000 公版・36 套居家穿搭｜一般寫真／V.cos 9:16｜P00 四格 16:9｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.24｜F000／O000／C000 公版・36 套居家穿搭｜一般寫真／V.cos 9:16｜P00 四格 16:9｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏整組</button><button id="toggleOutfitStarDetail" type="button" class="btn entity-star">☆ 服裝</button><button id="togglePoseStarDetail" type="button" class="btn entity-star">☆ 動作</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -2412,11 +2412,10 @@ function legacyCopyText(text){
 async function copyTextSafe(text){
  const value=String(text??'');
  if(!value.trim())throw new Error('Prompt 內容為空白');
- if(legacyCopyText(value))return true;
  if(navigator.clipboard&&typeof navigator.clipboard.writeText==='function'){
-  await navigator.clipboard.writeText(value);
-  return true;
+  try{await navigator.clipboard.writeText(value);return true;}catch(_){}
  }
+ if(legacyCopyText(value))return true;
  throw new Error('此瀏覽器無法使用剪貼簿');
 }
 async function copyR(r){
