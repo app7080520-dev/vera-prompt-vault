@@ -39,6 +39,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 .entity-star.on,.entity-selected-star.on,.favorite-quickbar .btn.on{color:#ffe09a;border-color:#b69753;background:#2b251a}.entity-card-favorites{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}.entity-card-favorites .btn{min-height:44px}
 @media(max-width:420px){.favorite-quickbar .btn{min-width:0;padding:10px 8px;font-size:12px}}
 .custom-wardrobe{margin-top:12px;padding:14px;border:1px solid #594969;border-radius:14px;background:#211a2a}.custom-wardrobe label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.custom-wardrobe textarea{display:block;width:100%;min-height:100px;resize:vertical;line-height:1.6;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}.custom-wardrobe textarea:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}.custom-wardrobe p{margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.6}
+.custom-wardrobe-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.custom-wardrobe #customWardrobeStatus{color:var(--accent2)}.custom-clothes-preview{margin-top:10px;padding:10px 12px;border:1px solid #493c57;border-radius:10px;background:#211a2a;font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;max-height:140px;overflow:auto}.sheet-custom-clothes{margin-bottom:12px}.sheet-custom-clothes strong{color:var(--accent2)}.sheet-custom-clothes p{margin:4px 0 8px}
 
 </style>
 </head>
@@ -95,8 +96,11 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
     </details>
     <section id="customWardrobePanel" class="custom-wardrobe is-hidden" aria-label="公版服裝填寫">
       <label for="customWardrobeText">公版服裝（填一次，自動帶入提示詞）</label>
-      <textarea id="customWardrobeText" rows="3" maxlength="4000" placeholder="服裝請填寫在此" aria-describedby="customWardrobeHint"></textarea>
-      <p id="customWardrobeHint">填寫上衣、下身、顏色與材質，選好動作後即可複製；內容會自動保留，三類公版共用同一段服裝。留白時可先複製空白公版，再替換唯一一處「服裝請填寫在此」。</p>
+      <textarea id="customWardrobeText" rows="3" maxlength="4000" placeholder="服裝請填寫在此" aria-describedby="customWardrobeHint customWardrobeStatus"></textarea>
+      <p id="customWardrobeHint">填寫後會立即帶入下方公版卡片，也可直接按「套用並查看」或「套用並複製」。三類公版共用同一段服裝，內容會自動保留。留白時可複製空白公版，再替換唯一一處「服裝請填寫在此」。</p>
+      <p id="customWardrobeStatus" role="status" aria-live="polite"></p>
+      <p id="customWardrobeTarget"></p>
+      <div class="custom-wardrobe-actions"><button id="applyCustomWardrobe" type="button" class="btn">套用並查看</button><button id="copyCustomWardrobe" type="button" class="btn primary">套用並複製</button></div>
       <p id="customCosWardrobeHint" class="is-hidden">V.cos 公版只依你填寫的衣裝；角色、款式與配色篩選用於既有造型。</p>
     </section>
     <div class="filter-status"><span id="filterSummary" aria-live="polite">目前沒有額外篩選</span><button id="clearFilters" class="btn small ghost">清除篩選</button></div>
@@ -129,10 +133,10 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.24｜F000／O000／C000 公版・36 套居家穿搭｜一般寫真／V.cos 9:16｜P00 四格 16:9｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.25｜公版服裝即時帶入・查看／複製｜36 套居家穿搭｜一般寫真／V.cos 9:16｜P00 四格 16:9｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
 </div>
 
-<div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏整組</button><button id="toggleOutfitStarDetail" type="button" class="btn entity-star">☆ 服裝</button><button id="togglePoseStarDetail" type="button" class="btn entity-star">☆ 動作</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
+<div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div id="sheetCustomWardrobe" class="custom-clothes-preview sheet-custom-clothes is-hidden"><strong>本次帶入服裝</strong><p id="sheetCustomWardrobeText"></p><button id="editCustomWardrobe" type="button" class="btn small">修改服裝</button></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏整組</button><button id="toggleOutfitStarDetail" type="button" class="btn entity-star">☆ 服裝</button><button id="togglePoseStarDetail" type="button" class="btn entity-star">☆ 動作</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
 <script>
 'use strict';
 const ENDPOINT='https://ykigbkdyxmcsdztnugha.supabase.co/functions/v1/';
@@ -1880,29 +1884,64 @@ function applyCustomWardrobeCatalogV2323(){
  catalog.cos=uniqBy([PUBLIC_WARDROBES_V2323.cos,...catalog.cos],o=>o.id);
  emoteFashionSource=uniqBy([PUBLIC_WARDROBES_V2323.fashion,...HOME_LOUNGE_OUTFITS_V2323,...emoteFashionSource],o=>o.id);
 }
+let customWardrobeBoundV2325=false,customWardrobeSaveTimerV2323=null,customWardrobeEmoteRatioV2325='1:1';
 function customWardrobeTextV2323(){return typeof state.customWardrobeTextV2323==='string'?state.customWardrobeTextV2323.slice(0,4000).trim():'';}
+function hydrateCustomWardrobeDraftV2325(){const input=$('#customWardrobeText');input.value=typeof state.customWardrobeTextV2323==='string'?state.customWardrobeTextV2323.slice(0,4000):'';}
+function captureCustomWardrobeDraftV2325(){
+ if(!customWardrobeBoundV2325)return false;
+ const value=$('#customWardrobeText').value.slice(0,4000);
+ if(value===state.customWardrobeTextV2323)return false;
+ state.customWardrobeTextV2323=value;return true;
+}
+function flushCustomWardrobeDraftV2323(){
+ const changed=captureCustomWardrobeDraftV2325(),pending=customWardrobeSaveTimerV2323!==null;
+ if(pending){clearTimeout(customWardrobeSaveTimerV2323);customWardrobeSaveTimerV2323=null;}
+ if(changed||pending)saveState();
+}
+function customWardrobeRecordV2325(){
+ if(isKomoriReply())return null;
+ const version=$('#version').value,isEmote=version==='V.表情包',sourceVersion=isEmote?$('#outfitSource').value:version;
+ const o=outfitsForVersion(sourceVersion).find(o=>o.id===$('#outfit').value&&o.customWardrobe);
+ const items=isEmote?catalog.emotes:catalog.poses,p=items.find(p=>p.id===$('#pose').value)||items[0];
+ if(!o||!p)return null;
+ const person=isEmote||$('#person').value==='ALL'?'Vera':$('#person').value,ratio=isEmote?customWardrobeEmoteRatioV2325:p.id==='P00'?'16:9':'9:16',key=keyOf(version,o,p,sourceVersion,ratio,person);
+ return {version,sourceVersion,o,p,person,ratio,key,u:state.usage[key]||0};
+}
+function updateCustomWardrobeDetailV2325(){
+ const visible=!!current?.o?.customWardrobe;
+ $('#sheetCustomWardrobe').classList.toggle('is-hidden',!visible);
+ $('#sheetCustomWardrobeText').textContent=visible?customWardrobeTextV2323()||'服裝請填寫在此':'';
+}
 function resolveCustomWardrobeV2323(o){return {...o,customWardrobe:false,customWardrobeResolved:true,detail:PUBLIC_WARDROBE_REFERENCE_V2323,role:'custom',roleLabel:'自訂服裝',variant:'custom',variantLabel:'公版',style:'custom',styleLabel:'公版穿搭',color:'custom',colorLabel:'依服裝設定',cut:'使用者指定版型',primaryColor:'依【服裝設定】指定',secondaryColor:'依【服裝設定】指定',accessories:'只保留【服裝設定】明列的衣裝配件，不主動添加。',referenceNote:'只使用當次填寫的衣裝，不沿用其他角色的款式、配色、假髮、臉部或身形。'};}
 function promptForCustomWardrobeV2323(version,o,p,ratio='9:16',person='Vera',emote=false){
+ flushCustomWardrobeDraftV2323();
  const resolved=resolveCustomWardrobeV2323(o),base=emote?promptForEmote(resolved,p,version,ratio):promptFor(version,resolved,p,ratio,person);
  const block=`【服裝設定｜只需填寫此處】\n${customWardrobeTextV2323()||'服裝請填寫在此'}\n\n【公版服裝使用規則】\n本段只定義本次衣裝，不改變人物身份、身形、髮型、妝容、所選動作與構圖。所有後續服裝段落、配色與驗收條件都引用上方同一段內容；不另行配衣、不借用 Body Master 的衣服，也不沿用其他題目的服裝或角色。若尚未填寫，先完成上方服裝內容再生成。`;
  const at=base.indexOf('【本題標題】');
  return at<0?block+'\n\n'+base:base.slice(0,at)+block+'\n\n'+base.slice(at);
 }
 function updateCustomWardrobePresentationV2323(){
+ if(captureCustomWardrobeDraftV2325())saveState();
  const isEmote=$('#version').value==='V.表情包',source=isEmote?$('#outfitSource').value:$('#version').value;
  const visible=!isKomoriReply()&&outfitsForVersion(source).some(o=>o.id===$('#outfit').value&&o.customWardrobe);
  $('#customWardrobePanel').classList.toggle('is-hidden',!visible);
  $('#customCosWardrobeHint').classList.toggle('is-hidden',!visible||source!=='V.cos');
- const input=$('#customWardrobeText'),text=typeof state.customWardrobeTextV2323==='string'?state.customWardrobeTextV2323.slice(0,4000):'';
- if(input.value!==text)input.value=text;
+ const text=customWardrobeTextV2323(),record=visible?customWardrobeRecordV2325():null;
+ $('#customWardrobeStatus').textContent=text?'已自動帶入公版服裝，查看與複製都會使用這段內容。':'尚未填寫；查看／複製會保留「服裝請填寫在此」。';
+ $('#customWardrobeTarget').textContent=record?`本次套用：${record.person}｜${record.o.id}・${record.p.id} ${record.p.label}｜${record.ratio}${$('#person').value==='ALL'||$('#pose').value==='ALL'?'（未指定的項目使用以上人物／動作，可在上方調整）':''}`:'';
+ $('#applyCustomWardrobe').disabled=!record;$('#copyCustomWardrobe').disabled=!record;
+ document.querySelectorAll('[data-custom-wardrobe-preview]').forEach(el=>{el.textContent=text?'帶入服裝：'+text:'服裝請填寫在此';});
+ updateCustomWardrobeDetailV2325();
 }
-let customWardrobeSaveTimerV2323=null;
-function flushCustomWardrobeDraftV2323(){if(customWardrobeSaveTimerV2323!==null){clearTimeout(customWardrobeSaveTimerV2323);customWardrobeSaveTimerV2323=null;saveState();}}
 function bindCustomWardrobeV2323(){
  const input=$('#customWardrobeText');
- input.addEventListener('input',()=>{state.customWardrobeTextV2323=input.value.slice(0,4000);clearTimeout(customWardrobeSaveTimerV2323);customWardrobeSaveTimerV2323=setTimeout(()=>{customWardrobeSaveTimerV2323=null;saveState();},250);if(current?.o?.customWardrobe&&$('#sheet').classList.contains('show'))$('#sheetPrompt').textContent=promptForRecord(current);});
- input.addEventListener('blur',flushCustomWardrobeDraftV2323);
- $('#grid').addEventListener('click',event=>{const button=event.target.closest('[data-act="customOutfit"]');if(!button)return;const card=button.closest('.card'),record=card&&byKey(card.dataset.key);if(!record?.o?.customWardrobe)return;$('#outfit').value=record.o.id;$('#advancedFilters').open=true;page=1;render();$('#customWardrobeText').focus();$('#customWardrobePanel').scrollIntoView({block:'nearest',behavior:'smooth'});});
+ hydrateCustomWardrobeDraftV2325();customWardrobeBoundV2325=true;
+ const sync=()=>{captureCustomWardrobeDraftV2325();clearTimeout(customWardrobeSaveTimerV2323);customWardrobeSaveTimerV2323=setTimeout(()=>{customWardrobeSaveTimerV2323=null;saveState();},250);updateCustomWardrobePresentationV2323();if(current?.o?.customWardrobe&&$('#sheet').classList.contains('show'))$('#sheetPrompt').textContent=promptForRecord(current);};
+ ['input','change','compositionend','blur'].forEach(event=>input.addEventListener(event,sync));
+ $('#applyCustomWardrobe').addEventListener('click',()=>{sync();const record=customWardrobeRecordV2325();if(record)openR(record);});
+ $('#copyCustomWardrobe').addEventListener('click',()=>{sync();const record=customWardrobeRecordV2325();if(record)copyR(record);});
+ $('#editCustomWardrobe').addEventListener('click',()=>{if(!current?.o?.customWardrobe)return;const r=current;if($('#version').value!==r.version||r.version==='V.表情包'&&$('#outfitSource').value!==r.sourceVersion){$('#version').value=r.version;if(r.version==='V.表情包')$('#outfitSource').value=r.sourceVersion;refreshSelects();}$('#person').value=r.person;$('#outfit').value=r.o.id;$('#pose').value=r.p.id;if(r.version==='V.表情包')customWardrobeEmoteRatioV2325=r.ratio;$('#sheet').classList.remove('show');page=1;render();input.focus();$('#customWardrobePanel').scrollIntoView({block:'nearest',behavior:'smooth'});});
+ $('#grid').addEventListener('click',event=>{const button=event.target.closest('[data-act="customOutfit"]');if(!button)return;const card=button.closest('.card'),record=card&&byKey(card.dataset.key);if(!record?.o?.customWardrobe)return;$('#person').value=record.person;$('#outfit').value=record.o.id;$('#pose').value=record.p.id;if(record.version==='V.表情包')customWardrobeEmoteRatioV2325=record.ratio;$('#advancedFilters').open=true;page=1;render();$('#customWardrobeText').focus();$('#customWardrobePanel').scrollIntoView({block:'nearest',behavior:'smooth'});});
  window.addEventListener('pagehide',flushCustomWardrobeDraftV2323);
 }
 
@@ -2364,8 +2403,8 @@ function refreshSelects(){
  updateFilterPresentation();
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function render(){rememberLastPage();if(activeView==='sync'){ $('#syncPanel').style.display='block';$('#grid').innerHTML='';$('#pager').innerHTML='';updateStats();return}else $('#syncPanel').style.display='none';filtered=recordsVirtual();const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages);const slice=filtered.slice((page-1)*pageSize,page*pageSize);$('#grid').innerHTML=slice.length?slice.map(cardHTML).join(''):entityFavoriteEmptyV2320();$('#pager').innerHTML=pages>1?`<button class="btn small" data-page="prev" ${page<=1?'disabled':''}>上一頁</button><span>${page} / ${pages}</span><button class="btn small" data-page="next" ${page>=pages?'disabled':''}>下一頁</button>`:'';updateStats()}
-function cardHTML(r){if(r.version===KOMORI_REPLY_VERSION)return komoriReplyCard(r);const f=!!state.fav[r.key],p=!!state.pending[r.key];const isE=r.version==='V.表情包';return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">${esc(isE?r.p.id+' ・ '+r.o.id:r.person+'｜'+r.o.id+' ・ '+r.p.id)}</div><div class="title">${esc(isE?r.p.label:r.o.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏整組提示詞" title="收藏這組服裝＋動作">♥</button></div><div class="sub">${isE?`<span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.o.label)}</span><span class="tag">${esc(r.sourceVersion)}</span><span class="tag">${esc(r.ratio)}</span>`:`<span class="tag">${esc(r.p.label)}</span>${r.p.id==='P00'?'<span class="tag">四格影片參考</span>':r.version==='V.cos'?'<span class="tag">半身攝影</span>':''}<span class="tag">${esc(r.o.bg)}</span><span class="tag">${esc(r.version)}</span><span class="tag">${esc(r.ratio)}</span>`}</div><div class="actions">${r.o.customWardrobe?'<button class="btn small" data-act="customOutfit">填寫服裝</button>':''}<button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="entity-card-favorites" role="group" aria-label="收藏服裝或動作">${entityFavoriteButtonsV2320(r)}</div><div class="usage">使用 ${r.u} 次</div></article>`}
+function render(){flushCustomWardrobeDraftV2323();rememberLastPage();if(activeView==='sync'){ $('#syncPanel').style.display='block';$('#grid').innerHTML='';$('#pager').innerHTML='';updateStats();return}else $('#syncPanel').style.display='none';filtered=recordsVirtual();const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages);const slice=filtered.slice((page-1)*pageSize,page*pageSize);$('#grid').innerHTML=slice.length?slice.map(cardHTML).join(''):entityFavoriteEmptyV2320();$('#pager').innerHTML=pages>1?`<button class="btn small" data-page="prev" ${page<=1?'disabled':''}>上一頁</button><span>${page} / ${pages}</span><button class="btn small" data-page="next" ${page>=pages?'disabled':''}>下一頁</button>`:'';updateStats()}
+function cardHTML(r){if(r.version===KOMORI_REPLY_VERSION)return komoriReplyCard(r);const f=!!state.fav[r.key],p=!!state.pending[r.key];const isE=r.version==='V.表情包';return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">${esc(isE?r.p.id+' ・ '+r.o.id:r.person+'｜'+r.o.id+' ・ '+r.p.id)}</div><div class="title">${esc(isE?r.p.label:r.o.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏整組提示詞" title="收藏這組服裝＋動作">♥</button></div><div class="sub">${isE?`<span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.o.label)}</span><span class="tag">${esc(r.sourceVersion)}</span><span class="tag">${esc(r.ratio)}</span>`:`<span class="tag">${esc(r.p.label)}</span>${r.p.id==='P00'?'<span class="tag">四格影片參考</span>':r.version==='V.cos'?'<span class="tag">半身攝影</span>':''}<span class="tag">${esc(r.o.bg)}</span><span class="tag">${esc(r.version)}</span><span class="tag">${esc(r.ratio)}</span>`}</div>${r.o.customWardrobe?`<div class="custom-clothes-preview" data-custom-wardrobe-preview>${esc(customWardrobeTextV2323()?'帶入服裝：'+customWardrobeTextV2323():'服裝請填寫在此')}</div>`:''}<div class="actions">${r.o.customWardrobe?'<button class="btn small" data-act="customOutfit">填寫服裝</button>':''}<button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="entity-card-favorites" role="group" aria-label="收藏服裝或動作">${entityFavoriteButtonsV2320(r)}</div><div class="usage">使用 ${r.u} 次</div></article>`}
 function updateStats(){
  const isR=isKomoriReply();
  const v=$('#version').value,isE=v==='V.表情包',sourceVersion=isE?$('#outfitSource').value:v;
@@ -2422,6 +2461,7 @@ async function copyR(r){
  try{
   const txt=promptForRecord(r);
   if(typeof txt!=='string'||!txt.trim())throw new Error('Prompt 生成結果為空白');
+  if(r.o?.customWardrobe&&current?.key===r.key&&$('#sheet').classList.contains('show')){$('#sheetPrompt').textContent=txt;updateCustomWardrobeDetailV2325();}
   await copyTextSafe(txt);
   touch(r);render();toast('已複製 '+(r.person||'Vera')+' Prompt');
  }catch(err){
@@ -2460,12 +2500,12 @@ function restoreLastPage(){
  if(x.detailKey){const item=byKey(String(x.detailKey).replace(/^(S\|)?([IF]\|[^|]+\|[^|]+)\|1x1$/,(_,s,k)=>(s||'')+k));if(item)openR(item)}
 }
 function openR(r){if(r.version===KOMORI_REPLY_VERSION){rememberLastPage();current=r;$('#sheetTitle').textContent='小森｜'+r.p.id+'｜'+r.p.label+'｜'+r.captionModeLabel+'｜1:1';$('#sheetMeta').textContent=r.p.category+'｜制服優先｜第三人稱手機攝影';$('#sheetPrompt').textContent=promptForRecord(r);syncDetailBtns();$('#sheet').classList.add('show');rememberLastPage();return;}rememberLastPage();current=r;const isE=r.version==='V.表情包';$('#sheetTitle').textContent=isE?`${r.p.id}・${r.o.id}｜${r.p.label}｜${r.ratio}`:`${r.person}｜${r.o.id}・${r.p.id}｜${r.o.label}｜${r.ratio}`;$('#sheetMeta').textContent=isE?`${r.p.category}｜${r.sourceVersion}｜${r.o.label}｜${r.ratio}`:`${r.person}｜${r.p.label}｜${r.o.bg}｜${r.version}｜${r.ratio}`;$('#sheetPrompt').textContent=isE?promptForEmote(r.o,r.p,r.sourceVersion,r.ratio):promptFor(r.version,r.o,r.p,r.ratio,r.person);syncDetailBtns();$('#sheet').classList.add('show');rememberLastPage()}
-function syncDetailBtns(){syncEntityFavoriteDetailV2320();if(!current)return;$('#toggleFavDetail').classList.toggle('on',!!state.fav[current.key]);$('#toggleFavDetail').textContent=state.fav[current.key]?'已收藏整組':'收藏整組';$('#togglePendingDetail').classList.toggle('on',!!state.pending[current.key]);$('#togglePendingDetail').textContent=state.pending[current.key]?'已待生成':'待生成'}
+function syncDetailBtns(){updateCustomWardrobeDetailV2325();syncEntityFavoriteDetailV2320();if(!current)return;$('#toggleFavDetail').classList.toggle('on',!!state.fav[current.key]);$('#toggleFavDetail').textContent=state.fav[current.key]?'已收藏整組':'收藏整組';$('#togglePendingDetail').classList.toggle('on',!!state.pending[current.key]);$('#togglePendingDetail').textContent=state.pending[current.key]?'已待生成':'待生成'}
 function toggleObj(obj,k){if(obj[k])delete obj[k];else obj[k]=true;saveState()}
 function toast(msg){let x=document.createElement('div');x.textContent=msg;x.style='position:fixed;z-index:200;left:50%;bottom:30px;transform:translateX(-50%);background:#f5effa;color:#17121c;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:700;box-shadow:0 8px 30px #0008';document.body.appendChild(x);setTimeout(()=>x.remove(),1500)}
 async function reloadCatalog(){await bootstrapRemote();refreshSelects();page=1;render()}
 function exportState(){const blob=new Blob([JSON.stringify({format:'vera-prompt-vault-state-v1',exportedAt:new Date().toISOString(),state},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Vera_PromptVault_State.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
-async function restore(file){const o=JSON.parse(await file.text());if(!o?.state)throw new Error('不是 Vera Prompt Vault 設定檔');Object.assign(state,o.state);normalizeEntityFavoritesV2320(state);migratePhotoState();saveState();await reloadCatalog()}
+async function restore(file){const o=JSON.parse(await file.text());if(!o?.state)throw new Error('不是 Vera Prompt Vault 設定檔');Object.assign(state,o.state);normalizeEntityFavoritesV2320(state);hydrateCustomWardrobeDraftV2325();migratePhotoState();saveState();await reloadCatalog()}
 function bind(){bindEntityFavoriteControlsV2320();bindKomoriReplyFilters();bindFilterPresentation();['cosRole','cosStyle','cosVariant','cosColor'].forEach(id=>$('#'+id).addEventListener('change',()=>{$('#outfit').value='ALL';if(id==='cosRole'){$('#cosVariant').value='ALL';$('#cosColor').value='ALL';}page=1;refreshSelects();render()}));$('#person').addEventListener('change',()=>{state.photoPerson=$('#person').value;page=1;render()});['q','outfit','pose'].forEach(id=>$('#'+id).addEventListener(id==='q'?'input':'change',()=>{page=1;render()}));$('#version').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#outfitSource').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;activeView=b.dataset.view;$('.tab').forEach(x=>x.classList.toggle('active',x===b));page=1;render()});$('#grid').addEventListener('click',e=>{const c=e.target.closest('.card');if(!c)return;const r=byKey(c.dataset.key);if(!r)return;const a=e.target.closest('[data-act]')?.dataset.act;if(a==='copy')copyR(r);if(a==='detail')openR(r);if(a==='fav'){toggleObj(state.fav,r.key);render()}if(a==='pending'){toggleObj(state.pending,r.key);render()}if(a==='outfitStar')toggleEntityFavoriteV2320('outfit',r.o.id);if(a==='poseStar')toggleEntityFavoriteV2320('pose',r.p.id);});$('#pager').addEventListener('click',e=>{const a=e.target.dataset.page;if(a==='prev')page--;if(a==='next')page++;render();scrollTo({top:0,behavior:'smooth'})});$('#random').onclick=()=>{const a=recordsVirtual();if(!a.length)return;openR(a[Math.floor(Math.random()*a.length)])};$('#closeSheet').onclick=()=>{$('#sheet').classList.remove('show');rememberLastPage()};$('#sheet').onclick=e=>{if(e.target===$('#sheet')){$('#sheet').classList.remove('show');rememberLastPage()}};$('#copyDetail').onclick=()=>current&&copyR(current);$('#toggleFavDetail').onclick=()=>{if(current){toggleObj(state.fav,current.key);syncDetailBtns();render()}};$('#togglePendingDetail').onclick=()=>{if(current){toggleObj(state.pending,current.key);syncDetailBtns();render()}};$('#importFile').onchange=async e=>{try{if(e.target.files[0])await importKomori(e.target.files[0])}catch(err){$('#importStatus').textContent='匯入失敗：'+err.message}finally{e.target.value=''}};$('#exportState').onclick=exportState;$('#restoreState').onchange=async e=>{try{if(e.target.files[0])await restore(e.target.files[0]);toast('Vera 設定已匯入')}catch(err){alert(err.message)}finally{e.target.value=''}}}
 (async function(){migratePhotoState();bind();const errs=await bootstrapRemote();restoreLastPage();if(errs.length)$('#importStatus').textContent='部分遠端 metadata 暫時無法載入，已使用 v2.1 內建完整備援；不會用舊匯入內容覆蓋正式題目。';})();
 window.addEventListener('pagehide',rememberLastPage);
