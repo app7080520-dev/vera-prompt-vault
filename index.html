@@ -40,6 +40,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 @media(max-width:420px){.favorite-quickbar .btn{min-width:0;padding:10px 8px;font-size:12px}}
 .custom-wardrobe{margin-top:12px;padding:14px;border:1px solid #594969;border-radius:14px;background:#211a2a}.custom-wardrobe label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}.custom-wardrobe textarea{display:block;width:100%;min-height:100px;resize:vertical;line-height:1.6;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--text)}.custom-wardrobe textarea:focus-visible{outline:2px solid var(--accent2);outline-offset:3px}.custom-wardrobe p{margin:8px 0 0;font-size:12px;color:var(--muted);line-height:1.6}
 .custom-wardrobe-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.custom-wardrobe #customWardrobeStatus{color:var(--accent2)}.custom-clothes-preview{margin-top:10px;padding:10px 12px;border:1px solid #493c57;border-radius:10px;background:#211a2a;font-size:12px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere;max-height:140px;overflow:auto}.sheet-custom-clothes{margin-bottom:12px}.sheet-custom-clothes strong{color:var(--accent2)}.sheet-custom-clothes p{margin:4px 0 8px}
+.video-board-layout{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));aspect-ratio:16/9;width:min(420px,100%);gap:4px;background:#eee;border-radius:8px;overflow:hidden;margin:10px 0}.video-board-layout>span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;background:#121016;color:var(--text);font-size:12px}.video-board-layout b{font-size:14px;color:var(--accent2)}.video-board-caption{font-size:11px;color:var(--muted)}
 
 </style>
 </head>
@@ -91,7 +92,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
         <label id="outfitSourceField" class="filter-field is-hidden"><span>表情包服裝來源</span><select id="outfitSource" class="ctrl"><option value="V.時裝寫真">V.時裝寫真</option><option value="V.內著寫真">V.內著寫真</option></select></label>
         <div id="poseField" class="filter-field"><label for="pose" id="poseCaption">動作</label><div class="selector-line"><select id="pose" class="ctrl"><option value="ALL">全部動作</option></select><button id="starSelectedPose" type="button" class="btn entity-selected-star" aria-label="先選一個動作即可收藏" aria-pressed="false" disabled>☆</button></div></div>
         <div id="outfitField" class="filter-field"><label for="outfit">指定服裝</label><div class="selector-line"><select id="outfit" class="ctrl"><option value="ALL">全部服裝</option></select><button id="starSelectedOutfit" type="button" class="btn entity-selected-star" aria-label="先選一個服裝即可收藏" aria-pressed="false" disabled>☆</button></div></div>
-        <p id="videoBoardNote" class="cos-note is-hidden" style="grid-column:1/-1;margin:0">P00・影片參考圖：整張 16:9 橫幅、2×2 四格；正面 → 前斜側 45° → 後斜背 135° → 背面。每格完整頭頂至大腿最上段，同一人物、服裝與光線；只對 P00 啟用。</p>
+        <div id="videoBoardNote" class="cos-note is-hidden" style="grid-column:1/-1;margin:0">P00・影片參考圖：整張 16:9 橫幅，1×4 橫排四張直式照片（每格約 4:9）。由左至右：正面 → 前斜側 45° → 後斜背 135° → 背面。每格完整頭頂至大腿最上段；四格共用原始 Face Master、同一服裝與光線。<div class="video-board-layout" role="img" aria-label="P00 版型：一排四個直式欄位，由左到右為正面、前斜側、後斜背、背面"><span><b>正面</b>0°</span><span><b>前斜側</b>45°</span><span><b>後斜背</b>135°</span><span><b>背面</b>180°</span></div><span class="video-board-caption">版型示意；生成圖不加入格名或角度文字。每次生圖仍須附上所選人物的原始 Face Master。</span></div>
       </div>
     </details>
     <section id="customWardrobePanel" class="custom-wardrobe is-hidden" aria-label="公版服裝填寫">
@@ -133,7 +134,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.26｜新增 F579–F590 性感背心＋短褲｜48 套居家穿搭｜公版服裝即時帶入｜一般寫真／V.cos 9:16｜P00 四格 16:9｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.27｜P00 橫排四張直式照片・16:9・同臉參考｜F579–F590 性感背心＋短褲｜48 套居家穿搭｜公版服裝即時帶入｜一般寫真／V.cos 9:16｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div id="sheetCustomWardrobe" class="custom-clothes-preview sheet-custom-clothes is-hidden"><strong>本次帶入服裝</strong><p id="sheetCustomWardrobeText"></p><button id="editCustomWardrobe" type="button" class="btn small">修改服裝</button></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏整組</button><button id="toggleOutfitStarDetail" type="button" class="btn entity-star">☆ 服裝</button><button id="togglePoseStarDetail" type="button" class="btn entity-star">☆ 動作</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -1637,7 +1638,7 @@ function entityPoseOptionsV2320(items,isEmote,isCos){
  const saved=items.filter(p=>isEntityFavoriteV2320('pose',p.id)),rest=items.filter(p=>!isEntityFavoriteV2320('pose',p.id));
  const option=(p,star=false)=>`<option value="${p.id}">${star?'★ ':''}${p.id}｜${esc(p.id!=='P00'&&isCos&&COS_PRODUCT_ROLE_IDS.includes($('#cosRole').value)?ropeCostumePoseLabel(p):p.label)}${isEmote?'｜'+esc(p.category):''}</option>`;
  const first=saved.length?'<optgroup label="★ 收藏'+(isEmote?'表情包':'動作')+'（'+saved.length+'）">'+saved.map(p=>option(p,true)).join('')+'</optgroup>':'';
- return first+(isEmote?rest.map(p=>option(p)).join(''):[{label:'影片參考圖（16:9・四格）',rows:rest.filter(p=>p.id==='P00')},{label:'本次照片參考動作（P146–P151）',rows:rest.filter(p=>p.referencePoseRevision)},{label:'既有動作',rows:rest.filter(p=>!p.referencePoseRevision&&p.id!=='P00')}].filter(g=>g.rows.length).map(g=>'<optgroup label="'+g.label+'">'+g.rows.map(p=>option(p)).join('')+'</optgroup>').join(''));
+ return first+(isEmote?rest.map(p=>option(p)).join(''):[{label:'影片參考圖（16:9・橫排直式四格）',rows:rest.filter(p=>p.id==='P00')},{label:'本次照片參考動作（P146–P151）',rows:rest.filter(p=>p.referencePoseRevision)},{label:'既有動作',rows:rest.filter(p=>!p.referencePoseRevision&&p.id!=='P00')}].filter(g=>g.rows.length).map(g=>'<optgroup label="'+g.label+'">'+g.rows.map(p=>option(p)).join('')+'</optgroup>').join(''));
 }
 function updateEntityFavoriteControlsV2320(){
  const reply=isKomoriReply();$('#entityFavoriteControls').classList.toggle('is-hidden',reply);if(reply)return;
@@ -1966,8 +1967,8 @@ function bindCustomWardrobeV2323(){
 // P00 is a four-view, 16:9 reference board, not a normal single-frame photo pose.
 const VIDEO_BOARD_POSE_V2321={
  id:'P00',label:'影片參考圖・四視角',category:'影片參考圖',frame:'reference-board',ratio:'16:9',videoReference:true,
- aliases:['影片參考','影片參考圖','四格','四視角','16:9','正面側面背面','前斜側','後斜背'],
- action:'同一位成年人物、同一套服裝，固定自然站姿，頭部跟隨軀幹同向轉身。16:9 橫幅內以 2×2 四格呈現：左上正面 0°、右上前斜側約 45°、左下後斜背約 135°、右下背面 180°。各格完整頭頂至大腿最上段，最多包含大腿最上方約 1/4；同一人物尺寸、同一拍攝距離與同一光線，背面不回頭露臉。'
+ aliases:['影片參考','影片參考圖','四格','四視角','16:9','1×4','橫排四格','四張直式照片','正面側面背面','前斜側','後斜背'],
+ action:'同一位成年人物、同一套服裝，固定自然站姿，頭部跟隨軀幹同向轉身。16:9 橫幅內以 1×4 橫排四張直式照片，每格約 4:9：由左至右依序正面 0°、前斜側約 45°、後斜背約 135°、背面 180°。各格完整頭頂至大腿最上段，最多包含大腿最上方約 1/4；四格共用原始 Face Master 定義的同一張臉、同一身形、同一拍攝距離與光線，背面不回頭露臉。'
 };
 function applyVideoBoardPoseV2321(){catalog.poses=uniqBy([VIDEO_BOARD_POSE_V2321,...catalog.poses],p=>p.id).sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));}
 function videoBoardWardrobeV2321(version,o){
@@ -1990,25 +1991,29 @@ function promptForVideoBoardV2321(version,o,person='Vera'){
 ${profile.name}｜${o.id}・P00｜${o.label}｜影片參考圖・四視角｜16:9
 
 【P00 專用輸出｜影片人物與穿搭參考】
-生成一張 16:9 橫幅真人攝影參考圖；整張畫布以 2×2 四格排版，四格同尺寸，格間只有細而均勻的中性間隔。不是四張分開輸出，也不是同一場景內站著四個人。每格各有一位同一位 ${profile.age} 歲明確成年 ${profile.fullName}；這是同一人物、同一衣裝的四個實拍視角。
-P00 是本題唯一有效動作。它獨立使用四格 16:9 規格，不套用一般寫真的直幅、單格、禁止多視角或其他 P 動作；它也不是表情包、自拍、鏡面倒影、故事分鏡或連續動作影片。
+生成一張 16:9 橫幅真人攝影參考圖；整張畫布採 1×4 排版：只有一排、四個並列直式欄位，四張直式人物照片從左至右橫排，沒有上下兩排。每格等寬、等高，格子高度佔滿畫布，單格比例約 4:9；格間只有三條細而均勻的白色垂直分隔線，沒有水平分隔線、額外外框或大片留白。若附有空白四欄示意圖，只讀取版面與分隔線，不把黑色占位底當成實際棚景。
+不是四張分開輸出，也不是同一場景內站著四個人。每格各有同一位 ${profile.age} 歲明確成年 ${profile.fullName}；這是同一人物、同一衣裝的四個實拍視角。P00 是本題唯一有效動作，整張畫布橫式、每格照片直式；不套用一般寫真的單格或禁止多視角規則，也不改成表情包、自拍、鏡面倒影、故事分鏡或連續動作影片。
 
 【原始參考圖分工】
 本次原始 ${profile.face}、${profile.body}、${profile.angle} 圖片本身須實際進入 image／reference input；檔名、對話記憶及歷史生成圖不能替代原始影像。缺少必要原圖時先補圖，不猜臉或借用其他人物。
 Face Master 是四格唯一臉部身份來源，保留原顱顏結構、眼型與眼距、鼻唇、下顎、下巴、膚色、真實膚質和自然不對稱。Body Master 只定義原骨架及身形比例；Angle Auxiliary 只輔助同一顆頭的角度，二者臉部身份權重為 0。服裝／角色參考的臉部身份權重為 0，不平均、不融合、不因側面或背面重畫第三張臉。
 
+【四格共用同一張臉｜身份優先】
+以本次原始 ${profile.face} 建立唯一共同身份錨點，四格共享同一顆頭部的三維骨架；不要為每格獨立重抽一張相似模特兒臉，也不把某格生成出的新臉當成新的 Face Master。第 1 格正面及第 2 格 45° 可見臉部都直接以原始 Face Master 核對，保持同一臉型長寬、眉眼結構、原眼距、鼻樑鼻翼、鼻唇距、唇形、下顎、下巴、膚色與自然不對稱。
+45° 只改變同一張臉的透視投影與正常遮擋，不換鼻型、眼型或下顎，不把正面五官平面貼在側頭。第 3、4 格只延續同一頭部骨架、耳位、髮根與後腦輪廓，不為了辨識人物而回頭露臉。Angle Auxiliary 若與原始 Face Master 的五官衝突，以原始 Face Master 為準。四格神情保持自然放鬆，面部身份優先於美化、性感風格與版面對齊。
+
 ${videoBoardWardrobeV2321(version,o)}
 
 【四格位置與視角｜固定順序】
-左上：正面 0°。身體與頭部正向相機，眉眼放鬆、嘴唇自然輕合，視線自然向前；完整呈現原人物正面與服裝前片。
-右上：前斜側約 45°。從正面向同一側轉身，頭部、肩線與骨盆同向，呈現正面與側面交界；不是完全 90° 側面，也不把身體轉斜後再把臉轉回正面。
-左下：後斜背約 135°。沿同一轉身方向繼續，呈現後腦、肩背、衣裝背側及腰臀衣料的斜背視角；頭部跟隨軀幹，不回頭看相機，不把正面臉貼在後腦。
-右下：背面 180°。肩背、骨盆與頭部同向背對相機，呈現後腦、背面髮態及服裝後片；看不到正面五官，不回頭、不扭頸露臉，不以鏡子補出人臉。
+第 1 格（最左）：正面 0°。身體與頭部正向相機，眉眼放鬆、嘴唇自然輕合，視線自然向前；完整呈現原人物正面與服裝前片。
+第 2 格（左起第二）：前斜側約 45°。從正面向同一側轉身，頭部、肩線與骨盆同向，呈現正面與側面交界；不是完全 90° 側面，也不把身體轉斜後再把臉轉回正面。
+第 3 格（左起第三）：後斜背約 135°。沿同一轉身方向繼續，呈現後腦、肩背、衣裝背側及腰臀衣料的斜背視角；頭部跟隨軀幹，不回頭看相機，不把正面臉貼在後腦。
+第 4 格（最右）：背面 180°。肩背、骨盆與頭部同向背對相機，呈現後腦、背面髮態及服裝後片；看不到正面五官，不回頭、不扭頸露臉，不以鏡子補出人臉。
 四個角度沿同一側從 0°、45°、135°到 180°轉身，不鏡像、不在不同格換成相反轉身方向。四格維持同一自然站姿，肩頸放鬆、頭頸端正、正常承重；雙臂自然放鬆，手不遮住主要衣片。原款服裝配件若需基本握持，只維持必要握持，不加入其他 P 的手勢、撩衣、轉頭或道具。
 
 【每格取景｜完整頭頂至大腿最上段】
 每格保留完整頭頂、原款帽飾／頭紗、雙肩、上身衣片、腰線、腰頭與少量大腿上段，最多包含大腿最上方約 1/4；裁切不延伸到膝蓋、小腿或腳掌，也不裁成只有胸口或臉。褲裝保留實體褲頭、上臀褲片及少量大腿上段衣料；裙裝或連身款保留相同範圍的原衣裝，不替換成褲子。
-四格人物的頭頂高度、腰線高度、下緣裁切、視覺尺度與相機距離一致。只用同一人的正常轉身形成前、側、背輪廓差異，不把側面變瘦、背面變高、某格放大胸臀，或為了畫面對齊拉長軀幹。
+四格人物的頭頂高度、腰線高度、下緣裁切、視覺尺度與相機距離一致。人物適度置中，雙肩及衣片在直式欄內自然留邊；不能為適應欄寬壓窄臉、縮肩、拉長軀幹、裁掉頭頂或過度拉遠拍成全身。只用同一人的正常轉身形成前、側、背輪廓差異，不把側面變瘦、背面變高或某格放大胸臀。
 
 【人物身形】
 ${profile.bodyLock}
@@ -2025,9 +2030,9 @@ ${camera}
 保留真實毛孔、唇紋、髮絲、衣料纖維、縫線及微小不對稱，不磨皮、不換成網紅模板臉，不做 CGI、3D、插畫或遊戲角色質感。各格人物與衣料細節要清楚，避免低解析、過度失焦或 AI 髮絲切圖。
 
 【最終驗收】
-整張只有四格、16:9；左上正面、右上前斜側、左下後斜背、右下背面。每格完整頭頂至大腿最上段，始終同一位 ${profile.name}、同一套 ${o.id}「${o.label}」、同一身形及同一拍攝條件。不得重複四個正面、偷換人物、服裝或髮型；背面不得出現正面五官。
+整張 16:9 橫幅只有一排四個直式欄位（1×4），由左至右正面、前斜側、後斜背、背面；不能排成上下兩排或四個橫式小窗。每格完整頭頂至大腿最上段，始終同一位 ${profile.name}、同一套 ${o.id}「${o.label}」、同一身形及同一拍攝條件。正面與前斜側的可見臉都必須仍是原始 ${profile.face} 的同一人物，不能只是四格彼此像卻已偏離原始臉。不得重複四個正面、偷換人物、服裝或髮型；背面不得出現正面五官。
 畫面不放字幕、角度文字、格子編號、箭頭、標題、浮水印或額外標誌；提示詞中的格名只用於指定版面，不畫成圖內文字。原款衣料已有的品牌／飾片僅依上方服裝設定。
-Photorealistic adult character and garment reference contact sheet. One 16:9 landscape canvas, exactly four equal panels in a 2-by-2 grid: front, front three-quarter, rear three-quarter, back. The same adult identity, outfit, body proportions, camera and lighting in every panel. Full head to very upper thighs in each panel. No front-facing face in the back view. No captions or panel labels.`;
+Photorealistic adult character and garment reference contact sheet. One 16:9 landscape canvas containing ONE ROW of FOUR equal tall portrait panels, a 1-by-4 horizontal strip. Each panel is approximately 4:9 and spans the full canvas height. Three thin white vertical dividers, no horizontal divider. Left to right: front 0 degrees, front three-quarter 45 degrees, rear three-quarter 135 degrees, back 180 degrees. All panels share ONE identity anchored directly to the original ${profile.face}; the same head in different rotations, not four independently redesigned faces. Preserve the original face geometry and natural skin texture. The same outfit, body proportions, camera and lighting in every panel. Full head to very upper thighs in each panel. No front-facing face in the back view. No captions or panel labels.`;
 }
 function updateVideoBoardPresentationV2321(){const on=!isKomoriReply()&&$('#version').value!=='V.表情包'&&$('#pose').value==='P00';$('#videoBoardNote').classList.toggle('is-hidden',!on);}
 
@@ -2422,7 +2427,7 @@ function refreshSelects(){
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function render(){flushCustomWardrobeDraftV2323();rememberLastPage();if(activeView==='sync'){ $('#syncPanel').style.display='block';$('#grid').innerHTML='';$('#pager').innerHTML='';updateStats();return}else $('#syncPanel').style.display='none';filtered=recordsVirtual();const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages);const slice=filtered.slice((page-1)*pageSize,page*pageSize);$('#grid').innerHTML=slice.length?slice.map(cardHTML).join(''):entityFavoriteEmptyV2320();$('#pager').innerHTML=pages>1?`<button class="btn small" data-page="prev" ${page<=1?'disabled':''}>上一頁</button><span>${page} / ${pages}</span><button class="btn small" data-page="next" ${page>=pages?'disabled':''}>下一頁</button>`:'';updateStats()}
-function cardHTML(r){if(r.version===KOMORI_REPLY_VERSION)return komoriReplyCard(r);const f=!!state.fav[r.key],p=!!state.pending[r.key];const isE=r.version==='V.表情包';return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">${esc(isE?r.p.id+' ・ '+r.o.id:r.person+'｜'+r.o.id+' ・ '+r.p.id)}</div><div class="title">${esc(isE?r.p.label:r.o.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏整組提示詞" title="收藏這組服裝＋動作">♥</button></div><div class="sub">${isE?`<span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.o.label)}</span><span class="tag">${esc(r.sourceVersion)}</span><span class="tag">${esc(r.ratio)}</span>`:`<span class="tag">${esc(r.p.label)}</span>${r.p.id==='P00'?'<span class="tag">四格影片參考</span>':r.version==='V.cos'?'<span class="tag">半身攝影</span>':''}<span class="tag">${esc(r.o.bg)}</span><span class="tag">${esc(r.version)}</span><span class="tag">${esc(r.ratio)}</span>`}</div>${r.o.customWardrobe?`<div class="custom-clothes-preview" data-custom-wardrobe-preview>${esc(customWardrobeTextV2323()?'帶入服裝：'+customWardrobeTextV2323():'服裝請填寫在此')}</div>`:''}<div class="actions">${r.o.customWardrobe?'<button class="btn small" data-act="customOutfit">填寫服裝</button>':''}<button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="entity-card-favorites" role="group" aria-label="收藏服裝或動作">${entityFavoriteButtonsV2320(r)}</div><div class="usage">使用 ${r.u} 次</div></article>`}
+function cardHTML(r){if(r.version===KOMORI_REPLY_VERSION)return komoriReplyCard(r);const f=!!state.fav[r.key],p=!!state.pending[r.key];const isE=r.version==='V.表情包';return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">${esc(isE?r.p.id+' ・ '+r.o.id:r.person+'｜'+r.o.id+' ・ '+r.p.id)}</div><div class="title">${esc(isE?r.p.label:r.o.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏整組提示詞" title="收藏這組服裝＋動作">♥</button></div><div class="sub">${isE?`<span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.o.label)}</span><span class="tag">${esc(r.sourceVersion)}</span><span class="tag">${esc(r.ratio)}</span>`:`<span class="tag">${esc(r.p.label)}</span>${r.p.id==='P00'?'<span class="tag">橫排直式四格</span>':r.version==='V.cos'?'<span class="tag">半身攝影</span>':''}<span class="tag">${esc(r.o.bg)}</span><span class="tag">${esc(r.version)}</span><span class="tag">${esc(r.ratio)}</span>`}</div>${r.o.customWardrobe?`<div class="custom-clothes-preview" data-custom-wardrobe-preview>${esc(customWardrobeTextV2323()?'帶入服裝：'+customWardrobeTextV2323():'服裝請填寫在此')}</div>`:''}<div class="actions">${r.o.customWardrobe?'<button class="btn small" data-act="customOutfit">填寫服裝</button>':''}<button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="entity-card-favorites" role="group" aria-label="收藏服裝或動作">${entityFavoriteButtonsV2320(r)}</div><div class="usage">使用 ${r.u} 次</div></article>`}
 function updateStats(){
  const isR=isKomoriReply();
  const v=$('#version').value,isE=v==='V.表情包',sourceVersion=isE?$('#outfitSource').value:v;
@@ -2433,7 +2438,7 @@ function updateStats(){
  const personCount=isR?1:photoPeople(v).length;
  const total=isR?KOMORI_REPLIES.length*2:oc*itemCount*ratioCount*personCount;
  $('#resultCount').textContent=(activeView==='sync'?total:filtered.length).toLocaleString();
- $('#coverageText').textContent=isR?`${KOMORI_REPLIES.length} 句回覆（含 ${KOMORI_MEME_REPLIES.length} 句迷因）× 有／無字幕 × 固定 1:1`:isE?`${itemCount} 題表情包 × ${oc} 套${sourceVersion==='V.內著寫真'?'內著':'時裝'} × ${ratioCount} 比例`:`${personCount} 位人物 × ${oc} 套服裝 × ${catalog.poses.filter(p=>p.id!=='P00').length} 動作 × 9:16${v==='V.cos'?' 半身':''} ＋ P00 四格 16:9`;
+ $('#coverageText').textContent=isR?`${KOMORI_REPLIES.length} 句回覆（含 ${KOMORI_MEME_REPLIES.length} 句迷因）× 有／無字幕 × 固定 1:1`:isE?`${itemCount} 題表情包 × ${oc} 套${sourceVersion==='V.內著寫真'?'內著':'時裝'} × ${ratioCount} 比例`:`${personCount} 位人物 × ${oc} 套服裝 × ${catalog.poses.filter(p=>p.id!=='P00').length} 動作 × 9:16${v==='V.cos'?' 半身':''} ＋ P00 橫排直式四格 16:9`;
  $('#innerCov').textContent=`${catalog.inner.length} / ${TARGET.inner}`;
  $('#fashionCov').textContent=`${catalog.fashion.length} / ${TARGET.fashion}`;
  $('#poseCov').textContent=`${catalog.poses.length} / ${TARGET.pose}`;
