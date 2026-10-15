@@ -48,12 +48,12 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 <div class="shell">
   <header class="top">
     <div class="brandrow">
-      <div class="brand"><img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera Face Master"><div><h1>Vera × 小森 Prompt Vault</h1><p>雙人物寫真／Cosplay｜Vera 表情包／小森 1:1 回覆包</p></div></div>
+      <div class="brand"><img class="avatar" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera Face Master"><div><h1>Vera × 小森 Prompt Vault</h1><p>雙人物寫真／Cosplay｜雙人物表情包／小森 1:1 回覆包</p></div></div>
       <div class="stats"><b id="resultCount">0</b> 個 Prompt<br><span id="coverageText">載入中…</span></div>
     </div>
     <div class="primary-filters">
       <label class="filter-field"><span>人物</span><select id="person" class="ctrl"><option value="ALL">Vera ＋ 小森</option><option value="小森">小森</option><option value="Vera">Vera</option></select></label>
-      <label class="filter-field"><span>大分類</span><select id="version" class="ctrl"><option value="V.時裝寫真">V.時裝寫真</option><option value="V.內著寫真">V.內著寫真</option><option value="V.cos">V.cos</option><option value="V.表情包">V.表情包（Vera）</option><option value="小森回覆包">小森回覆包・1:1</option></select></label>
+      <label class="filter-field"><span>大分類</span><select id="version" class="ctrl"><option value="V.時裝寫真">V.時裝寫真</option><option value="V.內著寫真">V.內著寫真</option><option value="V.cos">V.cos</option><option value="V.表情包">V.表情包（Vera／小森）</option><option value="小森回覆包">小森回覆包・1:1</option></select></label>
     </div>
     <div class="search-row">
       <label class="search-field"><span class="sr-only">搜尋提示詞</span><input id="q" class="ctrl" type="search" placeholder="搜尋服裝、動作或編號，例如 P131…" /></label>
@@ -86,6 +86,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       <p class="favorite-hint">卡片上的 ☆ 可分別收藏服裝／動作；♥ 收藏整組提示詞。</p>
     </section>
 
+    <p id="emoteInteractionNote" class="cos-note is-hidden" aria-live="polite"></p>
     <details id="advancedFilters" class="advanced-filters">
       <summary><span id="advancedCaption">指定動作／服裝</span><span id="advancedSummary" class="summary-value">不限</span></summary>
       <div class="advanced-grid">
@@ -117,12 +118,12 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       <div class="sync-card"><strong id="innerCov">0 / 194</strong><span>內著穿搭資料｜含 O000 公版</span></div>
       <div class="sync-card"><strong id="fashionCov">0 / 591</strong><span>時裝穿搭資料｜含 F000 公版、48 套居家穿搭（含 12 套性感新款）與 6 組照片參考服裝</span></div>
       <div class="sync-card"><strong id="poseCov">0 / 152</strong><span>動作資料｜含 P00 四格影片參考與 6 組照片參考動作</span></div>
-      <div class="sync-card"><strong id="emoteCov">63 / 63</strong><span>V.表情包題目</span></div>
+      <div class="sync-card"><strong id="emoteCov">Vera 63／小森 93</strong><span>V.表情包｜小森既有 63 題更新＋30 題鏡頭互動</span></div>
       <div class="sync-card"><strong id="replyCov">66 / 66</strong><span>小森回覆包｜9 分類・含 18 句迷因・有／無字幕・固定 1:1</span></div>
       <div class="sync-card"><strong id="cosCov">743 / 743</strong><span>V.cos｜含 C000 公版・47 主題・獨立內著 18 套・繩藝褲裝 40 套</span></div>
     </div>
     <div class="card">
-      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物和大分類。V.cos 再選角色、款式與配色，正常／性感版可直接切換；寫真可快速篩選內著＋外搭、內著＋網紗，需要時再展開指定動作或服裝。繩藝褲裝保留可拆卸、自由活動的衣外繩線；V.cos 一般動作為 9:16 半身；P00 專用於四格 16:9 影片參考圖。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包維持 Vera；小森回覆包另外提供制服優先、1:1、有／無字幕的脆留言回覆，基本回覆與網路迷因分開找，情緒與動作逐題對應、避免誇張表情重塑五官；字幕字型依語氣搭配，面部由小森原始 Face Master 唯一鎖定。</p></div></div>
+      <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物和大分類。V.cos 再選角色、款式與配色，正常／性感版可直接切換；寫真可快速篩選內著＋外搭、內著＋網紗，需要時再展開指定動作或服裝。繩藝褲裝保留可拆卸、自由活動的衣外繩線；V.cos 一般動作為 9:16 半身；P00 專用於四格 16:9 影片參考圖。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包可選 Vera／小森，小森提供鏡頭互動反應；小森回覆包另外提供制服優先、1:1、有／無字幕的脆留言回覆，基本回覆與網路迷因分開找，情緒與動作逐題對應、避免誇張表情重塑五官；字幕字型依語氣搭配，面部由小森原始 Face Master 唯一鎖定。</p></div></div>
       <div class="importbox">
         <b style="color:#fff">匯入共用穿搭／動作資料</b><br>
         可直接選擇小森 Prompt Vault 匯出的 JSON。網站只抽取 V.內著寫真與 V.時裝寫真的「服裝／姿勢 canonical 資料」，不把小森身份帶進 Vera；匯入後依所選人物套用各自的 Face / Body / Angle Master，重新組裝完整 Prompt。
@@ -134,7 +135,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.27｜P00 橫排四張直式照片・16:9・同臉參考｜F579–F590 性感背心＋短褲｜48 套居家穿搭｜公版服裝即時帶入｜一般寫真／V.cos 9:16｜Vera 表情包 1:1／9:16｜小森回覆包 1:1</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.28｜小森表情包 93 題・鏡頭互動｜Vera 表情包 63 題｜表情包 1:1／9:16｜P00 橫排直式四格 16:9｜48 套居家穿搭｜小森制服回覆包 1:1</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div id="sheetCustomWardrobe" class="custom-clothes-preview sheet-custom-clothes is-hidden"><strong>本次帶入服裝</strong><p id="sheetCustomWardrobeText"></p><button id="editCustomWardrobe" type="button" class="btn small">修改服裝</button></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏整組</button><button id="toggleOutfitStarDetail" type="button" class="btn entity-star">☆ 服裝</button><button id="togglePoseStarDetail" type="button" class="btn entity-star">☆ 動作</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -1066,6 +1067,7 @@ function groupedCosRoleOptions(){
  return '<option value="ALL">全部角色（'+COS_ROLES.length+'）</option>'+groups.join('');
 }
 function updateFilterPresentation(){
+ updateEmotePresentationV2328();
  updateEntityFavoriteControlsV2320();
  updateVideoBoardPresentationV2321();
  updateCustomWardrobePresentationV2323();
@@ -1395,7 +1397,7 @@ ${caption}
 先比對原始 Face Master：保持同一位小森的眉眼、鼻唇、下顎、下巴、臉型、膚色與年齡感，再確認「${e.label}」的表情與手勢清楚、制服原結構、${mode==='clean'?'無字幕':`唯一字幕「${e.caption}」`}、1:1 同時成立。先確認原眼型眼距、鼻口位置關係、人中、唇峰唇厚、下顎下巴、年齡感和膚色仍可辨為同一人，再看情緒是否貼題。若有漂移，回到原始 Face Master，只局部修正臉部並降低表情幅度；保留本題語意、手勢、制服、場景、字幕與 1:1，不改成另一張臉或把情緒抹成全中性。
 Photorealistic phone-captured reply portrait of the same adult Komori, original face reference used as actual image input, identity-first, restrained but clearly caption-matched human emotion and a semantically appropriate gesture for a Threads comment reply, third-person view, original work uniform, one person, square 1:1.`;
 }
-function promptForRecord(r){return r.version===KOMORI_REPLY_VERSION?promptForKomoriReply(r.reply,r.captionMode):r.version==='V.表情包'?promptForEmote(r.o,r.p,r.sourceVersion,r.ratio):promptFor(r.version,r.o,r.p,r.ratio,r.person);}
+function promptForRecord(r){return r.version===KOMORI_REPLY_VERSION?promptForKomoriReply(r.reply,r.captionMode):r.version==='V.表情包'?promptForEmote(r.o,r.p,r.sourceVersion,r.ratio,r.person):promptFor(r.version,r.o,r.p,r.ratio,r.person);}
 function komoriReplyCard(r){const f=!!state.fav[r.key],p=!!state.pending[r.key];return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">小森｜${esc(r.p.id)} · 1:1</div><div class="title">${esc(r.p.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏">♥</button></div><div class="sub"><span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.captionModeLabel)}</span><span class="tag">${esc(r.captionMode==='caption'?komoriReplyType(r.reply).label:'工作制服')}</span></div><div class="reply-use">${esc(r.reply.cue)}</div><div class="actions"><button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="usage">使用 ${r.u} 次</div></article>`;}
 
 function refreshKomoriReplySelects(){
@@ -1606,6 +1608,161 @@ Photorealistic real-world adult cosplay fashion photography. Identity-preserving
 
 const LS='vera_prompt_vault_v1';
 const EMOTES=[{"id":"E001","label":"好喔","category":"回覆用","frame":"近景","action":"正面看鏡頭，嘴角只有非常輕微禮貌弧度，慢慢點一下頭，眼神平靜甚至略帶敷衍；肩膀放鬆，整體是『好喔，我知道了』的淡定反應。"},{"id":"E002","label":"蛤？","category":"回覆用","frame":"近景","action":"頭微微向前探並偏一側，一邊眉毛自然抬起，眼睛略睜大但不能變成圓眼，嘴唇微張，像突然沒聽懂對方在說什麼。"},{"id":"E003","label":"真假啦","category":"回覆用","frame":"近景","action":"身體微向鏡頭靠近，眼神帶驚訝與懷疑，一手自然靠近嘴邊但不遮住五官，嘴巴微張，像剛聽到難以置信的消息。"},{"id":"E004","label":"你確定？","category":"回覆用","frame":"近景","action":"頭略偏、眉尾輕抬，眼神從側邊看向鏡頭，嘴唇輕抿，帶明顯懷疑感；雙手可自然抱胸或一手扶手臂。"},{"id":"E005","label":"先不要","category":"回覆用","frame":"半身","action":"一手掌心朝鏡頭做明確但不誇張的停止手勢，另一手自然放鬆；表情疲憊又堅定，像在阻止事情繼續發展。"},{"id":"E006","label":"等一下","category":"回覆用","frame":"半身","action":"抬起一根食指示意暫停，眼神專注、嘴唇微張像正要插話；上半身略向前，動作清楚但不做卡通式誇張。"},{"id":"E007","label":"笑死","category":"回覆用","frame":"近景","action":"真的忍不住笑出來，眼睛自然瞇起、臉頰因笑容抬高，一手可輕掩嘴角或扶胸；保留真實笑紋與臉部軟組織變化。"},{"id":"E008","label":"我真的會謝","category":"回覆用","frame":"半身","action":"露出非常克制的無奈假笑，眉毛微抬、眼神疲累，雙手在胸前輕輕合起或一手按胸口，呈現帶諷刺感的『謝謝喔』。"},{"id":"E009","label":"已讀但不想回","category":"回覆用","frame":"半身","action":"一手拿手機低頭看過訊息後把視線移開，嘴唇輕抿、表情冷淡，身體自然後靠，像明確決定先不回覆。"},{"id":"E010","label":"你繼續","category":"回覆用","frame":"近景","action":"托腮或單手支著下巴，另一手自然放著，側眼看向鏡頭，眉毛微抬，表情是『你繼續，我看你能講到哪』。"},{"id":"E011","label":"我在聽","category":"回覆用","frame":"半身","action":"雙手自然抱胸或一手扶另一手肘，身體正面，眼神穩定直視鏡頭，表情冷靜，沒有笑容，像真的在等對方講完。"},{"id":"E012","label":"沒事你說","category":"回覆用","frame":"半身","action":"露出一個非常勉強但禮貌的微笑，眼神卻明顯疲憊，一手做小幅度請繼續的手勢，反差形成無奈感。"},{"id":"E013","label":"可以不要嗎","category":"回覆用","frame":"半身","action":"雙手在胸前輕合做低調拜託手勢，肩膀微縮，眼神疲憊又帶一點求饒感，嘴角不必上揚。"},{"id":"E014","label":"我沒意見","category":"回覆用","frame":"半身","action":"嘴唇抿成近乎直線，視線稍微移開鏡頭，雙手自然攤開一點點，表面中立但明顯看得出其實很有意見。"},{"id":"E015","label":"辛苦了","category":"回覆用","frame":"半身","action":"一手比小幅度讚，表情真誠但帶疲倦，眼神柔和，另一手自然垂放；像在對同樣很累的人表示理解。"},{"id":"E016","label":"想下班","category":"崩潰系","frame":"半身","action":"上半身明顯鬆垮地往前趴或靠著桌面，一手托住臉頰，眼神放空，嘴角下垂，整體像電量只剩 1%。"},{"id":"E017","label":"事情好多","category":"崩潰系","frame":"半身","action":"雙手輕抓頭髮兩側或扶住太陽穴，眉心微皺，眼神在多個方向間無奈游移；不要真的拉扯髮型。"},{"id":"E018","label":"我不行了","category":"崩潰系","frame":"半身","action":"身體向一側靠著支撐物或用手撐住額頭，眼睛半閉，肩頸完全放鬆，像體力與精神都用完。"},{"id":"E019","label":"精神狀態良好（並沒有）","category":"崩潰系","frame":"近景","action":"對鏡頭露出過度禮貌但明顯僵硬的笑容，雙眼略空、眉毛有一點緊繃，雙手可端正放在身前，形成『看似正常但不正常』的反差。"},{"id":"E020","label":"表面冷靜內心尖叫","category":"崩潰系","frame":"半身","action":"臉部維持近乎無表情的冷靜狀態，但雙手在畫面下方緊握或抓住衣角，肩膀略僵硬，利用肢體透露內心崩潰。"},{"id":"E021","label":"不想面對","category":"崩潰系","frame":"半身","action":"一手遮住半張臉或額頭，頭微低並轉開鏡頭，另一手自然垂下，像拒絕繼續看眼前的事情。"},{"id":"E022","label":"我裂開了","category":"崩潰系","frame":"半身","action":"雙手放在太陽穴或頭兩側，眼神震驚又失焦，嘴巴微張；表情生動但五官幾何仍保持 Vera 身份。"},{"id":"E023","label":"這什麼鬼","category":"崩潰系","frame":"半身","action":"一手指向畫面外某個荒謬事物，眉心微皺、鼻部與嘴角出現自然嫌棄表情，身體微向後縮。"},{"id":"E024","label":"笑不出來","category":"崩潰系","frame":"近景","action":"完全沒有笑容，眼神直視鏡頭且略微疲憊，嘴唇自然閉合，肩膀下沉；畫面要有『連假笑都懶』的空白感。"},{"id":"E025","label":"好累但還活著","category":"崩潰系","frame":"半身","action":"身體微駝、眼睛半睜，一手比非常虛弱的讚，另一手扶著自己或支撐桌面，呈現勉強存活的幽默感。"},{"id":"E026","label":"我先去旁邊爛掉","category":"崩潰系","frame":"半身","action":"坐在地面或低矮處抱住膝蓋，身體縮成舒服但疲憊的姿勢，頭靠在膝上或牆邊，眼神放空。"},{"id":"E027","label":"我人呢","category":"崩潰系","frame":"半身","action":"正面坐著或站著，視線穿過鏡頭像靈魂出竅，嘴唇微張，手臂自然垂下，不做任何積極姿勢。"},{"id":"E028","label":"救命","category":"崩潰系","frame":"近景","action":"雙手靠近臉頰兩側但不要壓變形，眼神明顯求救，眉毛自然上抬，嘴巴小幅度張開；保持真人反應而不是卡通尖叫。"},{"id":"E029","label":"完蛋","category":"崩潰系","frame":"半身","action":"一手扶額，視線往下，嘴唇輕咬或抿住，眉心自然皺起，身體微向前縮，像突然意識到出大事。"},{"id":"E030","label":"今天先這樣","category":"崩潰系","frame":"半身","action":"疲憊地對鏡頭小幅度揮手告別，身體已經準備轉身離開，眼神像完全沒有力氣再處理任何事。"},{"id":"E031","label":"尊嘟假嘟","category":"Meme","frame":"近景","action":"頭明顯但自然地歪向一側，眼神帶玩味懷疑，一邊眉毛抬起，嘴角略帶笑意，像故意用可疑語氣確認真假。"},{"id":"E032","label":"已老實","category":"Meme","frame":"半身","action":"雙手舉到肩膀附近做輕度投降手勢，肩膀放鬆，嘴角收住，眼神看鏡頭，呈現『好，我不鬧了』的反應。"},{"id":"E033","label":"好荒謬","category":"Meme","frame":"半身","action":"先是忍不住笑、又露出無法理解的表情，一手扶額或碰太陽穴，另一手自然攤開，像對現況完全無語。"},{"id":"E034","label":"蛤我嗎","category":"Meme","frame":"半身","action":"一手指向自己胸口，頭稍微後仰，眼睛自然睜大，表情明顯是在確認『你是在叫我？』。"},{"id":"E035","label":"突然被點名","category":"Meme","frame":"近景","action":"頭快速但自然地轉向鏡頭來源，肩膀略抬、眼神瞬間集中，嘴巴微張，像剛剛還在放空卻突然聽到自己名字。"},{"id":"E036","label":"先觀望","category":"Meme","frame":"半身","action":"身體略躲在畫面邊緣或支撐物後方，只稍微探出身體觀察，眼神警覺又好奇，動作帶低調吃瓜感。"},{"id":"E037","label":"這題我會","category":"Meme","frame":"半身","action":"自信地舉起一隻手像要回答問題，嘴角微微上揚，眼神明亮但不幼態，身體稍微坐直。"},{"id":"E038","label":"有被冒犯到","category":"Meme","frame":"半身","action":"一手輕按胸口，眉毛抬起，身體略微後仰，嘴唇微張，表情是帶幽默感的『怎麼可以這樣』。"},{"id":"E039","label":"你再說一次","category":"Meme","frame":"近景","action":"身體微向前靠，頭略偏，眼神直接鎖定鏡頭，一邊眉毛輕抬，嘴角收緊，帶警告感但不暴怒。"},{"id":"E040","label":"我懂但我不接受","category":"Meme","frame":"半身","action":"先小幅度點頭表示理解，同時一手掌心朝外做拒絕手勢，表情冷靜堅定，呈現理解與拒絕同時存在。"},{"id":"E041","label":"不要情勒我","category":"Meme","frame":"半身","action":"一手掌心朝外做清楚界線手勢，另一手自然放下，眼神穩定、下巴保持自然高度，表情冷靜而明確。"},{"id":"E042","label":"這很可以","category":"Meme","frame":"半身","action":"眼神帶認可，輕輕點頭並比一個自然的讚，嘴角有小幅度真心笑意，整體乾淨俐落。"},{"id":"E043","label":"讓我想一下","category":"反應系","frame":"近景","action":"一手食指或指節輕碰下巴，眼神往上或側邊思考，眉毛自然收緊一點，嘴唇閉合。"},{"id":"E044","label":"我看不懂","category":"反應系","frame":"半身","action":"低頭看手機或畫面外物件，眼睛略瞇、眉心微皺，接著抬眼看向鏡頭，像完全無法理解內容。"},{"id":"E045","label":"這合理嗎","category":"反應系","frame":"半身","action":"雙手在腰上或胸前小幅度攤開，頭略偏，眉毛微抬，眼神直接問鏡頭，表達對事情合理性的質疑。"},{"id":"E046","label":"無言","category":"反應系","frame":"近景","action":"正面看鏡頭，臉部完全放鬆、嘴唇閉合，眼神略冷，停頓感很強；不需要手勢，用沉默本身形成表情包。"},{"id":"E047","label":"白眼","category":"反應系","frame":"近景","action":"眼球自然往上或斜上方移動形成真實白眼，頭部保持穩定，嘴角輕抿；不能把眼睛生成成不自然翻轉。"},{"id":"E048","label":"扶額","category":"反應系","frame":"半身","action":"一手自然扶住額頭或眉骨上方，眼睛輕閉或半閉，肩膀下沉，像被眼前事情耗盡耐心。"},{"id":"E049","label":"一臉問號","category":"反應系","frame":"近景","action":"頭微偏，眉毛呈不對稱疑惑，眼神直接看鏡頭，嘴唇微張但不誇張，呈現完全摸不著頭緒。"},{"id":"E050","label":"托腮看你演","category":"反應系","frame":"半身","action":"坐姿或靠桌，一手托住下巴或臉頰，眼神帶冷淡觀察感，嘴角幾乎無笑，像安靜看對方繼續演。"},{"id":"E051","label":"偷偷比讚","category":"反應系","frame":"半身","action":"身體正面但表情保持淡定，在畫面下方悄悄比一個小拇指讚，眼神略帶認可與幽默。"},{"id":"E052","label":"無奈鼓掌","category":"反應系","frame":"半身","action":"雙手在胸前做緩慢、幅度小的鼓掌動作，表情沒有真正開心，眉眼帶一點無奈與諷刺。"},{"id":"E053","label":"假裝沒聽到","category":"反應系","frame":"半身","action":"頭與視線明顯轉向另一側，像專注在完全無關的地方，一手可自然整理頭髮或碰耳側，故意忽略鏡頭。"},{"id":"E054","label":"想講但忍住","category":"反應系","frame":"半身","action":"嘴唇緊閉又微微動一下，像差點開口，一手抬到半途後收回或握住另一隻手，眉眼透露忍耐。"},{"id":"E055","label":"氣到鼓嘴","category":"反應系","frame":"半身","action":"臉頰非常輕微鼓起、嘴唇收緊，眉毛微皺，雙手抱胸；保持成年真人感，不做幼態動漫式嘟嘴。"},{"id":"E056","label":"你再鬧","category":"反應系","frame":"半身","action":"一手指向鏡頭或做小幅度警告手勢，眼神變得銳利一點但仍冷靜，嘴角壓平，像半認真半玩笑地制止。"},{"id":"E057","label":"裝乖","category":"反應系","frame":"半身","action":"雙手放在身後或自然併在身前，肩膀微收，頭略偏，露出克制的小微笑；仍維持 Vera 的成年感，不做娃娃式賣萌。"},{"id":"E058","label":"委屈但嘴硬","category":"反應系","frame":"半身","action":"雙手抱胸、頭微微轉開，眼神又偷偷看回鏡頭，嘴角略下壓，表現有點受傷但不願承認。"},{"id":"E059","label":"我只是路過","category":"反應系","frame":"半身","action":"身體側向準備離開，一手指向自己要去的方向或輕輕擺手，臉上是『跟我沒關係』的淡定表情。"},{"id":"E060","label":"撤退","category":"反應系","frame":"半身","action":"身體已轉成半側身準備離開，回頭看鏡頭並抬手小幅揮別，表情果斷又帶一點好笑的自保感。"},{"id":"E061","label":"自拍拳頭警告","category":"反應系","frame":"半身","action":"畫面必須是『手機前鏡頭自拍畫面本身』，不是第三人稱拍攝、不是鏡子自拍、不是旁人拍她拿手機。Vera 正用一隻手持手機開啟前置自拍鏡頭，手機本體通常不應出現在成像畫面中；鏡頭視角就是手機前鏡頭看見她的視角。另一隻手朝手機／鏡頭方向舉起拳頭，拳頭因靠近前鏡頭而有自然近大遠小與輕微廣角透視，像下一秒要往手機鏡頭揍過來，但只是玩鬧式威嚇，不真的撞擊鏡頭。她直視自拍鏡頭，眉頭輕皺、嘴角或臉頰帶一點生氣又可愛的反應，維持明確成年真人感，不做幼態娃娃臉。構圖要有真實手機自拍距離與手持感，可有些微手持歪斜與近距離透視；禁止出現另一台相機、禁止把手機畫在她手上並同時又以第三人稱拍攝。"},{"id":"E062","label":"感覺要被罵了","category":"反應系","frame":"半身","action":"肩膀縮起、胸口自然微微內收，上半身略往內縮，雙手抬在胸前，兩個食指彼此輕輕互戳；頭稍微低下但眼神委屈地看向鏡頭，眉尾輕抬、嘴角微微下壓，像知道自己等等要被罵而心虛又可憐。保持成年真人感，不做動漫式誇張賣萌。"},{"id":"E063","label":"跪地道歉","category":"崩潰系","frame":"全身","action":"雙膝跪在地面或跪坐在地上，上半身微微前傾，雙手在胸前合十，完整呈現跪姿與道歉手勢；眼眶可微濕、眉眼明顯委屈，嘴唇輕抿或微顫，像努力忍住哭腔、哽咽地對鏡頭道歉。情緒要真誠又帶一點表情包式戲劇感，但不要嚎啕大哭、不要誇張變形五官。"}];
+// Komori uses the existing E001–E063 phrases with her own camera-directed reactions.
+// Vera's original EMOTES array and saved E keys remain unchanged.
+const KOMORI_EMOTE_REACTIONS_V2328=Object.fromEntries([
+ ['E001','會意地提起一側嘴角，眼尾帶笑，像爽快回覆「好喔」；保留一點輕鬆敷衍感。','直視鏡頭，一手在肩旁比 OK，抓拍輕點頭的一瞬間；另一手攤在胸下，肩膀隨回應自然帶動。'],
+ ['E002','一邊眉毛自然抬起、另一邊略收，嘴唇輕分，疑惑清楚但眼睛尺寸不變。','近正面望鏡頭，頭向一側輕偏，一手掌心朝上抬到胸旁，像直接問觀眾「蛤？」；不要前探到變形。'],
+ ['E003','內眉輕提，嘴角帶不敢相信的笑意、嘴唇自然輕分，驚訝和懷疑同時可辨。','望著鏡頭，一手食指指向自己、另一手在胸旁攤開，上身略往後反應；捕捉聽到消息後向觀眾確認的一瞬間。'],
+ ['E004','單側眉毛抬起、嘴唇輕合，眼神專注而帶懷疑，像等對方重新確認。','雙臂低位自然抱胸，頭輕偏、身體近正面，一手從手臂旁攤起小半掌，直接對鏡頭提出質疑。'],
+ ['E005','眉部微收，嘴角壓平，疲憊中仍有清楚界線；不是憤怒瞪眼。','一手掌心朝鏡頭停在肩前，另一手掌心向下示意先停，身體稍往後；手與臉分開、不把手伸成巨掌。'],
+ ['E006','眉部自然提起、嘴唇輕分，像剛想起重要的事準備插話。','朝鏡頭抬起一根食指，另一手在胸旁示意暫停，上身小幅前傾；定格清楚的「等一下」手勢。'],
+ ['E007','嘴角明顯上揚、嘴唇自然分開，眼周因笑意輕收並帶真實笑紋，不把嘴橫向拉寬。','面向鏡頭，一手輕扶上腹衣面、另一手在胸旁攤開，肩膀隨忍不住的笑自然帶動；雙手不遮鼻眼和嘴。'],
+ ['E008','笑意只到嘴角，眉毛略提、眼神帶疲憊，讓「謝謝喔」的無奈反差明確。','朝鏡頭雙手在胸前合十，肩膀略聳、頭輕偏，像無奈地謝謝對方；不要改成真心大笑。'],
+ ['E009','嘴角收住、眼神淡淡帶著「我看到了，但先不回」的玩味。','一手把一支手機降到腰旁、螢幕朝自己，另一手食指在胸旁示意稍等，抬眼回應鏡頭；手機不遮臉、不出現聊天介面。'],
+ ['E010','一邊眉毛輕提、嘴角帶看穿對方的半笑，目光穩定而有停頓感。','望鏡頭，一手掌心朝上邀請對方繼續，另一手指節輕停下巴下方，不壓臉頰；上身自然微偏。'],
+ ['E011','眉部平穩、嘴角自然放鬆，目光認真專注，像確實在聽而不是空白凝視。','近正面朝鏡頭，一手在耳旁做清楚但不碰耳的聆聽手勢，另一手放胸下，頭小幅偏向鏡頭。'],
+ ['E012','嘴角勉強帶禮貌弧度、內眉輕提，眼神疲憊但仍示意對方繼續。','一手掌心朝上向鏡頭邀請繼續說，另一手低位扶住手肘，肩膀輕落；保留無奈和禮貌同時成立的反應。'],
+ ['E013','內眉稍提、嘴角輕壓，疲憊又想拜託對方，嘴唇自然輕分即可。','直視鏡頭，雙手在胸前合十、手肘放鬆，上身略前傾；像清楚地說「可以不要嗎」，不縮成幼態姿勢。'],
+ ['E014','嘴唇近乎水平、一邊眉尾略提，表面中立但眼神明顯有意見。','看向鏡頭，雙手在胸下自然攤開、肩膀輕聳，頭小幅偏向另一側，形成不說破的幽默反差。'],
+ ['E015','柔和而理解的眼神，嘴角有真誠的肯定笑意，仍帶一點共同疲憊感。','朝鏡頭比一個清楚的讚，另一手輕放自己上胸衣面，微微點頭致意；不是冷淡證件照。'],
+ ['E016','眼皮略放鬆、嘴角下垂，眼神像在向觀眾求一個下班許可。','坐在桌邊，一前臂靠桌、另一手虛弱地向鏡頭攤開，肩膀下沉、頭仍抬起；不托壓臉頰，桌緣保持低干擾。'],
+ ['E017','眉心自然收起、嘴唇輕分，眼神有忙不過來的焦急和無奈。','朝鏡頭攤開雙手在肩旁，手指自然張開、肩膀略提，上身微前傾；像把滿手事情攤給觀眾看，不抓頭髮。'],
+ ['E018','眼皮自然半垂、嘴角勉強動一下，疲憊清楚而五官仍放鬆。','一手扶桌邊承重、另一手朝鏡頭小幅示意投降，上身往一側自然卸力；臉不埋進手裡。'],
+ ['E019','努力保持禮貌的笑意、眉心卻有一點緊繃，讓「其實沒有很好」的反差明顯。','面向鏡頭，雙手比出端正的兩個讚，肩背略僵、頭輕偏，定格努力裝沒事的瞬間。'],
+ ['E020','嘴唇自然合起、表面鎮定，眉部和眼神留下一點繃住的壓力。','直視鏡頭，雙手在胸下輕握拳、手肘貼近身側，肩膀略繃；不抓衣角、不把臉扭成尖叫。'],
+ ['E021','眉心微收、嘴角下壓，眼神像在說「我真的不想看」。','一手停在額頭外側作擋視線的姿態，但保留兩眼鼻嘴可辨；另一手低位小幅擺手，頭輕偏後仍讓觀眾讀到回應。'],
+ ['E022','眉部上提又帶緊張、嘴唇自然輕分，難以置信的崩潰感明確。','望鏡頭，雙手張開停在頭部兩側外方，手掌與臉分開，上身略往後；不拉扯頭髮或壓頭。'],
+ ['E023','眉心自然微皺、嘴角一側下壓，嫌棄來自眉眼和嘴角，不用皺鼻改鼻型。','一手向畫面外側攤開指出荒謬情況，頭和目光仍回應鏡頭，另一手靠腰旁；不增加畫外事物到畫面內。'],
+ ['E024','嘴角放平、眼皮放鬆，對鏡頭有清楚的無奈停頓，而不是失去眼神焦點。','正面看鏡頭，肩膀下沉，一手在胸下攤開一小段又停住，像連假笑都懶得做。'],
+ ['E025','眼神疲倦卻還有一點自嘲笑意，嘴角只輕微上揚。','面向鏡頭比一個低位、略無力的讚，另一手撐在桌邊，身體略微卸力；手勢完整可見。'],
+ ['E026','眼皮略放鬆、嘴角自然下壓，疲憊中帶想躲開事情的無奈。','坐地靠牆抱起雙膝，頭離開膝蓋、抬眼回應鏡頭，一手在膝旁小幅揮別；保留坐地抱膝關係和完整臉部。'],
+ ['E027','目光短暫失神、嘴唇輕分，像靈魂還沒跟上對話；眼球和眼型自然。','身體近正面，一手停在剛抬到一半的胸旁、另一手垂放，肩膀略落，定格卡住的一瞬間，臉朝鏡頭。'],
+ ['E028','內眉自然提起、嘴角微壓，眼神向觀眾求助，嘴唇小幅分開。','雙手朝鏡頭方向攤開停在胸前，手肘自然彎曲，上身小幅前傾；是求救邀請，不伸到超近廣角處。'],
+ ['E029','眉心微收、嘴角收住，突然意識到出事的神情清楚，沒有咬到改唇形。','一手扶在額頭外側、另一手在胸旁停住，抬眼望鏡頭像在確認「完蛋了」；不遮眼鼻嘴。'],
+ ['E030','眼皮帶倦意、嘴角有一點放棄又好笑的弧度。','身體只略側向準備離開，一手在肩旁向鏡頭揮別，臉仍近正面回應；不變成背面離場照。'],
+ ['E031','單側眉毛抬起、嘴角帶玩味笑意，懷疑和故意逗觀眾的感覺同時存在。','頭自然輕偏，一手掌心朝上、一手食指指向鏡頭附近詢問真假；手指不貼近鏡頭或遮臉。'],
+ ['E032','嘴角收住又留一點認輸的笑，眼神直接承認自己不鬧了。','雙手張掌舉在肩旁作投降，肩膀放鬆、上身輕往後，對鏡頭清楚示意「已老實」。'],
+ ['E033','眉心帶困惑、嘴角卻忍不住帶笑，是同一瞬間的荒謬反差。','一手停在太陽穴外側、另一手朝鏡頭攤開，頭輕偏；不把先笑後困惑的多個瞬間拼在同張圖。'],
+ ['E034','眉部自然上提、嘴唇輕分，疑惑但帶「是在叫我嗎」的真人反應。','一手食指指向自己胸前衣面，另一手攤開，肩膀輕往後、眼神直問鏡頭；頭不後仰到變形。'],
+ ['E035','眉部略提、目光突然集中，嘴唇輕分，像剛回神被點名。','頭只從小幅側轉回近正面，一手抬到半途、肩膀自然一提，視線對上鏡頭；定格回神瞬間，沒有動態殘影。'],
+ ['E036','單側嘴角有克制的吃瓜笑意，眉眼好奇而警覺。','上身向一側輕偏再探向鏡頭，一手攏在胸下、另一手低位攤開，臉完整留在畫面；不躲到道具後。'],
+ ['E037','眉眼有精神、嘴角明顯帶自信笑意，不把眼睛放大。','面向鏡頭，一手清楚舉到肩上方像搶答，另一手指向自己，身體自然坐直；手不切出畫面。'],
+ ['E038','眉部稍提、嘴唇自然輕分，一側嘴角帶「怎麼可以這樣」的玩笑感。','一手放在自己上胸衣面、另一手攤向鏡頭，身體小幅往後反應，眼神仍和觀眾交流。'],
+ ['E039','單邊眉毛輕抬、嘴角壓平，目光專注且帶半認真的提醒。','一手在耳旁作再聽一次的手勢，另一手低位抱臂，上身只微微前傾，直接對鏡頭說話。'],
+ ['E040','眉眼平穩、嘴角略收，能看出理解但不同意的堅定。','朝鏡頭一手掌心向外拒絕、另一手食指在胸旁表示知道了，頭保留剛點頭後的端正位置；同一瞬間兩種語意並存。'],
+ ['E041','眼神穩定、眉部平穩、嘴唇自然合起，界線清楚而非暴怒。','一手掌心朝外停在肩前，另一手自然指向自己胸前表明立場，身體端正對鏡頭。'],
+ ['E042','眼尾帶真心笑意、嘴角自然上揚，認可清楚。','對鏡頭比一個明確的讚，另一手在胸下自然攤開，定格輕點頭之後的肯定反應。'],
+ ['E043','眉心輕收、嘴唇輕合，眼神有思考的停頓，不是無神。','一手食指停在下巴側下方、不壓臉，另一手食指示意等一下；頭微偏，目光短暫偏上但臉仍朝觀眾。'],
+ ['E044','眉心微皺、眼皮略收，嘴角有困惑，像想請對方再解釋。','一手把手機停在腰旁且螢幕朝自己，另一手向鏡頭攤開，視線抬回觀眾；不生成畫面文字或多支手機。'],
+ ['E045','眉部一高一低、嘴唇輕分，清楚地向觀眾提出質疑。','雙手在胸下左右攤開，肩膀微聳、頭輕偏，近正面望鏡頭，好像在問大家「這合理嗎」。'],
+ ['E046','嘴唇自然合起、眼神帶冷靜停頓，沒有笑意也不空洞。','近正面直視鏡頭，手臂自然低位抱起、肩膀略落，讓沉默與停頓形成回應，不額外補笑容。'],
+ ['E047','嘴角略抿，視線自然短暫移向斜上方，表達無奈白眼；保留正常眼皮和眼球位置。','頭維持近正面，一手低位攤開、另一手放鬆，肩膀小幅落下；不要同時要求直視鏡頭或露出大片眼白。'],
+ ['E048','眼皮自然短暫輕閉、眉心小幅收起，嘴角放鬆下壓，耐心用完的感覺清楚。','一手停在額頭外側，掌根不壓臉、不蓋住五官；另一手低位攤開，肩膀自然下沉。'],
+ ['E049','眉毛輕微不對稱、嘴唇小幅輕分，滿是疑惑卻不把眼睛瞪圓。','頭輕偏面向鏡頭，雙手在胸旁小幅攤開，像直接向觀眾討一個解釋。'],
+ ['E050','一邊眉尾稍提、嘴角有看穿的淡淡弧度，眼神耐心又帶一點冷幽默。','坐在桌旁，一手指節輕停下巴下方、另一手掌心朝上示意繼續；不托壓臉頰，目光回應鏡頭。'],
+ ['E051','嘴角努力維持淡定但眼尾有一點認可笑意。','一手在胸下悄悄比讚、另一手自然擋在手勢側方而不遮掉拇指，朝鏡頭交換會意眼神。'],
+ ['E052','眉部略提、嘴角勉強帶笑，明顯不是發自內心的開心。','面向鏡頭，雙掌在胸前剛好相觸，定格一次無奈鼓掌的清楚瞬間；不畫多雙手、拍手殘影或誇張笑臉。'],
+ ['E053','嘴角輕收、眉部卸力，刻意若無其事，讓「我沒聽到」一眼可讀。','頭向側邊小幅轉開，一手在耳旁外側隨意停住、另一手放鬆；這一題刻意避開鏡頭視線，臉仍保持三分之二以上可辨。'],
+ ['E054','嘴唇輕合、眉部微收，嘴角像努力壓住一句話，忍住的反應明確。','一手食指抬到胸前又停住，另一手輕握抬起的手腕，目光直對鏡頭；手不壓嘴、不遮唇形。'],
+ ['E055','臉頰只有輕微正常充氣、嘴唇自然閉合、眉部微收，像有點生悶氣；不擴大臉寬或變嘟唇。','雙臂低位抱胸、肩膀小幅繃住，近正面看鏡頭；身體姿態承擔主要氣惱感，臉部維持原比例。'],
+ ['E056','眉部輕收、嘴角壓平又藏一點玩笑，像在對觀眾說最後一次喔。','一手食指在肩前指向鏡頭方向，另一手扶住手肘，上身端正；手指不伸到臉前或超近處。'],
+ ['E057','嘴角收成克制笑意、目光偷偷帶笑，是成年女性故意裝乖的反應。','雙手端正併在胸下、肩膀小幅收住，頭輕偏後望鏡頭；不縮頭、縮肩或套用娃娃臉。'],
+ ['E058','內眉輕提、嘴角微下壓，眼神有委屈但仍不服輸，唇形自然。','雙臂低位抱胸，頭小幅偏開但眼神看回鏡頭，肩膀一側輕提；不把嘴噘長或新增眼淚。'],
+ ['E059','嘴角輕抿、眉尾稍提，淡定中帶一點「別找我」的幽默。','身體略側向出口方向，一手指向自己要去的畫外方向、另一手低位擺手，頭仍回向鏡頭；不另加出口文字。'],
+ ['E060','嘴角帶果斷又好笑的小弧度，眼神像在向觀眾說先走了。','身體只側轉約三十度，頭回向鏡頭、一手在肩旁揮別，另一手低位示意離開；不扭頸或轉成背面。'],
+ ['E061','眉部輕收、嘴角一側帶玩鬧的笑意，半認真的拳頭警告清楚，不瞪眼或壓扁臉。','手機前鏡頭自拍畫面本身，一手持拍攝手機且手機本體在成像畫外；另一手握拳停在肩前、朝鏡頭方向但不擋臉，只有自然有限的近大遠小，不實際碰撞鏡頭。'],
+ ['E062','內眉輕提、嘴角微下壓，心虛又想得到原諒，眼神望向觀眾。','雙手在胸前讓兩個食指輕碰，肩膀小幅內收、下巴只輕放低；臉仍完整可辨，不大幅低頭或縮脖子。'],
+ ['E063','眉眼有清楚歉意、眼眶可有很薄的自然濕潤，嘴唇輕合，保持成年原臉而不哭到扭曲。','雙膝自然跪地或跪坐，雙手在胸前合十，上身微前傾但頭抬起望鏡頭；同一畫面保留完整臉、手勢與雙膝，沒有其他人物。']
+].map(([id,expression,action])=>[id,{expression,action}]));
+const KOMORI_CAMERA_NEW_EMOTES_V2328=[
+ ['看到你了','眉部舒展、眼尾帶清楚笑意，像在人群裡終於找到對方。','一手在肩旁張掌招呼、另一手食指朝鏡頭方向點一下，身體微前傾，手不遮臉。',['嗨','招手','找到你']],
+ ['過來一下','嘴角上揚帶邀請笑意、眉尾自然提起，像有話想和對方說。','一手掌心向上停在胸前，手指自然彎曲作招呼過來的手勢；另一手靠腰旁，目光對著鏡頭。',['過來','來這邊','叫你']],
+ ['給你一個讚','眼周有真誠認可、嘴角自然笑開，少量露齒即可。','雙手在胸旁清楚比讚，兩肘放鬆、上身微向前，像把肯定送給鏡頭外的觀眾。',['稱讚','好棒','太厲害']],
+ ['真的謝謝你','笑意帶動眼尾和嘴角，真誠感謝清楚，不把嘴巴拉寬。','雙手在胸前比一個完整愛心，身體略前傾致意，愛心低於下巴、雙手不遮臉。',['感謝','愛心','謝啦']],
+ ['先抱一下','眼神柔和關心、嘴角帶暖暖笑意，像接住對方的情緒。','雙臂向鏡頭外的觀眾張開、前臂自然彎曲，抓拍邀請擁抱的一瞬間；畫面只有小森。',['抱抱','安慰','擁抱']],
+ ['看著我說','眉眼專注、嘴角自然收住，認真但不兇。','一手的食指和中指在胸上方指向自己的眼睛方向，與臉保持間距；另一手掌心朝觀眾邀請回答，不碰眼周。',['看我','認真聽','眼神']],
+ ['你是不是心虛','單側眉毛自然輕提，嘴角勾起帶看穿的玩味笑。','雙臂低位抱胸，一手小幅攤向鏡頭，上身輕微側傾，眼神像在等對方承認。',['心虛','被抓包','說實話']],
+ ['我就靜靜看你','嘴角近乎不動，眼神有清楚的觀察與停頓，不是空白臉。','雙手在胸下自然交疊，頭稍偏、肩膀放鬆，近正面對鏡頭停住，像已經看穿對方。',['看你演','靜靜','觀察']],
+ ['被我抓到了','眉尾略提、嘴角藏不住得意笑意，俏皮而保有成年感。','一手食指指向鏡頭方向、另一手輕靠腰側，身體自然微前傾，像當面抓包；手不貼近鏡頭。',['抓包','抓到了','發現']],
+ ['這邊請','眼神友善、嘴角帶清楚招呼笑意，沒有固定服務式假笑。','身體略側讓出一點空間，一手掌心朝上指向畫面側方，另一手自然放下，頭和視線仍回應鏡頭。',['請進','這邊','帶路']],
+ ['換你了','眉部自然提起、嘴角帶期待，像把話題交給對方。','一手從胸前攤向鏡頭方向，另一手回到自己胸下，頭輕偏，抓拍邀請觀眾接話的一瞬間。',['輪到你','你說','交給你']],
+ ['我替你開心','眼尾和嘴角自然帶開心反應，少量露齒、真實笑紋可見。','雙掌在胸前剛相觸作慶祝鼓掌，肩膀有輕快的帶動，目光朝鏡頭；不生成拍手殘影。',['開心','恭喜','慶祝']],
+ ['這次算你厲害','單側眉尾提起、嘴角忍不住帶笑，像不甘願又承認對方很強。','一手比讚、另一手張掌作小幅投降，身體微往後，視線直對鏡頭。',['服了','厲害','認輸']],
+ ['你先冷靜','目光穩定、眉部舒展，嘴角有安撫笑意但不敷衍。','雙手在胸前掌心朝下做放慢手勢，上身小幅向前關心觀眾，頭保持端正。',['冷靜','別急','慢慢說']],
+ ['說好了喔','嘴角帶期待笑意、眉尾自然輕提，眼神像在認真確認約定。','一手在肩前自然伸出小指作打勾勾邀請，另一手放在胸下；畫面不加入對方的手或第二人。',['約定','打勾勾','說好']],
+ ['別怕有我','內眉帶關心、目光可靠，嘴角有清楚但不誇張的支持笑意。','一手輕放自己上胸衣面、另一手掌心朝觀眾伸出一小段，肩背穩定，像在給對方安全感。',['別怕','有我','支持你']],
+ ['來，擊掌','眉眼有精神、嘴角自然笑開，像等著和對方一起慶祝。','一手張掌舉在肩上方朝向鏡頭，另一手低位比讚，手掌與臉分開且不過度靠近鏡頭；不新增第二隻對方的手。',['擊掌','high five','合作']],
+ ['等你誇我','嘴角帶一點得意、眼尾藏笑，像完成事情後期待被稱讚。','雙手拇指輕指向自己，肩膀放鬆、頭小幅偏，直接望鏡頭等待回應。',['誇我','求稱讚','我棒嗎']],
+ ['我真的生氣喔','眉部輕收、嘴角壓平，認真的氣惱感清楚，但原眼型和鼻型不變。','雙臂在胸下自然抱起，肩膀一側微提、頭近正面望鏡頭；不擠壓胸口、不朝鏡頭揮拳。',['生氣','不高興','提醒']],
+ ['你忍心嗎','內眉自然輕提、嘴角小幅下壓，像帶一點委屈向對方討答案。','雙手掌心朝上停在胸旁，頭輕偏但不低到失去臉，眼神直向鏡頭；不加大眼或幼態噘嘴。',['忍心','拜託','委屈']],
+ ['可以再說一次嗎','眉眼好奇、嘴唇輕分，像真的沒聽清楚而想再聽一次。','一手在耳外方作聆聽手勢、另一手食指示意一次，頭自然小幅偏向鏡頭，手掌不碰耳或壓臉。',['再說一次','沒聽清楚','重複']],
+ ['我才沒有','眉尾略提、嘴角努力收住卻露出一點心虛笑意。','雙手在胸旁張掌小幅否認，頭只有輕微否定傾向、眼神仍回應鏡頭，抓拍單一清楚瞬間。',['否認','才不是','嘴硬']],
+ ['你最好是','單側眉毛輕抬、嘴角帶懷疑的半笑，像不完全相信對方。','一手低位抱臂、另一手掌心朝上等解釋，身體小幅偏向一側，直接看鏡頭。',['最好是','我不信','懷疑']],
+ ['先讓我得意一下','眉眼有開心的自信、嘴角明顯上揚，得意但不誇張咧嘴。','一手拇指朝自己胸前、另一手低位攤開，肩背自然坐直，頭略偏向鏡頭。',['得意','自豪','我做到了']],
+ ['這個我收藏了','目光明亮有認可，嘴角帶記住了的會意笑。','雙手拇指與食指在胸前框出一個小方形，臉在手勢上方完整可見，像為觀眾的好點子定格；不加畫框或介面。',['收藏','記下來','存起來']],
+ ['我在這邊啦','眉尾自然提起、嘴角帶忍不住提醒對方的笑意。','身體向畫面一側小幅偏，單手在肩上方張掌招呼，另一手食指指向自己，臉仍完整朝鏡頭。',['在這裡','看這邊','注意我']],
+ ['要不要一起','眼神帶期待、嘴角有友善邀請笑意，像等對方加入。','一手向自己身旁空位攤開、另一手朝鏡頭作邀請，身體稍側但頭面向觀眾；不加入第二人。',['一起','邀請','加入']],
+ ['不准笑我','眉部小幅收起、嘴角想忍笑又有點不好意思，半認真半玩笑。','一手食指在肩前提醒鏡頭、另一手輕放自己胸前，肩膀自然微收，臉不躲開。',['不准笑','害羞','提醒你']],
+ ['好啦原諒你','嘴角從收住變成一點忍不住的笑意，像已經心軟的當下。','一手掌心朝外作算了的小幅擺手，另一手放胸下，頭輕偏望鏡頭；定格心軟的單一瞬間。',['原諒','算了','好啦']],
+ ['今天也拜託你了','目光真誠、眉部舒展，嘴角有清楚感謝與期待。','雙手在胸前合十，上身小幅前傾、頭抬起和鏡頭交流，像當面拜託觀眾；不深鞠躬遮臉。',['拜託','今天','請多指教']]
+].map(([label,expression,action,aliases],i)=>({id:'E'+String(64+i).padStart(3,'0'),label,category:'鏡頭互動',frame:'半身',expression,action,aliases:[...aliases,'鏡頭互動新題'],newKomoriCameraEmote:true}));
+const KOMORI_EMOTES_V2328=[...EMOTES.map(e=>{
+ const patch=KOMORI_EMOTE_REACTIONS_V2328[e.id];if(!patch)throw Error('Missing Komori emote reaction '+e.id);
+ return {...e,...patch,aliases:[...(e.aliases||[]),'小森原題更新'],komoriCameraEmote:true};
+}),...KOMORI_CAMERA_NEW_EMOTES_V2328];
+const KOMORI_EMOTE_BY_ID_V2328=new Map(KOMORI_EMOTES_V2328.map(e=>[e.id,e]));
+function emotesForPersonV2328(person='Vera'){return person==='小森'?KOMORI_EMOTES_V2328:catalog.emotes;}
+function emotesForSelectionV2328(){return $('#person').value==='小森'?KOMORI_EMOTES_V2328:$('#person').value==='ALL'?[...catalog.emotes,...KOMORI_CAMERA_NEW_EMOTES_V2328]:catalog.emotes;}
+function emoteForPersonV2328(id,person){return person==='小森'?KOMORI_EMOTE_BY_ID_V2328.get(id):catalog.emotes.find(e=>e.id===id);}
+function updateEmotePresentationV2328(){
+ const visible=$('#version').value==='V.表情包',people=photoPeople('V.表情包');
+ $('#emoteInteractionNote').classList.toggle('is-hidden',!visible);
+ $('#emoteInteractionNote').textContent=people.includes('小森')?`小森表情包 93 題：既有 E001–E063 已逐題更新，新增 E064–E093 鏡頭互動；可搭配所選服裝與 1:1／9:16，預設無字幕。眼神、手勢和姿態回應鏡頭，臉仍以每次附上的小森原始 Face Master 為準。${people.length>1?' Vera 保留原有 63 題。':''}`:'Vera 保留原有 63 題表情包，可搭配所選服裝與 1:1／9:16，預設無字幕。';
+}
+function promptForKomoriEmoteV2328(o,e,sourceVersion,ratio='1:1'){
+ const profile=personProfile('小森'),actualRatio=ratio==='9:16'?'9:16':'1:1',isSelfie=e.id==='E061';
+ const frame=e.id==='E063'?'完整頭頂、雙手合十及雙膝跪地關係都在畫面中的中全身構圖':e.id==='E026'?'完整頭頂到抱起的膝蓋，保留坐地、雙手與臉部的中景':e.frame==='近景'?'完整頭頂到胸下的中近景；本題主要手勢若較低，僅延伸到腰上以保留完整手指':'完整頭頂到腰上／大腿最上段的半身中景，臉與主要手勢同時清楚';
+ const camera=isSelfie?'本題是手機前鏡頭自拍成像本身：鏡頭就是小森持有手機的前鏡頭，只有一支拍攝手機且本體留在成像畫外；不是旁人拍她舉手機、不是鏡子自拍。前鏡頭保持正常距離，臉在畫面中央附近；允許拳頭有限的正常近大遠小，不把臉或拳頭拉伸。':'鏡頭是被回覆的觀眾所在方向，像朋友從正常手機距離拍到小森直接回應自己。採接近眼平的自然中近景視角，手勢可以向觀眾表達，臉與相機保持合理距離，不靠超近廣角、俯仰鏡位或誇張透視製造活潑感。';
+ const gaze=['E043','E047','E048','E053'].includes(e.id)?'本題思考、白眼、輕閉眼或故意移開視線時，依上方指定的眼神方向執行，不再強迫同時睜眼直視鏡頭；身體和手勢仍清楚回應鏡頭外的觀眾。':'目光落在鏡頭光心附近，像真的把這句話說給正在看圖的人；頭部保持近正面或本題必要的小幅偏轉，不看向無關的畫外攝影師。';
+ return `${photoReferenceGate(profile)}
+
+【本題標題】
+小森｜${e.id}・${o.id}｜${e.label}｜${o.label}｜${actualRatio} 表情包
+
+【用途與鏡頭對話感】
+小森／藍予晴，23 歲明確成年女性的真人聊天反應圖。這句「${e.label}」是直接回應鏡頭外的觀眾；畫面只有同一位小森，不新增收訊者、第二人、聊天介面或旁觀者。眼神、手勢、肩膀與上身姿態一起表達同一個意思，縮成聊天小圖也應讀得到；不是穿搭擺拍或固定禮貌微笑。
+
+【本題表情與動作｜${e.id}「${e.label}」】
+表情：${e.expression}
+動作：${e.action}
+${gaze}
+只定格本題最清楚的一個反應瞬間，不把點頭、轉頭、說話等前後多個動作拼在同張圖，不增加殘影或多重手腳。語意若是無言、疲累或冷淡，就讓停頓、肩膀與手勢清楚，不硬加開心笑容；開心、認可或驚訝也不能全部收成同一個淡笑。
+
+【表情生動但不換臉】
+原始 ${profile.face} 的同一顆頭部骨架與五官辨識關係優先：原眼型眼距、鼻樑鼻翼、鼻唇距、人中、唇峰與基礎唇厚、顴骨、下顎、下巴、耳位、膚色及自然不對稱不變。允許真實的眉部肌肉張力、眼皮開合、視線、嘴角、少量自然露齒、笑紋及臉頰軟組織隨本題反應；身份硬鎖不等於固定中性臉。
+生動感主要由本題眼神、手勢和身體節奏協調產生，不放大眼球、把眼睛改圓、拉寬嘴巴、加厚嘴唇、縮鼻、削臉或尖下巴。手掌和手指不壓變形臉頰、不遮住眼鼻嘴的主要辨識區；臉頰充氣、白眼或閉眼只做到自然可辨，不變成卡通幾何。若反應幅度開始影響原臉，降低幅度並保留同一語意與手勢；不另抽一張「更會表情」的臉。
+
+【服裝來源｜${sourceVersion} → ${o.id}】
+${o.detail||o.label+'。完整保留所選服裝的款式、材質、顏色、領口、肩帶、衣長與上下身搭配。'}
+完整穿著同一套 ${o.id}「${o.label}」，不因表情或手勢換衣、拉低領口、改款或新增制服、外套與首飾；只保留本題明列的配件或道具。沒有明列手機、桌面等道具時，不另外補上。公版服裝只引用唯一【服裝設定】段落。
+
+【人物、身形與參考分工】
+${profile.face} 是唯一臉部身份來源，每次生成都須讓原始圖像本身實際進入 image／reference input；檔名、描述、聊天記憶及歷史生成圖不能代替。${profile.body} 只維持原身形，${profile.angle} 只輔助必要的旋轉，二者及所有服裝圖的臉部身份權重為 0。
+${profile.bodyLock}
+${profile.hair}
+${profile.makeup}
+
+【${actualRatio} 畫布、鏡頭與真實攝影】
+單張、單格、單一人物，固定 ${actualRatio}。${frame}。不要為了手勢裁掉頭頂、縮頭、縮肩、拉長身體或改臉；手指完整且關節合理。
+${camera}
+背景為${o.bg||'簡潔中性棚景'}或低干擾的真實生活空間，不搶過臉和手勢。柔和真實環境光、自然陰影、原膚色、毛孔、眼下細紋、唇紋、髮絲與衣料摺痕保留；不磨皮、漂白、換網紅模板臉或套塑膠皮膚。沒有圖內字幕、對話框、格子編號、額外 Logo 或浮水印；衣裝原有圖案按所選服裝保留。
+
+【最後比對】
+先比對原始 ${profile.face}，再確認「${e.label}」的眼神、表情、手勢和身體姿態同時成立。應是同一位小森在對觀眾表達這句話，而不是另一張臉做出誇張表情；有偏移時回到原始 Face Master 局部修正臉，保留本題動作、衣服、場景與 ${actualRatio}。
+Photorealistic camera-directed reaction portrait of the same adult Komori, age 23, original face reference used as actual image input. Clear conversational emotion and a semantically matched gesture toward the viewer, natural facial muscle movement without redesigning facial geometry, one person, ${actualRatio}, no captions.`;
+}
+
 const state=loadState();
 let catalog={inner:[],fashion:[],cos:COS_OUTFITS,poses:[],emotes:EMOTES}, filtered=[], page=1, pageSize=30, current=null, activeView='all';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
@@ -1625,7 +1782,7 @@ function entityFavoriteChoicesV2320(){
  const version=$('#version').value,isEmote=version==='V.表情包';
  if(isKomoriReply())return {outfits:[],poses:[]};
  const source=isEmote?$('#outfitSource').value:version;
- return {outfits:version==='V.cos'?cosFilteredOutfits():isEmote?outfitsForEmoteSource(source):photoFilteredOutfits(source),poses:isEmote?catalog.emotes:catalog.poses};
+ return {outfits:version==='V.cos'?cosFilteredOutfits():isEmote?outfitsForEmoteSource(source):photoFilteredOutfits(source),poses:isEmote?emotesForSelectionV2328():catalog.poses};
 }
 function entityOutfitOptionsV2320(outfits,version){
  const saved=outfits.filter(o=>isEntityFavoriteV2320('outfit',o.id)),rest=outfits.filter(o=>!isEntityFavoriteV2320('outfit',o.id));
@@ -1638,7 +1795,7 @@ function entityPoseOptionsV2320(items,isEmote,isCos){
  const saved=items.filter(p=>isEntityFavoriteV2320('pose',p.id)),rest=items.filter(p=>!isEntityFavoriteV2320('pose',p.id));
  const option=(p,star=false)=>`<option value="${p.id}">${star?'★ ':''}${p.id}｜${esc(p.id!=='P00'&&isCos&&COS_PRODUCT_ROLE_IDS.includes($('#cosRole').value)?ropeCostumePoseLabel(p):p.label)}${isEmote?'｜'+esc(p.category):''}</option>`;
  const first=saved.length?'<optgroup label="★ 收藏'+(isEmote?'表情包':'動作')+'（'+saved.length+'）">'+saved.map(p=>option(p,true)).join('')+'</optgroup>':'';
- return first+(isEmote?rest.map(p=>option(p)).join(''):[{label:'影片參考圖（16:9・橫排直式四格）',rows:rest.filter(p=>p.id==='P00')},{label:'本次照片參考動作（P146–P151）',rows:rest.filter(p=>p.referencePoseRevision)},{label:'既有動作',rows:rest.filter(p=>!p.referencePoseRevision&&p.id!=='P00')}].filter(g=>g.rows.length).map(g=>'<optgroup label="'+g.label+'">'+g.rows.map(p=>option(p)).join('')+'</optgroup>').join(''));
+ return first+(isEmote?[{label:'鏡頭互動新題（E064–E093）',rows:rest.filter(p=>p.newKomoriCameraEmote)},{label:'既有表情包（E001–E063）',rows:rest.filter(p=>!p.newKomoriCameraEmote)}].filter(g=>g.rows.length).map(g=>'<optgroup label="'+g.label+'">'+g.rows.map(p=>option(p)).join('')+'</optgroup>').join(''):[{label:'影片參考圖（16:9・橫排直式四格）',rows:rest.filter(p=>p.id==='P00')},{label:'本次照片參考動作（P146–P151）',rows:rest.filter(p=>p.referencePoseRevision)},{label:'既有動作',rows:rest.filter(p=>!p.referencePoseRevision&&p.id!=='P00')}].filter(g=>g.rows.length).map(g=>'<optgroup label="'+g.label+'">'+g.rows.map(p=>option(p)).join('')+'</optgroup>').join(''));
 }
 function updateEntityFavoriteControlsV2320(){
  const reply=isKomoriReply();$('#entityFavoriteControls').classList.toggle('is-hidden',reply);if(reply)return;
@@ -1921,9 +2078,9 @@ function customWardrobeRecordV2325(){
  if(isKomoriReply())return null;
  const version=$('#version').value,isEmote=version==='V.表情包',sourceVersion=isEmote?$('#outfitSource').value:version;
  const o=outfitsForVersion(sourceVersion).find(o=>o.id===$('#outfit').value&&o.customWardrobe);
- const items=isEmote?catalog.emotes:catalog.poses,p=items.find(p=>p.id===$('#pose').value)||items[0];
+ const person=$('#person').value==='ALL'?(isEmote&&KOMORI_EMOTE_BY_ID_V2328.has($('#pose').value)&&!catalog.emotes.some(e=>e.id===$('#pose').value)?'小森':'Vera'):$('#person').value,items=isEmote?emotesForPersonV2328(person):catalog.poses,p=items.find(p=>p.id===$('#pose').value)||items[0];
  if(!o||!p)return null;
- const person=isEmote||$('#person').value==='ALL'?'Vera':$('#person').value,ratio=isEmote?customWardrobeEmoteRatioV2325:p.id==='P00'?'16:9':'9:16',key=keyOf(version,o,p,sourceVersion,ratio,person);
+ const ratio=isEmote?customWardrobeEmoteRatioV2325:p.id==='P00'?'16:9':'9:16',key=keyOf(version,o,p,sourceVersion,ratio,person);
  return {version,sourceVersion,o,p,person,ratio,key,u:state.usage[key]||0};
 }
 function updateCustomWardrobeDetailV2325(){
@@ -1934,7 +2091,7 @@ function updateCustomWardrobeDetailV2325(){
 function resolveCustomWardrobeV2323(o){return {...o,customWardrobe:false,customWardrobeResolved:true,detail:PUBLIC_WARDROBE_REFERENCE_V2323,role:'custom',roleLabel:'自訂服裝',variant:'custom',variantLabel:'公版',style:'custom',styleLabel:'公版穿搭',color:'custom',colorLabel:'依服裝設定',cut:'使用者指定版型',primaryColor:'依【服裝設定】指定',secondaryColor:'依【服裝設定】指定',accessories:'只保留【服裝設定】明列的衣裝配件，不主動添加。',referenceNote:'只使用當次填寫的衣裝，不沿用其他角色的款式、配色、假髮、臉部或身形。'};}
 function promptForCustomWardrobeV2323(version,o,p,ratio='9:16',person='Vera',emote=false){
  flushCustomWardrobeDraftV2323();
- const resolved=resolveCustomWardrobeV2323(o),base=emote?promptForEmote(resolved,p,version,ratio):promptFor(version,resolved,p,ratio,person);
+ const resolved=resolveCustomWardrobeV2323(o),base=emote?promptForEmote(resolved,p,version,ratio,person):promptFor(version,resolved,p,ratio,person);
  const block=`【服裝設定｜只需填寫此處】\n${customWardrobeTextV2323()||'服裝請填寫在此'}\n\n【公版服裝使用規則】\n本段只定義本次衣裝，不改變人物身份、身形、髮型、妝容、所選動作與構圖。所有後續服裝段落、配色與驗收條件都引用上方同一段內容；不另行配衣、不借用 Body Master 的衣服，也不沿用其他題目的服裝或角色。若尚未填寫，先完成上方服裝內容再生成。`;
  const at=base.indexOf('【本題標題】');
  return at<0?block+'\n\n'+base:base.slice(0,at)+block+'\n\n'+base.slice(at);
@@ -1959,7 +2116,7 @@ function bindCustomWardrobeV2323(){
  ['input','change','compositionend','blur'].forEach(event=>input.addEventListener(event,sync));
  $('#applyCustomWardrobe').addEventListener('click',()=>{sync();const record=customWardrobeRecordV2325();if(record)openR(record);});
  $('#copyCustomWardrobe').addEventListener('click',()=>{sync();const record=customWardrobeRecordV2325();if(record)copyR(record);});
- $('#editCustomWardrobe').addEventListener('click',()=>{if(!current?.o?.customWardrobe)return;const r=current;if($('#version').value!==r.version||r.version==='V.表情包'&&$('#outfitSource').value!==r.sourceVersion){$('#version').value=r.version;if(r.version==='V.表情包')$('#outfitSource').value=r.sourceVersion;refreshSelects();}$('#person').value=r.person;$('#outfit').value=r.o.id;$('#pose').value=r.p.id;if(r.version==='V.表情包')customWardrobeEmoteRatioV2325=r.ratio;$('#sheet').classList.remove('show');page=1;render();input.focus();$('#customWardrobePanel').scrollIntoView({block:'nearest',behavior:'smooth'});});
+ $('#editCustomWardrobe').addEventListener('click',()=>{if(!current?.o?.customWardrobe)return;const r=current,refresh=$('#version').value!==r.version||$('#person').value!==r.person||r.version==='V.表情包'&&$('#outfitSource').value!==r.sourceVersion;$('#person').value=r.person;if(refresh){$('#version').value=r.version;if(r.version==='V.表情包')$('#outfitSource').value=r.sourceVersion;refreshSelects();}$('#person').value=r.person;$('#outfit').value=r.o.id;$('#pose').value=r.p.id;if(r.version==='V.表情包')customWardrobeEmoteRatioV2325=r.ratio;$('#sheet').classList.remove('show');page=1;render();input.focus();$('#customWardrobePanel').scrollIntoView({block:'nearest',behavior:'smooth'});});
  $('#grid').addEventListener('click',event=>{const button=event.target.closest('[data-act="customOutfit"]');if(!button)return;const card=button.closest('.card'),record=card&&byKey(card.dataset.key);if(!record?.o?.customWardrobe)return;$('#person').value=record.person;$('#outfit').value=record.o.id;$('#pose').value=record.p.id;if(record.version==='V.表情包')customWardrobeEmoteRatioV2325=record.ratio;$('#advancedFilters').open=true;page=1;render();$('#customWardrobeText').focus();$('#customWardrobePanel').scrollIntoView({block:'nearest',behavior:'smooth'});});
  window.addEventListener('pagehide',flushCustomWardrobeDraftV2323);
 }
@@ -2139,7 +2296,7 @@ function personPose(p,person){
  if(person!=='小森')return p;
  return {...p,action:String(p.action||'').replaceAll('Vera／周語棠','小森').replaceAll('Vera','小森').replaceAll('26 歲','23 歲').replaceAll('26歲','23歲').replaceAll('FaceMaster_v1.0.png','小森半身正臉_FaceMaster.jpeg').replaceAll('BodyMaster_v1.0.jpeg','小森全身照_BodyMaster.jpeg').replaceAll('AngleAux_v1.0.jpeg','小森半身側臉_AngleAux.jpeg')};
 }
-function photoPeople(version){return version==='V.表情包'?['Vera']:$('#person').value==='ALL'?['Vera','小森']:[$('#person').value]}
+function photoPeople(version){return $('#person').value==='ALL'?['Vera','小森']:[$('#person').value]}
 function migratePhotoState(){
  const obsolete=k=>/^(?:S\|)?[IF]\|[^|]+\|[^|]+\|1x1$/.test(k);
  const changed=['fav','pending','usage'].some(n=>Object.keys(state[n]||{}).some(obsolete))||(state.recent||[]).some(obsolete);
@@ -2150,7 +2307,7 @@ function migratePhotoState(){
  state.photoFormatVersion=2;saveState();
 }
 
-function keyOf(version,o,p,sourceVersion,ratio,person='Vera'){const actual=ratio||(version==='V.表情包'?'1:1':'9:16');if(version==='V.表情包'){const base='E|'+(sourceVersion==='V.內著寫真'?'I':'F')+'|'+o.id+'|'+p.id;return actual==='1:1'?base:base+'|9x16'}return (person==='小森'?'S|':'')+(version==='V.cos'?'C':version==='V.內著寫真'?'I':'F')+'|'+o.id+'|'+p.id}
+function keyOf(version,o,p,sourceVersion,ratio,person='Vera'){const actual=ratio||(version==='V.表情包'?'1:1':'9:16');if(version==='V.表情包'){const base=(person==='小森'?'S|':'')+'E|'+(sourceVersion==='V.內著寫真'?'I':'F')+'|'+o.id+'|'+p.id;return actual==='1:1'?base:base+'|9x16'}return (person==='小森'?'S|':'')+(version==='V.cos'?'C':version==='V.內著寫真'?'I':'F')+'|'+o.id+'|'+p.id}
 function expressionFor(p){
  const label=String(p?.label||'').trim();
  const action=String(p?.action||'');
@@ -2306,8 +2463,9 @@ ${innerStory}
  const purposeText=person==='小森'?profile.purpose+'本題為 '+kind+' 與攝影作品集用途。重點是服裝剪裁、搭配、身形比例、姿勢與真人攝影質感。畫面只有小森一位人物。':`Vera 是 26 歲明確成年女性，也是有經驗的專業寫真／時裝模特兒。本題為 ${kind} 與攝影作品集用途。她知道如何依照攝影師口令自然切換姿勢與表情，因此畫面應像真實品牌拍攝現場，而不是僵硬的 AI 人像。重點是服裝剪裁、搭配、身形比例、姿勢、故事氛圍與真人攝影質感。畫面只有 Vera 一位人物。`;
  return `${photoReferenceGate(profile)}\n\n【最高優先級｜Face Master 單一身份硬鎖】\n先鎖定人物身份，再處理服裝、身形、髮型、姿勢、表情、燈光與背景。最終人物固定為 ${profile.face} 中同一位 ${profile.age} 歲、明確成年的東亞女性 ${profile.fullName}。Face Master 是唯一可定義臉部的圖像來源，權重高於所有造型與攝影要求。不得把 Angle Auxiliary、Body Master、服裝參考或任何舊生成圖的臉與 Face Master 平均、融合或重建成第三張臉。保留 Face Master 的真實五官比例、自然年齡感、真實膚質、毛孔、細紋、細微瑕疵與左右不對稱；禁止網紅模板臉、AI beauty face、娃娃感、塑膠皮膚、瓷器皮膚、CGI 或 3D render 感。\n\n【本題標題】\n${title}\n\n【人物與拍攝用途】\n${purposeText}\n\n${innerBoundary}【參考圖分工】\n${profile.face}：唯一臉部身份錨點，只定義「${profile.name} 是誰」。\n${profile.body}：${profile.referenceBody}\n${profile.angle}：只輔助同一人物在不同角度下的頭身旋轉幾何，不改變鼻型、眼型、唇型、下顎或人物身份。\n\n${referenceFashionRulesV2319(o)?referenceFashionRulesV2319(o)+"\n\n":""}【服裝硬鎖｜${o.id}】\n${outfitDetail}\n服裝固定；不同 P 姿勢只能改變姿勢、視角、表情與必要的自然髮絲動作。內著題以「品牌型錄正在拍攝這一套商品」來理解服裝：保持完整穿著與原始結構，不為了戲劇效果移動、掀開、拉低或拆解服裝。網紗與蕾絲若為不同層必須維持不同層；Corset／Bustier 外穿時不得變成其他服裝；Dress／Bodysuit／裙裝維持原有結構。胸前線條只由原剪裁、重力、Body Master 身形與姿勢自然形成，不為了線條改造服裝。\n\n【身形硬鎖】\n${profile.bodyLock}\n\n${fashionBodyStabilityV12(p,person)}\n\n【髮型硬鎖】\n${profile.hair}\n\n【妝容】\n${profile.makeup}\n\n【飾品】\n${referenceFashionAccessoriesV2319(o)}\n\n【表情跟隨動作，但臉部身份不得漂移｜Face Master 表情硬鎖】\nFace Master 鎖定的是 ${profile.name} 的人物身份與結構性臉部幾何，不是把她鎖成永遠同一號表情。表情必須隨本題 ${p.id} canonical 動作自然切換；不同姿勢若指定不同情緒，第一眼應能看出自然、可辨識的差異。\n本題表情執行：${expression}\n表情強度原則為約 30–50%：自然可辨識，但不戲劇化。笑、閉眼、眨眼、鼓嘴、嘟嘴、挑眉、嫌棄、無辜、俏皮、慵懶等都可以有正常的人類肌肉與軟組織變化；允許眼皮閉合程度、眉部肌肉張力、視線、嘴角、唇部短暫收放、臉頰軟組織、鼻唇溝、下巴姿態、頭部傾斜與肩頸呼吸感隨情緒自然改變。\n禁止改變的是 Face Master 的基礎身份幾何：臉型長寬、顴骨位置、眼型基礎輪廓、眼距、眼裂基礎長寬、眼皮結構、鼻樑／鼻頭／鼻翼、人中、唇形基礎輪廓、嘴巴基礎寬度、下顎線、下巴長度與寬度、耳朵位置、自然左右不對稱與 ${profile.age} 歲成年感。不得用放大眼睛、縮鼻、厚唇、拉寬嘴巴、尖下巴、縮短中庭、削窄下顎或網紅臉模板來表達情緒。\n若 canonical action 已明確指定表情、眼神或嘴部動作，以 canonical action 的具體內容為最高表情依據；本段只負責讓它更自然、更可辨識，不得另加與題目無關的情緒。若 canonical action 沒有指定情緒，維持自然專注、有生命感的放鬆中性，不強制微笑。換句話說：情緒可以變、軟組織可以自然動，${profile.name} 的身份與基礎五官不能變。\n禁止把所有 P 姿勢都套成同一種淡笑、同一種冷淡臉、同一種中性臉或同一種無神直視。\n\n${referencePoseRulesV2318(p)?referencePoseRulesV2318(p)+"\n\n":""}【動作、視角與表情｜${p.id}】\n${action}\n本題唯一有效姿勢為 ${p.id}「${p.label}」。若任何舊資料殘留其他 P 編號、手勢、髮型動作或表情，全部忽略。本題 canonical 動作已指定的構圖範圍與鏡位優先，不被共通 ${frame} 描述覆蓋；未指定範圍時才使用 ${frame}，人體關節、手指、腿部與頭頸旋轉符合真實解剖。\n\n【場景與燈光】\n${o.bg}，簡潔無品牌棚拍背景。若為內著寫真，沿用上方「寫真情境／故事感」的拍攝現場氛圍：柔和窗光或大型柔光箱、自然陰影、少量真實環境細節、像攝影師剛好捕捉到的一個瞬間。燈光不追求完美對稱，臉部與身體保留自然明暗過渡、衣料反光差異與真實空間層次；不要平面 AI 打光，不要過度戲劇化。\n\n【本題真實相機捕捉模式】\n${cameraProfile}\n只能採用本題指定的一種捕捉模式，不可把 Fujifilm 與 iPhone 影像特徵混成不存在的第三種相機風格。\n\n${canvasBlock}\n\n【真實人物與自然膚況硬鎖｜禁止 AI 人像感】\n${profile.name} 必須像現實世界中真的站在鏡頭前被拍到的人，而不是「高畫質 AI 美女」。Face Master 身份不變，但最終照片必須重新呈現真實攝影下的皮膚與材質：鼻翼與臉頰可見細小毛孔，額頭與下巴有不規則微紋理，眼下保留自然細紋與輕微陰影，嘴唇有真實唇紋，臉頰與鼻周允許很輕微的膚色不均或泛紅，皮膚高光隨油脂與光線自然分布。手臂、肩頸、鎖骨、腹部、腿部也要有正常皮膚紋理與細小色差，不可全身像同一張磨皮材質。不要憑空新增明顯痣、疤痕或永久特徵。\n\n保留少量真實攝影瑕疵：髮絲邊緣偶有細碎飛髮、衣料有細微摺痕、左右臉與肩線保留自然不對稱、焦點與景深符合真實鏡頭、背景與人物邊緣不存在 AI 光暈。眼白不要純白，牙齒不要過度漂白，虹膜不要過度銳利發光，睫毛不要每根完全等距。\n\n禁止：beauty filter、磨皮、奶油肌、陶瓷肌、塑膠皮膚、過度降噪、局部過銳化、假 HDR 光暈、假散景切圖、完美對稱臉、超現實大眼、過度精緻虹膜、網紅模板臉、generic AI beauty face、CGI、3D render、game character、digital painting。\n\nPhotorealistic real-world photograph, authentic camera capture, natural skin microtexture, visible pores, peach fuzz, subtle under-eye texture, realistic lip texture, slight tonal variation, believable focus plane, natural optical falloff, restrained sharpening, subtle sensor/grain character, realistic hair separation, real fabric fibers, realistic anatomy.\n\n【最終優先序】\n第一優先：Face Master 中同一位 ${profile.age} 歲成年 ${profile.name} 的臉部身份。\n第二優先：${o.id}「${safeLabel}」完整固定穿搭與 Body Master 身形一致性。\n第三優先：${p.id}「${p.label}」指定姿勢、視角與表情。\n第四優先：本題 canonical 表情必須跟隨動作切換；同時維持 ${profile.name} 的原始髮色、髮質、髮長及妝容，不加額外飾品；本題指定綁髮、撥髮或髮態照動作執行，不被共通髮型覆蓋。\n第五優先：本題指定的 Fujifilm 棚拍或 iPhone 18 Pro 實拍捕捉模式、自然膚況、${actualRatio}、${o.bg}與真實世界攝影質感。\n\n【姿勢一致性最終驗收】\n只允許本題 ${p.id}；Prompt 內任何與 ${p.id} 不一致的姿勢內容一律視為舊資料並忽略。\n\n【臉部一致性最終驗收】\n在套用本題表情後再次比對 ${profile.face}：若眼型、眼距、鼻型、唇形基礎輪廓、嘴寬、臉型、下顎或下巴任一項看起來像換了一個人，視為失敗，必須恢復 Face Master 結構，只保留與 canonical action 一致的自然可辨識表情。最終影像必須明確是「同一位 ${profile.name} 做出不同表情」，而不是「不同臉的人做不同表情」。\n\n最終影像必須像真實世界中實際拍攝到的 ${profile.name}，而不是理想化 AI 美女。若第一眼仍讓人覺得是 AI 生成的人像，視為失敗：必須降低磨皮與銳化、恢復皮膚微紋理與自然色差、修正假散景與髮絲光暈，並讓光線、焦點、景深與相機成像重新符合真實攝影。`;
 }
-function promptForEmote(o,e,sourceVersion,ratio='1:1'){
- if(o?.customWardrobe)return promptForCustomWardrobeV2323(sourceVersion,o,e,ratio,'Vera',true);
+function promptForEmote(o,e,sourceVersion,ratio='1:1',person='Vera'){
+ if(o?.customWardrobe)return promptForCustomWardrobeV2323(sourceVersion,o,e,ratio,person,true);
+ if(person==='小森')return promptForKomoriEmoteV2328(o,KOMORI_EMOTE_BY_ID_V2328.get(e.id)||e,sourceVersion,ratio);
  const isInner=sourceVersion==='V.內著寫真';
  const sourceLabel='選定服裝';
  const safeLabel=isInner?safeInnerwearText(o.label):o.label;
@@ -2375,17 +2533,18 @@ function recordsVirtual(){
  const version=$('#version').value;
  const sourceVersion=version==='V.表情包'?$('#outfitSource').value:version;
  const outfits=version==='V.cos'?cosFilteredOutfits():version==='V.表情包'?outfitsForEmoteSource(sourceVersion):photoFilteredOutfits(sourceVersion);
- const items=version==='V.表情包'?catalog.emotes:catalog.poses;
+ const items=version==='V.表情包'?emotesForSelectionV2328():catalog.poses;
  const ratios=version==='V.表情包'?['1:1','9:16']:['9:16'];
  const oSel=$('#outfit').value,pSel=$('#pose').value,q=$('#q').value.trim().toLowerCase();
  let out=[];
  for(const o of outfits){
   if(oSel!=='ALL'&&o.id!==oSel)continue;
   if(entityFavoriteFiltersV2320.outfit&&!isEntityFavoriteV2320('outfit',o.id))continue;
-  for(const p of items){
-   if(pSel!=='ALL'&&p.id!==pSel)continue;
-   if(entityFavoriteFiltersV2320.pose&&!isEntityFavoriteV2320('pose',p.id))continue;
+  for(const selectedPose of items){
+   if(pSel!=='ALL'&&selectedPose.id!==pSel)continue;
+   if(entityFavoriteFiltersV2320.pose&&!isEntityFavoriteV2320('pose',selectedPose.id))continue;
    for(const person of photoPeople(version)){
+   const p=version==='V.表情包'?emoteForPersonV2328(selectedPose.id,person):selectedPose;if(!p)continue;
    for(const ratio of (p.id==='P00'?['16:9']:ratios)){
     const key=keyOf(version,o,p,sourceVersion,ratio,person);
     const hay=[o.id,o.label,o.main,o.sub,p.id,p.label,p.category||'',...(p.aliases||[]),version,sourceVersion,ratio,person,...(version==='V.cos'?[o.cut,...(o.aliases||[])]:version==='V.時裝寫真'?(o.aliases||[]):[])].join(' ').toLowerCase();
@@ -2408,14 +2567,14 @@ function refreshSelects(){
  if(isKomoriReply()){const person=$('#person');if(!person.disabled)state.photoPerson=person.value;person.value='小森';person.disabled=true;$('#cosControls').classList.add('is-hidden');$('#outfitSource').classList.add('is-hidden');refreshKomoriReplySelects();$('#q').placeholder='搜尋回覆用途或 R 編號，例如 收到、等我、抱歉…';updateFilterPresentation();return;}
  const version=$('#version').value,isEmote=version==='V.表情包',isCos=version==='V.cos';
  const person=$('#person');
- if(isEmote){if(!person.disabled)state.photoPerson=person.value;person.value='Vera';person.disabled=true;}else{if(person.disabled)person.value=state.photoPerson||'ALL';person.disabled=false;}
+ if(person.disabled)person.value=state.photoPerson||'ALL';person.disabled=false;
  $('#outfitSource').classList.toggle('is-hidden',!isEmote);
  $('#cosControls').classList.toggle('is-hidden',!isCos);
  if(isCos)refreshCosSelects();
  const sourceVersion=isEmote?$('#outfitSource').value:version;
  const availableOutfits=isCos?cosFilteredOutfits():isEmote?outfitsForEmoteSource(sourceVersion):photoFilteredOutfits(sourceVersion);
  const os=entityFavoriteFiltersV2320.outfit?availableOutfits.filter(o=>isEntityFavoriteV2320('outfit',o.id)):availableOutfits;
- const availableItems=isEmote?catalog.emotes:catalog.poses;
+ const availableItems=isEmote?emotesForSelectionV2328():catalog.poses;
  const items=entityFavoriteFiltersV2320.pose?availableItems.filter(p=>isEntityFavoriteV2320('pose',p.id)):availableItems;
  const ov=$('#outfit').value,pv=$('#pose').value;
  $('#outfit').innerHTML='<option value="ALL">'+(entityFavoriteFiltersV2320.outfit?'全部收藏服裝':isCos?'全部造型':'全部服裝')+'（'+os.length+'）</option>'+entityOutfitOptionsV2320(os,version);
@@ -2427,22 +2586,22 @@ function refreshSelects(){
 }
 function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function render(){flushCustomWardrobeDraftV2323();rememberLastPage();if(activeView==='sync'){ $('#syncPanel').style.display='block';$('#grid').innerHTML='';$('#pager').innerHTML='';updateStats();return}else $('#syncPanel').style.display='none';filtered=recordsVirtual();const pages=Math.max(1,Math.ceil(filtered.length/pageSize));page=Math.min(page,pages);const slice=filtered.slice((page-1)*pageSize,page*pageSize);$('#grid').innerHTML=slice.length?slice.map(cardHTML).join(''):entityFavoriteEmptyV2320();$('#pager').innerHTML=pages>1?`<button class="btn small" data-page="prev" ${page<=1?'disabled':''}>上一頁</button><span>${page} / ${pages}</span><button class="btn small" data-page="next" ${page>=pages?'disabled':''}>下一頁</button>`:'';updateStats()}
-function cardHTML(r){if(r.version===KOMORI_REPLY_VERSION)return komoriReplyCard(r);const f=!!state.fav[r.key],p=!!state.pending[r.key];const isE=r.version==='V.表情包';return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">${esc(isE?r.p.id+' ・ '+r.o.id:r.person+'｜'+r.o.id+' ・ '+r.p.id)}</div><div class="title">${esc(isE?r.p.label:r.o.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏整組提示詞" title="收藏這組服裝＋動作">♥</button></div><div class="sub">${isE?`<span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.o.label)}</span><span class="tag">${esc(r.sourceVersion)}</span><span class="tag">${esc(r.ratio)}</span>`:`<span class="tag">${esc(r.p.label)}</span>${r.p.id==='P00'?'<span class="tag">橫排直式四格</span>':r.version==='V.cos'?'<span class="tag">半身攝影</span>':''}<span class="tag">${esc(r.o.bg)}</span><span class="tag">${esc(r.version)}</span><span class="tag">${esc(r.ratio)}</span>`}</div>${r.o.customWardrobe?`<div class="custom-clothes-preview" data-custom-wardrobe-preview>${esc(customWardrobeTextV2323()?'帶入服裝：'+customWardrobeTextV2323():'服裝請填寫在此')}</div>`:''}<div class="actions">${r.o.customWardrobe?'<button class="btn small" data-act="customOutfit">填寫服裝</button>':''}<button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="entity-card-favorites" role="group" aria-label="收藏服裝或動作">${entityFavoriteButtonsV2320(r)}</div><div class="usage">使用 ${r.u} 次</div></article>`}
+function cardHTML(r){if(r.version===KOMORI_REPLY_VERSION)return komoriReplyCard(r);const f=!!state.fav[r.key],p=!!state.pending[r.key];const isE=r.version==='V.表情包';return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">${esc(isE?r.person+'｜'+r.p.id+' ・ '+r.o.id:r.person+'｜'+r.o.id+' ・ '+r.p.id)}</div><div class="title">${esc(isE?r.p.label:r.o.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏整組提示詞" title="收藏這組服裝＋動作">♥</button></div><div class="sub">${isE?`<span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.o.label)}</span><span class="tag">${esc(r.sourceVersion)}</span><span class="tag">${esc(r.ratio)}</span>`:`<span class="tag">${esc(r.p.label)}</span>${r.p.id==='P00'?'<span class="tag">橫排直式四格</span>':r.version==='V.cos'?'<span class="tag">半身攝影</span>':''}<span class="tag">${esc(r.o.bg)}</span><span class="tag">${esc(r.version)}</span><span class="tag">${esc(r.ratio)}</span>`}</div>${r.o.customWardrobe?`<div class="custom-clothes-preview" data-custom-wardrobe-preview>${esc(customWardrobeTextV2323()?'帶入服裝：'+customWardrobeTextV2323():'服裝請填寫在此')}</div>`:''}<div class="actions">${r.o.customWardrobe?'<button class="btn small" data-act="customOutfit">填寫服裝</button>':''}<button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="entity-card-favorites" role="group" aria-label="收藏服裝或動作">${entityFavoriteButtonsV2320(r)}</div><div class="usage">使用 ${r.u} 次</div></article>`}
 function updateStats(){
  const isR=isKomoriReply();
  const v=$('#version').value,isE=v==='V.表情包',sourceVersion=isE?$('#outfitSource').value:v;
  updateFilterPresentation();
  const oc=isR?1:(isE?outfitsForEmoteSource(sourceVersion):outfitsForVersion(sourceVersion)).length;
- const itemCount=isR?KOMORI_REPLIES.length:isE?catalog.emotes.length:catalog.poses.length;
+ const itemCount=isR?KOMORI_REPLIES.length:isE?photoPeople(v).reduce((sum,person)=>sum+emotesForPersonV2328(person).length,0):catalog.poses.length;
  const ratioCount=isE?2:1;
  const personCount=isR?1:photoPeople(v).length;
- const total=isR?KOMORI_REPLIES.length*2:oc*itemCount*ratioCount*personCount;
+ const total=isR?KOMORI_REPLIES.length*2:oc*itemCount*ratioCount*(isE?1:personCount);
  $('#resultCount').textContent=(activeView==='sync'?total:filtered.length).toLocaleString();
- $('#coverageText').textContent=isR?`${KOMORI_REPLIES.length} 句回覆（含 ${KOMORI_MEME_REPLIES.length} 句迷因）× 有／無字幕 × 固定 1:1`:isE?`${itemCount} 題表情包 × ${oc} 套${sourceVersion==='V.內著寫真'?'內著':'時裝'} × ${ratioCount} 比例`:`${personCount} 位人物 × ${oc} 套服裝 × ${catalog.poses.filter(p=>p.id!=='P00').length} 動作 × 9:16${v==='V.cos'?' 半身':''} ＋ P00 橫排直式四格 16:9`;
+ $('#coverageText').textContent=isR?`${KOMORI_REPLIES.length} 句回覆（含 ${KOMORI_MEME_REPLIES.length} 句迷因）× 有／無字幕 × 固定 1:1`:isE?`${photoPeople(v).map(person=>person+' '+emotesForPersonV2328(person).length+' 題').join(' ＋ ')} × ${oc} 套${sourceVersion==='V.內著寫真'?'內著':'時裝'} × ${ratioCount} 比例`:`${personCount} 位人物 × ${oc} 套服裝 × ${catalog.poses.filter(p=>p.id!=='P00').length} 動作 × 9:16${v==='V.cos'?' 半身':''} ＋ P00 橫排直式四格 16:9`;
  $('#innerCov').textContent=`${catalog.inner.length} / ${TARGET.inner}`;
  $('#fashionCov').textContent=`${catalog.fashion.length} / ${TARGET.fashion}`;
  $('#poseCov').textContent=`${catalog.poses.length} / ${TARGET.pose}`;
- $('#emoteCov').textContent=`${catalog.emotes.length} / ${TARGET.emote}`;
+ $('#emoteCov').textContent=`Vera ${catalog.emotes.length}／小森 ${KOMORI_EMOTES_V2328.length}`;
  $('#replyCov').textContent=KOMORI_REPLIES.length+' / '+KOMORI_REPLIES.length;
  $('#cosCov').textContent=`${catalog.cos.length} / ${COS_OUTFITS.length+1}`;
  const missing=[];
@@ -2508,8 +2667,7 @@ function restoreLastPage(){
  const family=$('#fashionFamily');if([...family.options].some(o=>o.value===x.fashionFamily))family.value=x.fashionFamily;
  $('#advancedFilters').open=!!x.advancedOpen;
  const src=$('#outfitSource');if([...src.options].some(o=>o.value===x.outfitSource))src.value=x.outfitSource;
- if(v.value==='V.表情包')person.disabled=true;
- if(v.value==='V.cos'){
+  if(v.value==='V.cos'){
   for(const [id,value] of [['cosRole',x.cosRole],['cosStyle',x.cosStyle],['cosVariant',x.cosVariant],['cosColor',x.cosColor]]){refreshCosSelects();const el=$('#'+id);if([...el.options].some(o=>o.value===value))el.value=value;}
  }
  if(v.value===KOMORI_REPLY_VERSION){refreshKomoriReplySelects();for(const [id,value]of [['replyCategory',x.replyCategory],['replyCaption',x.replyCaption]]){const el=$('#'+id);if([...el.options].some(o=>o.value===value))el.value=value;}refreshKomoriReplySelects();if([...$('#replyExact').options].some(o=>o.value===x.replyExact))$('#replyExact').value=x.replyExact;}
@@ -2522,14 +2680,14 @@ function restoreLastPage(){
  render();
  if(x.detailKey){const item=byKey(String(x.detailKey).replace(/^(S\|)?([IF]\|[^|]+\|[^|]+)\|1x1$/,(_,s,k)=>(s||'')+k));if(item)openR(item)}
 }
-function openR(r){if(r.version===KOMORI_REPLY_VERSION){rememberLastPage();current=r;$('#sheetTitle').textContent='小森｜'+r.p.id+'｜'+r.p.label+'｜'+r.captionModeLabel+'｜1:1';$('#sheetMeta').textContent=r.p.category+'｜制服優先｜第三人稱手機攝影';$('#sheetPrompt').textContent=promptForRecord(r);syncDetailBtns();$('#sheet').classList.add('show');rememberLastPage();return;}rememberLastPage();current=r;const isE=r.version==='V.表情包';$('#sheetTitle').textContent=isE?`${r.p.id}・${r.o.id}｜${r.p.label}｜${r.ratio}`:`${r.person}｜${r.o.id}・${r.p.id}｜${r.o.label}｜${r.ratio}`;$('#sheetMeta').textContent=isE?`${r.p.category}｜${r.sourceVersion}｜${r.o.label}｜${r.ratio}`:`${r.person}｜${r.p.label}｜${r.o.bg}｜${r.version}｜${r.ratio}`;$('#sheetPrompt').textContent=isE?promptForEmote(r.o,r.p,r.sourceVersion,r.ratio):promptFor(r.version,r.o,r.p,r.ratio,r.person);syncDetailBtns();$('#sheet').classList.add('show');rememberLastPage()}
+function openR(r){if(r.version===KOMORI_REPLY_VERSION){rememberLastPage();current=r;$('#sheetTitle').textContent='小森｜'+r.p.id+'｜'+r.p.label+'｜'+r.captionModeLabel+'｜1:1';$('#sheetMeta').textContent=r.p.category+'｜制服優先｜第三人稱手機攝影';$('#sheetPrompt').textContent=promptForRecord(r);syncDetailBtns();$('#sheet').classList.add('show');rememberLastPage();return;}rememberLastPage();current=r;const isE=r.version==='V.表情包';$('#sheetTitle').textContent=isE?`${r.person}｜${r.p.id}・${r.o.id}｜${r.p.label}｜${r.ratio}`:`${r.person}｜${r.o.id}・${r.p.id}｜${r.o.label}｜${r.ratio}`;$('#sheetMeta').textContent=isE?`${r.p.category}｜${r.sourceVersion}｜${r.o.label}｜${r.ratio}`:`${r.person}｜${r.p.label}｜${r.o.bg}｜${r.version}｜${r.ratio}`;$('#sheetPrompt').textContent=promptForRecord(r);syncDetailBtns();$('#sheet').classList.add('show');rememberLastPage()}
 function syncDetailBtns(){updateCustomWardrobeDetailV2325();syncEntityFavoriteDetailV2320();if(!current)return;$('#toggleFavDetail').classList.toggle('on',!!state.fav[current.key]);$('#toggleFavDetail').textContent=state.fav[current.key]?'已收藏整組':'收藏整組';$('#togglePendingDetail').classList.toggle('on',!!state.pending[current.key]);$('#togglePendingDetail').textContent=state.pending[current.key]?'已待生成':'待生成'}
 function toggleObj(obj,k){if(obj[k])delete obj[k];else obj[k]=true;saveState()}
 function toast(msg){let x=document.createElement('div');x.textContent=msg;x.style='position:fixed;z-index:200;left:50%;bottom:30px;transform:translateX(-50%);background:#f5effa;color:#17121c;padding:10px 14px;border-radius:999px;font-size:12px;font-weight:700;box-shadow:0 8px 30px #0008';document.body.appendChild(x);setTimeout(()=>x.remove(),1500)}
 async function reloadCatalog(){await bootstrapRemote();refreshSelects();page=1;render()}
 function exportState(){const blob=new Blob([JSON.stringify({format:'vera-prompt-vault-state-v1',exportedAt:new Date().toISOString(),state},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='Vera_PromptVault_State.json';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)}
 async function restore(file){const o=JSON.parse(await file.text());if(!o?.state)throw new Error('不是 Vera Prompt Vault 設定檔');Object.assign(state,o.state);normalizeEntityFavoritesV2320(state);hydrateCustomWardrobeDraftV2325();migratePhotoState();saveState();await reloadCatalog()}
-function bind(){bindEntityFavoriteControlsV2320();bindKomoriReplyFilters();bindFilterPresentation();['cosRole','cosStyle','cosVariant','cosColor'].forEach(id=>$('#'+id).addEventListener('change',()=>{$('#outfit').value='ALL';if(id==='cosRole'){$('#cosVariant').value='ALL';$('#cosColor').value='ALL';}page=1;refreshSelects();render()}));$('#person').addEventListener('change',()=>{state.photoPerson=$('#person').value;page=1;render()});['q','outfit','pose'].forEach(id=>$('#'+id).addEventListener(id==='q'?'input':'change',()=>{page=1;render()}));$('#version').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#outfitSource').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;activeView=b.dataset.view;$('.tab').forEach(x=>x.classList.toggle('active',x===b));page=1;render()});$('#grid').addEventListener('click',e=>{const c=e.target.closest('.card');if(!c)return;const r=byKey(c.dataset.key);if(!r)return;const a=e.target.closest('[data-act]')?.dataset.act;if(a==='copy')copyR(r);if(a==='detail')openR(r);if(a==='fav'){toggleObj(state.fav,r.key);render()}if(a==='pending'){toggleObj(state.pending,r.key);render()}if(a==='outfitStar')toggleEntityFavoriteV2320('outfit',r.o.id);if(a==='poseStar')toggleEntityFavoriteV2320('pose',r.p.id);});$('#pager').addEventListener('click',e=>{const a=e.target.dataset.page;if(a==='prev')page--;if(a==='next')page++;render();scrollTo({top:0,behavior:'smooth'})});$('#random').onclick=()=>{const a=recordsVirtual();if(!a.length)return;openR(a[Math.floor(Math.random()*a.length)])};$('#closeSheet').onclick=()=>{$('#sheet').classList.remove('show');rememberLastPage()};$('#sheet').onclick=e=>{if(e.target===$('#sheet')){$('#sheet').classList.remove('show');rememberLastPage()}};$('#copyDetail').onclick=()=>current&&copyR(current);$('#toggleFavDetail').onclick=()=>{if(current){toggleObj(state.fav,current.key);syncDetailBtns();render()}};$('#togglePendingDetail').onclick=()=>{if(current){toggleObj(state.pending,current.key);syncDetailBtns();render()}};$('#importFile').onchange=async e=>{try{if(e.target.files[0])await importKomori(e.target.files[0])}catch(err){$('#importStatus').textContent='匯入失敗：'+err.message}finally{e.target.value=''}};$('#exportState').onclick=exportState;$('#restoreState').onchange=async e=>{try{if(e.target.files[0])await restore(e.target.files[0]);toast('Vera 設定已匯入')}catch(err){alert(err.message)}finally{e.target.value=''}}}
+function bind(){bindEntityFavoriteControlsV2320();bindKomoriReplyFilters();bindFilterPresentation();['cosRole','cosStyle','cosVariant','cosColor'].forEach(id=>$('#'+id).addEventListener('change',()=>{$('#outfit').value='ALL';if(id==='cosRole'){$('#cosVariant').value='ALL';$('#cosColor').value='ALL';}page=1;refreshSelects();render()}));$('#person').addEventListener('change',()=>{state.photoPerson=$('#person').value;page=1;if($('#version').value==='V.表情包')refreshSelects();render()});['q','outfit','pose'].forEach(id=>$('#'+id).addEventListener(id==='q'?'input':'change',()=>{page=1;render()}));$('#version').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#outfitSource').addEventListener('change',()=>{page=1;refreshSelects();render()});$('#tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(!b)return;activeView=b.dataset.view;$$('.tab').forEach(x=>x.classList.toggle('active',x===b));page=1;render()});$('#grid').addEventListener('click',e=>{const c=e.target.closest('.card');if(!c)return;const r=byKey(c.dataset.key);if(!r)return;const a=e.target.closest('[data-act]')?.dataset.act;if(a==='copy')copyR(r);if(a==='detail')openR(r);if(a==='fav'){toggleObj(state.fav,r.key);render()}if(a==='pending'){toggleObj(state.pending,r.key);render()}if(a==='outfitStar')toggleEntityFavoriteV2320('outfit',r.o.id);if(a==='poseStar')toggleEntityFavoriteV2320('pose',r.p.id);});$('#pager').addEventListener('click',e=>{const a=e.target.dataset.page;if(a==='prev')page--;if(a==='next')page++;render();scrollTo({top:0,behavior:'smooth'})});$('#random').onclick=()=>{const a=recordsVirtual();if(!a.length)return;openR(a[Math.floor(Math.random()*a.length)])};$('#closeSheet').onclick=()=>{$('#sheet').classList.remove('show');rememberLastPage()};$('#sheet').onclick=e=>{if(e.target===$('#sheet')){$('#sheet').classList.remove('show');rememberLastPage()}};$('#copyDetail').onclick=()=>current&&copyR(current);$('#toggleFavDetail').onclick=()=>{if(current){toggleObj(state.fav,current.key);syncDetailBtns();render()}};$('#togglePendingDetail').onclick=()=>{if(current){toggleObj(state.pending,current.key);syncDetailBtns();render()}};$('#importFile').onchange=async e=>{try{if(e.target.files[0])await importKomori(e.target.files[0])}catch(err){$('#importStatus').textContent='匯入失敗：'+err.message}finally{e.target.value=''}};$('#exportState').onclick=exportState;$('#restoreState').onchange=async e=>{try{if(e.target.files[0])await restore(e.target.files[0]);toast('Vera 設定已匯入')}catch(err){alert(err.message)}finally{e.target.value=''}}}
 (async function(){migratePhotoState();bind();const errs=await bootstrapRemote();restoreLastPage();if(errs.length)$('#importStatus').textContent='部分遠端 metadata 暫時無法載入，已使用 v2.1 內建完整備援；不會用舊匯入內容覆蓋正式題目。';})();
 window.addEventListener('pagehide',rememberLastPage);
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')rememberLastPage()});
