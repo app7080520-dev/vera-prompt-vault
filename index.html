@@ -66,6 +66,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
         <label id="cosColorField" class="filter-field"><span>配色</span><select id="cosColor" class="ctrl"><option value="ALL">全部配色</option></select></label>
       </div>
       <div id="cosStyleField" class="style-field"><span class="field-caption">版本</span><div id="cosStyleChoices" class="style-choices" role="group" aria-label="服裝版本"></div></div>
+      <p id="malfoyLookNote" class="cos-note is-hidden">Malfoy 正常／性感兩款：鉑金淺金髮色，保留 Vera／小森原髮型與臉部身份，一手握住魔杖。雙手動作會採單手持杖改編；P00 四格保持同一髮色與握杖手。</p>
       <select id="cosStyle" class="is-hidden" aria-label="服裝版本"><option value="ALL">全部版本</option><option value="normal">正常版</option><option value="sexy">性感版</option></select>
     </section>
     <section id="replyControls" class="reply-controls is-hidden" aria-label="小森回覆包篩選">
@@ -135,7 +136,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.29｜V.cos 性轉跩哥馬份・正常／性感｜小森表情包 93 題・鏡頭互動｜Vera 表情包 63 題｜表情包 1:1／9:16｜P00 橫排直式四格 16:9｜48 套居家穿搭｜小森制服回覆包 1:1</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.30｜真人身形護欄｜Malfoy 鉑金髮色・原髮型・手持魔杖｜小森表情包 93 題・Vera 63 題｜P00 橫排直式四格 16:9｜48 套居家穿搭｜小森制服回覆包 1:1</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div id="sheetCustomWardrobe" class="custom-clothes-preview sheet-custom-clothes is-hidden"><strong>本次帶入服裝</strong><p id="sheetCustomWardrobeText"></p><button id="editCustomWardrobe" type="button" class="btn small">修改服裝</button></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏整組</button><button id="toggleOutfitStarDetail" type="button" class="btn entity-star">☆ 服裝</button><button id="togglePoseStarDetail" type="button" class="btn entity-star">☆ 動作</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -1019,9 +1020,9 @@ const COS_MALFOY_PALETTE_V2329={id:'slytherin-black-green-silver',label:'黑／�
 COS_PALETTES.malfoyBlackGreen=COS_MALFOY_PALETTE_V2329;
 const COS_MALFOY_EMBLEM_V2329='唯一一枚小型銀線史萊哲林蛇形布徽縫在背心左胸，僅是衣裝刺繡；袍身、背面及背景不重複蛇徽，不生成校名文字或額外標誌。';
 const COS_MALFOY_ROLE_V2329={
- id:'draco-malfoy',label:'性轉跩哥馬份 Malfoy',fanRole:true,
+ id:'draco-malfoy',label:'性轉跩哥馬份 Malfoy',fanRole:true,hairColorOverride:'platinum-blonde',heldProp:'wand',
  aliases:['跩哥','跩哥馬份','德拉科','馬份','马尔福','德拉科·马尔福','Draco Malfoy','Malfoy','Malfoid','Fem Malfoy','Galfoy','Draconia','史萊哲林','斯莱特林','Slytherin','哈利波特','Harry Potter','性轉'],
- referenceNote:'跩哥馬份／Draco Malfoy 的史萊哲林配色服裝靈感，由所選原年齡成年 Vera 或小森作女性 Cosplay。正常版與性感版都是成人服裝改編，不套用原作學生年齡或校園劇情，不宣稱為官方女性角色定裝。黑袍綠內襯與綠銀領帶依官方服裝元素；扣式背心、百褶裙及裙邊為所附造型的改編。附圖只讀衣裝，臉部身份權重為 0；不採用附圖模特兒、Tom Felton 或角色的臉、鉑金髮色、妝容、瞳色、年齡與身形。原 P 動作、表情及所選人物原髮型照常。',
+ referenceNote:'跩哥馬份／Draco Malfoy 的史萊哲林配色服裝靈感，由所選原年齡成年 Vera 或小森作女性 Cosplay。正常版與性感版都是成人服裝改編，不套用原作學生年齡或校園劇情，不宣稱為官方女性角色定裝。黑袍綠內襯與綠銀領帶依官方服裝元素；扣式背心、百褶裙及裙邊為所附造型的改編。附圖只讀衣裝，臉部身份權重為 0，不採用附圖模特兒、Tom Felton 或角色的臉、妝容、瞳色、年齡與身形。本題頭髮改為 Malfoy 的冷調鉑金淺金色，保留所選人物原髮型、髮長與分線；一手確實握持一支魔杖。P 動作保留身體方向、表情與支點，手位依本題持杖改編，不新增肢體。',
  variants:[{
   id:'malfoy-slytherin',label:'史萊哲林背心裙裝',start:743,palettes:['malfoyBlackGreen'],
   normal:{
@@ -1030,7 +1031,7 @@ const COS_MALFOY_ROLE_V2329={
    bottom:'深灰色高腰百褶裙，裙腰與背心下襬自然銜接，裙長為膝上正常長度。裙擺有一道墨綠寬邊及其上兩道細銀灰橫線，摺線連續延伸至背面；黑色及膝襪，襪口兩道銀灰細條紋。裙襬與襪口在半身畫外自然延續，不為展示裙邊或襪子拉遠鏡頭。',
    material:'挺括不透棉混紡襯衫、霧面有襯西裝背心與裙布；領帶為低光澤綠銀斜紋織物，黑袍外層柔軟霧面、墨綠內襯有克制緞光；真實鈕扣、領片、摺線與縫線各自清楚。',
    coverage:'端正扣合襯領、結實領帶結、普通 V 領背心及完整覆腹為正常版固定組合，胸前沒有開口；長袍敞開只展示完整三層衣裝，不變成性感版鬆領或低領。',
-   accessories:COS_MALFOY_EMBLEM_V2329+' 一支深棕色細魔杖收在袍內側的杖袋，固定不手持、不漂浮，不覆蓋原 P 的手勢；不加假髮、眼鏡或飾品。'
+   accessories:COS_MALFOY_EMBLEM_V2329+' 一支深棕色木質細魔杖，由一隻手真實握住杖柄，杖身從握點連續延伸、指尖與杖柄接觸清楚；默認右手在身側低位持杖、杖尖斜向下，鏡自拍時由空出的另一手持杖。不收進口袋、不漂浮、不複製第二支、不遮臉；不加角色假髮、眼鏡或飾品。'
   },
   sexy:{
    cut:'鬆領白襯衫＋低 V 合身扣式背心＋短百褶裙＋綠內襯黑袍',
@@ -1038,14 +1039,14 @@ const COS_MALFOY_ROLE_V2329={
    bottom:'深灰色高腰百褶短裙，裙長至大腿上段但臀部與下身完整遮覆，腰頭平整、前後裙片固定；裙擺保留一道墨綠寬邊和其上兩道細銀灰橫線。搭配黑色過膝長襪，襪口兩道銀灰細條紋，無吊襪帶；裙襬、襪口與腿部在半身畫外自然延續，不掀裙、不露內著，不為展示短裙或長襪拉遠鏡頭。',
    material:'有微量彈性的不透明白色棉襯衫、柔軟有襯霧面西裝背心和挺括裙布；低光澤綠銀斜紋領帶、霧面黑袍與墨綠緞光內襯、密織不透明襪料。貼合感來自衣裝收省與真實摺痕，不改身形。',
    coverage:'鬆開兩顆上方鈕扣的白襯領、下移的領帶結與低 V 合身背心，在頭頂至大腿最上段的半身畫面內就能識別性感版；保留襯衫、背心、長袍三層，胸部和下身完整不透明，不豐胸、縮腰或幼態化，不把襯領自動扣回正常版。',
-   accessories:COS_MALFOY_EMBLEM_V2329+' 一支深棕色細魔杖收在袍內側的杖袋，固定不手持、不漂浮，不覆蓋原 P 的手勢；不加假髮、眼鏡或飾品。'
+   accessories:COS_MALFOY_EMBLEM_V2329+' 一支深棕色木質細魔杖，由一隻手真實握住杖柄，杖身從握點連續延伸、指尖與杖柄接觸清楚；默認右手在身側低位持杖、杖尖斜向下，鏡自拍時由空出的另一手持杖。不收進口袋、不漂浮、不複製第二支、不遮臉；不加角色假髮、眼鏡或飾品。'
   }
  }]
 };
 COS_ROLES.push(COS_MALFOY_ROLE_V2329);
 for(const [index,style]of COS_STYLES.entries()){
  const role=COS_MALFOY_ROLE_V2329,variant=role.variants[0],g=variant[style.id],palette=COS_MALFOY_PALETTE_V2329;
- const o={...g,id:'C'+String(variant.start+index).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,label:[role.label,style.label,variant.label,palette.label].join('｜'),referenceNote:role.referenceNote,brand:false,fanRole:true,main:'指定造型 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚',costumeEmblem:COS_MALFOY_EMBLEM_V2329,aliases:[...role.aliases]};
+ const o={...g,id:'C'+String(variant.start+index).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,label:[role.label,style.label,variant.label,palette.label].join('｜'),referenceNote:role.referenceNote,brand:false,fanRole:true,main:'指定造型 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚',costumeEmblem:COS_MALFOY_EMBLEM_V2329,hairColorOverride:role.hairColorOverride,heldProp:role.heldProp,aliases:[...role.aliases]};
  if(COS_OUTFITS.some(existing=>existing.id===o.id))throw Error('Duplicate cosplay outfit '+o.id);
  o.detail=cosV2311Detail(o);COS_OUTFITS.push(o);
 }
@@ -1113,6 +1114,7 @@ function updateFilterPresentation(){
  updateCustomWardrobePresentationV2323();
  const reply=isKomoriReply();$('#replyControls').classList.toggle('is-hidden',!reply);$('#advancedFilters').classList.toggle('is-hidden',reply);if(reply){$('#fashionFamilyField').classList.add('is-hidden');$('#cosControls').classList.add('is-hidden');updateKomoriReplyPresentation();return;}
  const version=$('#version').value,isCos=version==='V.cos',isEmote=version==='V.表情包',role=$('#cosRole').value;
+ $('#malfoyLookNote').classList.toggle('is-hidden',!isCos||!(role==='draco-malfoy'||catalog.cos.some(o=>o.id===$('#outfit').value&&isMalfoyCostumeV2330(o))));
  $('#fashionFamilyField').classList.toggle('is-hidden',version!=='V.時裝寫真');
  $('#outfitSourceField').classList.toggle('is-hidden',!isEmote);$('#outfitField').classList.remove('is-hidden');
  $('#poseCaption').textContent=isEmote?'表情包題目':'動作';
@@ -1494,7 +1496,51 @@ function cosHalfBodyPose(p,person){
  return {...canonical,frame:'half',action};
 }
 
+function isMalfoyCostumeV2330(o){return o.role==='draco-malfoy'&&o.hairColorOverride==='platinum-blonde'&&o.heldProp==='wand';}
+function cosPoseForV2330(o,p,person){
+ if(p.malfoyWandAdapted)return p;
+ const pose=cosHalfBodyPose(p,person);if(!isMalfoyCostumeV2330(o)||p.id==='P00')return pose;
+ // Keep body/camera/expression clauses; replace hand choreography as one coherent pose.
+ const handClause=/手|前臂|上臂|雙臂|一臂|兩臂|肘|腕|托腮|支臉|撥髮|抓髮|綁成|綁髮|比V|比愛心|環抱|抱胸|抱臂/;
+ const expression=pose.action.match(/(?:本題)?表情(?:固定)?為[「]?([^」。；\n]+)/)?.[1]||pose.expression||'';
+ let body=pose.action.split(/[，,。；\n]+/).map(s=>s.trim()).filter(s=>s&&!handClause.test(s)&&!/(?:本題)?表情(?:固定)?為/.test(s)).join('；');
+ const label=p.label;
+ let left='左手自然放在腰前或可入鏡的上段腿面，肩膀放鬆';
+ if(/高馬尾/.test(label))left='原指定高馬尾已綁好，左手輕整理馬尾基部，不表演雙手綁髮';
+ else if(/低馬尾/.test(label))left='原指定低馬尾已綁好，左手輕整理馬尾基部，不表演雙手綁髮';
+ else if(['P36','P37','P75','P124','P147'].includes(p.id))left='左手按原姿勢在地面、椅面或坐墊上穩定承重，身體重心落在支點內';
+ else if(['P49','P50'].includes(p.id))left='左前臂與手肘穩定撐在俯臥平面，左手可輕托下巴，軀幹仍是趴姿';
+ else if(p.id==='P51')left='左肘由躺臥平面穩定支撐，左手輕撐頭側，保留原側躺方向';
+ else if(p.id==='P53')left='左手依原仰躺方向輕停額頭外側，不壓住或遮住主要五官';
+ else if(p.id==='P150')left='左前臂與左手單側托住原長耳毛絨玩偶，讓玩偶靠在軀幹外側形成穩定支點，不遮臉';
+ else if(/兔耳|比V/.test(label))left='左手在頭側比一個自然 V 手勢，兩指與臉保持距離';
+ else if(/愛心/.test(label))left='左手在胸前比單手指尖愛心，手指不遮臉';
+ else if(/指向鏡頭/.test(label))left='左手食指自然指向鏡頭方向，保持正常拍攝距離';
+ else if(/捂嘴|遮半臉/.test(label))left='左手輕停嘴角外側表達原笑意，不遮住眼鼻等主要辨識點';
+ else if(/托腮|捧臉|托下巴/.test(label))left='左手輕托下巴側面，不壓變形臉頰或改下顎輪廓';
+ else if(/戳臉|碰臉/.test(label))left='左手指尖輕碰臉頰外側，不推擠臉部';
+ else if(/後腦|後頸/.test(label))left='左手自然停在後頸或後腦髮際，手肘維持舒適角度';
+ else if(/撥髮|抓髮|側髮|瀏海/.test(label))left='左手輕整理原側髮或瀏海，保留所選人物原髮型';
+ else if(/鎖骨|扶頸|碰鎖骨/.test(label))left='左手輕碰鎖骨外側或頸側，不遮臉、不拉衣料';
+ else if(/整理|輕調|拉肩帶/.test(label))left='左手輕觸本款實際存在的襯領、袍襟或腰側衣面，不拉低領口或移動衣裝';
+ else if(/身後|背後/.test(label))left='左手自然放在後腰附近，原身體前傾與頭部方向保持';
+ else if(/叉腰|扶腰|壓腰|腰頭|插腰|插口袋/.test(label))left='左手輕扶腰側袍面，不壓縮腰身、不插入不存在的口袋';
+ else if(/抱膝|撐膝|貼膝|扶膝|撐大腿/.test(label))left='左手在原膝上或上段大腿位置輕撐，重心穩定、肩寬自然';
+ else if(/抱胸|抱臂|雙臂|一臂|扶臂|扶上臂/.test(label))left='左前臂自然橫放上腹，手掌停在右側腰外，不托高或擠壓胸部';
+ else if(/舉高|上舉|頭頂/.test(label))left='左臂沿原伸展方向自然舉起，肩胛與頸部保持正常位置';
+ const right=/趴|躺/.test(label)?'右前臂自然靠近躺臥或俯臥平面，右手在身側前方握住一支魔杖，杖身沿平面斜向前，與身體和支撐面保持正常間距':'右手在身側或上段腿面旁低位握住一支魔杖，右肘自然彎曲，杖尖斜向下';
+ let hands=left+'；'+right+'。';
+ if(p.id==='P148'){
+  body='單一鏡面前的站姿前傾半身，從髖部輕微向前，膝微彎、髖部後移且雙腳穩定承重；保留原偏頭、斜肩，視線抬向鏡中右上方的手機鏡頭；只呈現一個鏡中人物';
+  hands='原持手機的一手維持鏡中右上方的自拍手位，手機不遮臉；原沿身側下垂的另一手在上段大腿旁確實握住一支魔杖，杖尖斜向下，不再撥髮或扶膝。';
+ }
+ return {...pose,label:label.endsWith('・持杖改編')?label:label+'・持杖改編',malfoyWandAdapted:true,action:body+'。'+(expression?'\n本題表情固定為「'+expression+'」。':'')+'\n【本題唯一手位｜持杖改編】'+hands+' 只保留兩條手臂與兩隻手，各手只執行以上一個任務；杖柄與手指接觸、遮擋和支撐合理，魔杖不漂浮、不穿過衣料或身體，不為展示整支杖拉遠鏡頭。原雙手手勢已由以上單手版本取代，表情、軀幹方向、腿部姿勢與支點依本題保留。'};
+}
 function cosHairFor(o,profile){
+ if(isMalfoyCostumeV2330(o)){
+  const style=profile.name==='小森'?'保留小森原有中長髮長度、中分八字瀏海、臉側碎髮、髮量與髮質':'保留 Vera 原有胸上中長直髮、中分瀏海、臉側碎髮、髮量與髮質';
+  return `【Malfoy 本題髮色例外｜髮型仍是 ${profile.name}】\n只把本題頭髮改為冷調鉑金淺金色（platinum blonde），淺金中帶柔和銀灰高光，髮根到髮尾屬同一鉑金色系，有真實髮絲陰影，不是發光純白髮。${style}，實際髮型結構以原始 ${profile.face} 為準；重新生成本題頭髮，不搬貼參考照的整顆頭、不換成角色短髮或附圖模特兒的長髮。原 P 若指定高／低馬尾、濕髮或撥髮，保持相應髮態且全程鉑金淺金色。只改頭髮顏色，原眉色、瞳色、膚色、五官、妝容與年齡不變，不回寫人物永久髮色。`;
+ }
  if(o.hairState!=='wet')return profile.hair;
  return profile.hair+'\n【本題浴後濕髮】同一位 '+profile.name+' 剛洗好澡，原頭髮呈清楚可見的濕潤髮束、較貼合的真實髮絲與少量髮尾水珠；濕髮只改暫時乾濕狀態，不改原髮色、髮長、瀏海分線、髮量或人物身份，不換成角色假髮。原 P 指定綁髮、撥髮或抓髮仍照做，保留相應濕髮狀態，不新增甩髮、擦髮或吹髮動作。此濕髮要求只作用於本題浴後款，不回寫其他造型或永久設定。';
 }
@@ -1592,7 +1638,7 @@ Photorealistic adult ${costume?'cosplay stage-costume clothing lookbook':fashion
 function promptForCos(o,p,person='Vera'){
  if(p?.id==='P00')return promptForVideoBoardV2321('V.cos',o,person);
  if(COS_PRODUCT_ROLE_IDS.includes(o.role))return promptForRopeCostume(o,p,person);
- const profile=personProfile(person),pose=cosHalfBodyPose(p,person);
+ const profile=personProfile(person),pose=cosPoseForV2330(o,p,person);
  const expression=person==='小森'?expressionFor(pose).replaceAll('Vera','小森'):expressionFor(pose);
  const title=`${profile.name}｜${o.id}・${pose.id}｜${o.label}｜${pose.label}（半身版本）｜9:16`;
  const branding=o.customWardrobeResolved?'只保留【服裝設定】明列的衣料圖案或服裝字樣；不新增背景品牌、畫面文字、Logo、水印或字幕。':o.costumeEmblem?o.costumeEmblem+' 其餘背景、道具和畫面不加文字、Logo、水印或字幕。':o.brand?'只允許衣裝上本題明列的一個 Starbucks 白色雙尾人魚圓形標誌；它是服裝圖案，不是畫面水印。其餘背景、道具和畫面不加文字、Logo 或廣告。':'除了本題明列的服裝科技袖章或縫製飾片，不新增品牌文字、Logo、水印或畫面字幕。';
@@ -1603,7 +1649,7 @@ ${title}
 
 【V.cos｜成年造型攝影與角色範圍】
 同一位 ${profile.age} 歲明確成年 ${profile.fullName}，本題為「${o.roleLabel}／${o.variantLabel}」，${o.styleLabel}、${o.colorLabel}。${o.referenceNote}
-人物仍是 ${profile.name} 本人，不是換成角色原本的臉。角色、品牌及任何服裝參考只定義當次衣裝，其臉部身份權重為 0；不得改用角色的臉、髮色、妝容、國籍、年齡或身形。Cosplay 情境不回寫人物永久設定。
+人物仍是 ${profile.name} 本人，不是換成角色原本的臉。角色、品牌及任何服裝參考只定義當次衣裝，其臉部身份權重為 0；${isMalfoyCostumeV2330(o)?'本題唯一外觀例外是鉑金淺金髮色，髮型仍依原人物與本題 P；不得改用角色的臉、妝容、國籍、年齡或身形。':'不得改用角色的臉、髮色、妝容、國籍、年齡或身形。'}Cosplay 情境不回寫人物永久設定。
 
 【9:16 半身攝影硬鎖】
 單張、單格、單一人物，9:16 直幅；在原半身構圖基礎上只小幅後退，取景固定為完整頭頂至大腿最上段。畫面下緣落在大腿根部下方一小段，最多包含大腿最上方約 1/4；不把裁切下緣延伸至大腿中段、膝蓋、小腿或全身。
@@ -1622,7 +1668,7 @@ ${branding}
 
 ${referencePoseRulesV2318(pose)?referencePoseRulesV2318(pose)+"\n\n":""}【動作、視角與表情｜${pose.id}「${pose.label}」｜半身版本】
 ${pose.action||`依 ${pose.id}「${pose.label}」完成原動作，維持原手勢、頭部方向、視線、表情與身體支點。`}
-${pose.referencePoseRevision?'與 V.時裝寫真／V.內著寫真使用同一 P 的身體方向、表情和手勢；依本題半身段落裁切，只有明列的必要手位微調才執行，其餘動作不變。':'與 V.時裝寫真／V.內著寫真用同一 P 編號的 canonical 動作，只修改成上方半身取景。'}若服裝沒有指定動作要碰的肩帶、鈕扣或外套，用原動作已有的替代手位；沒有替代時維持同方向手勢，不憑空新增結構、不拉扯衣料。畫外下肢仍保留原姿勢與支點，不拼貼或補出另一個動作。
+${pose.malfoyWandAdapted?'本題是同一 P 的持杖改編；身體方向、表情與支點保留，手位唯一依上方【本題唯一手位】執行，不疊加原雙手手勢。':pose.referencePoseRevision?'與 V.時裝寫真／V.內著寫真使用同一 P 的身體方向、表情和手勢；依本題半身段落裁切，只有明列的必要手位微調才執行，其餘動作不變。':'與 V.時裝寫真／V.內著寫真用同一 P 編號的 canonical 動作，只修改成上方半身取景。'}若服裝沒有指定動作要碰的肩帶、鈕扣或外套，用原動作已有的替代手位；沒有替代時維持同方向手勢，不憑空新增結構、不拉扯衣料。畫外下肢仍保留原姿勢與支點，不拼貼或補出另一個動作。
 
 【表情跟隨動作｜不因角色換臉】
 ${expression}
@@ -1636,7 +1682,7 @@ ${bodyPosePhysics(pose)}
 【人物髮型與妝容】
 ${cosHairFor(o,profile)}
 ${profile.makeup}
-衣裝色不改髮色、瞳色或膚色；帽子、耳箍與頭紗可以佩戴，但不加角色假髮或把它們變成新瀏海。原 P 動作指定綁髮、撥髮或髮態時照做，保持同一個人物。
+${isMalfoyCostumeV2330(o)?'本題頭髮依上方髮色例外維持鉑金淺金色；髮型、瀏海、髮長與分線仍屬原人物。服裝配色不染到眉毛、眼睛或皮膚，沒有角色假髮或新瀏海；馬尾等指定髮態依持杖改編執行。':'衣裝色不改髮色、瞳色或膚色；帽子、耳箍與頭紗可以佩戴，但不加角色假髮或把它們變成新瀏海。原 P 動作指定綁髮、撥髮或髮態時照做，保持同一個人物。'}
 
 【棚景與真人攝影】
 ${o.bg}，簡潔低干擾的真實棚景，沒有額外品牌招牌。${profile.name} 單人成年 Cosplay 服裝 lookbook，自然窗光或大型柔光源，正常景深、衣料纖維和皮膚毛孔可見；依原 P 支點使用簡單座面、地面或躺臥支撐，不自動延伸成故事。保留微紋理、唇紋、髮絲、不對稱與細微色差，不磨皮、不變網紅模板臉，不做動漫、CGI、3D 或塑膠人像。不要畫面字幕、水印、拼貼、多視角或第二個人物；服裝標誌僅依上方例外。
@@ -1950,6 +1996,10 @@ function applyReferencePosesV2318(){
 }
 function referencePoseRulesV2318(p){
  const source=PHOTO_REFERENCE_POSES_V2318.find(x=>x.id===p?.id);if(!source)return '';
+ if(p.malfoyWandAdapted){
+  const prop=source.id==='P148'?'本題仍保留一支自拍手機與單一鏡面，由原空出的另一手握魔杖。':source.id==='P150'?'本題由空出的單側手臂托住原玩偶，另一手持杖，不疊加雙手托抱。':'除本題一支魔杖外不加手持物，椅面或坐墊只按原姿勢提供支點。';
+  return `【照片參考動作分工｜${source.id} 持杖改編】\n原動作照只參考身體方向、頭部角度、視線與支點；臉及身形仍使用所選人物原始 Master。手位已改編為一手持杖，另一手保留主要表達或承重，不多生手腳。${prop}`;
+ }
  const prop=source.id==='P148'?'本題 P148 明列的動作道具只有一支無品牌可辨識文字的手機與一面簡單鏡子；它們用於鏡自拍，屬本題指定例外，不是額外配件。手機鏡頭、持手機手與鏡面反射位置合理，畫面只有一個鏡中人物，不再生成鏡外第二個人物、第二張臉或多次反射。':source.id==='P150'?'本題 P150 明列的動作道具只有一個無品牌長耳毛絨玩偶；它是原抱玩偶動作所需的指定例外，不是寵物或另一個角色，不新增文字、商標或其他玩具。兩手托抱位置固定，衣裝原有手持配件若也需要占用雙手，不能硬塞出第三隻手或把玩偶換成衣裝。':'本題不新增手持道具；椅面或坐墊只依原坐姿作必要支點，不增加故事人物或額外裝飾。';
  return `【照片參考動作分工｜${source.id}】
 本題由使用者第 ${source.sourceRef} 張參考照拆解，沿用其身體方向、可見手位、頭部角度與視線；不沿用參考模特的臉、膚色、身形、髮色、妝容、服裝、品牌或原照片的修圖效果。若生成時另附該動作照，僅作姿勢參考，臉部身份權重為 0；所選人物的原始 Face Master 仍是唯一臉部來源，身形只依所選人物的 Body Master。
@@ -2172,7 +2222,7 @@ function videoBoardWardrobeV2321(version,o){
  const isCos=version==='V.cos',detail=version==='V.內著寫真'?innerwearVisualSpec(o.detail||o.label):(o.detail||`${o.label}。完整保留所選服裝的版型、材質、領口、袖型、上下身搭配及固定層次。`);
  return `【選定服裝｜${o.id}「${o.label}」】
 ${detail}
-${isCos?`【指定造型】${o.roleLabel}／${o.variantLabel}；${o.styleLabel}、${o.colorLabel}。角色名稱只定義本題服裝，不換成角色原本的臉、髮色、年齡或身形。
+${isCos?`【指定造型】${o.roleLabel}／${o.variantLabel}；${o.styleLabel}、${o.colorLabel}。${isMalfoyCostumeV2330(o)?'本題沿用所選人物原臉、原髮型及成年身形，只有頭髮顏色改成鉑金淺金色，四格都一致。':'角色名稱只定義本題服裝，不換成角色原本的臉、髮色、年齡或身形。'}
 【服裝配件】${o.accessories}
 【原款配色】主色 ${o.primaryColor}；其餘配色與固定圖樣依原款。`:referenceFashionAccessoriesV2319(o)}
 四格完整穿著同一套原款，不換款、不換顏色、不把正常版與其他剪裁混用。罩杯、肩帶、袖片、腰頭、裙片、褲片、蕾絲／網紗表面層及必要不透明襯層，維持同一件衣裝的可穿著結構；不為轉身拉低、掀開或拆解衣物，也不為展示輪廓重新塑造人物。
@@ -2206,7 +2256,7 @@ ${videoBoardWardrobeV2321(version,o)}
 第 2 格（左起第二）：前斜側約 45°。從正面向同一側轉身，頭部、肩線與骨盆同向，呈現正面與側面交界；不是完全 90° 側面，也不把身體轉斜後再把臉轉回正面。
 第 3 格（左起第三）：後斜背約 135°。沿同一轉身方向繼續，呈現後腦、肩背、衣裝背側及腰臀衣料的斜背視角；頭部跟隨軀幹，不回頭看相機，不把正面臉貼在後腦。
 第 4 格（最右）：背面 180°。肩背、骨盆與頭部同向背對相機，呈現後腦、背面髮態及服裝後片；看不到正面五官，不回頭、不扭頸露臉，不以鏡子補出人臉。
-四個角度沿同一側從 0°、45°、135°到 180°轉身，不鏡像、不在不同格換成相反轉身方向。四格維持同一自然站姿，肩頸放鬆、頭頸端正、正常承重；雙臂自然放鬆，手不遮住主要衣片。原款服裝配件若需基本握持，只維持必要握持，不加入其他 P 的手勢、撩衣、轉頭或道具。
+四個角度沿同一側從 0°、45°、135°到 180°轉身，不鏡像、不在不同格換成相反轉身方向。四格維持同一自然站姿，肩頸放鬆、頭頸端正、正常承重；雙臂自然放鬆，手不遮住主要衣片。${version==='V.cos'&&isMalfoyCostumeV2330(o)?'四格都由人物自己的右手在身側低位確實握住同一支魔杖，杖尖斜向下；左手自然垂放。轉身時握杖手不交換，按透視和原手臂正常移位；杖柄及握持處保持可辨，不為露出整支杖扭肩、回頭或多畫手臂。':'原款服裝配件若需基本握持，只維持必要握持，不加入其他 P 的手勢、撩衣、轉頭或道具。'}
 
 【每格取景｜完整頭頂至大腿最上段】
 每格保留完整頭頂、原款帽飾／頭紗、雙肩、上身衣片、腰線、腰頭與少量大腿上段，最多包含大腿最上方約 1/4；裁切不延伸到膝蓋、小腿或腳掌，也不裁成只有胸口或臉。褲裝保留實體褲頭、上臀褲片及少量大腿上段衣料；裙裝或連身款保留相同範圍的原衣裝，不替換成褲子。
@@ -2272,6 +2322,7 @@ async function bootstrapRemote(){
  applyFashionV2312();
  applyReferenceFashionV2319();
  applyReferencePosesV2318();
+ applyRealisticPosesV2330();
  applyVideoBoardPoseV2321();
  applyCustomWardrobeCatalogV2323();
  if(errs.length)console.warn('部分 metadata 使用 v2.1 內建完整備援',errs);
@@ -2315,18 +2366,49 @@ function bodyPosePhysics(p){
  const camera=/仰拍|低角度|低視角|低機位|由下|low.angle|low.camera/i.test(text)?'保留本題指定低角度與正常近大遠小，不縮頭、拉腿或把人物拔高。':/俯拍|高角度|高視角|高機位|由上|top.down|high.angle/i.test(text)?'保留本題指定俯拍與正常遠近效果，不永久壓扁軀幹或縮短腿。':'本題明確鏡位與構圖優先；未指定時才採自然中距離人像視角，不擅自更改動作、視線或畫面範圍。';
  return geometry+'\n【鏡頭與透視】'+camera;
 }
+// Shared anatomy rules cover photos, cosplay, P00, both emote packs and replies.
+const REALISTIC_BODY_RULES_V2330='【現實成年女性身形｜共同驗收】\n依各自原始 Body Master 保留人物骨架與自然體態差異，重新建立符合本題姿勢的立體人體；不把參考照的正面輪廓、鏡頭透視或衣料壓痕硬套到側背面。頭、頸、鎖骨、肩胛、胸廓、腰腹與骨盆連接連續，軀幹有正常厚度，四肢與手腳尺寸相稱；不套用固定三圍、罩杯、腰臀比或幾頭身數字，不從照片推算尺寸。\n胸部按原胸廓、重力及衣料支撐自然分布，腰腹保留柔軟厚度、呼吸空間與姿勢摺痕；臀腿、肩背與腹部隨站坐跪躺和受力自然改變。性感、背心、馬甲或低領只改服裝，不增加胸臀體積、不縮窄肋骨與骨盆、不掐細腰或延長軀幹及雙腿。\n肩、肘、腕、髖、膝、踝按真實關節活動，脊柱轉身和頸部回看幅度合理，承重與接觸面一致；可見手指數量、連接與握持自然，遮擋時不強迫露出全部手指。保留本題鏡位、表情、構圖與必要手勢，只校正不合理的拉伸、關節及透視，不為展示完整身形擅自拉遠。';
+function applyRealisticPosesV2330(){
+ const replacements=[
+  ['形成較集中的胸前輪廓','保持肩臂自然間距與胸廓正常厚度'],
+  ['這個姿勢可讓胸線更集中','胸前線條只按原身形、正常重力與衣料支撐呈現'],
+  ['此姿勢可讓胸前輪廓更集中','胸前輪廓只按原身形、正常重力與衣料支撐呈現'],
+  ['形成胸前線條自然集中的姿勢','肩膀放鬆且胸廓保持自然厚度'],
+  ['僅由上臂內收、正常重力與服裝原有支撐自然加深胸前線條','僅由原身形、正常重力與服裝原有支撐自然呈現胸前線條'],
+  ['使肩線與胸前輪廓自然集中','肩線與胸廓保持自然寬度'],
+  ['形成清楚但不誇張的胸前集中輪廓','保留自然肩線與原胸廓比例'],
+  ['姿勢可讓線條自然集中','胸前線條依原身形與衣料支撐自然呈現'],
+  ['使肩頸保持放鬆並形成柔和的胸前集中線條','使肩頸保持放鬆，胸廓與腰腹保留正常厚度'],
+  ['僅讓上臂內收造成的自然集中效果出現','胸前輪廓只依原身形、重力與衣料支撐呈現'],
+  ['僅讓手臂內收自然加深輪廓','保留原胸廓與自然衣料支撐'],
+  ['僅由上臂內收、正常重力與服裝支撐自然集中','僅依原身形、正常重力與服裝支撐自然呈現'],
+  ['胸前線條自然集中但不聳肩','胸廓保持原有寬度與厚度，不聳肩'],
+  ['只保留姿勢造成的自然集中效果','只保留姿勢、重力與衣料支撐造成的自然變化'],
+  ['胸前集中只來自上臂位置與自然體態','胸前輪廓只依原有體態與自然衣料支撐'],
+  ['手肘內收可讓胸前線條自然集中','手肘只自然靠近軀幹，胸廓保持原有比例'],
+  ['僅保留正常手臂內收造成的自然集中','僅保留原身形、重力與衣料支撐造成的自然輪廓'],
+  ['胸前線條只自然集中','胸前線條只依原身形、重力與衣料支撐自然呈現']
+ ];
+ for(const p of catalog.poses){
+  const old=p.label;
+  if(p.id==='P60')p.label='雙臂交疊胸前・冷淡';
+  if(p.id==='P62')p.label='前傾雙手撐膝・自信直視';
+  if(old!==p.label)p.aliases=[...new Set([...(p.aliases||[]),old])];
+  for(const [from,to]of replacements)p.action=p.action.replaceAll(from,to);
+ }
+}
 function personProfile(person='Vera'){
  if(person==='小森')return {
   name:'小森',fullName:'小森',age:23,face:'小森半身正臉_FaceMaster.jpeg',body:'小森全身照_BodyMaster.jpeg',angle:'小森半身側臉_AngleAux.jpeg',
   referenceBody:'只定義小森原有的肩線、骨架、胸廓、軀幹、腰臀與腿部比例，不重新定義臉，也不把圖中的制服、牛仔褲、鞋或背景帶進本題。',
-  bodyLock:'以原始 小森全身照_BodyMaster.jpeg 圖像本身為準：小森約 162 cm、約 50 kg，偏窄肩、中等偏小骨架，纖細自然但保有正常女性曲線、自然腰身與軟組織。自然約 D 罩杯的視覺描述僅是人物尺度輔助，不是可由照片量出的精確罩杯，也不得拿它重新塑形。身高、體重與罩杯文字均為輔助；與 Body Master 影像衝突時，以原圖為準。保留原有肩部、胸廓、軀幹、骨盆、腰臀、腿長、頭身比及手腳尺寸，不刻意變瘦、拔高、縮腰、拉腿或誇張曲線；近景不可為了顯示身形而擅自拉遠構圖。',
+  bodyLock:'以原始 小森全身照_BodyMaster.jpeg 圖像本身維持小森原有骨架、自然肩線、胸廓、軀幹與腰臀腿比例；纖細自然並保留正常軟組織，不採用服裝模特的身形，不用身高體重或罩杯文字重新塑形。\n'+REALISTIC_BODY_RULES_V2330,
   purpose:'小森是 23 歲明確成年的東亞女性。本題由同一位小森完成指定的穿搭攝影與姿勢；自然依本題動作切換表情，維持她原有的臉部身份與生活感，不把拍攝情境改寫成永久人物背景。',
   hair:'髮色、髮質、髮長與瀏海以本次原始小森 Face Master 為準；暖栗棕／茶棕、中長髮約胸上、中分自然八字瀏海與臉側碎髮只是輔助描述，不反過來改造原圖。綁髮、撥髮、濕髮等當下髮態依本題動作及真實重力；本題指定高馬尾或低馬尾時照做，不以共通髮型覆蓋。保留自然單根髮絲、密度與飛髮。',
   makeup:'韓系裸妝／自然淡妝，底妝薄透、自然眉眼與唇色，保留小森原始參考圖膚色、眼下結構、毛孔、唇紋與細微瑕疵。妝容不能放大眼睛、縮鼻、削尖下巴或改成網紅模板臉。'
  };
  return {name:'Vera',fullName:'Vera／周語棠',age:26,face:'FaceMaster_v1.0.png',body:'BodyMaster_v1.0.jpeg',angle:'AngleAux_v1.0.jpeg',
-  referenceBody:'只定義約 160 cm、自然微肉沙漏型的肩腰臀與腿部比例，不重新定義臉，也不把圖中的背心、短褲、鞋或背景帶進本題。',
-  bodyLock:'以原始 BodyMaster_v1.0.jpeg 圖像本身為準：Vera 約 160 cm、49–54 kg；約 90／66／94 cm、腰臀比約 0.70 僅是正式設定的輔助護欄，不是每個角度都要顯示的固定輪廓，與原圖衝突時以原圖為準。維持微肉、自然柔和的沙漏型成年體態，胸臀量感平衡、腰線自然、大腿有肉感、腹部保有正常軟組織；不刻意變瘦、拔高、縮腰、拉腿、誇張豐滿或重塑身形。',
+  referenceBody:'只參考 Vera 原有肩線、胸廓、軀幹、腰臀與腿部比例，按真實人體和本題姿勢重建；不重新定義臉，也不把圖中的背心、短褲、鞋或背景帶進本題。',
+  bodyLock:'以原始 BodyMaster_v1.0.jpeg 圖像本身維持 Vera 原有骨架與自然柔和體態；肩寬、胸廓、腰腹厚度、臀腿量感與手腳尺寸彼此相稱，不把自然曲線放大成極端沙漏，不用體重、三圍或腰臀比文字重新塑形。\n'+REALISTIC_BODY_RULES_V2330,
   purpose:'Vera 是 26 歲明確成年女性，也是有經驗的專業寫真／時裝模特兒。本題為 ',
   hair:'中長直髮到胸上、中分瀏海、霧感冷灰／灰棕髮色，以原始 Face Master 為準；保留真實單根髮絲、密度與細碎飛髮。不得改成其他永久髮色或髮型，但本題的高馬尾、低馬尾、撥髮、抓髮、濕髮與自然髮絲動態照 canonical 動作執行，不以共通散髮描述覆蓋。',
   makeup:'低飽和純慾微煙燻：灰棕／冷棕眼妝、柔和拉長眼型、裸粉或低飽和玫瑰唇；底妝薄透，真實膚況仍可見。不要甜妹娃娃妝、高飽和濃妝或過度精修網紅妝。'
@@ -2542,7 +2624,8 @@ Vera 的核心 Face ID 不變：眼睛仍為水平偏長的自然杏仁眼，不
 
 【身形與 Master 分工】
 FaceMaster_v1.0.png = 唯一臉部身份。
-BodyMaster_v1.0.jpeg = 半身或身材明顯時，只負責約 160 cm、90/66/94 左右、WHR 約 0.70 的自然微肉沙漏型比例；不得定義臉。
+BodyMaster_v1.0.jpeg = 身形入鏡時只參考 Vera 原有骨架與自然身體比例；不得定義臉或帶入原服裝，不把正面輪廓硬套到新姿勢。
+${personProfile('Vera').bodyLock}
 AngleAux_v1.0.jpeg = 明顯 3/4、側臉、回頭、低頭／仰頭時，只負責同一張臉的 rotation geometry；不得創造新五官。
 所有歷史生成圖 = 可供構圖概念參考，但臉部身份權重為 0。
 
@@ -2594,7 +2677,7 @@ function recordsVirtual(){
     if(activeView==='pending'&&!state.pending[key])continue;
     if(activeView==='recent'&&!state.recent.includes(key))continue;
     if(activeView==='frequent'&&u===0)continue;
-    out.push({version,sourceVersion,o,p:p.id!=='P00'&&version==='V.cos'&&COS_PRODUCT_ROLE_IDS.includes(o.role)?ropeCostumePose(p,person):p,key,u,ratio,person});
+    out.push({version,sourceVersion,o,p:p.id!=='P00'&&version==='V.cos'?(isMalfoyCostumeV2330(o)?cosPoseForV2330(o,p,person):COS_PRODUCT_ROLE_IDS.includes(o.role)?ropeCostumePose(p,person):p):p,key,u,ratio,person});
    }
    }
   }
