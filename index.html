@@ -120,7 +120,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       <div class="sync-card"><strong id="poseCov">0 / 152</strong><span>動作資料｜含 P00 四格影片參考與 6 組照片參考動作</span></div>
       <div class="sync-card"><strong id="emoteCov">Vera 63／小森 93</strong><span>V.表情包｜小森既有 63 題更新＋30 題鏡頭互動</span></div>
       <div class="sync-card"><strong id="replyCov">66 / 66</strong><span>小森回覆包｜9 分類・含 18 句迷因・有／無字幕・固定 1:1</span></div>
-      <div class="sync-card"><strong id="cosCov">743 / 743</strong><span>V.cos｜含 C000 公版・47 主題・獨立內著 18 套・繩藝褲裝 40 套</span></div>
+      <div class="sync-card"><strong id="cosCov">745 / 745</strong><span>V.cos｜含 C000 公版・48 主題・跩哥馬份正常／性感・獨立內著 18 套・繩藝褲裝 40 套</span></div>
     </div>
     <div class="card">
       <div class="profile"><img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96' viewBox='0 0 96 96'%3E%3Crect width='96' height='96' rx='24' fill='%23211d29'/%3E%3Ctext x='48' y='62' text-anchor='middle' font-family='Arial' font-size='44' font-weight='700' fill='%23d6b7ff'%3EV%3C/text%3E%3C/svg%3E" alt="Vera"><div><h3>Vera｜周語棠 ＋ 小森</h3><p>先選人物和大分類。V.cos 再選角色、款式與配色，正常／性感版可直接切換；寫真可快速篩選內著＋外搭、內著＋網紗，需要時再展開指定動作或服裝。繩藝褲裝保留可拆卸、自由活動的衣外繩線；V.cos 一般動作為 9:16 半身；P00 專用於四格 16:9 影片參考圖。Vera 使用 Vera 原始 Master；小森使用小森原始 Master。兩人的臉、身形、髮型與妝容各自獨立，複製時會輸出完整提示詞。V.表情包可選 Vera／小森，小森提供鏡頭互動反應；小森回覆包另外提供制服優先、1:1、有／無字幕的脆留言回覆，基本回覆與網路迷因分開找，情緒與動作逐題對應、避免誇張表情重塑五官；字幕字型依語氣搭配，面部由小森原始 Face Master 唯一鎖定。</p></div></div>
@@ -135,7 +135,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
 
   <main class="grid" id="grid"></main>
   <div class="pager" id="pager"></div>
-  <footer>Vera × 小森 Prompt Vault v2.3.28｜小森表情包 93 題・鏡頭互動｜Vera 表情包 63 題｜表情包 1:1／9:16｜P00 橫排直式四格 16:9｜48 套居家穿搭｜小森制服回覆包 1:1</footer>
+  <footer>Vera × 小森 Prompt Vault v2.3.29｜V.cos 性轉跩哥馬份・正常／性感｜小森表情包 93 題・鏡頭互動｜Vera 表情包 63 題｜表情包 1:1／9:16｜P00 橫排直式四格 16:9｜48 套居家穿搭｜小森制服回覆包 1:1</footer>
 </div>
 
 <div class="sheet" id="sheet"><div class="sheetbox"><div class="sheetbar"></div><h2 id="sheetTitle"></h2><div class="sheetmeta" id="sheetMeta"></div><div id="sheetCustomWardrobe" class="custom-clothes-preview sheet-custom-clothes is-hidden"><strong>本次帶入服裝</strong><p id="sheetCustomWardrobeText"></p><button id="editCustomWardrobe" type="button" class="btn small">修改服裝</button></div><div class="prompt" id="sheetPrompt"></div><div class="sheetactions"><button id="copyDetail" class="btn primary">複製 Prompt</button><button id="togglePendingDetail" class="btn">待生成</button><button id="toggleFavDetail" class="btn">收藏整組</button><button id="toggleOutfitStarDetail" type="button" class="btn entity-star">☆ 服裝</button><button id="togglePoseStarDetail" type="button" class="btn entity-star">☆ 動作</button><button id="closeSheet" class="btn ghost">關閉</button></div></div></div>
@@ -1010,6 +1010,46 @@ for(const source of COS_ROPE_ROLE.variants)cosV2312Append(COS_ROPE_ROLE,source,[
 for(const def of COS_V2312_WARDROBE){const role=COS_ROLES.find(r=>r.id===def.role),source=role.variants.find(v=>v.id===def.source);if(!source)throw Error('Missing extension source '+def.role+' '+def.source);cosV2312Append(role,source,def.colors,{label:def.label,patch:def,newVariant:true});}
 COS_OUTFITS.sort((a,b)=>a.id.localeCompare(b.id,undefined,{numeric:true}));
 
+// v2.3.29: Append two adult Malfoy-inspired outfits without renumbering existing IDs.
+// Official robe lining/crest and house-tie colours: Harry Potter Shop, checked 2026-10-17.
+// https://harrypottershop.com/products/personalized-slytherin-robe
+// https://harrypottershop.jp/en/products/slytherin-house-tie
+// The fitted buttoned waistcoat and green/silver skirt hem follow the user's reference.
+const COS_MALFOY_PALETTE_V2329={id:'slytherin-black-green-silver',label:'黑／深灰／綠銀',primary:'黑色袍身、深灰色背心與裙裝',secondary:'墨綠內襯、綠銀斜紋領帶、白色襯衫'};
+COS_PALETTES.malfoyBlackGreen=COS_MALFOY_PALETTE_V2329;
+const COS_MALFOY_EMBLEM_V2329='唯一一枚小型銀線史萊哲林蛇形布徽縫在背心左胸，僅是衣裝刺繡；袍身、背面及背景不重複蛇徽，不生成校名文字或額外標誌。';
+const COS_MALFOY_ROLE_V2329={
+ id:'draco-malfoy',label:'性轉跩哥馬份 Malfoy',fanRole:true,
+ aliases:['跩哥','跩哥馬份','德拉科','馬份','马尔福','德拉科·马尔福','Draco Malfoy','Malfoy','Malfoid','Fem Malfoy','Galfoy','Draconia','史萊哲林','斯莱特林','Slytherin','哈利波特','Harry Potter','性轉'],
+ referenceNote:'跩哥馬份／Draco Malfoy 的史萊哲林配色服裝靈感，由所選原年齡成年 Vera 或小森作女性 Cosplay。正常版與性感版都是成人服裝改編，不套用原作學生年齡或校園劇情，不宣稱為官方女性角色定裝。黑袍綠內襯與綠銀領帶依官方服裝元素；扣式背心、百褶裙及裙邊為所附造型的改編。附圖只讀衣裝，臉部身份權重為 0；不採用附圖模特兒、Tom Felton 或角色的臉、鉑金髮色、妝容、瞳色、年齡與身形。原 P 動作、表情及所選人物原髮型照常。',
+ variants:[{
+  id:'malfoy-slytherin',label:'史萊哲林背心裙裝',start:743,palettes:['malfoyBlackGreen'],
+  normal:{
+   cut:'端正白襯衫＋扣式背心＋百褶裙＋綠內襯黑袍',
+   top:'不透明白色尖領長袖襯衫，前襟扣至領根，袖口完整，綠底銀灰斜紋領帶端正結在領口。外搭深炭灰色 V 領扣式西裝背心，正面一排實體鈕扣全部扣合，普通合身鬆量、完整覆腹；背心不是針織套頭衫。最外層為敞開前襟的黑色連帽長袍，兩袖正常穿著、帽子垂在後背，墨綠色內襯沿兩側袍襟清楚可見，胸前襯衫與背心層次不被蓋住。',
+   bottom:'深灰色高腰百褶裙，裙腰與背心下襬自然銜接，裙長為膝上正常長度。裙擺有一道墨綠寬邊及其上兩道細銀灰橫線，摺線連續延伸至背面；黑色及膝襪，襪口兩道銀灰細條紋。裙襬與襪口在半身畫外自然延續，不為展示裙邊或襪子拉遠鏡頭。',
+   material:'挺括不透棉混紡襯衫、霧面有襯西裝背心與裙布；領帶為低光澤綠銀斜紋織物，黑袍外層柔軟霧面、墨綠內襯有克制緞光；真實鈕扣、領片、摺線與縫線各自清楚。',
+   coverage:'端正扣合襯領、結實領帶結、普通 V 領背心及完整覆腹為正常版固定組合，胸前沒有開口；長袍敞開只展示完整三層衣裝，不變成性感版鬆領或低領。',
+   accessories:COS_MALFOY_EMBLEM_V2329+' 一支深棕色細魔杖收在袍內側的杖袋，固定不手持、不漂浮，不覆蓋原 P 的手勢；不加假髮、眼鏡或飾品。'
+  },
+  sexy:{
+   cut:'鬆領白襯衫＋低 V 合身扣式背心＋短百褶裙＋綠內襯黑袍',
+   top:'不透明白色尖領長袖襯衫原有上方兩顆鈕扣自然鬆開，形成固定較低 V 形領口，肩頸、鎖骨與一小段上胸自然可見；胸部由不透明衣片完整遮覆。綠底銀灰斜紋領帶鬆繫，領帶結停在領根下方，前領片自然展開。外搭深炭灰色低 V 領合身扣式西裝背心，正面一排實體鈕扣扣合、原腰線貼合而不束腰，下襬完整覆腹，不是裸穿馬甲或針織套頭衫。黑色連帽長袍保持前襟敞開、兩袖自然穿著，帽子垂在後背，墨綠內襯及白襯衫袖口清楚，袍襟不擋住鬆領和低 V 背心。',
+   bottom:'深灰色高腰百褶短裙，裙長至大腿上段但臀部與下身完整遮覆，腰頭平整、前後裙片固定；裙擺保留一道墨綠寬邊和其上兩道細銀灰橫線。搭配黑色過膝長襪，襪口兩道銀灰細條紋，無吊襪帶；裙襬、襪口與腿部在半身畫外自然延續，不掀裙、不露內著，不為展示短裙或長襪拉遠鏡頭。',
+   material:'有微量彈性的不透明白色棉襯衫、柔軟有襯霧面西裝背心和挺括裙布；低光澤綠銀斜紋領帶、霧面黑袍與墨綠緞光內襯、密織不透明襪料。貼合感來自衣裝收省與真實摺痕，不改身形。',
+   coverage:'鬆開兩顆上方鈕扣的白襯領、下移的領帶結與低 V 合身背心，在頭頂至大腿最上段的半身畫面內就能識別性感版；保留襯衫、背心、長袍三層，胸部和下身完整不透明，不豐胸、縮腰或幼態化，不把襯領自動扣回正常版。',
+   accessories:COS_MALFOY_EMBLEM_V2329+' 一支深棕色細魔杖收在袍內側的杖袋，固定不手持、不漂浮，不覆蓋原 P 的手勢；不加假髮、眼鏡或飾品。'
+  }
+ }]
+};
+COS_ROLES.push(COS_MALFOY_ROLE_V2329);
+for(const [index,style]of COS_STYLES.entries()){
+ const role=COS_MALFOY_ROLE_V2329,variant=role.variants[0],g=variant[style.id],palette=COS_MALFOY_PALETTE_V2329;
+ const o={...g,id:'C'+String(variant.start+index).padStart(3,'0'),role:role.id,roleLabel:role.label,variant:variant.id,variantLabel:variant.label,style:style.id,styleLabel:style.label,color:palette.id,colorLabel:palette.label,primaryColor:palette.primary,secondaryColor:palette.secondary,label:[role.label,style.label,variant.label,palette.label].join('｜'),referenceNote:role.referenceNote,brand:false,fanRole:true,main:'指定造型 Cosplay',sub:role.label+'／'+variant.label+'／'+style.label,bg:'中性灰棚',costumeEmblem:COS_MALFOY_EMBLEM_V2329,aliases:[...role.aliases]};
+ if(COS_OUTFITS.some(existing=>existing.id===o.id))throw Error('Duplicate cosplay outfit '+o.id);
+ o.detail=cosV2311Detail(o);COS_OUTFITS.push(o);
+}
+
 // Garment-only variations of named existing fashion entries. No new image rules.
 const FASHION_V2312_PATTERNS=[
  {source:'F301',group:'inner-outer',outer:'{外色}短版棉襯衫',inner:'{內色}有襯蕾絲Camisole',bottom:'{下色}低腰貼身牛仔長褲',outerDetail:'尖領短版棉襯衫，前襟自然敞開，袖口端正，完整袖片與原衣襟層次清楚。',innerDetail:'固定方領細肩帶Camisole，表面小花蕾絲、胸腹完整不透明襯層，襯衫與內搭是兩件衣服。',bottomDetail:'正常褲襠、完整前後褲片及實體褲腰，牛仔明線與側縫清楚。',colors:[['白色','黑色','水洗藍'],['霧藍色','奶油白','水洗灰'],['煙粉色','深棕色','水洗黑'],['炭灰色','酒紅色','水洗藍']]},
@@ -1050,7 +1090,7 @@ const COS_V2312_ROLE_GROUPS=[
  ['運動與居家',['fitness-coach','yoga-coach','tennis-girl','swimsuit','neighbor-sister','apron-housekeeper','after-bath-student']],
  ['職業與舞台',['starbucks','tactical-girl','soldier','agent','leather-agent','assassin','nurse','female-dealer','secretary','band-guitarist','cheerleader','magician','lace-up-dancer']],
  ['奇幻與故事',['miko','succubus','vampire','dark-angel','nun','demon-fox','elf','ghost-girl','doll-princess','bride','red-riding-hood','cleopatra','leather-catwoman','tomie','harley-quinn','killjoy']],
- ['學院與日常',['sailor','student-president','jirai','qipao-girl']]
+ ['學院與日常',['draco-malfoy','sailor','student-president','jirai','qipao-girl']]
 ];
 function fashionFamilyOf(o){
  if(o.collection)return o.collection;
@@ -1555,7 +1595,7 @@ function promptForCos(o,p,person='Vera'){
  const profile=personProfile(person),pose=cosHalfBodyPose(p,person);
  const expression=person==='小森'?expressionFor(pose).replaceAll('Vera','小森'):expressionFor(pose);
  const title=`${profile.name}｜${o.id}・${pose.id}｜${o.label}｜${pose.label}（半身版本）｜9:16`;
- const branding=o.customWardrobeResolved?'只保留【服裝設定】明列的衣料圖案或服裝字樣；不新增背景品牌、畫面文字、Logo、水印或字幕。':o.brand?'只允許衣裝上本題明列的一個 Starbucks 白色雙尾人魚圓形標誌；它是服裝圖案，不是畫面水印。其餘背景、道具和畫面不加文字、Logo 或廣告。':'除了本題明列的服裝科技袖章或縫製飾片，不新增品牌文字、Logo、水印或畫面字幕。';
+ const branding=o.customWardrobeResolved?'只保留【服裝設定】明列的衣料圖案或服裝字樣；不新增背景品牌、畫面文字、Logo、水印或字幕。':o.costumeEmblem?o.costumeEmblem+' 其餘背景、道具和畫面不加文字、Logo、水印或字幕。':o.brand?'只允許衣裝上本題明列的一個 Starbucks 白色雙尾人魚圓形標誌；它是服裝圖案，不是畫面水印。其餘背景、道具和畫面不加文字、Logo 或廣告。':'除了本題明列的服裝科技袖章或縫製飾片，不新增品牌文字、Logo、水印或畫面字幕。';
  return `${photoReferenceGate(profile)}
 
 【本題標題】
