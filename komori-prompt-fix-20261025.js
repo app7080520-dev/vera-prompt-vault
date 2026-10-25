@@ -81,7 +81,8 @@
     for (const [before, after] of corrections) result = result.replaceAll(before, after);
     if (result.includes('【小森專案參考圖載入規則｜2026-10-25】')) return result;
     const kind = photoType(record);
-    if (kind) return compactEditorialPrompt(record, result, kind);
+    if (kind && record.p?.id !== 'P00') return compactEditorialPrompt(record, result, kind);
+    if (kind) result = naturalPoseWording(result);
     const additions = [imageInput];
     if (kind === 'inner') additions.push(innerEditorial);
     if (kind === 'layered') additions.push(layeredEditorial);
