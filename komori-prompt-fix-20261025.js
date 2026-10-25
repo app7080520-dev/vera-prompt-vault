@@ -91,10 +91,11 @@
   window.promptForRecord = patchedPromptForRecord;
   window.__veraKomoriPromptPatch = {
     version: VERSION,
-    scope: 'person=小森; V.內著寫真 and V.時裝寫真 / inner-outer; Komori reference filenames',
+    scope: 'person=小森; compact V.內著寫真 and V.時裝寫真 / inner-outer / inner-mesh; original garments and poses retained',
     prior: previous,
     upgrade,
     photoType,
+    compactKomoriLookbook,
     naturalPoseWording
   };
 })();
