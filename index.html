@@ -117,7 +117,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
   <section id="syncPanel" style="display:none">
     <div class="sync-grid">
       <div class="sync-card"><strong id="innerCov">0 / 194</strong><span>內著穿搭資料｜含 O000 公版</span></div>
-      <div class="sync-card"><strong id="fashionCov">0 / 641</strong><span>時裝穿搭資料｜含 F000 公版、50 套 Bolero（30 套基礎＋10 套蕾絲＋10 套網紗）、48 套居家穿搭與 6 組照片參考服裝</span></div>
+      <div class="sync-card"><strong id="fashionCov">0 / 641</strong><span>時裝穿搭資料｜含 F000 公版、50 套 Bolero（30 套基礎＋20 套蕾絲，其中 10 套細肩帶／蕾絲腰帶）、48 套居家穿搭與 6 組照片參考服裝</span></div>
       <div class="sync-card"><strong id="poseCov">0 / 153</strong><span>動作資料｜含 P0 正面服裝測試、P00 四格與 6 組照片參考動作</span></div>
       <div class="sync-card"><strong id="emoteCov">Vera 63／小森 93</strong><span>V.表情包｜小森既有 63 題更新＋30 題鏡頭互動</span></div>
       <div class="sync-card"><strong id="replyCov">66 / 66</strong><span>小森回覆包｜9 分類・含 18 句迷因・有／無字幕・固定 1:1</span></div>
@@ -2095,7 +2095,7 @@ function referenceFashionAccessoriesV2319(o){
  return o?.garmentAccessories?o.garmentAccessories+' 本題明列的軟帽屬服裝配件，不屬額外飾品；其餘沿用原規則：'+normal:normal;
 }
 function fashionOptionsV2319(outfits){
- return [{label:'Bolero・蕾絲內著（F621–F630）',rows:outfits.filter(o=>o.boleroTextileGroup==='蕾絲內著')},{label:'Bolero・網紗內著（F631–F640）',rows:outfits.filter(o=>o.boleroTextileGroup==='網紗內著')},{label:'Bolero 基礎延伸（F591–F600）',rows:outfits.filter(o=>o.boleroSeries==='基礎延伸')},{label:'Bolero・CK 對比腰頭（F601–F605）',rows:outfits.filter(o=>o.boleroSeries==='CK對比腰頭')},{label:'Bolero・SKIMS 中性色（F606–F610）',rows:outfits.filter(o=>o.boleroSeries==='SKIMS中性色')},{label:'Bolero・機能運動（F611–F615）',rows:outfits.filter(o=>o.boleroSeries==='機能運動')},{label:'Bolero・材質質感（F616–F620）',rows:outfits.filter(o=>o.boleroSeries==='材質質感')},{label:'性感背心＋短褲・新款（F579–F590）',rows:outfits.filter(o=>o.sexyHomeLounge)},{label:'居家背心＋短褲（F543–F578）',rows:outfits.filter(o=>o.homeLoungeRevision&&!o.sexyHomeLounge)},{label:'照片參考服裝（F537–F542）',rows:outfits.filter(o=>o.referenceFashionRevision)},{label:'既有時裝',rows:outfits.filter(o=>!o.boleroSeriesRevision&&!o.referenceFashionRevision&&!o.homeLoungeRevision)}].filter(g=>g.rows.length).map(g=>'<optgroup label="'+g.label+'">'+g.rows.map(o=>`<option value="${o.id}">${o.id}｜${esc(o.label)}</option>`).join('')+'</optgroup>').join('');
+ return [{label:'Bolero・蕾絲內著（F621–F630）',rows:outfits.filter(o=>o.boleroTextileGroup==='蕾絲內著')},{label:'Bolero・蕾絲細帶／蕾絲腰帶（F631–F640）',rows:outfits.filter(o=>o.boleroTextileGroup==='蕾絲細帶／蕾絲腰帶')},{label:'Bolero 基礎延伸（F591–F600）',rows:outfits.filter(o=>o.boleroSeries==='基礎延伸')},{label:'Bolero・CK 對比腰頭（F601–F605）',rows:outfits.filter(o=>o.boleroSeries==='CK對比腰頭')},{label:'Bolero・SKIMS 中性色（F606–F610）',rows:outfits.filter(o=>o.boleroSeries==='SKIMS中性色')},{label:'Bolero・機能運動（F611–F615）',rows:outfits.filter(o=>o.boleroSeries==='機能運動')},{label:'Bolero・材質質感（F616–F620）',rows:outfits.filter(o=>o.boleroSeries==='材質質感')},{label:'性感背心＋短褲・新款（F579–F590）',rows:outfits.filter(o=>o.sexyHomeLounge)},{label:'居家背心＋短褲（F543–F578）',rows:outfits.filter(o=>o.homeLoungeRevision&&!o.sexyHomeLounge)},{label:'照片參考服裝（F537–F542）',rows:outfits.filter(o=>o.referenceFashionRevision)},{label:'既有時裝',rows:outfits.filter(o=>!o.boleroSeriesRevision&&!o.referenceFashionRevision&&!o.homeLoungeRevision)}].filter(g=>g.rows.length).map(g=>'<optgroup label="'+g.label+'">'+g.rows.map(o=>`<option value="${o.id}">${o.id}｜${esc(o.label)}</option>`).join('')+'</optgroup>').join('');
 }
 
 // Public wardrobe templates share one editable clothing block. Existing outfits stay immutable.
@@ -2316,21 +2316,21 @@ async function bootstrapRemote(){
   return rows(JSON.parse(raw),normalizePose);
  };
  const jobs=[
-  ['F621–F640｜Bolero 蕾絲／網紗 20 款',async()=>{
-   const payload=await fetchJSON('./data/fashion-bolero-f621-f640-lace-mesh-v1.json?v=1');
-   if(payload?.format!=='vera-bolero-lace-mesh-v1'||payload.count!==20||!Array.isArray(payload.outfits)||payload.outfits.length!==20)throw Error('Bolero 蕾絲／網紗資料不完整');
+  ['F621–F640｜Bolero 蕾絲 20 款',async()=>{
+   const payload=await fetchJSON('./data/fashion-bolero-f621-f640-lace-mesh-v1.json?v=2');
+   if(payload?.format!=='vera-bolero-all-lace-v2'||payload.count!==20||!Array.isArray(payload.outfits)||payload.outfits.length!==20)throw Error('Bolero 蕾絲系列資料不完整');
    const seen=new Set();
    const outfits=rows(payload.outfits,row=>{
     const data=normalizeFashion(row);
-    if(!/^F6(?:2[1-9]|3\d|40)$/.test(data.id))throw Error('Bolero 蕾絲／網紗 F 編號超出範圍: '+data.id);
-    if(seen.has(data.id))throw Error('Bolero 蕾絲／網紗 F 編號重複: '+data.id);
+    if(!/^F6(?:2[1-9]|3\d|40)$/.test(data.id))throw Error('Bolero 蕾絲 F 編號超出範圍: '+data.id);
+    if(seen.has(data.id))throw Error('Bolero 蕾絲 F 編號重複: '+data.id);
     const needed=['【外層】','【內搭】','【下身】','【材質與配色】','【樣式與品牌風格】','【穿搭硬鎖】'];
-    if(!row.detail||needed.some(t=>!row.detail.includes(t))||!row.detail.includes('細緻彈性針織'))throw Error('Bolero 蕾絲／網紗服裝硬鎖缺段: '+data.id);
-    if(!['蕾絲內著','網紗內著'].includes(row.boleroTextileGroup))throw Error('Bolero 內著材質分類錯誤: '+data.id);
+    if(!row.detail||needed.some(t=>!row.detail.includes(t))||!row.detail.includes('細緻彈性針織'))throw Error('Bolero 蕾絲服裝硬鎖缺段: '+data.id);
+    if(!['蕾絲內著','蕾絲細帶／蕾絲腰帶'].includes(row.boleroTextileGroup))throw Error('Bolero 內著材質分類錯誤: '+data.id);
     seen.add(data.id);
     return {...data,collection:'inner-outer',boleroSeriesRevision:row.boleroSeriesRevision,boleroTextileGroup:row.boleroTextileGroup,referenceDesign:row.referenceDesign,aliases:row.aliases};
    });
-   if(outfits.length!==20||outfits[0].id!=='F621'||outfits.at(-1).id!=='F640'||outfits.filter(o=>o.boleroTextileGroup==='蕾絲內著').length!==10||outfits.filter(o=>o.boleroTextileGroup==='網紗內著').length!==10)throw Error('Bolero 蕾絲／網紗 F621–F640 缺漏');
+   if(outfits.length!==20||outfits[0].id!=='F621'||outfits.at(-1).id!=='F640'||outfits.filter(o=>o.boleroTextileGroup==='蕾絲內著').length!==10||outfits.filter(o=>o.boleroTextileGroup==='蕾絲細帶／蕾絲腰帶').length!==10)throw Error('Bolero 蕾絲 F621–F640 缺漏');
    return {fashion:outfits};
   }],
   ['F591–F620｜Bolero 30 款',async()=>{
