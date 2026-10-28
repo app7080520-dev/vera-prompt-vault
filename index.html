@@ -1439,7 +1439,12 @@ Prompt 網站僅輸出文字，不會自動把專案照片傳給生圖模型：�
 }
 
 function promptForKomoriReply(e,mode='caption'){
- const profile=personProfile('小森'),office=komoriReplyOfficeV20261028(e),caption=mode==='clean'?`【字幕】
+ const rawProfile=personProfile('小森'),profile={...rawProfile,
+  face:'小森半身正臉_FaceMaster_v2.jpeg',
+  body:'小森全身照_BodyMaster_v3_面部修正版.jpeg',
+  angle:'小森半身側臉_AngleAux_v2.jpeg',
+  bodyLock:String(rawProfile.bodyLock).replaceAll('小森全身照_BodyMaster.jpeg','小森全身照_BodyMaster_v3_面部修正版.jpeg')
+ },office=komoriReplyOfficeV20261028(e),caption=mode==='clean'?`【字幕】
 無字幕版本。畫面不生成字幕、對話框、水印、編號或內部分類文字；僅保留制服本身原有品牌圖案。`:komoriThreadsCaption(e);
  return `【本次原始參考圖與面部身份硬鎖】
 原始 ${profile.face} 圖片本身必須實際進入本次 image／reference input；檔名、文字描述、聊天記憶或前一次生成圖不能代替原始影像。若未提供原始 Face Master，先要求補圖，不自行猜臉。每次重新載入原圖建立 fresh facial anchor，歷史生成圖的臉部身份權重為 0。
