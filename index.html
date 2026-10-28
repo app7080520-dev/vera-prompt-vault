@@ -76,7 +76,7 @@ button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visi
       <div class="style-field"><span class="field-caption">字幕</span><div id="replyCaptionChoices" class="style-choices" role="group" aria-label="字幕版本"></div></div>
       <select id="replyCaption" class="is-hidden" aria-label="字幕版本"><option value="caption">有字幕</option><option value="clean">無字幕</option><option value="ALL">全部版本</option></select>
       <select id="replyExact" class="is-hidden" aria-label="指定回覆"><option value="ALL">全部回覆</option></select>
-      <p class="cos-note">小森專用・固定 1:1・制服優先・第三人稱手機攝影感。先選回覆情境或「網路迷因」，也可搜尋「收到、抱歉、已老實」；人物身份優先，表情以自然眉眼和嘴角區分，手勢逐句貼合回覆意思；字幕依語氣用花字手寫、復古立體、漫畫爆字或黑白迷因字。縮成脆留言小圖也要清楚，圖內僅放所選短句。</p>
+      <p class="cos-note">小森專用・固定 1:1・制服優先・第三人稱手機攝影感。先選回覆情境或「網路迷因」，也可搜尋「收到、抱歉、已老實」；人物身份優先，表情以自然眉眼和嘴角區分，手勢逐句貼合回覆意思；背景固定從五張小森辦公室原始參考圖選一張；表情依回覆語意更生動但不換臉；有字幕版統一白色粗字＋純黑粗描邊，縮成脆留言小圖仍清楚，圖內僅放所選短句。無字幕版維持乾淨畫面。</p>
     </section>
     <label id="fashionFamilyField" class="filter-field fashion-family is-hidden"><span>穿搭方向</span><select id="fashionFamily" class="ctrl"><option value="ALL">全部時裝</option><option value="home-lounge">居家背心＋短褲</option><option value="inner-outer">內著＋外搭</option><option value="inner-mesh">內著＋網紗</option><option value="other">其他時裝</option></select></label>
     <section id="entityFavoriteControls" aria-label="服裝與動作收藏篩選">
@@ -1202,7 +1202,7 @@ const KOMORI_REPLIES=[
  {id:'R023',category:'casual',label:'被你發現了',caption:'被你發現了',expression:'被看穿後的尷尬偷笑，嘴角略收、眉眼帶玩味。',action:'回望鏡頭，一手輕碰後頸，頭微偏，不抓亂頭髮。',aliases:['被抓包','心虛','尷尬']},
  {id:'R024',category:'casual',label:'先觀望',caption:'先觀望',expression:'克制的好奇與觀察，眼神有反應、嘴角微微收住。',action:'面向鏡頭略偏頭，一手輕托下巴，另一手自然放下；不躲到其他人物或道具後面。',aliases:['吃瓜','看看','路過','觀望']}
 ];
-const KOMORI_REPLY_UNIFORM={id:'KU001',label:'ET PET 深皇家藍 Polo 制服',bg:'真實寵物門市工作區'};
+const KOMORI_REPLY_UNIFORM={id:'KU001',label:'ET PET 深皇家藍 Polo 制服',bg:'小森辦公室原始參考場景'};
 const KOMORI_REPLY_CAPTION_MODES=[{id:'caption',label:'有字幕'},{id:'clean',label:'無字幕'}];
 function isKomoriReply(){return $('#version').value===KOMORI_REPLY_VERSION;}
 function komoriReplyGroupLabel(id){return KOMORI_REPLY_GROUPS.find(g=>g.id===id)?.label||'';}
@@ -1252,12 +1252,12 @@ const KOMORI_THREADS_REACTIONS={
 };
 for(const e of KOMORI_REPLIES){const reaction=KOMORI_THREADS_REACTIONS[e.id];if(!reaction)throw Error('Missing Threads reaction '+e.id);Object.assign(e,reaction);}
 function komoriThreadsCaption(e){
- const length=Array.from(e.caption).length,size=length<=2?'畫面高度的 18–20%':length<=4?'畫面高度的 14–18%':'畫面高度的 10–13%',type=komoriReplyType(e);
- return `【脆留言回覆字幕｜語氣字型】
-唯一字幕仍是繁體中文「${e.caption}」，逐字正確，不增減文字。本題採「${type.label}」：${type.description}
-裝飾字型依本題語氣設計；繁體中文字的完整筆畫與小圖可讀性優先，花飾、筆刷或立體側面不能蓋住主字。字效只作用於字幕，人物維持真實手機攝影、原膚色和自然膚質，不因字型變成漫畫人物。
-字幕明顯加大，每字字高約${size}，以縮成留言區小圖仍可讀為準。整組文字置於下方約 18–25% 的安全區，左右和底邊保留約 5% 空間；以一行完整顯示。若較長句必須分成兩行，每字字高調為約畫面高度的 9–10%，兩行一起落在原安全區。整句同一組、不重複、不拆成多個對話框。
-臉和主要手勢留在字幕上方，不遮眼、鼻、嘴或關鍵手指；不為字幕縮小人物或把鏡頭拉成全身。不要把字型名稱、分類、版本、編號或用途印在圖上；只放所選短句，不加額外貼紙、表情符號、聊天介面或其他文案。字幕描邊與背景有足夠對比，光暈不模糊字邊。`;
+ const length=Array.from(e.caption).length,size=length<=2?'單字高度約畫面 16–19%':length<=4?'單字高度約畫面 13–16%':'單字高度約畫面 9–12%';
+ return `【小森回覆包｜全系列統一黑白高對比字幕】
+唯一繁體中文字幕：「${e.caption}」，一字不差、不重複、不另加標題或表情符號。全系列固定為純白（#FFFFFF）繁體中文極粗黑體／無襯線黑體（字形以 Noto Sans TC Black 類型為準），字外有連續、清楚的純黑（#000000）粗描邊，僅保留短距離純黑陰影。黑與白是唯一文字色；絕不使用金色、粉色、紫色、橘色、漸層、彩色花字、霓虹光暈、彩色描邊、立體彩色側面或貼圖裝飾。
+字幕必須明顯：${size}，粗筆畫、合理字距、文字清楚且繁體筆畫完整；1:1 方形縮成 Threads 留言小圖依然容易讀取，不能細字、淺灰字、描邊太薄或被辦公室背景吃掉。
+文字原則上集中在下方約 20–28% 安全區，離左右及下緣至少 5%，不遮住眼睛、鼻子、嘴巴與主要手勢。文字較長可以排成兩行、置中且等間距；最多兩行，不拆成多個對話框。若原始辦公室背景有複雜物件，先在字幕範圍做自然的局部景深與低干擾整理；必要時只在文字下方補純黑半透明平整底條襯白字，除此之外不得加彩色或不透明大塊覆蓋人物。
+只印本題指定短句；不把檔名、圖片編號、分類、網站名稱、版本、Threads 介面、地點名稱或指令印在畫面上。文字必須像完成的實拍回覆貼文排版，不是貼在人物臉上的大字，也不是無法辨識的 AI 字形。`;
 }
 
 // Keep all original reply IDs and captions. Each reaction has its own readable facial signature.
@@ -1315,7 +1315,7 @@ const KOMORI_REPLY_TYPE_STYLES={
  meme:{label:'黑白迷因字',description:'經典網路迷因的繁體超粗黑白展示字，筆畫緊實清楚，字距保留可讀空間。純白實體字、深黑粗描邊、短硬陰影，乾脆有停頓感；不拉長壓扁中文字，不加其他標題、上下雙份字幕或表情符號。'}
 };
 for(const e of KOMORI_REPLIES){if(!KOMORI_REPLY_TYPE_STYLES[e.type])throw Error('Missing reply typography '+e.id);}
-function komoriReplyType(e){return KOMORI_REPLY_TYPE_STYLES[e.type];}
+function komoriReplyType(e){return {label:'黑白高對比字幕',description:'全回覆包統一清楚的繁體中文極粗黑白標題字，純白（#FFFFFF）字面＋純黑（#000000）厚描邊＋少量純黑短陰影；不加彩色內緣、粉色、金色、漸層、發光、立體彩色側面或彩色花字。'};}
 
 // Identity-first revisions. Keep R001–R036 labels, captions, categories, aliases and saved keys.
 const KOMORI_IDENTITY_FIRST_REACTIONS={
@@ -1398,12 +1398,52 @@ KOMORI_REPLIES.push(...KOMORI_EXPANDED_REPLIES);
 KOMORI_MEME_REPLIES.push(...KOMORI_EXPANDED_REPLIES.filter(e=>e.category==='meme'));
 for(const e of KOMORI_REPLIES){if(!KOMORI_REPLY_TYPE_STYLES[e.type])throw Error('Missing reply typography '+e.id);}
 
+
+// Reply pack v2026-10-28: one original Komori office photo defines the background for each stable R ID.
+// Actual photos must be attached to image/reference input by the user/tool; their filenames alone are not image input.
+// Keep R IDs, captions, group membership and existing favorites untouched.
+const KOMORI_REPLY_OFFICES_V20261028=[
+ {file:'辦公室_01_清爽空桌.jpeg',label:'清爽空桌',scene:'淺木色整潔桌面、黑色網背辦公椅、辦公隔板、收納櫃與 ET PET 工作牆面，背景乾淨而真實。'},
+ {file:'辦公室_02_日常電腦作業.jpeg',label:'日常電腦作業',scene:'淺木色桌面、電腦螢幕及鍵盤、黑色網背辦公椅、白色辦公櫃架與原工作牆面，維持日常電腦辦公氣氛。'},
+ {file:'辦公室_04_晨間社群排程.jpeg',label:'晨間社群排程',scene:'清晨白天辦公桌、鍵盤、工作筆記本與桌上飲料，後方為原本辦公工作區與收納櫃。'},
+ {file:'辦公室_05_午後素材審稿.jpeg',label:'午後素材審稿',scene:'辦公桌上已存在的平板、審稿資料及電腦設備，後方沿用原始 ET PET 辦公室收納區和工作牆面。'},
+ {file:'辦公室_06_晚間貼文趕稿.jpeg',label:'晚間貼文趕稿',scene:'晚間辦公桌燈的溫暖局部照明、文件、鍵盤與桌面飲料，背景是同一處辦公室而非住家或臥室。'}
+];
+const KOMORI_REPLY_OFFICE_EXCEPTIONS_V20261028={
+ R001:0,R002:2,R003:4,R004:0,R007:1,R010:1,R011:1,R012:3,R019:3,R022:3,
+ R025:1,R026:3,R031:4,R037:0,R039:4,R046:1,R047:3,R048:1,R055:3,R060:4
+};
+function komoriReplyOfficeV20261028(e){
+ const index=KOMORI_REPLY_OFFICE_EXCEPTIONS_V20261028[e.id];
+ if(Number.isInteger(index))return KOMORI_REPLY_OFFICES_V20261028[index];
+ const n=Number(String(e.id).replace(/\D/g,''))||0;
+ return KOMORI_REPLY_OFFICES_V20261028[n%KOMORI_REPLY_OFFICES_V20261028.length];
+}
+function komoriReplyEmotionStrengthV20261028(e){
+ if(['R003','R013','R018','R053','R054'].includes(e.id))return '50–65%';
+ if(['R019','R022','R026','R027','R035','R036','R060','R062'].includes(e.id))return '75–85%';
+ const byGroup={greeting:'65–75%',thanks:'65–75%',confirm:'60–70%',waiting:'60–70%',decline:'60–70%',comfort:'55–70%',curious:'70–80%',casual:'70–80%',meme:'70–80%'};
+ return byGroup[e.category]||'65–75%';
+}
+function komoriReplyExpressionRuleV20261028(e){
+ const office=komoriReplyOfficeV20261028(e);
+ return `【小森辦公室原始背景參考｜本題唯一場景】
+本題背景固定以原始「${office.file}」為唯一場景圖片參考；背景用途：${office.scene}
+如果生圖環境有這張原始照片，務必將它本身實際附入本次 image／reference input，與 Face Master 分開提供；只用辦公室照片內的空間、家具、物件、攝影方位與照明建立場景，不引用照片裡任何人的身份、臉、髮型或服裝。
+Prompt 網站僅輸出文字，不會自動把專案照片傳給生圖模型：只有檔名、連結文字、過往聊天記憶都不等於實際附圖。若未提供這張辦公室原始照片，應要求補上該圖，不可聲稱已取得或精準複製。若有五張辦公室照片，當次以本題指定的一張為主要背景，不拼貼五張或交叉混合不一致的時間與道具。
+畫面固定在小森的 ET PET 辦公室工作區，不換成門市賣場、貨架走道、戶外、家中、臥室、咖啡廳、空白純色棚景；背景可配合 1:1 裁切和實際拍攝景深自然虛化，但仍須一眼辨識為此原始辦公室。維持背景已有家具與用品，不強行新增未見的大型道具、其他人物或寵物。
+
+【生動自然的真人反應｜${e.id}】
+這是一張即時的社群留言回覆反應圖，第一眼應讀出「${e.label}」的實際情緒，而非所有 R 都是同一個禮貌微笑或面無表情。原 canonical 表情和手勢是唯一動作依據；允許真實眉肌、眼瞼、眼角、嘴角、臉頰、短暫張唇、鼻唇溝及肩頸呼吸隨情緒變化，捕捉最有生命力的一瞬間。
+本題表情建議強度 ${komoriReplyEmotionStrengthV20261028(e)}，只描述情緒辨識程度，不是把眼球、嘴寬、臉頰或下巴按百分比放大。驚訝就有真實的抬眉與輕張嘴，開心就有帶動眼周的笑，無奈就有收住的嘴角與肩膀，尷尬就有忍笑與停頓，安慰就溫柔且有交流感；不硬套固定笑容。保留小森 Face Master 的原顱顏身份及成年自然膚質，不能用卡通變形、娃娃臉或 AI beauty filter 表現生動。`;
+}
+
 function promptForKomoriReply(e,mode='caption'){
- const profile=personProfile('小森'),caption=mode==='clean'?`【字幕】
+ const profile=personProfile('小森'),office=komoriReplyOfficeV20261028(e),caption=mode==='clean'?`【字幕】
 無字幕版本。畫面不生成字幕、對話框、水印、編號或內部分類文字；僅保留制服本身原有品牌圖案。`:komoriThreadsCaption(e);
  return `【本次原始參考圖與面部身份硬鎖】
 原始 ${profile.face} 圖片本身必須實際進入本次 image／reference input；檔名、文字描述、聊天記憶或前一次生成圖不能代替原始影像。若未提供原始 Face Master，先要求補圖，不自行猜臉。每次重新載入原圖建立 fresh facial anchor，歷史生成圖的臉部身份權重為 0。
-人物固定為同一位 23 歲明確成年的小森／藍予晴。Face Master 唯一定義顱顏結構、原臉型長寬、眉眼與眼距、鼻唇、人中、下顎、下巴、膚色、自然不對稱與真實膚質。Body Master、Angle Auxiliary、制服照及其他人物圖的臉部身份權重為 0；不平均、不融合、不重畫第三張臉。美感形容與文字數字不能反過來改造原圖。
+人物固定為同一位 23 歲明確成年的小森／林予晴。Face Master 唯一定義顱顏結構、原臉型長寬、眉眼與眼距、鼻唇、人中、下顎、下巴、膚色、自然不對稱與真實膚質。Body Master、Angle Auxiliary、制服照及其他人物圖的臉部身份權重為 0；不平均、不融合、不重畫第三張臉。美感形容與文字數字不能反過來改造原圖。
 身份優先於表情幅度：先由原始 Face Master 建立同一位小森，再只改本題需要的眉部肌肉、眼皮開合、視線與嘴角反應。笑、輕分嘴唇和微瞇眼是暫時的真人軟組織變化，不重新設計眼型眼距、鼻翼、人中、唇峰唇厚、顴骨、下顎和下巴；不放大眼睛、縮鼻、削尖下巴、縮短中庭、削窄臉或磨皮換臉。原五官的辨識關係、膚色與自然不對稱優先保留，不把身份硬鎖誤解成固定中性臉。
 若指定情緒需要超出原臉可自然做到的幅度，降低嘴張開、抬眉或瞇眼的幅度，仍保留同一題的情緒方向；不得為追求誇張、迷因或花字氣氛借用別人的臉或重新抽一張笑臉。
 
@@ -1412,10 +1452,10 @@ function promptForKomoriReply(e,mode='caption'){
 
 【參考圖分工】
 ${profile.body} 只維持原上半身骨架、肩寬、胸廓及軀幹比例；身形明顯入鏡時使用原圖，不採用其中的人臉、服裝或背景。明顯轉頭／側面時，${profile.angle} 只輔助同一顆頭的旋轉，不改五官。
-東森寵物制服實拍_UniformMaster.jpeg 若已提供，圖像本身唯一定義制服真實色相、領口、門襟、袖口、布料與 Logo；忽略制服實拍人物的臉與黑色內搭。未提供時，以下制服文字只是暫用結構，不能宣稱已用真人制服 Master 精準還原色彩或 Logo，也不用 Body Master、ReferenceBoard 或其他 AI 圖替代。
+東森寵物制服實拍_UniformMaster.jpeg 若已提供，圖像本身唯一定義制服真實色相、領口、門襟、袖口、布料與 Logo；忽略制服實拍人物的臉與黑色內搭。未提供時，以下制服文字只是暫用結構，不能宣稱已用真人制服 Master 精準還原色彩或 Logo，也不用 Body Master、ReferenceBoard 或其他 AI 圖替代。辦公室照片不作制服或人物身份的依據。\n\n${komoriReplyExpressionRuleV20261028(e)}
 
 【回覆用途與拍攝方式】
-本題專門用於回覆 Threads（脆）的留言，回覆情境是「${e.label}」。小森像剛看到網友留言，朝鏡頭回應留言者，捕捉符合本題語意、眉眼嘴型與手勢清楚的即時反應；回覆對象在鏡頭外，畫面只有小森。縮成留言小圖時，表情、手勢與指定字幕仍要一眼可辨。第三人稱、同事手機拍到的真人回覆瞬間，不是自拍、鏡子自拍、貼圖插畫或時裝棚拍。不新增第二人、貓狗、商品故事、聊天介面或手持手機。
+本題專門用於回覆 Threads（脆）的留言，回覆情境是「${e.label}」。小森在上述辦公室工作間隙像剛看到網友留言，朝鏡頭回應留言者，捕捉符合本題語意、眉眼嘴型與手勢生動清楚的即時反應；回覆對象在鏡頭外，畫面只有小森。縮成留言小圖時，表情、手勢與指定字幕仍要一眼可辨。第三人稱、同事手機拍到的真人回覆瞬間，不是自拍、鏡子自拍、貼圖插畫或時裝棚拍。不新增第二人、貓狗、商品故事、聊天介面或手持手機。
 
 【制服與人物】
 完整穿著 ET PET 深皇家藍、微帶藍紫底的合身套頭短袖 Polo：鮮明青藍翻領與短門襟、原有兩顆扣子、白色＋青藍雙條紋袖口、標誌在人物自己的左胸且不可鏡像；不改成襯衫、拉鍊或全開襟。領口與門襟維持原結構，不改成深 V、不拉低領口或讓表情改造衣裝。下身沿用破洞牛仔褲、白色 Air Max 97，但在本題中近景畫外正常延續，不為鞋褲擅自拉遠。
@@ -1427,20 +1467,20 @@ ${profile.makeup}
 ${e.action}
 本題語意：${e.meaning}
 表情：${e.expression}
-本題表情幅度約 ${e.strength}，是情緒清楚的自然真人反應，不是把五官或臉型放大這個比例。依本題的眉眼、嘴角、視線與肩頸節奏辨識情緒；不把所有題目變成同一種禮貌微笑，也不為了差異性加大 O 嘴、噘嘴、鼓腮、瞪眼或大幅露眼白。露齒只作少量自然顯露，不理想化齒列或增加嘴部寬度；原 Face Master 未顯露牙齒時，可優先以輕分唇保留笑意，避免為補齒列重畫嘴部。
+本題表情幅度約 ${komoriReplyEmotionStrengthV20261028(e)}，是情緒明顯、第一眼容易辨認的自然真人反應，不是把五官或臉型放大這個比例。依本題的眉眼、嘴角、臉頰、視線與肩頸節奏辨識情緒；不把所有題目變成同一種禮貌微笑，依情境允許自然輕張嘴、真實笑眼、無奈、憋笑與驚訝，但不誇張放大眼球、扭曲嘴型或露出不合理大片眼白。露齒只作少量自然顯露，不理想化齒列或增加嘴部寬度；原 Face Master 未顯露牙齒時，可優先以輕分唇保留笑意，避免為補齒列重畫嘴部。
 動作以本題語意為準，不混入其他回覆手勢；沒有指定揮手、比讚、握拳、合十或張臂，就不額外補上。手位以胸旁／肩下為主，不碰、壓、托或遮住眼鼻嘴；頭頸維持近正面軸線，只作本題必要的小幅偏頭或點頭。捕捉單一清楚瞬間，不把多步連續動作放進一張圖，不用殘影或多重手腳。手指、骨架和正常支點合理；動作不能為了活潑而縮脖子、擠臉、仰頭或前探到產生廣角變形。
 
 【1:1 構圖與真實攝影】
 單張、單格、單人物，固定 1:1 正方形。完整頭頂到胸下／腰上中近景，臉部是主要視覺焦點，同時完整保留本題主要手勢；有字幕版在下方留出大字安全區，無字幕版維持同樣的臉與手勢重點。依手勢只作必要的小幅取景調整，不改成全身照。鏡頭大致眼平、正常手機拍攝距離，人物頭部近正面、鏡頭與臉維持正常距離。差異來自情緒與手勢，不靠大幅轉頭、俯仰、超近廣角或透視拉伸；不為構圖縮頭或改臉型，明顯角度需求才按原參考分工使用 Angle Auxiliary。
-背景為真實寵物門市工作區，貨架與工作空間低干擾、自然稍微失焦；白天或一般工作照明，不因「早安／晚安」另外換成臥室。保留略不完美但清楚的手機拍攝感、真實毛孔、眼下結構、唇紋、自然髮絲、制服纖維與衣料摺痕。暖中性原膚色不被濾鏡漂白、灰化或改成另一種膚色；不做完美對稱、塑膠肌、過度精修或網紅模板臉。
+背景固定使用本題指定「${office.file}」對應的小森辦公室工作區，保持原參考圖的辦公設備與空間關係；場景僅按 1:1 正方形裁切、自然失焦和主體站位做合理變化，不把它換成寵物門市賣場、室外或純色棚。光線與原始參考圖時段相符，例如晨間參考保留白天氣氛、晚間參考保留桌燈暖光；不得因字幕內容切換到臥室或其他新場所。保留略不完美但清楚的手機拍攝感、真實毛孔、眼下結構、唇紋、自然髮絲、制服纖維與衣料摺痕。暖中性原膚色不被濾鏡漂白、灰化或改成另一種膚色；不做完美對稱、塑膠肌、過度精修或網紅模板臉。
 ${caption}
 
 【最後比對】
-先比對原始 Face Master：保持同一位小森的眉眼、鼻唇、下顎、下巴、臉型、膚色與年齡感，再確認「${e.label}」的表情與手勢清楚、制服原結構、${mode==='clean'?'無字幕':`唯一字幕「${e.caption}」`}、1:1 同時成立。先確認原眼型眼距、鼻口位置關係、人中、唇峰唇厚、下顎下巴、年齡感和膚色仍可辨為同一人，再看情緒是否貼題。若有漂移，回到原始 Face Master，只局部修正臉部並降低表情幅度；保留本題語意、手勢、制服、場景、字幕與 1:1，不改成另一張臉或把情緒抹成全中性。
-Photorealistic phone-captured reply portrait of the same adult Komori, original face reference used as actual image input, identity-first, restrained but clearly caption-matched human emotion and a semantically appropriate gesture for a Threads comment reply, third-person view, original work uniform, one person, square 1:1.`;
+先比對原始 Face Master：保持同一位小森的眉眼、鼻唇、下顎、下巴、臉型、膚色與年齡感，再確認「${e.label}」的表情與手勢清楚、制服原結構、${mode==='clean'?'無字幕':`唯一字幕「${e.caption}」`}、指定辦公室原始背景「${office.file}」、1:1 同時成立。先確認原眼型眼距、鼻口位置關係、人中、唇峰唇厚、下顎下巴、年齡感和膚色仍可辨為同一人，再看情緒是否貼題。若有漂移，回到原始 Face Master，只局部修正臉部並降低表情幅度；保留本題語意、手勢、制服、場景、字幕與 1:1，不改成另一張臉或把情緒抹成全中性。
+Photorealistic phone-captured reply portrait of the same adult Komori, original face reference used as actual image input, identity-first, vivid clearly caption-matched natural human facial expression and a semantically appropriate gesture for a Threads comment reply, third-person view, the specified real Komori office photo as background reference, original work uniform, one person, square 1:1.`;
 }
 function promptForRecord(r){return r.version===KOMORI_REPLY_VERSION?promptForKomoriReply(r.reply,r.captionMode):r.version==='V.表情包'?promptForEmote(r.o,r.p,r.sourceVersion,r.ratio,r.person):promptFor(r.version,r.o,r.p,r.ratio,r.person);}
-function komoriReplyCard(r){const f=!!state.fav[r.key],p=!!state.pending[r.key];return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">小森｜${esc(r.p.id)} · 1:1</div><div class="title">${esc(r.p.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏">♥</button></div><div class="sub"><span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.captionModeLabel)}</span><span class="tag">${esc(r.captionMode==='caption'?komoriReplyType(r.reply).label:'工作制服')}</span></div><div class="reply-use">${esc(r.reply.cue)}</div><div class="actions"><button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="usage">使用 ${r.u} 次</div></article>`;}
+function komoriReplyCard(r){const f=!!state.fav[r.key],p=!!state.pending[r.key];return `<article class="card" data-key="${esc(r.key)}"><div class="cardhead"><div><div class="code">小森｜${esc(r.p.id)} · 1:1</div><div class="title">${esc(r.p.label)}</div></div><button class="heart ${f?'on':''}" data-act="fav" aria-label="收藏">♥</button></div><div class="sub"><span class="tag">${esc(r.p.category)}</span><span class="tag">${esc(r.captionModeLabel)}</span><span class="tag">${esc(r.captionMode==='caption'?komoriReplyType(r.reply).label:'工作制服')}</span><span class="tag">辦公室・${esc(komoriReplyOfficeV20261028(r.reply).label)}</span></div><div class="reply-use">${esc(r.reply.cue)}</div><div class="actions"><button class="btn small primary" data-act="copy">複製</button><button class="btn small" data-act="detail">查看</button><button class="btn small ${p?'on':''}" data-act="pending">${p?'已待生成':'待生成'}</button></div><div class="usage">使用 ${r.u} 次</div></article>`;}
 
 function refreshKomoriReplySelects(){
  const category=$('#replyCategory'),value=category.value;
@@ -1451,7 +1491,7 @@ function updateKomoriReplyPresentation(){
  const category=$('#replyCategory').value,mode=$('#replyCaption').value;
  $('#replyCategoryChoices').innerHTML=[{id:'ALL',label:'全部'},...KOMORI_REPLY_GROUPS].map(g=>'<button type="button" class="btn" data-reply-category="'+g.id+'" aria-pressed="'+(category===g.id)+'">'+esc(g.label)+'</button>').join('');
  $('#replyCaptionChoices').innerHTML=[...KOMORI_REPLY_CAPTION_MODES,{id:'ALL',label:'全部'}].map(m=>'<button type="button" class="btn" data-reply-caption="'+m.id+'" aria-pressed="'+(mode===m.id)+'">'+m.label+'</button>').join('');
- const summary=['小森 · 1:1'];if(category!=='ALL')summary.push(komoriReplyGroupLabel(category));summary.push(mode==='ALL'?'全部字幕版本':mode==='clean'?'無字幕':'有字幕');if($('#replyExact').value!=='ALL')summary.push($('#replyExact').value);if($('#q').value.trim())summary.push('搜尋：'+$('#q').value.trim());
+ const summary=['小森 · 1:1','辦公室場景',mode==='clean'?'無字幕':'黑白字幕'];if(category!=='ALL')summary.push(komoriReplyGroupLabel(category));summary.push(mode==='ALL'?'全部字幕版本':mode==='clean'?'無字幕':'有字幕');if($('#replyExact').value!=='ALL')summary.push($('#replyExact').value);if($('#q').value.trim())summary.push('搜尋：'+$('#q').value.trim());
  $('#filterSummary').textContent=summary.join(' · ');$('#clearFilters').disabled=category==='ALL'&&mode==='ALL'&&$('#replyExact').value==='ALL'&&!$('#q').value.trim();
 }
 function bindKomoriReplyFilters(){
